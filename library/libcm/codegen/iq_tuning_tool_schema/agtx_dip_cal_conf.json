@@ -1,0 +1,65 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_CAL_CONF_S",
+	"comments": [
+		"==================================",
+		"== Calibration algorithm enable ==",
+		"==================================",
+		"NOTE: if single sensor, only CAL0 valid",
+		"ALSO SEE: MPI_setCalAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"cal": {
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 2,
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_CAL_ATTR_S",
+				"properties": {
+					"cal_en": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1,
+						"minimum": 0,
+						"maximum": 1
+					},
+					"dbc_en": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1,
+						"minimum": 0,
+						"maximum": 1
+					},
+					"dcc_en": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1,
+						"minimum": 0,
+						"maximum": 1
+					},
+					"lsc_en": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1,
+						"minimum": 0,
+						"maximum": 1
+					}
+				}
+			}
+		}
+	}
+}

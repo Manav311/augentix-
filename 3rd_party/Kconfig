@@ -1,0 +1,65 @@
+menu "3rd_party"
+
+config APP_TUYA_SERVICE
+	bool "tuya_service"
+
+config APP_TUYA_IPC_SDK_PATH
+	string "Tuya IPC SDK path"
+	default "/path/to/tuya_ipc_sdk"
+	depends on APP_TUYA_SERVICE
+	help
+	  Path to where the Tuya IPC SDK is installed.
+
+config APP_TUTK_SERVICE
+	bool "tutk_service"
+	default n
+	select LIBTZ
+	select LIBLPW
+	select APP_SNTP
+	help
+		TUTK service base on TUTK SDK version 4.3.22
+
+config APP_TUTK_SDK_PATH
+	string "TUTK SDK path"
+	default "/path/to/tutk_sdk"
+	depends on APP_TUTK_SERVICE
+	help
+	  Path to where the TUTK SDK is installed.
+
+config APP_TANGE_CLOUD
+	bool "tange cloud"
+	default n
+
+choice APP_TANGE_CLOUD_SWITCH_VIDEO_APP
+	bool "select a video application"
+	depends on APP_TANGE_CLOUD
+
+config TANGE_USE_AV_MAIN2
+	bool "tange use av_main2"
+	help
+		help_av_main2
+
+config TANGE_USE_AGT_MPI_STREAM
+	bool "tange use mpi_stream"
+	help
+		help_mpi_stream
+
+endchoice
+
+config APP_AMAZON_KVS
+	bool "Amazon KVS"
+	default n
+	help
+		Amazon Kinesis Video Streams with WebRTC
+
+config APP_SE_TRNG_PROVIDER
+	bool "Custom RNG Provider using Secure Element"
+	default n
+	help
+		Enable a custom RNG provider for OpenSSL v3.x that integrates the 
+		True Random Number Generator (TRNG) functionality provided by the Secure Element. 
+		This provider relies on Secure Element hardware and the libse core library for RNG operations.
+		
+		Note: Ensure that the Secure Element hardware and libse core library are properly configured and available in your environment.
+
+endmenu

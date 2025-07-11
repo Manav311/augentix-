@@ -1,0 +1,43 @@
+{
+  "cmd_id": "AGTX_CMD_PWM_CONF",
+  "json_content": {
+    "pwm_alias": [
+      {
+        "name": "PIR",
+        "pin_num": "-1",
+        "period": 12800,
+        "duty_cycle": 700
+      },
+      {
+        "name": "PIR",
+        "pin_num": "-1",
+        "period": 12800,
+        "duty_cycle": 700
+      },
+      {
+        "name": "FLOODLIGHT",
+        "pin_num": "-1",
+        "period": 12800,
+        "duty_cycle": 700
+      },
+      {
+        "name": "IR_PWM",
+        "pin_num": "-1",
+        "period": 102400,
+        "duty_cycle": 0
+      },
+      {
+        "name": "",
+        "pin_num": "-1",
+        "period": 12800,
+        "duty_cycle": 700
+      },
+      {
+        "name": "",
+        "pin_num": "-1",
+        "period": 12800,
+        "duty_cycle": 700
+      }
+    ]
+  }
+}

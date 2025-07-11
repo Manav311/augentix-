@@ -1,0 +1,301 @@
+# case_config_1: single stream (H265)
+#------------------------------------------------
+# Value ranges of case parameters
+#------------------------------------------------
+# sid value range: fixed for each case
+# frame_num value range: [1:2^31-1]
+# show_params value range: [Disable(0), Enable(1)]
+# dev_idx value range: fixed for each case
+# hdr_mode value range: [NONE, FRAME_PARL, FRAME_ITLV, TOP_N_BTM, SIDE_BY_SIDE, LINE_COLOC, LINE_ITLV, PIX_COLOC, PIX_ITLV, FRAME_COMB, FRAME_ITLV_ASYNC, FRAME_ITLV_SYNC]
+# stitch_enable value range: [Disable(0), Enable(1)]
+# eis_enable value range: [Disable(0), Enable(1)]
+# bayer value range: [PHASE_G0, PHASE_R, PHASE_B, PHASE_G1]
+# input_fps value range:
+# path_idx value range: fixed for each case
+# input_res value range: [1920x1080]
+# === VCHN && VLAYOUT ===
+# output_res: [1920x1080]
+# output_fps: [30]
+# === VWINDOW ====
+# rotate value range: [ROTATE_0, ROTATE_90, ROTATE_180, ROTATE_270]
+# mirror value range: [Disable(0), Enable(1)]
+# flip value range: [Disable(0), Enable(1)]
+# stitch value range: [Disable(0), Enable(1)]
+# ==== VENC ====
+# frame_rate value range: [30]
+# venc_type value range: [H264, H265, MJPEG, JPEG]
+# venc_profile value range: [MAIN, HIGH] (H264); [MAIN] (H265)
+# rc_mode value range: [VBR, CBR, SBR, CQP]
+# gop_size value range: [10:250], depends H264/H265
+# max_frame_size value range: [0:<half of encoder bit-stream buffer size>]
+# [VBR] venc_type = H264/H265, rc_mode = VBR 
+# max_bit_rate: [512:16383]
+# max_qp: [35:46]
+# quality_level_index: [0:9]
+# fluc_level: [0:4]
+# scene_smooth : [0:9]
+# regression_speed: [0:9]
+# i_continue_weight: [0]
+# i_qp_offset: [-10:0]
+# motion_tolerance_level: [0:100]
+# motion_tolerance_qp: [0:51]
+# [CBR] venc_type = H264/H265, rc_mode = CBR
+# bit_rate: [512:16383]
+# min_qp: [0:51]
+# max_qp: [40:51]
+# fluc_level: [0:4]
+# scene_smooth : [0:9]
+# regression_speed: [0:9]
+# i_continue_weight: [0]
+# i_qp_offset: [-10:0]
+# motion_tolerance_level: [0:100]
+# motion_tolerance_qp: [0:51]
+# [SBR] venc_type = H264/H265, rc_mode = CBR
+# bit_rate: [512:16383]
+# min_qp: [0:51]
+# max_qp: [35:51]
+# quality_level_index: [0:9]
+# fluc_level: [0:4]
+# scene_smooth : [0:9]
+# regression_speed: [0:9]
+# i_continue_weight: [0]
+# i_qp_offset: [-10:0]
+# adjust_br_thres_pc: [50:150]
+# adjust_step_times: [1:50]
+# converge_frame: [1:240]
+# motion_tolerance_level: [0:100]
+# motion_tolerance_qp: [0:51]
+# [CQP] venc_type = H264/H265, rc_mode = CQP
+# i_frame_qp: [0:51]
+# p_frame_qp: [0:51]
+# [MJPEG] venc_type = MJPEG, rc_mode = VBR/CBR/SBR/CQP
+# max_bit_rate: [1024:16383]        # rc_mode = VBR
+# quality_level_index: [0:9]        # rc_mode = VBR
+# fluc_level: [0:4]                 # rc_mode = VBR/CBR/SBR
+# bit_rate: [1024:16383]            # rc_mode = CBR/SBR
+# min_q_factor: [0, 100]            # rc_mode = VBR/CBR/SBR
+# max_q_factor: [0, 100]            # rc_mode = CBR/SBR
+# q_factor: [0, 100]                # rc_mode = CQP
+# adjust_br_thres_pc: [50:150]      # rc_mode = SBR
+# adjust_step_times: [1:50]         # rc_mode = SBR
+# converge_frame: [1:240]           # rc_mode = SBR
+# motion_tolerance_level: [0:100]   # rc_mode = VBR/CBR/SBR
+# motion_tolerance_qfactor: [0:100] # rc_mode = VBR/CBR/SBR
+# [EX]
+# obs: [Disable(0), Enable(1)]
+# obs_off_period: [1, GOP]
+# ==== Stream ====
+# udpstream_enable value range: [Disable(0), Enable(1)]
+# client_ip value range: user-defined
+# client_port value range: user-defined
+# record_enable value range: [Disable(0), Enable(1)]
+# output_file value range: user-defined, less than 128 characters
+# frame number: how many frames stored. [-1, INT_MAX], depends record_enable 
+
+#------------------------------------------------
+
+#---------- Case Parameter ----------------------
+# [General Parameter]
+sid         = 1
+show_params = 1
+
+#---------- Video Buffer Configuration ----------
+# [General Parameter]
+max_pool_cnt = 32
+pool_idx     = 0
+block_size   = 327684
+block_cnt    = 3
+pool_name    = isp_TMV_0
+
+#---------- Video Device Configuration ----------
+# [Video Device 0]
+dev_idx   = 0
+bayer     = PHASE_B
+input_fps = 30.0
+#hdr_mode = NONE
+#stitch_enable = 0
+#eis_en = 0
+
+# [Input Path 0]
+path_idx   = 0
+sensor_idx = 0
+input_res  = 2592x1944
+
+# [Video Channel 0]
+chn_idx = 0
+
+# [Video Channel Parameter]
+output_res = 1920x1080
+output_fps = 30
+
+# [Video Channel Layout]
+window_num        = 1
+layout_window_idx = 0
+rect_x            = 0
+rect_y            = 0
+rect_width        = 1024
+rect_height       = 1024
+
+# [Video Window 0]
+window_idx = 0
+
+# [Video Window Parameter]
+# win_type - 0 : NORMAL; 1 : LDC; 2 : PANORAMA; 3 : PANNING; 4 : SURROUND; 5 : STITCH;
+# path_bmp - 1 : path 0; 2 : path 1; 3 : path 0&1; 4 : path 2; 8 : path3;
+path_bmp   = 1
+window_fps = 30
+rotate     = ROTATE_0
+mirror     = 1
+flip       = 1
+win_type   = 1
+roi_x      = 0
+roi_y      = 0
+roi_width  = 1024
+roi_height = 1024
+priority   = 0
+
+# [LDC Attributes]
+# ldc_type - 0 : CROP; 1: ALL
+ldc_en    = 0
+ldc_type  = 0
+ldc_x     = 0
+ldc_y     = 0
+ldc_ratio = 0
+
+# [PANORAMA Attributes]
+pano_en         = 0
+pano_radius     = 5180
+pano_curvature  = 3880
+pano_straighten = 256
+pano_x_offs     = 0
+pano_y_offs     = 0
+pano_ldc        = 0
+
+# [PANNING Attributes]
+pann_en           = 0
+pann_radius       = 5180
+pann_hor_strength = 0
+pann_ver_strength = 0
+pann_x_offs       = 0
+pann_y_offs       = 0
+pann_ldc          = 0
+
+# [SURROUND Attributes]
+surr_en         = 0
+surr_rotate     = 0
+surr_min_radius = 0
+surr_max_radius = 5180
+surr_x_offs     = 0
+surr_y_offs     = 0
+surr_ldc        = 0
+
+# [Video Channel 1]
+chn_idx = 1
+
+# [Video Channel Parameter]
+output_res = 1280x720
+output_fps = 30
+
+# [Video Channel Layout]
+window_num        = 1
+layout_window_idx = 0
+rect_x            = 0
+rect_y            = 0
+rect_width        = 1024
+rect_height       = 1024
+
+# [Video Window 0]
+window_idx = 0
+
+# [Video Window Parameter]
+# win_type - 0 : NORMAL; 1 : LDC; 2 : PANORAMA; 3 : PANNING; 4 : SURROUND; 5 : STITCH;
+# path_bmp - 1 : path 0; 2 : path 1; 3 : path 0&1; 4 : path 2; 8 : path3;
+path_bmp   = 1
+window_fps = 30
+rotate     = ROTATE_0
+mirror     = 1
+flip       = 1
+win_type   = 1
+roi_x      = 0
+roi_y      = 0
+roi_width  = 1024
+roi_height = 1024
+priority   = 0
+
+# [Video Channel 2]
+chn_idx = 2
+
+# [Video Channel Parameter]
+output_res = 320x240
+output_fps = 30
+binding_capability = 3
+
+# [Video Channel Layout]
+window_num        = 1
+layout_window_idx = 0
+rect_x            = 0
+rect_y            = 0
+rect_width        = 1024
+rect_height       = 1024
+
+# [Video Window 0]
+window_idx = 0
+
+# [Video Window Parameter]
+# win_type - 0 : NORMAL; 1 : LDC; 2 : PANORAMA; 3 : PANNING; 4 : SURROUND; 5 : STITCH;
+# path_bmp - 1 : path 0; 2 : path 1; 3 : path 0&1; 4 : path 2; 8 : path3;
+path_bmp   = 1
+window_fps = 30
+rotate     = ROTATE_0
+mirror     = 1
+flip       = 1
+win_type   = 1
+roi_x      = 0
+roi_y      = 0
+roi_width  = 1024
+roi_height = 1024
+priority   = 0
+
+#---------- Encoder Configuration ---------------
+# [Encoder Channel 0]
+enc_idx = 0
+
+# [Stream Parameter]
+udpstream_enable = 0
+client_ip        = 192.168.36.3
+client_port      = 8888
+record_enable    = 0
+output_file      = video_001_0
+frame_num        = 100
+
+# [Encoder Channel Parameter]
+enc_res     = 1920x1080
+max_enc_res = 1920x1080
+
+# [Binding Information]
+bind_dev_idx = 0
+bind_chn_idx = 0
+
+# [Codec Parameter] **NOTICE SUPPORTED PARAMETER** 
+venc_type              = H265
+venc_profile           = MAIN
+rc_mode                = CBR
+gop_size               = 30
+enc_fps                = 30
+max_frame_size         = 0
+bit_rate               = 2048
+min_qp                 = 15
+max_qp                 = 40
+fluc_level             = 0
+scene_smooth           = 0
+regression_speed       = 6
+i_continue_weight      = 0
+i_qp_offset            = -2
+motion_tolerance_level = 16
+motion_tolerance_qp    = 31
+
+# [Codec Parameter Ex]
+obs            = 0
+obs_off_period = 2
+
+#------------------------------------------------

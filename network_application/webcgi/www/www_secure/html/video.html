@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/video.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <div class="col-sm-8 text-left">
+          <nav class="navbar navbar-borderless">
+            <div class="container-fluid">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="{{x.page_item}}" ng-repeat="x in VideoMenu">
+                    <a class="page-link" href="{{x.href}}" target="_self">{{x.txt[lang]}}</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </nav>
+          <div>
+            <div>
+              <div class="panel panel-borderless">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                  <p>{{msg_t.Stream_count[lang]}} : <select class="changes" name="current" ng-change=
+                  "change_stream_cnt()" ng-model="total_stream">
+                    <option ng-repeat="x in video_option_total_stream_list" ng-value="{{x}}">
+                      {{x}}
+                    </option>
+                  </select></p>
+                </div>
+                <table>
+                  <tr height="50">
+                    <td width="250"></td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)" width="250">
+                    {{msg_t.Channel[lang]}} {{x.video_strm_idx+1}}</td>
+                  </tr>
+                  <tr height="50">
+                    <td width="250">{{msg_t.Codec_Type[lang]}}</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><select class="changes"
+                     name="current" ng-change="set_default_profile($index)" ng-model=
+                    "video.video_strm_list[$index].venc_type" disabled>
+                      <option ng-repeat="x in video_venc_option[$index].venc" ng-value="lookup_codec(x.codec)">
+                        {{x.codec}}
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td></td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><select class="changes"
+                    name="current" ng-model="video.video_strm_list[$index].venc_profile">
+                      <option ng-repeat=
+                      "x in video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].profile" ng-value=
+                      "lookup_profile(x)">
+                        {{x}}
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.Resolution[lang]}}</td>
+                    <td ng-repeat=" x in video.video_strm_list.slice(0, total_stream)"><select class="changes"
+                      name="current" ng-change="setDefaultFps($index)" ng-model="res_idx[$index]">
+                      <option ng-if="x.width&gt;0 && x.height&gt;0" ng-repeat="x in video_res_option[$index].res" ng-value=
+                      "$index">
+                        {{x.width}}*{{x.height}}
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.Frame_Rate[lang]}}</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><select ng-model=
+                    "video.video_strm_list[$index].output_fps">
+                      <option ng-repeat=
+                      "y in video_res_option[$index].res[res_idx[$index]].frame_rate_list | limitTo: -getValidFps($index)"
+                      ng-value="y">
+                        {{y}}
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.Rate_Control[lang]}}</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><select class="changes"
+                    name="current" ng-model="video.video_strm_list[$index].rc_mode">
+                      <option ng-repeat=
+                      "x in video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].rc_mode" ng-value=
+                      "lookup_rc_mode(x)">
+                        {{x}}
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.CBR_Bit_Rate[lang]}}(kbps)</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><input max=
+                    "{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].max_bit_rate}}" min=
+                    "{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].min_bit_rate}}" ng-model=
+                    "bitrate[$index].cbr" required="" type=
+                    "number">({{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].min_bit_rate}}-{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].max_bit_rate}})</td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.VBR_Max_Bit_Rate[lang]}}(kbps)</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><input max=
+                    "{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].max_bit_rate}}" min=
+                    "{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].min_bit_rate}}" ng-model=
+                    "bitrate[$index].vbr" required="" type=
+                    "number">({{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].min_bit_rate}}-{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].max_bit_rate}})</td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.VBR_Image_Quality[lang]}}</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><select class="changes"
+                    name="current" ng-model="video.video_strm_list[$index].vbr_quality_level_index">
+                      <option ng-value="0">
+                        Standard
+                      </option>
+                      <option ng-value="1">
+                        Good
+                      </option>
+                      <option ng-value="2">
+                        Medium
+                      </option>
+                      <option ng-value="3">
+                        Detailed
+                      </option>
+                      <option ng-value="4">
+                        Excellent
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td>GOP</td>
+                    <td ng-repeat="x in video.video_strm_list.slice(0, total_stream)"><input max=
+                    "{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].max_gop_size}}" min=
+                    "{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].min_gop_size}}" ng-model=
+                    "video.video_strm_list[$index].gop_size" type=
+                    "number">({{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].min_gop_size}}~{{video_venc_option[$index].venc[video.video_strm_list[$index].venc_type].max_gop_size}})</td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                    <th>{{msg_t.Global_setting[lang]}}</th>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.Flip[lang]}}</td>
+                    <td><select class="changes" name="current" ng-model=
+                    "video.video_strm_list[0].flip_en">
+                      <option ng-value="0">
+                        OFF
+                      </option>
+                      <option ng-value="1">
+                        ON
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr height="50">
+                    <td>{{msg_t.Mirror[lang]}}</td>
+                    <td><select class="changes" name="current" ng-model=
+                    "video.video_strm_list[0].mirr_en">
+                      <option ng-value="0">
+                        OFF
+                      </option>
+                      <option ng-value="1">
+                        ON
+                      </option>
+                    </select></td>
+                  </tr>
+                  <tr>
+                    <td><input class="btn btn-info" type="submit" ng-disabled="!canApply" ng-click="sendData()" value="{{msg_t.Apply[lang]}}"> <button ng-click=
+                    "getOption()" ng-show="debug">GetOption</button> <button ng-click="ScreenToSet()" ng-show=
+                    "debug">Scr2Set</button></td>
+                    <td><button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button></td>
+                  </tr>
+                </table>
+                <p>{{cmdStatus}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

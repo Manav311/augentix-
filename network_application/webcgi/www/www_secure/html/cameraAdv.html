@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <link href="../css/agtx_player.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/cameraAdv.js"></script>
+  <script src="../js/lib/flv.min.js"></script>
+  <script src="../js/agtx_player_check.js"></script>
+  <script src="../js/lib/signalr.min.js"></script>
+  <script type="module" src="../js/agtx_player_srv.js"></script>
+  <script type="module" src="../js/agtx_player_vm.js"></script>
+  <script type="module">
+  $(async function() {
+    const mainUrl = window.flvLiveAudio0;
+    const subUrl = window.flvLiveAudio1;
+    const mainRelayUrl = window.flvRelayLiveAudio0;
+    const subRelayUrl = window.flvRelayLiveAudio1;
+    const { core } = window.augentixPlayerViewModel || {};
+    await core?.init({ langId, mainUrl, subUrl, mainRelayUrl, subRelayUrl });
+  });
+  </script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left" ng-cloak="">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="imagePreference.html" target="_self">{{msg_t.Image_Preference[lang]}}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="awbPreference.html" target="_self">{{msg_t.AWB_Preference[lang]}}</a>
+                </li>
+                <li class="page-item" ng-hide="Disrval()">
+                  <a class="page-link" href="stitching.html" target="_self">{{msg_t.Stitching[lang]}}</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="cameraAdv.html" target="_self">{{msg_t.Advanced_Setting[lang]}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <div id="agtx-player-preview"></div>
+            <form>
+              <table class="table">
+                <tr>
+                  <td>{{msg_t.Image_Mode[lang]}}</td>
+                  <td><label><input id="daymode" ng-change="dayMode()" ng-model="cameraAdv.night_mode" type="radio"
+                  value="OFF"> {{msg_t.Day_Mode[lang]}}</label> <label><input id="nightmode" ng-change="nightMode()"
+                  ng-model="cameraAdv.night_mode" type="radio" value="ON"> {{msg_t.Night_Mode[lang]}}</label>
+                  <label><input id="automode" ng-change="autoMode()" ng-model="cameraAdv.night_mode" type="radio"
+                  value="AUTO"> {{msg_t.Auto[lang]}}</label></td>
+                </tr>
+                <tr ng-hide="true">
+                  <td>{{msg_t.Image_Mode[lang]}}</td>
+                  <td><input id="imcolor" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.image_mode" type="radio" value="COLOR">{{msg_t.Color[lang]}}</td>
+                  <td><input id="imgray" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.image_mode" type="radio" value="GRAYSCALE">{{msg_t.Gray_Scale[lang]}}</td>
+                  <td><input id="imauto" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.image_mode" type="radio" value="AUTO">{{msg_t.Sync_Night_Mode[lang]}}</td>
+                </tr>
+                <tr ng-hide="true">
+                  <td>{{msg_t.IR_Cut_filter_mode[lang]}}</td>
+                  <td><input id="iroff" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.icr_mode" type="radio" value="OFF">Off</td>
+                  <td><input id="iron" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.icr_mode" type="radio" value="ON">On</td>
+                  <td><input id="irauto" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.icr_mode" type="radio" value="AUTO">{{msg_t.Sync_Night_Mode[lang]}}</td>
+                </tr>
+                <tr ng-hide="true">
+                  <td>{{msg_t.IR_Led_mode[lang]}}</td>
+                  <td><input id="lmoff" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.ir_led_mode" type="radio" value="OFF">Off</td>
+                  <td><input id="lmon" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.ir_led_mode" type="radio" value="ON">On</td>
+                  <td><input id="lmauto" ng-disabled="cameraAdv.night_mode === 'AUTOSWITCH'" ng-model=
+                  "cameraAdv.ir_led_mode" type="radio" value="AUTO">{{msg_t.Sync_Night_Mode[lang]}}</td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Backlight_Compensation[lang]}}</td>
+                  <td><input id="bcoff" ng-model="cameraAdv.backlight_compensation" type="radio" value="0">Off</td>
+                  <td><input id="bcon" ng-model="cameraAdv.backlight_compensation" type="radio" value="1">On</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.WDR_Enable[lang]}}</td>
+                  <td><input id="weoff" ng-model="cameraAdv.wdr_en" type="radio" value="0">Off</td>
+                  <td><input id="weon" ng-model="cameraAdv.wdr_en" type="radio" value="1">On</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><label>{{msg_t.WDR_Strength[lang]}}</label></td>
+                  <td><input id="wsoff" max="100" min="0" ng-disabled="WDRoff()" ng-model="cameraAdv.wdr_strength"
+                  type="range"></td>
+                  <td><input if="wsrange" ng-disabled="WDRoff()" ng-model="cameraAdv.wdr_strength" required="" type=
+                  "number">(0~100)</td>
+                </tr>
+              </table><button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+              <button class="btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+              <p>{{cmdStatus}}</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

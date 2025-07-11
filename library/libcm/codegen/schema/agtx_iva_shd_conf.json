@@ -1,0 +1,113 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_SHD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"ui_type":"boolean",
+			"ui_access_right": "read_write",
+			"description": "(Dis/En)able IVA shaking object detection."
+		},
+		"obj_life_th": {
+			"type": "integer",
+			"description": "Minimum life threshold for object to be considered for detection"
+		},
+		"video_chn_idx": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": 0,
+			"maxValue": 3
+		},
+		"sensitivity": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 75,
+			"minValue": 1,
+			"maxValue": 100
+		},
+		"quality": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 75,
+			"minValue": 1,
+			"maxValue": 100,
+			"description": "The frequency of SHD to do checking and update internal data."
+		},
+		"longterm_life_th": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 10,
+			"minValue": 1,
+			"maxValue": 4294967295,
+			"description": "The minimum life threshold to activate registered longterm item"
+		},
+		"instance_duration": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1,
+			"minValue": 1,
+			"maxValue": 4294967295,
+			"description": "Define of instance object duration(0.1sec)."
+		},
+		"shaking_update_duration": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1,
+			"minValue": 1,
+			"maxValue": 4294967295,
+			"description": "Define of shaking object update duration(1sec)."
+		},
+		"longterm_dec_period": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1,
+			"minValue": 1,
+			"maxValue": 4294967295,
+			"description": "Define of shaking object update duration(1sec)."
+		},
+		"longterm_num": {
+			"type": "integer",
+			"ui_type":"number",
+			"default": 1,
+			"minValue": 1,
+			"maxValue": 10,
+			"description": "Number of longterm item."
+		},
+		"longterm_list": {
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 10,
+			"items": {
+				"type": "object",
+				"title": "AGTX_IVA_SHD_LT_LIST_S",
+				"properties": {
+					"start_x": {
+						"type": "integer",
+						"description": "Start coordinates of detection region. (inclusive)"
+					},
+					"start_y": {
+						"type": "integer",
+						"description": "Start coordinates of detection region. (inclusive)"
+					},
+					"end_x": {
+						"type": "integer",
+						"description": "End coordinates of detection region. (inclusive)"
+					},
+					"end_y": {
+						"type": "integer",
+						"description": "End coordinates of detection region. (inclusive)"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,133 @@
+{
+	"cmd_id": "AGTX_CMD_SYS_DB_INFO",
+	"json_content": {
+		"db_ver": "default",
+		"led_info": {
+			"gpio_pin0": -1,
+			"gpio_pin1": -1,
+			"inverse_pin0": 0,
+			"inverse_pin1": 0,
+			"period_msec": 0,
+			"duty_cycle": 0,
+			"interleave": 0
+		},
+		"fw_setting_list": [
+			{
+				"name": "AGTX_CMD_SYS_DB_INFO",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_PRODUCT_OPTION",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_PRODUCT_OPTION_LIST",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_SYS_FEATURE_OPTION",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_RES_OPTION",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_VENC_OPTION",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_VIDEO_DEV_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_VIDEO_LAYOUT_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_CAL",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_DBC",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_DCC",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_LSC",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_CTRL",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_AE",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_ISO",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_AWB",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_PTA",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_CSM",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_SHP",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_NR",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_ROI",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_TE",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_DIP_GAMMA",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_LDC_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_PANNING_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_SURROUND_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_EVT_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_GPIO_CONF",
+				"update_rule": "OVERWRITE"
+			},
+			{
+				"name": "AGTX_CMD_EVT_PARAM",
+				"update_rule": "OVERWRITE"
+			}
+		]
+	}
+}

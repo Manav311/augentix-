@@ -1,0 +1,52 @@
+{
+	"type": "object",
+	"title": "AGTX_OSD_CONF_S",
+	"properties": {
+		"showWeekDay": {
+			"type": "integer",
+			"description": "Flag to enable display Weekday"
+		},
+		"strm": {
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "object",
+                "title": "AGTX_OSD_CONF_OUTER_S",
+				"properties": {
+					"region": {
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "object",
+                            "title": "AGTX_OSD_CONF_INNER_S",
+							"properties": {
+								"enabled": {
+									"type": "boolean"
+								},
+								"type": {
+									"type": "string",
+									"title": "AGTX_OSD_TYPE_E",
+									"enum": ["TEXT", "IMAGE", "INFO"]
+								},
+								"type_spec": {
+									"type": "string",
+									"maxLength": 256
+								},
+								"start_x": {
+									"type": "integer",
+									"description": "Start coordinates of detection region. (in percentage)"
+								},
+								"start_y": {
+									"type": "integer",
+									"description": "Start coordinates of detection region. (in percentage)"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

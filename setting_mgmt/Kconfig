@@ -1,0 +1,20 @@
+menu "setting_mgmt"
+
+config APP_CENTCTRL
+	bool "centctrl"
+	depends on APP_DBMONITOR && APP_SQLAPP
+	select LIBCM
+	select LIBSQL
+	default y
+
+config APP_DBMONITOR
+	bool "dbmonitor"
+	select APP_SQLAPP
+	default y
+
+config APP_SQLAPP
+	bool "sqlapp"
+	select LIBCM_X86
+	default y
+
+endmenu

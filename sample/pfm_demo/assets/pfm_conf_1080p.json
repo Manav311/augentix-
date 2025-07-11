@@ -1,0 +1,10 @@
+{
+	"sensitivity": 100,
+	"endurance": 1,
+	"roi": [480, 544, 1487, 1071],
+	"od_qual": 46,
+	"od_track_refine": 42,
+	"od_size_th": 40,
+	"od_sen": 254,
+	"en_stop_det": false
+}

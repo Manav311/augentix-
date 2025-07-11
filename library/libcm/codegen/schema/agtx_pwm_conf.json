@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_PWM_CONF_S",
+	"properties": {
+		"pwm_alias": {
+			"type": "array",
+			"minItems": 6,
+			"maxItems": 6,
+			"items": {
+				"type": "object",
+				"title": "AGTX_PWM_ALIAS_S",
+				"properties": {
+					"enabled": {
+						"ui_type": "number",
+						"type": "integer",
+						"description": "PWM enabled. Set 1/0 to open/close the initial PWM status."
+					},
+					"name": {
+						"type": "string",
+						"maxLength": 128,
+						"description": "PWM event name."
+					},
+					"pin_num": {
+						"ui_type": "number",
+						"type": "integer",
+						"description": "PWM pin number. Set -1 to close the PWM module."
+					},
+					"period": {
+						"ui_type": "number",
+						"type": "integer"
+					},
+					"duty_cycle": {
+						"ui_type": "number",
+						"type": "integer"
+					}
+				}
+			}
+		}
+	}
+}

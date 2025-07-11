@@ -1,0 +1,61 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DEV_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"type": "integer"
+		},
+		"hdr_mode": {
+			"type": "string",
+			"title": "AGTX_HDR_MODE_E",
+			"enum": ["OFF", "FRAME_PARL", "FRAME_ITLV", "TOP_N_BTM", "SIDE_BY_SIDE", "LINE_COLOC", "LINE_ITLV", "PIX_COLOC", "PIX_ITLV", "FRAME_COMB"]
+		},
+		"stitch_en": {
+			"type": "boolean"
+		},
+		"eis_en": {
+			"type": "boolean"
+		},
+		"bayer": {
+			"type": "string",
+			"title": "AGTX_BAYER_E",
+			"enum": ["G0", "R", "B", "G1"]
+		},
+		"input_fps": {
+			"type": "integer",
+		},
+		"input_path": {
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 2,
+			"items": {
+				"type": "object",
+				"title": "AGTX_PATH_CONF_S",
+				"properties": {
+					"path_idx": {
+						"type": "integer"
+					},
+                    "path_en": {
+						"type": "boolean"
+					},
+					"sensor_idx": {
+						"type": "integer"
+					},
+					"path_fps": {
+						"type": "number"
+					},
+					"width": {
+						"type": "integer"
+					},
+					"height": {
+						"type": "integer"
+					},
+					"eis_strength": {
+						"type": "integer"
+					}
+				}
+			}
+		}
+	}
+}

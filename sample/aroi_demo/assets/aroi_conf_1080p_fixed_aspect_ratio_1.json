@@ -1,0 +1,11 @@
+{
+    "min_roi_width": 192,
+    "min_roi_height": 108,
+    "max_roi_width": 1920,
+    "max_roi_height": 1080,
+    "aspect_ratio_width": 192,
+    "aspect_ratio_height": 108,
+    "track_speed": 32,
+    "return_speed": 8,
+    "obj_life_th": 32,
+}

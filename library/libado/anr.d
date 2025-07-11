@@ -1,0 +1,4 @@
+anr.o: anr.c \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/extdrv/audio/include/pcm_interfaces.h
+anr.c:
+/home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/extdrv/audio/include/pcm_interfaces.h:

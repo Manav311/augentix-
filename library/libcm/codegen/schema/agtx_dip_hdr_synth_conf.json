@@ -1,0 +1,121 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_HDR_SYNTH_CONF_S",
+	"comments": [
+		"#=============================================#",
+		"#== High Dynamic Range Synthesis parameters ==#",
+		"#=============================================#",
+		"# ALSO SEE: MPI_setHdrSynthAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"weight_se_weight_th_min": {
+			"ini_name": "weight.se_weight_th_min",
+			"comments": "Short exposure weighting threshold minimum. The value range is [0, 4095]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 240,
+			"minimum": 0,
+			"maximum": 4095
+		},
+		"weight_se_weight_slope": {
+			"ini_name": "weight.se_weight_slope",
+			"comments": "Short exposure weighting slope. The value range is [0, 127]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 56,
+			"minimum": 0,
+			"maximum": 127
+		},
+		"weight_se_weight_min": {
+			"ini_name": "weight.se_weight_min",
+			"comments": "Short exposure weighting minimum. The value range is [1, 63]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 1,
+			"maximum": 63
+		},
+		"weight_se_weight_max": {
+			"ini_name": "weight.se_weight_max",
+			"comments": "Short exposure weighting maximum. The value range is [1, 63]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 63,
+			"minimum": 1,
+			"maximum": 63
+		},
+		"weight_le_weight_th_max": {
+			"ini_name": "weight.le_weight_th_max",
+			"comments": "Long exposure weighting threshold maximum. The value range is [0, 4095]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 3840,
+			"minimum": 0,
+			"maximum": 4095
+		},
+		"weight_le_weight_slope": {
+			"ini_name": "weight.le_weight_slope",
+			"comments": "Long exposure weighting slope. The value range is [0, 127]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 14,
+			"minimum": 0,
+			"maximum": 127
+		},
+		"weight_le_weight_min": {
+			"ini_name": "weight.le_weight_min",
+			"comments": "Long exposure weighting minimum. The value range is [1, 63]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 1,
+			"maximum": 63
+		},
+		"weight_le_weight_max": {
+			"ini_name": "weight.le_weight_max",
+			"comments": "Long exposure weighting maximum. The value range is [1, 63]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 63,
+			"minimum": 1,
+			"maximum": 63
+		},
+		"local_fb_th": {
+			"ini_name": "local_fb_th",
+			"comments": "Local fallback threshold. The value range is [0, 255]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 44,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"frame_fb_strength": {
+			"ini_name": "frame_fb_strength",
+			"comments": "Frame fallback strength. The value range is [0, 16]",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 16
+		}
+	}
+}

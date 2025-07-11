@@ -1,0 +1,15 @@
+{
+  "enable":1,
+  "frequency_idx":1,
+  "frequency_list":[
+    {
+      "fps":15,
+      "frequency":50
+    },
+    {
+      "fps":30,
+      "frequency":60
+    }
+  ],
+  "cmd_id":"AGTX_CMD_ANTI_FLICKER_CONF"
+}

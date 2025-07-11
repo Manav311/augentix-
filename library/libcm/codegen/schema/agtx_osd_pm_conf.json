@@ -1,0 +1,53 @@
+{
+	"type": "object",
+	"title": "AGTX_OSD_PM_CONF_S",
+	"properties": {
+		"conf": {
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "object",
+				"title": "AGTX_OSD_PM_PARAM_S",
+				"properties": {
+					"param": {
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "object",
+				            "title": "AGTX_OSD_PM_S",
+							"properties": {
+								"enabled": {
+									"type": "boolean"
+								},
+								"alpha": {
+									"type": "integer"
+								},
+								"color": {
+									"type": "integer"
+								},
+								"start_x": {
+									"type": "integer",
+									"description": "Start coordinates of detection region. (in percentage)"
+								},
+								"start_y": {
+									"type": "integer",
+									"description": "Start coordinates of detection region. (in percentage)"
+								},
+								"end_x": {
+									"type": "integer",
+									"description": "Start coordinates of detection region. (in percentage)"
+								},
+								"end_y": {
+									"type": "integer",
+									"description": "Start coordinates of detection region. (in percentage)"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

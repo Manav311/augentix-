@@ -1,0 +1,53 @@
+#ifndef AGTX_LAYOUT_CONF_H_
+#define AGTX_LAYOUT_CONF_H_
+
+#include "agtx_types.h"
+struct json_object;
+
+typedef enum {
+	AGTX_WINDOW_VIEW_TYPE_NORMAL,
+	AGTX_WINDOW_VIEW_TYPE_LDC,
+	AGTX_WINDOW_VIEW_TYPE_STITCH,
+	AGTX_WINDOW_VIEW_TYPE_PANORAMA,
+	AGTX_WINDOW_VIEW_TYPE_PANNING,
+	AGTX_WINDOW_VIEW_TYPE_SURROUND
+} AGTX_WINDOW_VIEW_TYPE_E;
+
+#define MAX_AGTX_LAYOUT_PARAM_S_WINDOW_ARRAY_SIZE 9
+#define MAX_AGTX_LAYOUT_CONF_S_VIDEO_LAYOUT_SIZE 4
+
+typedef struct {
+	AGTX_INT32 path_bmp;
+	AGTX_INT32 pos_height;
+	AGTX_INT32 pos_width;
+	AGTX_INT32 pos_x;
+	AGTX_INT32 pos_y;
+	AGTX_INT32 priority;
+	AGTX_INT32 parent;
+	AGTX_INT32 roi_height;
+	AGTX_INT32 roi_width;
+	AGTX_INT32 roi_x;
+	AGTX_INT32 roi_y;
+	AGTX_INT32 update_fps;
+	AGTX_WINDOW_VIEW_TYPE_E view_type;
+	AGTX_INT32 window_idx;
+	AGTX_INT32 const_qual;
+	AGTX_INT32 dyn_adj;
+	AGTX_INT32 eis_en;
+} AGTX_WINDOW_PARAM_S;
+
+typedef struct {
+	AGTX_INT32 video_strm_idx;
+	AGTX_WINDOW_PARAM_S window_array[MAX_AGTX_LAYOUT_PARAM_S_WINDOW_ARRAY_SIZE];
+	AGTX_INT32 window_num;
+} AGTX_LAYOUT_PARAM_S;
+
+typedef struct {
+	AGTX_INT32 layout_en;
+	AGTX_INT32 layout_num;
+	AGTX_INT32 video_dev_idx;
+	AGTX_LAYOUT_PARAM_S video_layout[MAX_AGTX_LAYOUT_CONF_S_VIDEO_LAYOUT_SIZE];
+} AGTX_LAYOUT_CONF_S;
+
+
+#endif /* AGTX_LAYOUT_CONF_H_ */

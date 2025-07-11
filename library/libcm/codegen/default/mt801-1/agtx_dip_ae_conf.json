@@ -1,0 +1,39 @@
+"{"\
+"  "video_dev_idx": 0,"\
+"  "brightness": 5800,"\
+"  "exp_strategy": "NORMAL","\
+"  "exp_strength": 128,"\
+"  "roi_luma_weight": 1,"\
+"  "roi_awb_weight": 1,"\
+"  "max_sys_gain": 512,"\
+"  "min_sys_gain": 32,"\
+"  "max_sensor_gain": 512,"\
+"  "min_sensor_gain": 32,"\
+"  "max_isp_gain": 32,"\
+"  "min_isp_gain": 32,"\
+"  "fps_mode": "VARIABLE","\
+"  "frame_rate": 15,"\
+"  "slow_frame_rate": 15,"\
+"  "gain_thr_up": 32,"\
+"  "gain_thr_down": 32,"\
+"  "speed": 160,"\
+"  "black_speed_bias": 128,"\
+"  "interval": 0,"\
+"  "tolerance": 1280,"\
+"  "white_delay_frame": 0,"\
+"  "black_delay_frame": 7,"\
+"  "anti_flicker": {"\
+"    "enable": false,"\
+"    "frequency": 60,"\
+"    "luma_delta": 2000"\
+"  },"\
+"  "manual": {"\
+"    "enabled": false,"\
+"    "flag": 0,"\
+"    "exp_value": 3200,"\
+"    "inttime": 100,"\
+"    "isp_gain": 32,"\
+"    "sensor_gain": 32,"\
+"    "sys_gain": 32"\
+"  }"\
+"}

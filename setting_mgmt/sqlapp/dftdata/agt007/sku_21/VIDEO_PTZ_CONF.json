@@ -1,0 +1,26 @@
+{
+  "cmd_id": "AGTX_CMD_VIDEO_PTZ_CONF",
+  "json_content": {
+    "enabled": 1,
+	  "mode": "AUTO",
+	  "roi_width": 341,
+    "roi_height":384,
+    "win_speed_x": 0,
+    "win_speed_y": 0,
+    "win_size_limit_min": 1,
+    "win_size_limit_max": 1023,
+    "subwindow_disp": {
+		"win_num": 2,
+		"win": [
+        {
+			    "chn_idx": 1,
+			    "win_idx": 0
+		    },
+        {
+			    "chn_idx": 2,
+			    "win_idx": 0
+		    }
+      ]
+    }
+  }
+}

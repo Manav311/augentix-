@@ -1,0 +1,71 @@
+#include "handlers.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+
+#include "cm_anti_flicker_conf.h"
+
+#include "log_define.h"
+#include "core.h"
+
+extern GlobalConf g_conf;
+extern AgtxConf g_old_conf_tmp;
+
+int READ_DB(AntiFlicker)(const char *path)
+{
+	struct json_object *ret_obj = NULL;
+
+	ret_obj = get_db_record_obj(path, AGTX_CMD_ANTI_FLICKER_CONF);
+	/* parse list of object from Json Object */
+	parse_anti_flicker_conf(&g_conf.anti_flicker, ret_obj);
+	json_object_put(ret_obj);
+
+	avmain2_log_info("anti_flicker.enable:%d. frequency_idx:%d", g_conf.anti_flicker.enable,
+	                 g_conf.anti_flicker.frequency_idx);
+
+	return 0;
+}
+
+int WRITE_DB(AntiFlicker)(const char *path)
+{
+	AGTX_UNUSED(path);
+
+	return 0;
+}
+
+int APPLY(AntiFlicker)(AGTX_CDATA data /*agtx input*/, int len /*len*/, void *node /*node should be root*/)
+{
+	AGTX_ANTI_FLICKER_CONF_S *anti_flicker_conf = (AGTX_ANTI_FLICKER_CONF_S *)data;
+	if (len != sizeof(AGTX_ANTI_FLICKER_CONF_S)) {
+		avmain2_log_err("invalid size %d, should be:%d", len, sizeof(AGTX_ANTI_FLICKER_CONF_S));
+		return -EINVAL;
+	}
+
+	saveOldConftoTmp(&g_conf.anti_flicker, anti_flicker_conf, sizeof(AGTX_ANTI_FLICKER_CONF_S));
+
+	NodeId id = NONE;
+	int ptr = 0;
+	int ret = 0;
+
+	id = IMAGE_PREFERENCE;
+	ptr = ((int)node) + (id * sizeof(Node));
+	ret = NODES_execSet((Node *)ptr, ANTI_FLIKER, anti_flicker_conf);
+	if (ret != 0) {
+		recoverOldConfFromTmp(&g_conf.anti_flicker, sizeof(AGTX_CMD_ANTI_FLICKER_CONF));
+		return ret;
+	}
+
+	recoverTmptoZero();
+
+	return 0;
+}
+
+static JsonConfHandler anti_flicker_ops = MAKE_JSON_CONF_HANDLER(AGTX_CMD_ANTI_FLICKER_CONF, AntiFlicker);
+
+__attribute__((constructor)) void registerAntiFlicker(void)
+{
+	HANDLERS_registerHandlers(&anti_flicker_ops);
+}

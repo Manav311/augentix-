@@ -1,0 +1,47 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_DK_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"obj_life_th": {
+			"type": "integer",
+			"description": "object confidence threshold range [0,160]."
+		},
+		"loiter_period_th": {
+			"type": "integer",
+			"description": "loitering period threshold (10ms)."
+		},
+		"overlap_ratio_th": {
+			"type": "integer",
+			"description": "Object to ROI overlap ratio threshold. range [0,100]"
+		},
+		"roi": {
+			"type": "object",
+			"title": "AGTX_IVA_DK_REGION_S",
+			"properties": {
+				"start_x": {
+					"type": "integer",
+					"description": "Start coordinates of monitor region. (inclusive)"
+				},
+				"start_y": {
+					"type": "integer",
+					"description": "Start coordinates of monitor region. (inclusive)"
+				},
+				"end_x": {
+					"type": "integer",
+					"description": "End coordinates of monitor region. (inclusive)"
+				},
+				"end_y": {
+					"type": "integer",
+					"description": "End coordinates of monitor region. (inclusive)"
+				}
+			}
+        }
+    }
+}

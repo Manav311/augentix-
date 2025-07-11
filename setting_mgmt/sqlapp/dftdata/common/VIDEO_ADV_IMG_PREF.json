@@ -1,0 +1,13 @@
+{
+  "cmd_id": "AGTX_CMD_ADV_IMG_PREF",
+  "json_content": {
+    "backlight_compensation": 0,
+    "night_mode": "OFF",
+    "icr_mode": "ON",
+    "ir_led_mode": "OFF",
+    "ir_light_suppression" : "12",
+    "image_mode": "COLOR",
+    "wdr_en": 0,
+    "wdr_strength": 0
+  }
+}

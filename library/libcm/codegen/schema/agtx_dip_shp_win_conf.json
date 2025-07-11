@@ -1,0 +1,88 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_SHP_WIN_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"win_shp_en" : {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1
+		},
+		"strm_num" : {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1
+		},
+		"video_strm": {
+			"type": "array",
+			"maxItems": 4,
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"title": "AGTX_SHP_STRM_PARAM_S",
+				"properties": {
+					"video_strm_idx": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1
+					},
+					"window_num": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 9
+					},
+					"window_array": {
+						"type": "array",
+						"maxItems": 9,
+						"minItems": 1,
+						"items": {
+							"type": "object",
+							"title": "AGTX_SHP_WINDOW_PARAM_S",
+							"properties": {
+								"window_idx": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 0,
+									"minimum": 0,
+									"maximum": 8
+								},
+								
+								"strength": {
+									"ini_name": "strength",
+									"comments": "Weighted coefficient of sharpness(0~256)",
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 128,
+									"minimum": 0,
+									"maximum": 256
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

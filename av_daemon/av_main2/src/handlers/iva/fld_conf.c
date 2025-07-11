@@ -1,0 +1,68 @@
+#include "handlers.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+
+#include "cm_iva_fld_conf.h"
+
+#include "log_define.h"
+#include "core.h"
+
+extern GlobalConf g_conf;
+
+int READ_DB(Fld)(const char *path)
+{
+	struct json_object *ret_obj = NULL;
+
+	ret_obj = get_db_record_obj(path, AGTX_CMD_FLD_CONF);
+	/* parse list of object from Json Object */
+	parse_iva_fld_conf(&g_conf.fld, ret_obj);
+	json_object_put(ret_obj);
+
+	avmain2_log_info("Read Fld_conf from database and use channel: %d.", g_conf.fld.video_chn_idx);
+	return 0;
+}
+
+int WRITE_DB(Fld)(const char *path)
+{
+	AGTX_UNUSED(path);
+
+	return 0;
+}
+
+int APPLY(Fld)(AGTX_CDATA data /*agtx input*/, int len /*len*/, void *node /*node should be root*/)
+{
+	AGTX_IVA_FLD_CONF_S *fld = (AGTX_IVA_FLD_CONF_S *)data;
+	if (len != sizeof(AGTX_IVA_FLD_CONF_S)) {
+		avmain2_log_err("invalid size %d, should be:%d", len, sizeof(AGTX_IVA_FLD_CONF_S));
+		return -EINVAL;
+	}
+
+	saveOldConftoTmp(&g_conf.fld, fld, sizeof(AGTX_IVA_FLD_CONF_S));
+
+	NodeId id = NONE;
+	int ptr = 0;
+	int ret = 0;
+
+	id = IVA;
+	ptr = ((int)node) + (id * sizeof(Node));
+	ret = NODES_execSet((Node *)ptr, FLD_ATTR, fld);
+	if (ret != 0) {
+		recoverOldConfFromTmp(&g_conf.fld, sizeof(AGTX_CMD_FLD_CONF));
+		return ret;
+	}
+
+	recoverTmptoZero();
+
+	return 0;
+}
+
+static JsonConfHandler fld_ops = MAKE_JSON_CONF_HANDLER(AGTX_CMD_FLD_CONF, Fld);
+
+__attribute__((constructor)) void registerFld(void)
+{
+	HANDLERS_registerHandlers(&fld_ops);
+}

@@ -1,0 +1,11 @@
+{
+  "cmd_id": "AGTX_CMD_LDC_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "enable": 0,
+    "view_type": "CROP",
+    "center_x_offset": 0,
+    "cetner_y_offset": 0,
+    "ratio": 0,
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "cmd_id": "AGTX_CMD_EVT_PARAM",
+  "json_content": {
+    "event_attr": [
+      {
+        "name": "LIGHT_SENSOR_IN",
+        "enabled": true
+      },
+      {
+        "name": "PIR_IN",
+        "enabled": true
+      },
+      {
+        "name": "EINTC_PIR",
+        "enabled": true
+      },
+      {
+        "name": "IVA_MD",
+        "enabled": true
+      },
+      {
+        "name": "IVA_TD",
+        "enabled": true
+      },
+      {
+        "name": "PUSH_BUTTON_IN",
+        "enabled": true
+      },
+      {
+        "name": "SD_CARD_IN",
+        "enabled": true
+      },
+      {
+        "name": "LIGHT_SENSOR_ADC",
+        "enabled": false
+      },
+      {
+        "name": "LED_INFORM",
+        "enabled": false
+      },
+      {
+        "name": "LIGHT_SENSOR_MPI",
+        "enabled": false
+      }
+    ]
+  }
+}

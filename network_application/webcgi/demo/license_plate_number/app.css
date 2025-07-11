@@ -1,0 +1,98 @@
+:root {
+  --main-bg-color: #eee;
+  --main-color: #000;
+  --viewport-bg-color: #fff;
+  --viewport-width: 320px;
+  --viewport-height: 240px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--main-bg-color);
+}
+
+a {
+  color: var(--main-color);
+}
+
+.app {
+  overflow: hidden;
+  width: var(--viewport-width);
+  height: var(--viewport-height);
+}
+
+.page {
+  background-color: var(--viewport-bg-color);
+  width: var(--viewport-width);
+  height: var(--viewport-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page a {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+.page a .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome.page .logo {
+  margin: 1rem;
+  align-self: center;
+}
+
+.welcome.page .hint {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome.page .hint p {
+  margin-block: .2rem;
+}
+
+.prompt.page .lpn-form .number {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.prompt.page .lpn-form .numpad {
+  display: flex;
+}
+
+.prompt.page .lpn-form .numpad .numkey {
+  box-sizing: border-box;
+  flex: 1;
+  height: 2rem;
+}
+
+.prompt.page .lpn-form .actions {
+  display: flex;
+}
+
+.prompt.page .lpn-form .actions input {
+  flex: 1;
+  min-height: 2rem;
+}
+
+.result.page .plate {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.result.page .plate .digit {
+  align-self: center;
+}

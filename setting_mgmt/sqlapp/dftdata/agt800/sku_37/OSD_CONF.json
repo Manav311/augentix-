@@ -1,0 +1,103 @@
+{
+  "cmd_id": "AGTX_CMD_OSD_CONF",
+  "json_content": {
+    "strm": [
+      {
+        "region": [
+          {
+            "enabled": false,
+            "type": "TEXT",
+            "type_spec": "Channel0",
+            "start_x": 1,
+            "start_y": 1
+          },
+          {
+            "enabled": true,
+            "type": "INFO",
+            "type_spec": "YYYY-MM-DD HH:mm:ss",
+            "start_x": 1,
+            "start_y": 1
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "/system/mpp/font/logo_augentix_size0.ayuv",
+            "start_x": 85,
+            "start_y": 1
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "icon:bell",
+            "start_x": 70,
+            "start_y": 0
+          }
+        ]
+      },
+      {
+        "region": [
+          {
+            "enabled": false,
+            "type": "TEXT",
+            "type_spec": "Channel0",
+            "start_x": 1,
+            "start_y": 1
+          },
+          {
+            "enabled": true,
+            "type": "INFO",
+            "type_spec": "YYYY-MM-DD HH:mm:ss",
+            "start_x": 1,
+            "start_y": 1
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "/system/mpp/font/logo_augentix_size1.ayuv",
+            "start_x": 80,
+            "start_y": 1
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "icon:bell",
+            "start_x": 70,
+            "start_y": 0
+          }
+        ]
+      },
+      {
+        "region": [
+          {
+            "enabled": -1
+          },
+          {
+            "enabled": -1
+          },
+          {
+            "enabled": -1
+          },
+          {
+            "enabled": -1
+          }
+        ]
+      },
+      {
+        "region": [
+          {
+            "enabled": -1
+          },
+          {
+            "enabled": -1
+          },
+          {
+            "enabled": -1
+          },
+          {
+            "enabled": -1
+          }
+        ]
+      }
+    ]
+  }
+}

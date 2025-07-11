@@ -1,0 +1,24 @@
+{
+	"min_roi_width": 100,
+	"min_roi_height": 100,
+	"max_roi_width": 1920,
+	"max_roi_height": 1080,
+	"aspect_ratio_width": 192,
+	"aspect_ratio_height": 108,
+	"track_speed": 32,
+	"return_speed": 8,
+	"obj_life_th": 32,
+	"roi_width": 341,
+	"roi_height":384,
+	"win_speed_x": 0,
+	"win_speed_y": 0,
+	"win_size_limit_min": 1,
+	"win_size_limit_max": 1023,
+	"subwindow_disp": {
+		"win_num": 1,
+		"win": {
+			"chn_idx": 1,
+			"win_idx": 0
+		}
+	}
+}

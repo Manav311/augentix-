@@ -1,0 +1,17 @@
+{
+  "cmd_id": "AGTX_CMD_OD_CONF",
+  "json_content": {
+    "enabled": 1,
+    "en_crop_outside_obj": 1,
+    "en_shake_det": 1,
+    "video_chn_idx": 0,
+    "version": "OD_V5",
+    "od_qual": 80,
+    "od_track_refine": 64,
+    "od_size_th": 6,
+    "od_sen": 99,
+    "en_stop_det": 1,
+    "en_gmv_det": 0,
+    "en_motor": 0
+  }
+}

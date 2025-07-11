@@ -1,0 +1,18 @@
+{
+    "obj_life_th": 4,
+    "target_idx": 0,
+    "api": "HUMAN_CLASSIFY",
+    "data_fmt": "MPI_Y",
+    "url": "inapp",
+    "snapshot_width": 1280,
+    "snapshot_height": 720,
+    "pos_stop_count_th": 99,
+    "pos_classify_period": 100,
+    "neg_classify_period": 5,
+    "obj_exist_classify_period": 0,
+    "face_reco_model": "whatever",
+    "detect_model": "whatever",
+    "classify_model": "whatever",
+    "classify_cv_model": "whatever",
+    "human_classify_model": "/system/eaif/models/oc_human_only/human.ini"
+}

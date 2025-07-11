@@ -1,0 +1,13 @@
+menuconfig APP_UNICORN
+	bool "unicorn"
+	default y
+	select LIBAGTX
+	select LIBCM
+	help
+	  Say Y here if you are not sure. Enable Augentix Tool daemon.
+
+if APP_UNICORN
+config CCSERVER_SUPPORT
+	bool "support ccserver connection"
+	depends on APP_CENTCTRL
+endif

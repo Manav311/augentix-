@@ -1,0 +1,10 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_PRIVATE_MODE_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		}		
+	}
+}

@@ -1,0 +1,188 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_STITCH_CONF_S",
+	"description": "Contains stitching parameters of all distances for 180 video.",
+	"ini_unavailable": true,
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"enable": {
+			"ui_type": "boolean",
+			"type": "boolean",
+			"default": false
+		},
+		"center_0_x": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 16384
+		},
+		"center_0_y": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 16384
+		},
+		"center_1_x": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 16384
+		},
+		"center_1_y": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 16384
+		},
+		"dft_dist": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 2
+		},
+		"dist_tbl_list": {
+			
+			"type": "array",
+			"minItems": 3,
+			"maxItems": 3,
+			"items": {
+				"type": "object",
+				"title": "AGTX_STITCH_TABLE_S",
+				"description": "Contains stitching parameters of a distance.",
+				"properties": {
+					"tbl_idx": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 2
+					},
+					"dist": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 32768
+					},
+					"ver_disp": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 2048
+					},
+					"straighten": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 16384
+					},
+					"src_zoom": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 2048
+					},
+					"theta_0": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -640,
+						"maximum": 640
+					},
+					"theta_1": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -640,
+						"maximum": 640
+					},
+					"radius_0": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"radius_1": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"curvature_0": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"curvature_1": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"fov_ratio_0": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"fov_ratio_1": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"ver_scale_0": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"ver_scale_1": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"ver_shift_0": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1024
+					},
+					"ver_shift_1": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1024
+					}
+				}
+			}
+		}
+	}
+}

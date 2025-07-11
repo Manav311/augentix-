@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/dateTime.js"></script>
+  <title>Augentix</title>
+  <script language="Javascript">
+            function time() {
+                //获得显示时间的div
+                t_div = document.getElementById('showtime');
+                var now = new Date();
+                        //替换div内容 
+                t_div.innerHTML = now.getFullYear() + "." + (now.getMonth() + 1) + "." + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+                //等待一秒钟后调用time方法，由于settimeout在time方法内，所以可以无限调用
+                setTimeout(time, 1000);
+        }
+        
+  </script>
+  <style>
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+        .lang_1{
+                background: #f1f1f1;
+                position:absolute;
+                right:0px;
+                top:0px;
+                }
+        .lang_2{
+            background: #f1f1f1;
+            position:absolute;
+            right:90px;
+            top:0px; 
+        }       
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    tr{
+        height: 50px;
+    }
+
+
+    button,
+    textarea {
+        vertical-align: middle;
+    }
+    .container {
+        display: inline-block;
+        height: 100px;
+    }
+    .text, .button {
+        vertical-align: middle;
+    }
+
+  </style>
+</head>
+<body onload="time()">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item active">
+                  <a class="page-link" href="dateTime.html" target="_self">{{msg_t.date_time[lang]}}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="maintenance.html" target="_self">{{msg_t.Maintenance[lang]}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <form>
+              <br>
+              <table class="table">
+                <tr>
+                  <td><input ng-model="TimeMode.Manual_enabled" ng-value="true" type=
+                  "radio">{{msg_t.EnableManual[lang]}}</td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Current_Date_Time[lang]}}</td>
+                  <td><input ng-disabled="enableManual()" ng-model="curCamTime" type="text"></td>
+                  <td><button class="btn btn-info" ng-click="getCamTime()" ng-disabled=
+                  "enableManual()">{{msg_t.Load_from_Camera[lang]}}</button></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.PC_Date_Time[lang]}}</td>
+                  <td>
+                    <div id="showtime"></div>
+                  </td>
+                  <td><input ng-disabled="enableManual()" ng-model="TimeMode.SyncWithPC_enabled" type=
+                  "checkbox">{{msg_t.SyncWithPC[lang]}}</td>
+                </tr>
+                <tr>
+                  <td><input ng-model="TimeMode.Manual_enabled" ng-value="false" type=
+                  "radio">{{msg_t.EnableNTP[lang]}}</td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Time_Server_IP[lang]}}</td>
+                  <td><input ng-disabled="enableNTP()" ng-model="SntpConf.NTPserver" type="text"></td>
+                  <td><button class="btn btn-info" ng-click="getCamSntpConf()" ng-disabled=
+                  "enableNTP()">{{msg_t.Load_from_Camera[lang]}}</button></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Interval_Update_Time[lang]}}</td>
+                  <td><input ng-disabled="enableNTP()" ng-model="SntpConf.Interval" type="text">{{msg_t.hr[lang]}}</td>
+                </tr>
+              </table><br>
+              <table class="table">
+                <tr>
+                  <td>{{msg_t.TimeZone[lang]}}</td>
+                  <td><select class="changes" ng-model="DSTSet.GMT" ng-name="current">
+                    <option ng-value="660">
+                      GMT-11:00
+                    </option>
+                    <option ng-value="600">
+                      GMT-10:00
+                    </option>
+                    <option ng-value="570">
+                      GMT-09:30
+                    </option>
+                    <option ng-value="540">
+                      GMT-09:00
+                    </option>
+                    <option ng-value="480">
+                      GMT-08:00
+                    </option>
+                    <option ng-value="420">
+                      GMT-07:00
+                    </option>
+                    <option ng-value="360">
+                      GMT-06:00
+                    </option>
+                    <option ng-value="300">
+                      GMT-05:00
+                    </option>
+                    <option ng-value="240">
+                      GMT-04:00
+                    </option>
+                    <option ng-value="180">
+                      GMT-03:00
+                    </option>
+                    <option ng-value="120">
+                      GMT-02:00
+                    </option>
+                    <option ng-value="60">
+                      GMT-01:00
+                    </option>
+                    <option ng-value="0">
+                      GMT+00:00
+                    </option>
+                    <option ng-value="-60">
+                      GMT+01:00
+                    </option>
+                    <option ng-value="-120">
+                      GMT+02:00
+                    </option>
+                    <option ng-value="-180">
+                      GMT+03:00
+                    </option>
+                    <option ng-value="-210">
+                      GMT+03:30
+                    </option>
+                    <option ng-value="-240">
+                      GMT+04:00
+                    </option>
+                    <option ng-value="-270">
+                      GMT+04:30
+                    </option>
+                    <option ng-value="-300">
+                      GMT+05:00
+                    </option>
+                    <option ng-value="-330">
+                      GMT+05:30
+                    </option>
+                    <option ng-value="-345">
+                      GMT+05:45
+                    </option>
+                    <option ng-value="-360">
+                      GMT+06:00
+                    </option>
+                    <option ng-value="-390">
+                      GMT+06:30
+                    </option>
+                    <option ng-value="-420">
+                      GMT+07:00
+                    </option>
+                    <option ng-value="-480">
+                      GMT+08:00
+                    </option>
+                    <option ng-value="-540">
+                      GMT+09:00
+                    </option>
+                    <option ng-value="-570">
+                      GMT+09:30
+                    </option>
+                    <option ng-value="-600">
+                      GMT+10:00
+                    </option>
+                    <option ng-value="-630">
+                      GMT+10:30
+                    </option>
+                    <option ng-value="-660">
+                      GMT+11:00
+                    </option>
+                    <option ng-value="-720">
+                      GMT+12:00
+                    </option>
+                    <option ng-value="-765">
+                      GMT+12:45
+                    </option>
+                    <option ng-value="-780">
+                      GMT+13:00
+                    </option>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td><input ng-model="TimeMode.DST_enabled" type="checkbox">{{msg_t.EnableDST[lang]}}</td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.StartTime[lang]}}</td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.MonthStart" ng-name="current">
+                    <option ng-value="1">
+                      Jan
+                    </option>
+                    <option ng-value="2">
+                      Feb
+                    </option>
+                    <option ng-value="3">
+                      Mar
+                    </option>
+                    <option ng-value="4">
+                      Apr
+                    </option>
+                    <option ng-value="5">
+                      May
+                    </option>
+                    <option ng-value="6">
+                      Jun
+                    </option>
+                    <option ng-value="7">
+                      Jul
+                    </option>
+                    <option ng-value="8">
+                      Aug
+                    </option>
+                    <option ng-value="9">
+                      Sep
+                    </option>
+                    <option ng-value="10">
+                      Oct
+                    </option>
+                    <option ng-value="11">
+                      Nov
+                    </option>
+                    <option ng-value="12">
+                      Dec
+                    </option>
+                  </select></td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.PriorityStart" ng-name=
+                  "current">
+                    <option ng-value="1">
+                      First
+                    </option>
+                    <option ng-value="2">
+                      Second
+                    </option>
+                    <option ng-value="3">
+                      Third
+                    </option>
+                    <option ng-value="4">
+                      Fourth
+                    </option>
+                    <option ng-value="5">
+                      Last
+                    </option>
+                  </select></td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.WeekStart" ng-name="current">
+                    <option ng-value="0">
+                      Sun
+                    </option>
+                    <option ng-value="1">
+                      Mon
+                    </option>
+                    <option ng-value="2">
+                      Tue
+                    </option>
+                    <option ng-value="3">
+                      Wed
+                    </option>
+                    <option ng-value="4">
+                      Thu
+                    </option>
+                    <option ng-value="5">
+                      Fri
+                    </option>
+                    <option ng-value="6">
+                      Sat
+                    </option>
+                  </select></td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.HourStart" ng-name="current">
+                    <option ng-value="0">
+                      00
+                    </option>
+                    <option ng-value="1">
+                      01
+                    </option>
+                    <option ng-value="2">
+                      02
+                    </option>
+                    <option ng-value="3">
+                      03
+                    </option>
+                    <option ng-value="4">
+                      04
+                    </option>
+                    <option ng-value="5">
+                      05
+                    </option>
+                    <option ng-value="6">
+                      06
+                    </option>
+                    <option ng-value="7">
+                      07
+                    </option>
+                    <option ng-value="8">
+                      08
+                    </option>
+                    <option ng-value="9">
+                      09
+                    </option>
+                    <option ng-value="10">
+                      10
+                    </option>
+                    <option ng-value="11">
+                      11
+                    </option>
+                    <option ng-value="12">
+                      12
+                    </option>
+                    <option ng-value="13">
+                      13
+                    </option>
+                    <option ng-value="14">
+                      14
+                    </option>
+                    <option ng-value="15">
+                      15
+                    </option>
+                    <option ng-value="16">
+                      16
+                    </option>
+                    <option ng-value="17">
+                      17
+                    </option>
+                    <option ng-value="18">
+                      18
+                    </option>
+                    <option ng-value="19">
+                      19
+                    </option>
+                    <option ng-value="20">
+                      20
+                    </option>
+                    <option ng-value="21">
+                      21
+                    </option>
+                    <option ng-value="22">
+                      22
+                    </option>
+                    <option ng-value="23">
+                      23
+                    </option>
+                    <option ng-value="24">
+                      24
+                    </option>
+                  </select></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.EndTime[lang]}}</td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.MonthEnd" ng-name="current">
+                    <option ng-value="1">
+                      Jan
+                    </option>
+                    <option ng-value="2">
+                      Feb
+                    </option>
+                    <option ng-value="3">
+                      Mar
+                    </option>
+                    <option ng-value="4">
+                      Apr
+                    </option>
+                    <option ng-value="5">
+                      May
+                    </option>
+                    <option ng-value="6">
+                      Jun
+                    </option>
+                    <option ng-value="7">
+                      Jul
+                    </option>
+                    <option ng-value="8">
+                      Aug
+                    </option>
+                    <option ng-value="9">
+                      Sep
+                    </option>
+                    <option ng-value="10">
+                      Oct
+                    </option>
+                    <option ng-value="11">
+                      Nov
+                    </option>
+                    <option ng-value="12">
+                      Dec
+                    </option>
+                  </select></td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.PriorityEnd" ng-name=
+                  "current">
+                    <option ng-value="1">
+                      First
+                    </option>
+                    <option ng-value="2">
+                      Second
+                    </option>
+                    <option ng-value="3">
+                      Third
+                    </option>
+                    <option ng-value="4">
+                      Fourth
+                    </option>
+                    <option ng-value="5">
+                      Last
+                    </option>
+                  </select></td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.WeekEnd" ng-name="current">
+                    <option ng-value="0">
+                      Sun
+                    </option>
+                    <option ng-value="1">
+                      Mon
+                    </option>
+                    <option ng-value="2">
+                      Tue
+                    </option>
+                    <option ng-value="3">
+                      Wed
+                    </option>
+                    <option ng-value="4">
+                      Thu
+                    </option>
+                    <option ng-value="5">
+                      Fri
+                    </option>
+                    <option ng-value="6">
+                      Sat
+                    </option>
+                  </select></td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.HourEnd" ng-name="current">
+                    <option ng-value="0">
+                      00
+                    </option>
+                    <option ng-value="1">
+                      01
+                    </option>
+                    <option ng-value="2">
+                      02
+                    </option>
+                    <option ng-value="3">
+                      03
+                    </option>
+                    <option ng-value="4">
+                      04
+                    </option>
+                    <option ng-value="5">
+                      05
+                    </option>
+                    <option ng-value="6">
+                      06
+                    </option>
+                    <option ng-value="7">
+                      07
+                    </option>
+                    <option ng-value="8">
+                      08
+                    </option>
+                    <option ng-value="9">
+                      09
+                    </option>
+                    <option ng-value="10">
+                      10
+                    </option>
+                    <option ng-value="11">
+                      11
+                    </option>
+                    <option ng-value="12">
+                      12
+                    </option>
+                    <option ng-value="13">
+                      13
+                    </option>
+                    <option ng-value="14">
+                      14
+                    </option>
+                    <option ng-value="15">
+                      15
+                    </option>
+                    <option ng-value="16">
+                      16
+                    </option>
+                    <option ng-value="17">
+                      17
+                    </option>
+                    <option ng-value="18">
+                      18
+                    </option>
+                    <option ng-value="19">
+                      19
+                    </option>
+                    <option ng-value="20">
+                      20
+                    </option>
+                    <option ng-value="21">
+                      21
+                    </option>
+                    <option ng-value="22">
+                      22
+                    </option>
+                    <option ng-value="23">
+                      23
+                    </option>
+                    <option ng-value="24">
+                      24
+                    </option>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Bias[lang]}}</td>
+                  <td><select class="changes" ng-disabled="enableDST()" ng-model="DSTSet.BiasSet" ng-name="current">
+                    <option ng-value="30">
+                      30min
+                    </option>
+                    <option ng-value="60">
+                      60min
+                    </option>
+                    <option ng-value="90">
+                      90min
+                    </option>
+                    <option ng-value="120">
+                      120min
+                    </option>
+                  </select></td>
+                </tr>
+              </table><button class="btn btn-info" ng-click="setTimeData()" ng-disabled=
+              "!canApply">{{msg_t.Apply[lang]}}</button>
+              <p>{{cmdStatus}}</p><br>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

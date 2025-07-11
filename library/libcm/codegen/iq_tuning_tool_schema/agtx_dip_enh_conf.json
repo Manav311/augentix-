@@ -1,0 +1,436 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_ENH_CONF_S",
+	"comments": [
+		"============================",
+		"== Enhancement parameters ==",
+		"============================",
+		"ALSO SEE: MPI_setDipEnhAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0 for auto, 2 for manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"auto_y_txr_strength_list": {
+			"ini_name": "enh_auto.y_txr_strength",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 1023
+			}
+		},
+		"auto_y_txr_edge_list": {
+			"ini_name": "enh_auto.y_txr_edge",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 32,
+				"minimum": 0,
+				"maximum": 32
+			}
+		},
+		"auto_y_txr_detail_list": {
+			"ini_name": "enh_auto.y_txr_detail",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": -16,
+				"maximum": 63
+			}
+		},
+		"auto_y_zone_strength_list": {
+			"ini_name": "enh_auto.y_zone_strength",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 1023
+			}
+		},
+		"auto_y_zone_edge_list": {
+			"ini_name": "enh_auto.y_zone_edge",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 32,
+				"minimum": 0,
+				"maximum": 32
+			}
+		},
+		"auto_y_zone_detail_list": {
+			"ini_name": "enh_auto.y_zone_detail",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": -16,
+				"maximum": 63
+			}
+		},
+		"auto_y_zone_radius_list": {
+			"ini_name": "enh_auto.y_zone_radius",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 2
+			}
+		},
+		"auto_y_zone_weight_list": {
+			"ini_name": "enh_auto.y_zone_weight",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 128,
+				"minimum": 0,
+				"maximum": 255
+			}
+		},
+		"auto_c_radius_list": {
+			"ini_name": "enh_auto.c_radius",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 3
+			}
+		},
+		"auto_c_strength_list": {
+			"ini_name": "enh_auto.c_strength",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 1023
+			}
+		},
+		"auto_c_edge_list": {
+			"ini_name": "enh_auto.c_edge",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 32
+			}
+		},
+		"manual_y_txr_strength": {
+			"ini_name": "enh_manual.y_txr_strength",
+			"comments": "luma strength for texture (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1023
+		},
+		"manual_y_txr_edge": {
+			"ini_name": "enh_manual.y_txr_edge",
+			"comments": "luma edge strength for texture (0~32)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 32,
+			"minimum": 0,
+			"maximum": 32
+		},
+		"manual_y_txr_detail": {
+			"ini_name": "enh_manual.y_txr_detail",
+			"comments": "luma detail strength for texture (-16~63)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": -16,
+			"maximum": 63
+		},
+		"manual_y_zone_strength": {
+			"ini_name": "enh_manual.y_zone_strength",
+			"comments": "luma strength for flat zone (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1023
+		},
+		"manual_y_zone_edge": {
+			"ini_name": "enh_manual.y_zone_edge",
+			"comments": "luma edge strength for flat zone (0~32)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 32,
+			"minimum": 0,
+			"maximum": 32
+		},
+		"manual_y_zone_detail": {
+			"ini_name": "enh_manual.y_zone_detail",
+			"comments": "luma detail strength for flat zone (-16~63)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": -16,
+			"maximum": 63
+		},
+		"manual_y_zone_radius": {
+			"ini_name": "enh_manual.y_zone_radius",
+			"comments": "luma radius strength for flat zone (0~2)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 2
+		},
+		"manual_y_zone_weight": {
+			"ini_name": "enh_manual.y_zone_weight",
+			"comments": "no use, weight for blending txr and zone (0~255)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"manual_c_radius": {
+			"ini_name": "enh_manual.c_radius",
+			"comments": "chroma radius (0~3)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 3
+		},
+		"manual_c_strength": {
+			"ini_name": "enh_manual.c_strength",
+			"comments": "chroma strength (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1023
+		},
+		"manual_c_edge": {
+			"ini_name": "enh_manual.c_edge",
+			"comments": "chroma edge strength (0~32)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 32
+		}
+	}
+}

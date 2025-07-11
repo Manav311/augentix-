@@ -1,0 +1,15 @@
+{
+  "version": "HC1703_HC1783S_r3_4_7",
+  "module": "surround_conf",
+  "cmd_id": "AGTX_CMD_SURROUND_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "center_offset_x": 0,
+    "center_offset_y": 0,
+    "rotate": "0",
+    "enable": 0,
+    "min_radius": 0,
+    "max_radius": 5180,
+    "ldc_ratio": 0
+  }
+}

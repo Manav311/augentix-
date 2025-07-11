@@ -1,0 +1,14 @@
+{
+  "cmd_id": "AGTX_CMD_PD_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "max_aspect_ratio_w": 1,
+    "max_aspect_ratio_h": 1,
+    "min_aspect_ratio_w": 1,
+    "min_aspect_ratio_h": 5,
+    "min_size": 0,
+    "max_size": 100,
+    "obj_life_th": 32
+  }
+}

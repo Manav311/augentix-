@@ -1,0 +1,55 @@
+{
+  "cmd_id": "AGTX_CMD_GPIO_CONF",
+  "json_content": {
+    "gpio_alias": [
+      {
+        "name": "PUSH_BUTTON_IN",
+        "dir": "IN",
+        "pin_num": 79,
+        "value": 0
+      },
+      {
+        "name": "PIR_IN",
+        "dir": "IN",
+        "pin_num": 67,
+        "value": 0
+      },
+      {
+        "name": "SD_CARD_IN",
+        "dir": "IN",
+        "pin_num": 6,
+        "value": 0
+      },
+      {
+        "name": "IRCUT0_OUT",
+        "dir": "OUT",
+        "pin_num": 77,
+        "value": 0
+      },
+      {
+        "name": "ALARM_OUT",
+        "dir": "OUT",
+        "pin_num": 11,
+        "value": 0
+      },
+      {
+        "name": "LED0_OUT",
+        "dir": "OUT",
+        "pin_num": 16,
+        "value": 1
+      },
+      {
+        "name": "IRLED_OUT",
+        "dir": "OUT",
+        "pin_num": 14,
+        "value": 0
+      },
+      {
+        "name": "",
+        "dir": "IN",
+        "pin_num": -1,
+        "value": -1
+      }
+    ]
+  }
+}

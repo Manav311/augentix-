@@ -1,0 +1,131 @@
+{
+  "cmd_id": "AGTX_CMD_RES_OPTION",
+  "json_content": {
+    "strm_idx": -1,
+    "strm": [
+      {
+        "res_idx": -1,
+        "res": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "max_frame_rate": [
+              15,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame_rate_list": [
+              15,
+              14,
+              13,
+              12,
+              11,
+              10,
+              9,
+              8,
+              7,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1
+            ]
+          },
+          {
+            "width": -1,
+            "height": -1,
+            "max_frame_rate": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame_rate_list": [
+			  0
+            ]
+          },
+          {
+            "width": -1,
+            "height": -1,
+            "max_frame_rate": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame_rate_list": [
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "res_idx": -1,
+        "res": [
+          {
+            "width": 640,
+            "height": 360,
+            "max_frame_rate": [
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame_rate_list": [
+              15,
+              14,
+              13,
+              12,
+              11,
+              10,
+              9,
+              8,
+              7,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1
+            ]
+          },
+          {
+            "width": -1,
+            "height": -1,
+            "max_frame_rate": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame_rate_list": [
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

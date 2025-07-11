@@ -1,0 +1,20 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_VDBG_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"ui_type":"boolean",
+			"ui_access_right": "read_write"
+		},
+		"ctx": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": 0
+		}
+	}
+
+}

@@ -1,0 +1,84 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_EF_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"active_cell": {
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 511
+		},
+		"line_cnt": {
+			"type": "integer"
+		},
+		"line_list": {
+			"type": "array",
+			"minItems": 16,
+			"maxItems": 16,
+			"items": {
+				"type": "object",
+				"title": "AGTX_IVA_EF_LINE_S",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"start_x": {
+						"type": "integer",
+						"description": "Start coordinates of detection region. (inclusive)"
+					},
+					"start_y": {
+						"type": "integer",
+						"description": "Start coordinates of detection region. (inclusive)"
+					},
+					"end_x": {
+						"type": "integer",
+						"description": "End coordinates of detection region. (inclusive)"
+					},
+					"end_y": {
+						"type": "integer",
+						"description": "End coordinates of detection region. (inclusive)"
+					},
+					"obj_min_w": {
+						"type": "integer"
+					},
+					"obj_min_h": {
+						"type": "integer"
+					},
+					"obj_max_w": {
+						"type": "integer"
+					},
+					"obj_max_h": {
+						"type": "integer"
+					},
+					"obj_area": {
+						"type": "integer"
+					},
+					"obj_v_th": {
+						"type": "integer"
+					},
+					"obj_life_th": {
+						"type": "integer"
+					},
+					"mode": {
+						"type": "string",
+						"title": "AGTX_IVA_EF_MODE_E",
+						"enum": ["DIR_NONE", "DIR_POS", "DIR_NEG", "DIR_BOTH"]
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+

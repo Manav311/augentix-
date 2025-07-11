@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/iva_pfm.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="dropdown">
+              <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle=
+              "dropdown" id="dropdownMenuButton" type="button">{{CurPage[lang]}}</button>
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                <a class="{{x.dropdown}}" href="{{x.href}}" ng-repeat="x in IvaDropDown" target=
+                "_self">{{x.txt[lang]}}</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <table>
+              <tr>
+                <td><input ng-model="pfmPref.enabled" type="checkbox">{{msg_t.Enable_pet_feeding_monitor[lang]}}</td>
+              </tr>
+              <tr>
+                <td><label>{{msg_t.Sensitivity[lang]}}</label></td>
+                <td><input max="100" min="0" ng-model="pfmPref.sensitivity" type="range"></td>
+                <td><input max="100" min="0" ng-model="pfmPref.sensitivity" type="number"></td>
+              </tr>
+              <tr>
+                <td><label>{{msg_t.Duration[lang]}}</label></td>
+                <td></td>
+                <td><input min="1" ng-model="pfmPref.endurance" type="number"></td>
+              </tr>
+              <!--
+              <tr>
+                <td>{{msg_t.Register_command[lang]}}</td>
+                <td></td>
+                <td><select ng-model="pfmPref.register_scene">
+                  <option ng-value="0">
+                    {{msg_t.None[lang]}}
+                  </option>
+                  <option ng-value="1">
+                    {{msg_t.Register[lang]}}
+                  </option>
+                  <option ng-value="2">
+                    {{msg_t.Feeding[lang]}}
+                  </option>
+                </select></td>
+              </tr>
+              -->
+              <!--
+              <tr>
+                <td>{{msg_t.Regis_to_feeding_interval[lang]}}</td>
+                <td></td>
+                <td><input max="3600" min="10" ng-model="pfmPref.regis_to_feeding_interval" type="number"></td>
+              </tr>
+              -->
+            </table>
+            <table>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Region[lang]}}</td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Start[lang]}} X:</td>
+                <td><input max="99" min="0" ng-blur="check_coordinate()" ng-model="pfmPref.roi.start_x" type=
+                "number"></td>
+                <td>{{msg_t.Start[lang]}} Y:</td>
+                <td><input max="99" min="0" ng-blur="check_coordinate()" ng-model="pfmPref.roi.start_y" type=
+                "number"></td>
+                <td>{{msg_t.End[lang]}} X:</td>
+                <td><input max="100" min="1" ng-blur="check_coordinate()" ng-model="pfmPref.roi.end_x" type=
+                "number"></td>
+                <td>{{msg_t.End[lang]}} Y:</td>
+                <td><input max="100" min="1" ng-blur="check_coordinate()" ng-model="pfmPref.roi.end_y" type=
+                "number"></td>
+              </tr>
+            </table>
+            <!--
+            <table>
+              <tr>
+                <td>{{msg_t.Time_num[lang]}}</td>
+                <td><input max="10" min="0" ng-change="schedule_change(0)" ng-model="pfmPref.time_number" type=
+                "number"></td>
+                <td><button class="btn" ng-click="schedule_change(1)" type="button">+</button></td>
+                <td><button class="btn" ng-click="schedule_change(-1)" type="button">-</button></td>
+              </tr>
+            </table>
+            -->
+            <table>
+              <tr ng-repeat="x in range(0,pfmPref.time_number)">
+                <td>{{x}} :</td>
+                <td>HH:<select ng-blur="update_time(x)" ng-model="pfmJs.schedule[x].hr">
+                  <option ng-repeat='i in range(0,24)' ng-value="i">
+                    {{i}}
+                  </option>
+                </select></td>
+                <td>MM:<select ng-blur="update_time(x)" ng-model="pfmJs.schedule[x].min">
+                  <option ng-repeat='i in range(0,60)' ng-value="i">
+                    {{i}}
+                  </option>
+                </select></td>
+                <td>SS:<select ng-blur="update_time(x)" ng-model="pfmJs.schedule[x].sec">
+                  <option ng-repeat='i in range(0,60)' ng-value="i">
+                    {{i}}
+                  </option>
+                </select></td>
+                <td ng-show="x == (pfmPref.time_number-1)"><button class="btn" ng-click="schedule_change(1)" type=
+                "button">+</button></td>
+                <td ng-show="x == (pfmPref.time_number-1)"><button class="btn" ng-click="schedule_change(-1)" type=
+                "button">-</button></td>
+              </tr>
+            </table><br>
+            <button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button> <button class=
+            "btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+            <p>{{cmdStatus}}</p><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

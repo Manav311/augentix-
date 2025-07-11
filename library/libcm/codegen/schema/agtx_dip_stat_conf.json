@@ -1,0 +1,152 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_STAT_CONF_S",
+	"comments": [
+		"===============================",
+		"== Statistics Configurations ==",
+		"===============================",
+		"SEE: MPI_setStatisticsConfigs"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1
+		},
+		"wb": {
+			"type": "object",
+			"title": "AGTX_DIP_STAT_WB_CONF_S",
+			"properties": {
+				"lum_max": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 13000,
+					"minimum": 0,
+					"maximum": 16383
+				},
+				"lum_min": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 1500,
+					"minimum": 0,
+					"maximum": 16383
+				},
+				"lum_slope": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 16,
+					"minimum": 0,
+					"maximum": 31
+				},
+				"rb_point_x": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 5,
+					"maxItems": 5,
+					"items": {
+						"type": "integer",
+						"default": 64,
+						"minimum": 0,
+						"maximum": 511
+					},
+					"defaultItems": [102, 70, 64, 58, 26]
+				},
+				"rb_point_y": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 5,
+					"maxItems": 5,
+					"items": {
+						"type": "integer",
+						"default": 64,
+						"minimum": 0,
+						"maximum": 511
+					},
+					"defaultItems": [26, 58, 64, 70, 102]
+				},
+				"rb_rgn_th": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 4,
+					"maxItems": 4,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 127
+					},
+					"defaultItems": [2, 2, 1, 1]
+				},
+				"rb_rgn_slope": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 4,
+					"maxItems": 4,
+					"items": {
+						"type": "integer",
+						"default": 16,
+						"minimum": 0,
+						"maximum": 31
+					},
+					"defaultItems": [16, 16, 16, 16]
+				},
+				"gwd_auto_lum_thd_enable": {
+					"ui_type": "boolean",
+					"type": "boolean",
+					"default": false
+				},
+				"gwd_auto_lum_max_degree": {
+					"ini_name": "gwd_auto_lum_thd_param.lum_max_degree",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 13,
+					"minimum": 0,
+					"maximum": 32
+				},
+				"gwd_auto_indoor_ev_thd": {
+					"ini_name": "gwd_auto_lum_thd_param.indoor_ev_thd",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 640000,
+					"minimum": 0,
+					"maximum": 163830000000
+				},
+				"gwd_auto_outdoor_ev_thd": {
+					"ini_name": "gwd_auto_lum_thd_param.outdoor_ev_thd",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 256000,
+					"minimum": 0,
+					"maximum": 163830000000
+				},
+				"gwd_auto_indoor_lum_range": {
+					"ini_name": "gwd_auto_lum_thd_param.indoor_lum_range",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 4480,
+					"minimum": 0,
+					"maximum": 16383
+				},
+				"gwd_auto_outdoor_lum_range": {
+					"ini_name": "gwd_auto_lum_thd_param.outdoor_lum_range",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 8960,
+					"minimum": 0,
+					"maximum": 16383
+				},
+				"gwd_auto_min_lum_bnd": {
+					"ini_name": "gwd_auto_lum_thd_param.min_lum_bnd",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 640,
+					"minimum": 0,
+					"maximum": 16383
+				}
+			}
+		}
+	}
+}

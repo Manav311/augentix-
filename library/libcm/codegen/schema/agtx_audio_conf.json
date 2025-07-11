@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_AUDIO_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"codec": {
+            "type": "string",
+            "title": "AGTX_AUDIO_CODEC_E",
+            "enum": ["NONE", "PCM", "ULAW", "ALAW", "G726"]
+        },
+        "gain": {
+			"type": "integer"
+		},
+		"sampling_bit": {
+			"type": "integer"
+		},
+		"sampling_frequency": {
+			"type": "integer"
+		}		
+	}
+}

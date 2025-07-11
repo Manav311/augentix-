@@ -1,0 +1,32 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_FLOODLIGHT_CONF_S",
+	"properties": {
+		"enabled": {
+			"ui_type": "enum",
+			"type": "integer",
+			"enum" : [0, 1]
+		},
+		"warn_switch": {
+			"ui_type": "enum",
+			"type": "integer",
+			"enum" : [0, 1]
+		},
+		"lightness": {
+			"ui_type": "number",
+			"type": "integer"
+		},
+		"bright_mode": {
+			"ui_type": "enum",
+			"default": 0,
+			"type": "integer",
+			"enum" : [0, 1],
+			"description": "Lightness condition. 0 is manual, 1 is auto."
+		},
+		"warn_time": {
+			"ui_type": "number",
+			"type": "integer"
+		}
+	}
+}

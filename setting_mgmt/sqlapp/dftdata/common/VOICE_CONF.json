@@ -1,0 +1,9 @@
+{
+  "cmd_id": "AGTX_CMD_VOICE_CONF",
+  "json_content": {
+    "enabled": 1,
+    "priority": 0,
+    "hold_time": 10,
+    "volume": 90,
+  }
+}

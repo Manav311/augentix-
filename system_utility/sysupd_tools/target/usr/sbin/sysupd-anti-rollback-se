@@ -1,0 +1,389 @@
+#!/bin/sh
+
+#
+# AUGENTIX INC. - PROPRIETARY
+#
+# sysupd-anti-rollback-se - System update with anti-rollback prtection via secure element
+# Copyright (C) 2024 Augentix Inc. - All Rights Reserved
+#
+# NOTICE: The information contained herein is the property of Augentix Inc.
+# Copying and distributing of this file, via any medium,
+# must be licensed by Augentix Inc.
+
+export LD_LIBRARY_PATH=/system/lib:$LD_LIBRARY_PATH
+
+SYSROOT=""
+
+# List all available image directories in certain order
+SYSUPD_IMG_PATH="$SYSROOT/tmp"
+SYSUPD_IMG_PATH_FLASH="$SYSROOT/usrdata/update"
+SYSUPD_IMG_PATH_SDCARD="$SYSROOT/mnt/sdcard/update"
+SYSUPD_IMG=""
+SYSUPD_IMG_SDCARD=""
+INPUT_FILENAME=""
+eth0_path=/sys/class/net/eth0
+reset_usbnet_flag=/usrdata/reset_to_usbnet
+usbnet_module=$( lsmod | grep "g_ether" )
+diff_log="$SYSROOT/tmp/diff.log"
+fw_setenv_list=/tmp/fw_env_list
+
+# Secure element related variables
+SECURE_ELEMENT_PATH=/system/bin/secure_element_demo
+major_bit=11
+minor_bit=5
+patch_bit=5
+sw_ver_int=0
+
+# Read the content of /usrdata/mode to get the mode value
+if [ -f /usrdata/mode ]; then
+    mode=$(cat /usrdata/mode)
+else
+    # If the file does not exist or is empty, set mode to "factory"
+    mode="factory"
+fi
+echo "[SYSUPD] Mode: $mode"
+
+# Update flag for configuration management
+CONFIG_UPDATE_FILE=/usrdata/update_file
+
+verify_version() {
+    sw_version=$1
+
+    # Read software version
+    major=$(echo "$sw_version" | awk -F. '{print $1}')
+    minor=$(echo "$sw_version" | awk -F. '{print $2}')
+    patch=$(echo "$sw_version" | awk -F. '{print $3}')
+
+    major_int=$((major))
+    minor_int=$((minor))
+    patch_int=$((patch))
+
+    # Read counter value in the secure element
+    output=$($SECURE_ELEMENT_PATH -D 1 -C)
+    counter_value=$(echo "$output" | grep "Counter value:" | awk '{print $NF}')
+
+    # Check if the counter_value was extracted successfully
+    if [ -z "$counter_value" ]; then
+        echo "[SYSUPD] Error: Counter value not found in the output."
+        return 1 # Failed
+    else
+        echo "[SYSUPD] Counter value: $counter_value"
+    fi
+
+    if ! echo "$counter_value" | awk '/^[0-9]+$/ { exit 0 } { exit 1 }'; then
+        echo "[SYSUPD] Anti-rollback error: Counter value is not a valid number."
+        return 1 # Failed
+    fi
+
+    # Compare version
+    int_to_nbit_bin() {
+        local num=$1
+        local bits=$2
+
+        # Validate input
+        if [ -z "$num" ] || [ -z "$bits" ]; then
+            echo "[SYSUPD] Anti-rollback error: Input and bit length cannot be empty."
+            return
+        fi
+
+        if ! [[ "$num" =~ ^[0-9]+$ ]] || ! [[ "$bits" =~ ^[0-9]+$ ]]; then
+            echo "[SYSUPD] Anti-rollback error: Inputs must be valid numbers."
+            return
+        fi
+
+        if [ "$num" -ge $((1 << bits)) ]; then
+            echo "[SYSUPD] Anti-rollback error: Input exceeds the maximum value for $bits bits."
+            return
+        fi
+
+        if [ "$num" -eq 0 ]; then
+            printf "%0${bits}d\n" 0
+            return
+        fi
+
+        # Convert to binary
+        local bin=""
+        while [ "$num" -gt 0 ]; do
+            bin=$((num % 2))$bin
+            num=$((num / 2))
+        done
+
+        # Pad to the specified bit length
+        bin=$(printf "%0${bits}d" "$bin")
+        echo "$bin"
+    }
+
+    # Convert major_int, minor_int, patch_int to binary
+    major_bin=$(int_to_nbit_bin "$major_int" "$major_bit")
+    minor_bin=$(int_to_nbit_bin "$minor_int" "$minor_bit")
+    patch_bin=$(int_to_nbit_bin "$patch_int" "$patch_bit")
+
+    if [[ "$major_bin" == *"error"* ]]; then
+        echo "Error in major_bin: $major_bin"
+        return 1 # Failed
+    fi
+
+    if [[ "$minor_bin" == *"error"* ]]; then
+        echo "Error in minor_bin: $minor_bin"
+        return 1 # Failed
+    fi
+
+    if [[ "$patch_bin" == *"error"* ]]; then
+        echo "Error in patch_bin: $patch_bin"
+        return 1 # Failed
+    fi
+
+    sw_ver_bin="$major_bin$minor_bin$patch_bin"
+
+    # Convert combined binary to integer
+    sw_ver_int=$((2#$sw_ver_bin))
+
+    # Check if sw_ver_int is a valid integer
+    if ! [[ "$sw_ver_int" =~ ^[0-9]+$ ]]; then
+        echo "[SYSUPD] sw_ver_int must be a numeric integer."
+        return 1 # Failed
+    fi
+
+    # Compare value
+    if [[ "$counter_value" -gt "$sw_ver_int" ]]; then
+        echo "[SYSUPD] Anti-rollback error: Counter value is greater than software version."
+        return 1 # Failed
+    else
+        return 0 # Success
+    fi
+}
+
+increment_counter() {
+    # Increment counter value to the desired software version
+    output=$($SECURE_ELEMENT_PATH -D 1 -I $sw_ver_int)
+
+    # Extract counter value from the output
+    counter_value=$(echo "$output" | grep "Counter value:" | awk '{print $NF}')
+
+    # Check if the counter_value was extracted successfully
+    if [ -z "$counter_value" ]; then
+        echo "[SYSUPD] Error: Counter value not found in the output."
+        return 1 # Failed
+    fi
+
+    # Check if counter_value is equal to sw_ver_int
+    if [ "$counter_value" -eq "$sw_ver_int" ]; then
+        echo "[SYSUPD] Success: Counter value incremented to $sw_ver_int."
+        return 0 # Success
+    else
+        echo "[SYSUPD] Error: Counter value ($counter_value) does not match the desired value ($sw_ver_int)."
+        return 1 # Failed
+    fi
+}
+
+# System update image must in swu format
+find_sysupd_default_img() {
+	SYSUPD_IMG=$(find $SYSUPD_IMG_PATH -name "*.swu" -print | head -n 1)
+	if [ -z $SYSUPD_IMG ]; then
+		return 1; # Return false if failed to find the image
+	else
+		return 0; # Success
+	fi
+}
+
+run_swupdate(){
+	img=$1
+	version=$(grep -ah -m 1 $img -e "version = *" | head -1 | awk -F "[\" =]" '/version =/ {print $5}')
+
+	# Perform the anti-rollback check only when the mode is set to 'user'
+	if [ "$mode" = "user" ]; then
+		verify_version "$version"
+		if [ $? -ne 0 ]; then
+    			echo "[SYSUPD] Anti-rollback error: verify version";
+    			return 1 # Failed
+		fi
+	else
+		echo "[SYSUPD] Mode is not 'user'. Skipping secure element counter value check."
+	fi
+
+	bootpart_to_write=
+	# Step 1 read the bootpart to decide which OS to be updated
+	if [ $(fw_printenv slot_b_active -n) == 1 ]; then
+		bootpart_to_write=1
+		echo "Update \"$img\" to Slot A"
+		echo "slot_a_active 0"     > $fw_setenv_list
+		echo "slot_a_bootable 0"   >> $fw_setenv_list
+		echo "slot_a_successful 0" >> $fw_setenv_list
+	else
+		bootpart_to_write=2
+		echo "Update \"$img\" to Slot B"
+		echo "slot_b_active 0"     >  $fw_setenv_list
+		echo "slot_b_bootable 0"   >> $fw_setenv_list
+		echo "slot_b_successful 0" >> $fw_setenv_list
+	fi
+
+	fw_setenv -s $fw_setenv_list
+
+	img_collection="release,copy_$bootpart_to_write"
+	# Skip scanning certain MTDs
+	echo "[SYSUPD] Execute swupdate with signature verification"
+	swupdate -v -b "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19" -e "$img_collection" -i $img -k /usr/share/misc/sysupd_pub_key.pem
+
+	if [ $? == 0 ]; then
+		if [ $bootpart_to_write == 1 ]; then
+			# Slot A to be activate
+			echo "slot_a_bootable 1" >  $fw_setenv_list
+			echo "slot_a_active   1" >> $fw_setenv_list
+			echo "slot_b_active   0" >> $fw_setenv_list
+		else
+			# Slot B to be activate
+			echo "slot_b_bootable 1" >  $fw_setenv_list
+			echo "slot_b_active   1" >> $fw_setenv_list
+			echo "slot_a_active   0" >> $fw_setenv_list
+		fi
+
+		fw_setenv -s $fw_setenv_list
+
+		# Perform the anti-rollback check only when the mode is set to 'user'
+		if [ "$mode" = "user" ]; then
+			increment_counter
+			if [ $? -ne 0 ]; then
+    				echo "[SYSUPD] Anti-rollback error: increment counter";
+    				return 1 # Failed
+			else
+				echo "[SYSUPD] Update counter to $sw_ver_int."
+			fi
+		else
+			echo "[SYSUPD] Mode is not 'user'. Skipping secure element counter increment."
+		fi
+
+		# Assert update flag for configuration management
+		echo "[SYSUPD] New SW version:"
+		echo "$version" > $CONFIG_UPDATE_FILE
+		cat $CONFIG_UPDATE_FILE
+
+		return 0
+	fi
+
+	return 1
+}
+
+usage() {
+	echo "Usage:"
+	echo "$0 [-f <filename>]"
+	echo "  -f		Specifies input filename"
+	echo ""
+	echo "If filename is not specified or the file is not found, sysupd fall backs to default search rule."
+}
+
+usage_exit() {
+	usage
+	exit 0
+}
+
+while [ $# -gt 0 ]; do
+	key="$1"
+	case $key in
+	-f)
+		INPUT_FILENAME="$2"
+		shift
+		shift
+		;;
+	-h|--help)
+		usage_exit
+		;;
+	esac
+done
+
+SYSUPD_IMG="$SYSUPD_IMG_PATH/update.swu"
+# Specified input file is given
+if [ "$INPUT_FILENAME" != "" ]; then
+	if [ -f "$INPUT_FILENAME" ]; then
+		if [ "$(cd $(dirname $INPUT_FILENAME); pwd -P)" != "$SYSUPD_IMG_PATH" ]; then
+			echo "Copy image to $SYSUPD_IMG_PATH"
+			cp -f $INPUT_FILENAME $SYSUPD_IMG
+		else
+			SYSUPD_IMG="$INPUT_FILENAME"
+			echo "Found image $SYSUPD_IMG"
+		fi
+
+		if run_swupdate $SYSUPD_IMG; then
+			echo "[SYSUPD] Update finished; Please reboot system...";
+			return 0;
+		else
+			echo "[SYSUPD] Failed to update the system";
+		fi
+		return 1;
+	fi
+fi
+
+#Update file not in /tmp/
+if ! find_sysupd_default_img; then
+
+	#Update file in SD card
+	SYSUPD_IMG_SDCARD=$(find $SYSUPD_IMG_PATH_SDCARD -name "*.swu" -print | head -n 1)
+	#Update file in flash
+	SYSUPD_IMG_FLASH=$(find $SYSUPD_IMG_PATH_FLASH -name "*.swu" -print | head -n 1)
+	if [ -e "$SYSUPD_IMG_SDCARD" ]; then
+		echo "Update file is found in SD card."
+		echo "Verifying..."
+
+		#Copy update file to /tmp/
+		cp "$SYSUPD_IMG_SDCARD" "$SYSUPD_IMG_PATH"
+		SYSUPD_IMG=$(find $SYSUPD_IMG_PATH -name "*.swu" -print | head -n 1)
+		if [ ! -e "$SYSUPD_IMG" ]; then
+			echo "Verify Fail; Please check the update file."
+			return 1
+		else
+			diff $SYSUPD_IMG_SDCARD $SYSUPD_IMG > $diff_log
+			while [ -s $diff_log ]
+			do
+				echo "Copy fail; Retry again..."
+				cp "$SYSUPD_IMG_SDCARD" "$SYSUPD_IMG_PATH"
+				SYSUPD_IMG=$(find $SYSUPD_IMG_PATH -name "*.swu" -print | head -n 1)
+				diff "$SYSUPD_IMG_SDCARD" "$SYSUPD_IMG" > $diff_log
+				echo "Update file is located in $SYSUPD_IMG"
+			done
+			echo "Update file is located in $SYSUPD_IMG"
+			echo "Check update file OK."
+
+			if run_swupdate $SYSUPD_IMG; then
+				echo "[SYSUPD] Update finished; Please reboot system...";
+			else
+				echo "[SYSUPD] Failed to update the system";
+			fi
+		fi
+	elif [ -e "$SYSUPD_IMG_FLASH" ]; then
+		echo "Update file is located in $SYSUPD_IMG_FLASH"
+		echo "Check update file OK."
+		if run_swupdate $SYSUPD_IMG_FLASH; then
+			echo "[SYSUPD] Update finished; Please reboot system...";
+			return 0;
+		else
+			echo "[SYSUPD] Failed to update the system";
+			return 1;
+		fi
+	else
+		#Check if ethernet exist
+		if [ -d "$eth0_path" ];then
+			echo "etho mode"
+		else
+
+		#If no ethernet, trun on usbnet
+			if [ -z "$usbnet_module" ]; then
+				echo "[warning] can not find rndis module"
+			else
+				touch $reset_usbnet_flag
+				echo "[SYSUPD] Rebooting system to finish system update...";
+				reboot
+			fi
+		fi
+		echo "[SYSUPD] Failed to find update image!"
+		return 1;
+	fi
+
+#Update file in /tmp/
+else
+	if run_swupdate $SYSUPD_IMG; then
+		echo "[SYSUPD] Update finished; Please reboot system...";
+		return 0;
+	else
+		echo "[SYSUPD] Failed to update the system";
+	fi
+	return 1;
+fi

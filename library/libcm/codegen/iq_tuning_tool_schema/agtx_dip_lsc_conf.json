@@ -1,0 +1,85 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_LSC_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"lsc": {
+			"comments": [
+				"========================================",
+				"== Lens shading correction parameters ==",
+				"========================================",
+				"NOTE: if single sensor, only LSC0 valid",
+				"ALSO SEE: MPI_setLscAttr"
+			],
+			"ui_access_right": "read_write",
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 2,
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_LSC_ATTR_S",
+				"properties": {
+					"origin": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 65536,
+						"minimum": 0,
+						"maximum": 65536
+					},
+					"x_trend": {
+						"ini_name": "x_trend_2s",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 65536
+					},
+					"y_trend": {
+						"ini_name": "y_trend_2s",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 65536
+					},
+					"x_curvature": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 65536
+					},
+					"y_curvature": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 65536
+					},
+					"tilt": {
+						"ini_name": "tilt_2s",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 65536
+					}
+				}
+			}
+		}
+	}
+}

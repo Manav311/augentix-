@@ -1,0 +1,219 @@
+#!/bin/sh
+
+#
+# AUGENTIX INC. - PROPRIETARY
+#
+# sysupd - System update script
+# Copyright (C) 2018 Augentix Inc. - All Rights Reserved
+#
+# NOTICE: The information contained herein is the property of Augentix Inc.
+# Copying and distributing of this file, via any medium,
+# must be licensed by Augentix Inc.
+#
+# * Author: ShihChieh Lin <shihchieh.lin@augentix.com>
+#
+
+SYSROOT=""
+
+# List all available image directories in certain order
+SYSUPD_IMG_PATH="$SYSROOT/tmp"
+SYSUPD_IMG_PATH_FLASH="$SYSROOT/usrdata/update"
+SYSUPD_IMG_PATH_SDCARD="$SYSROOT/mnt/sdcard/update"
+SYSUPD_IMG=""
+SYSUPD_IMG_SDCARD=""
+INPUT_FILENAME=""
+eth0_path=/sys/class/net/eth0
+reset_usbnet_flag=/usrdata/reset_to_usbnet
+usbnet_module=$( lsmod | grep "g_ether" )
+diff_log="$SYSROOT/tmp/diff.log"
+fw_setenv_list=/tmp/fw_env_list
+
+# Update flag for configuration management
+CONFIG_UPDATE_FILE=/usrdata/update_file
+
+# System update image must in swu format
+find_sysupd_default_img() {
+	SYSUPD_IMG=$(find $SYSUPD_IMG_PATH -name "*.swu" -print | head -n 1)
+	if [ -z $SYSUPD_IMG ]; then
+		return 1; # Return false if failed to find the image
+	else
+		return 0; # Success
+	fi
+}
+
+run_swupdate(){
+	img=$1
+	bootpart_to_write=
+	# Step 1 read the bootpart to decide which OS to be updated
+	if [ $(fw_printenv slot_b_active -n) == 1 ]; then
+		bootpart_to_write=1
+		echo "Update \"$img\" to Slot A"
+		echo "slot_a_active 0"     > $fw_setenv_list
+		echo "slot_a_bootable 0"   >> $fw_setenv_list
+		echo "slot_a_successful 0" >> $fw_setenv_list
+	else
+		bootpart_to_write=2
+		echo "Update \"$img\" to Slot B"
+		echo "slot_b_active 0"     >  $fw_setenv_list
+		echo "slot_b_bootable 0"   >> $fw_setenv_list
+		echo "slot_b_successful 0" >> $fw_setenv_list
+	fi
+
+	fw_setenv -s $fw_setenv_list
+
+	img_collection="release,copy_$bootpart_to_write"
+	# Skip scanning certain MTDs
+	echo "[SYSUPD] Execute swupdate with signature verification"
+	swupdate -v -b "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19" -e "$img_collection" -i $img -k /usr/share/misc/sysupd_pub_key.pem
+
+	if [ $? == 0 ]; then
+		if [ $bootpart_to_write == 1 ]; then
+			# Slot A to be activate
+			echo "slot_a_bootable 1" >  $fw_setenv_list
+			echo "slot_a_active   1" >> $fw_setenv_list
+			echo "slot_b_active   0" >> $fw_setenv_list
+		else
+			# Slot B to be activate
+			echo "slot_b_bootable 1" >  $fw_setenv_list
+			echo "slot_b_active   1" >> $fw_setenv_list
+			echo "slot_a_active   0" >> $fw_setenv_list
+		fi
+
+		fw_setenv -s $fw_setenv_list
+
+		# Assert update flag for configuration management
+		version=$(grep -ah -m 1 $img -e "version = *" | head -1 | awk -F "[\" =]" '/version =/ {print $5}')
+		echo "[SYSUPD] New SW version:"
+		echo "$version" > $CONFIG_UPDATE_FILE
+		cat $CONFIG_UPDATE_FILE
+
+		return 0
+	fi
+
+	return 1
+}
+
+usage() {
+	echo "Usage:"
+	echo "$0 [-f <filename>]"
+	echo "  -f		Specifies input filename"
+	echo ""
+	echo "If filename is not specified or the file is not found, sysupd fall backs to default search rule."
+}
+
+usage_exit() {
+	usage
+	exit 0
+}
+
+while [ $# -gt 0 ]; do
+	key="$1"
+	case $key in
+	-f)
+		INPUT_FILENAME="$2"
+		shift
+		shift
+		;;
+	-h|--help)
+		usage_exit
+		;;
+	esac
+done
+
+SYSUPD_IMG="$SYSUPD_IMG_PATH/update.swu"
+# Specified input file is given
+if [ "$INPUT_FILENAME" != "" ]; then
+	if [ -f "$INPUT_FILENAME" ]; then
+		if [ "$(cd $(dirname $INPUT_FILENAME); pwd -P)" != "$SYSUPD_IMG_PATH" ]; then
+			echo "Copy image to $SYSUPD_IMG_PATH"
+			cp -f $INPUT_FILENAME $SYSUPD_IMG
+		else
+			SYSUPD_IMG="$INPUT_FILENAME"
+			echo "Found image $SYSUPD_IMG"
+		fi
+
+		if run_swupdate $SYSUPD_IMG; then
+			echo "[SYSUPD] Update finished; Please reboot system...";
+			return 0;
+		else
+			echo "[SYSUPD] Failed to update the system";
+		fi
+		return 1;
+	fi
+fi
+
+#Update file not in /tmp/
+if ! find_sysupd_default_img; then
+
+	#Update file in SD card
+	SYSUPD_IMG_SDCARD=$(find $SYSUPD_IMG_PATH_SDCARD -name "*.swu" -print | head -n 1)
+	#Update file in flash
+	SYSUPD_IMG_FLASH=$(find $SYSUPD_IMG_PATH_FLASH -name "*.swu" -print | head -n 1)
+	if [ -e "$SYSUPD_IMG_SDCARD" ]; then
+		echo "Update file is found in SD card."
+		echo "Verifying..."
+
+		#Copy update file to /tmp/
+		cp "$SYSUPD_IMG_SDCARD" "$SYSUPD_IMG_PATH"
+		SYSUPD_IMG=$(find $SYSUPD_IMG_PATH -name "*.swu" -print | head -n 1)
+		if [ ! -e "$SYSUPD_IMG" ]; then
+			echo "Verify Fail; Please check the update file."
+			return 1
+		else
+			diff $SYSUPD_IMG_SDCARD $SYSUPD_IMG > $diff_log
+			while [ -s $diff_log ]
+			do
+				echo "Copy fail; Retry again..."
+				cp "$SYSUPD_IMG_SDCARD" "$SYSUPD_IMG_PATH"
+				SYSUPD_IMG=$(find $SYSUPD_IMG_PATH -name "*.swu" -print | head -n 1)
+				diff "$SYSUPD_IMG_SDCARD" "$SYSUPD_IMG" > $diff_log
+				echo "Update file is located in $SYSUPD_IMG"
+			done
+			echo "Update file is located in $SYSUPD_IMG"
+			echo "Check update file OK."
+
+			if run_swupdate $SYSUPD_IMG; then
+				echo "[SYSUPD] Update finished; Please reboot system...";
+			else
+				echo "[SYSUPD] Failed to update the system";
+			fi
+		fi
+	elif [ -e "$SYSUPD_IMG_FLASH" ]; then
+		echo "Update file is located in $SYSUPD_IMG_FLASH"
+		echo "Check update file OK."
+		if run_swupdate $SYSUPD_IMG_FLASH; then
+			echo "[SYSUPD] Update finished; Please reboot system...";
+			return 0;
+		else
+			echo "[SYSUPD] Failed to update the system";
+			return 1;
+		fi
+	else
+		#Check if ethernet exist
+		if [ -d "$eth0_path" ];then
+			echo "etho mode"
+		else
+
+		#If no ethernet, trun on usbnet
+			if [ -z "$usbnet_module" ]; then
+				echo "[warning] can not find rndis module"
+			else
+				touch $reset_usbnet_flag
+				echo "[SYSUPD] Rebooting system to finish system update...";
+				reboot
+			fi
+		fi
+		echo "[SYSUPD] Failed to find update image!"
+		return 1;
+	fi
+
+#Update file in /tmp/
+else
+	if run_swupdate $SYSUPD_IMG; then
+		echo "[SYSUPD] Update finished; Please reboot system...";
+		return 0;
+	else
+		echo "[SYSUPD] Failed to update the system";
+	fi
+	return 1;
+fi

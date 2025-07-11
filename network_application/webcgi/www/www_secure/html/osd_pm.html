@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <link href="../css/agtx_player.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/osd_pm.js"></script>
+  <script src="../js/lib/flv.min.js"></script>
+  <script src="../js/agtx_player_check.js"></script>
+  <script src="../js/lib/signalr.min.js"></script>
+  <script type="module" src="../js/agtx_player_srv.js"></script>
+  <script type="module" src="../js/agtx_player_vm.js"></script>
+  <script type="module">
+  $(async function() {
+    const mainUrl = window.flvLiveAudio0;
+    const subUrl = window.flvLiveAudio1;
+    const mainRelayUrl = window.flvRelayLiveAudio0;
+    const subRelayUrl = window.flvRelayLiveAudio1;
+    const { core } = window.augentixPlayerViewModel || {};
+    await core?.init({ langId, mainUrl, subUrl, mainRelayUrl, subRelayUrl });
+  });
+  </script>
+  <title>Augentix</title>
+</head>
+<body data-ng-init="init()">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="osd.html" target="_self">{{msg_t.OSD_Setting[lang]}}</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="osd_pm.html" target="_self">{{msg_t.Privacy_Mask[lang]}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div id="preview_div" style="display:none">
+              <img id='u400' style="width:60%;">
+              <canvas alt="Browser does not support canvas tag" id="preview" style="width:0%"></canvas>
+            </div><button hidden="true" id="add_obj">click here</button>
+            <div id="agtx-player-preview"></div>
+            <form ng-submit="sendData()">
+              <table class="table" ng-repeat="id in osd_pm_options.max_bind_list">
+                <tr>
+                  <td colspan="2">{{msg_t.ID[lang]}} {{id}}</td>
+                  <td ng-repeat="chn in getNumber(osd_pmJs.chn_nums)" width="200px"><input ng-change="update()"
+                  ng-model="osd_pmPref.conf[chn].param[id].enabled" type="checkbox"></td>
+                </tr>
+                <tr>
+                  <td width="50px"></td>
+                  <td width="150px">{{msg_t.Color[lang]}}</td>
+                  <td ng-repeat="chn in getNumber(osd_pmJs.chn_nums)" width="200px"><select name="current" ng-change=
+                  "update()" ng-class="color_dict[osd_pmPref.conf[chn].param[id].color]" ng-model=
+                  "osd_pmPref.conf[chn].param[id].color">
+                    <option ng-class="color_dict[val]" ng-repeat="val in getNumber(color_num)" ng-value="val">
+                      {{msg_t[color_dict[val]][lang]}}
+                    </option>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>{{msg_t.Alpha[lang]}}</td>
+                  <td ng-repeat="chn in getNumber(osd_pmJs.chn_nums)"><input max="7" min="0" ng-change="update()"
+                  ng-model="osd_pmPref.conf[chn].param[id].alpha" type="range" width="50%"><input max="7" min="0"
+                  ng-change="update()" ng-model="osd_pmPref.conf[chn].param[id].alpha" type="number" width="10%"></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>{{msg_t.Start[lang]}}</td>
+                  <td ng-repeat="chn in getNumber(osd_pmJs.chn_nums)">x: <input max="100" min="0" ng-change="update()"
+                  ng-model="osd_pmPref.conf[chn].param[id].start_x" type="number">y: <input max="100" min="0"
+                  ng-change="update()" ng-model="osd_pmPref.conf[chn].param[id].start_y" type="number"></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>{{msg_t.End[lang]}}</td>
+                  <td ng-repeat="chn in getNumber(osd_pmJs.chn_nums)">x: <input max="100" min="0" ng-change="update()"
+                  ng-model="osd_pmPref.conf[chn].param[id].end_x" type="number">y: <input max="100" min="0" ng-change=
+                  "update()" ng-model="osd_pmPref.conf[chn].param[id].end_y" type="number"></td>
+                </tr>
+              </table><button class="btn btn-info" formnovalidate="" ng-click="getData()" type=
+              "button">{{msg_t.Read_setting[lang]}}</button> <input class="btn btn-info" ng-disabled="!canApply" type=
+              "submit" value="{{msg_t.Apply[lang]}}">
+            </form>
+            <p>{{cmdStatus}}</p><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

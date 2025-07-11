@@ -1,0 +1,97 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"version": 1,
+	"type": "object",
+	"title": "AGTX_DIP_EXPOSURE_INFO_S",
+	"purpose": "query",
+	"ini_unavailable": true,
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_only",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"inttime": {
+			"ui_type": "number",
+			"ui_access_right": "read_only",
+			"type": "integer",
+			"default": 1000,
+			"minimum": 1,
+			"maximum": 2147483647
+		},
+		"isp_gain": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 1024,
+			"minimum": 1024,
+			"maximum": 4294967295
+		},
+		"sensor_gain": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 32,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"sys_gain": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 32,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"iso": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 100,
+			"minimum": 0,
+			"maximum": 102400
+		},
+		"frame_delay": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"flicker_free_conf": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"fps": {
+			"ui_type": "number",
+			"type": "number",
+			"ui_access_right": "read_only",
+			"default": 15,
+			"minimum": 0.1,
+			"maximum": 255
+		},
+		"ratio": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 1024,
+			"minimum": 0,
+			"maximum": 2147483647
+		},
+		"luma_avg": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 8000,
+			"minimum": 0,
+			"maximum": 16383
+		}
+	}
+}

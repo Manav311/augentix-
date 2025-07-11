@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/network.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+              <nav aria-label="Page navigation example">
+				<ul class="pagination">
+				<!-- <li class="page-item active"><a class="page-link" href="#">General</a></li> -->
+	  			  <li class="page-item active"><a class="page-link" target="_self" href="networkInterface.html">{{msg_t.Wired_Network_Interface[lang]}}</a></li>
+				</ul>
+			</nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <p>{{msg_t.Wired_Network_Interface[lang]}}</p>
+            <hr>
+            <p></p>
+            <table>
+              <tr>
+                <td>{{msg_t.Network_Mode[lang]}}</td>
+                <td><input name="mode" ng-model="NetworkConfig.dhcp" ng-value="1" type="radio">DHCP</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><input name="mode" ng-model="NetworkConfig.dhcp" ng-value="0" type=
+                "radio">{{msg_t.Static_IP[lang]}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <form name="IpTable">
+                  <table>
+                    <tr>
+                      <td><label>{{msg_t.IP_Address[lang]}}</label></td>
+                      <td><input name="Ip" ng-model="NetworkConfig.IPAddress" type="text" ng-pattern="ipForm" required></td>
+                      <td style="color:red" class="error" ng-show="IpTable.Ip.$error.required">{{msg_t.Required[lang]}}</td>
+                      <td style="color:red" class="error" ng-show="IpTable.Ip.$error.pattern">{{msg_t.InvalidAddress[lang]}}</td>
+                    </tr>
+                    <tr>
+                      <td><label>{{msg_t.Subnet_Mask[lang]}}</label></td>
+                      <td><input name="SubMask" ng-model="NetworkConfig.Netmask" type="text" ng-pattern="ipForm" required></td>
+                      <td style="color:red" class="error" ng-show="IpTable.SubMask.$error.required">{{msg_t.Required[lang]}}</td>
+                      <td style="color:red" class="error" ng-show="IpTable.SubMask.$error.pattern">{{msg_t.InvalidAddress[lang]}}</td>
+                    </tr>
+                    <tr>
+                      <td><label>{{msg_t.Defualt_Gateway[lang]}}</label></td>
+                      <td><input name="Gate" ng-model="NetworkConfig.Gateway" type="text" ng-pattern="ipForm" required></td>
+                      <td style="color:red" class="error" ng-show="IpTable.Gate.$error.required">{{msg_t.Required[lang]}}</td>
+                      <td style="color:red" class="error" ng-show="IpTable.Gate.$error.pattern">{{msg_t.InvalidAddress[lang]}}</td>
+                    </tr>
+                    <tr>
+                      <td><label>{{msg_t.Primary_DNS[lang]}}</label></td>
+                      <td><input name="PriDNS" ng-model="NetworkConfig.DNS1" type="text" ng-pattern="ipForm" required></td>
+                      <td style="color:red" class="error" ng-show="IpTable.PriDNS.$error.required">{{msg_t.Required[lang]}}</td>
+                      <td style="color:red" class="error" ng-show="IpTable.PriDNS.$error.pattern">{{msg_t.InvalidAddress[lang]}}</td>
+                    </tr>
+                    <tr>
+                      <td><label>{{msg_t.Secondary_DNS[lang]}}</label></td>
+                      <td><input name="SecDNS" ng-model="NetworkConfig.DNS2" type="text" ng-pattern="ipForm"></td>
+                      <td style="color:red" class="error" ng-show="IpTable.SecDNS.$error.pattern">{{msg_t.InvalidAddress[lang]}}</td>
+                    </tr>
+                  </table>
+                  </form>
+                  <hr>
+                </td>
+              </tr>
+            </table>
+            <button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+            <button type="submit" class="btn btn-info" ng-disabled="!canApply||IpTable.$invalid" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+            <button class="btn btn-info" ng-click="reboot()">{{msg_t.Reboot[lang]}}</button>
+            <p>{{msg_t.Reboot_msg[lang]}}</p>
+            <p>{{cmdStatus}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

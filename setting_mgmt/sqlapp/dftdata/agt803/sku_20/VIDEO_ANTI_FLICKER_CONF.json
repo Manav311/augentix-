@@ -1,0 +1,19 @@
+{
+	"cmd_id": "AGTX_CMD_ANTI_FLICKER_CONF",
+	"json_content": {
+	  "enable": 1,
+	  "frequency_idx": 1,
+	  "frequency_list": [
+		{
+		  "frequency": 50,
+		  "fps": 16.67
+		},
+		{
+		  "frequency": 60,
+		  "fps": 15
+		}
+	  ]
+	}
+  }
+
+

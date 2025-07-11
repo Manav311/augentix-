@@ -1,0 +1,121 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_DHZ_CONF_S",
+	"comments": [
+		"=======================",
+		"== Dehaze parameters ==",
+		"=======================",
+		"ALSO SEE: MPI_setDhzAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0 for auto, 2 for manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"dc_iir_weight": {
+			"comments": "update rate of luma direct-current (y_dc) value (0~256)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 32,
+			"minimum": 0,
+			"maximum": 256
+		},
+		"gain_step_th": {
+			"comments": "regional gain step threshold (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 10,
+			"minimum": 0,
+			"maximum": 1023
+		},
+		"auto_y_gain_max_list": {
+			"ini_name": "dhz_auto.y_gain_max",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 512,
+				"minimum": 0,
+				"maximum": 1023
+			}
+		},
+		"auto_c_gain_max_list": {
+			"ini_name": "dhz_auto.c_gain_max",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 340,
+				"minimum": 0,
+				"maximum": 1023
+			}
+		},
+		"manual_y_gain_max": {
+			"ini_name": "dhz_manual.y_gain_max",
+			"comments": "Y channel gain maximum, set the value as ROUNDING(N * 256), where N(float)=[0, 4) (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 512,
+			"minimum": 0,
+			"maximum": 1023
+		},
+		"manual_c_gain_max": {
+			"ini_name": "dhz_manual.c_gain_max",
+			"comments": "UV channel gain maximum, set the value as ROUNDING(N * 256), where N(float)=[0, 4) (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 340,
+			"minimum": 0,
+			"maximum": 1023
+		}
+	}
+}

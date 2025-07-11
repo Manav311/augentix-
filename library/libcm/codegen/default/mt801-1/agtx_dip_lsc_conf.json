@@ -1,0 +1,21 @@
+"{"\
+"  "video_dev_idx": 0,"\
+"  "lsc": ["\
+"    {"\
+"      "origin": 4,"\
+"      "x_trend": 3872,"\
+"      "y_trend": 2401,"\
+"      "x_curvature": 7290,"\
+"      "y_curvature": 7767,"\
+"      "tilt": 0"\
+"    },"\
+"    {"\
+"      "origin": 4,"\
+"      "x_trend": 3872,"\
+"      "y_trend": 2401,"\
+"      "x_curvature": 7290,"\
+"      "y_curvature": 7767,"\
+"      "tilt": 0"\
+"    }"\
+"  ]"\
+"}

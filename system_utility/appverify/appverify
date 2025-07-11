@@ -1,0 +1,34 @@
+#!/bin/sh
+
+err_invalid_args=1
+err_access_file=2
+
+usage() {
+	echo "$0: Verify an application signature."
+	echo "Usage: $0 [public_key] [app] [app_signature]"
+	echo ""
+	echo "Example:"
+	echo "    $0 /usr/share/misc/app_pub_key.pem /usrdata/app/dut_onehost /usrdata/app/dut_onehost.sig"
+}
+
+if [ ! $# -eq 3 ]; then
+	usage
+	exit $err_invalid_args
+fi
+
+pub_key=$1
+app=$2
+sig=$3
+
+if [ ! -f "$pub_key" ]; then
+    exit $err_access_file
+fi
+if [ ! -f "$app" ]; then
+    exit $err_access_file
+fi
+if [ ! -f "$sig" ]; then
+    exit $err_access_file
+fi
+
+
+openssl dgst -sha256 -verify "$pub_key" -signature "$sig" "$app" > /dev/null 2>&1

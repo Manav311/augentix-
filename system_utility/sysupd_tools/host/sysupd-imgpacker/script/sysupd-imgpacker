@@ -1,0 +1,227 @@
+#!/bin/bash
+
+###############################################################################
+#
+# AUGENTIX INC. - PROPRIETARY
+#
+# sysupd-imgpacker - SUWpdate image generator
+# Copyright (C) 2018 Augentix Inc. - All Rights Reserved
+#
+# NOTICE: The information contained herein is the property of Augentix Inc.
+# Copying and distributing of this file, via any medium,
+# must be licensed by Augentix Inc.
+#
+# * Author: ShihChieh Lin <shihchieh.lin@augentix.com>
+#
+###############################################################################
+
+# Environment setup; change this settings if needed
+
+# SRCDIR: Directory that contains all binary images
+
+SW_DESC=sw-description
+SW_DESC_SRC=fwupd.desc
+PREFER_RESET_DESC=prefer-reset.sh
+PREFER_RESET_SRC=prefer-reset.desc
+BLOCK_VER=INPUT_PREF_VERSION
+
+TMPDIR=./.sysupd_tmp
+
+BUILDDIR=../../
+BINDIR=..
+
+if [ -f $BINDIR/fitImage.bin ]; then # if supports SECURE BOOT
+	KERNEL_BIN=fitImage.bin
+else
+	KERNEL_BIN=uImage.bin
+fi
+
+fctry_rst_script=factory-reset.sh
+usr_rst_script=user-reset.sh
+pre_rst_script=prefer-reset.sh
+
+# default
+post_install_script=post-install.sh
+
+reset_user=0
+reset_prefer=0
+reset_prefer_auto=0
+reset_factory=0
+
+SCRIPTSRCS=
+SYSUPD_INPUT_PKG=
+SYSUPD_OUTPUT_PKG=
+
+
+usage(){
+	echo "Usage:"
+	echo "[Generate update image] $0 [-u] [-f] [-p] [-ap <blocking_sw_version_string>] -o <output_image_name> -v <sw_version_string>"
+	echo "  -u		Also reset user setting after system update"
+	echo "  -f		Also reset to factory mode"
+	echo "  -p		Also reset user preference setting after system update"
+	echo "  -ap		Also reset user preference setting when previous version is below blocking version"
+	echo "[Parse image version]   $0 -i <input_image_name>"
+}
+
+usage_exit(){
+	usage
+	exit 0
+}
+
+gen_swdesc(){
+	echo " - Generating SW descriptor \"$SW_DESC\" from \"$SW_DESC_SRC\" ..."
+	cp -f $SW_DESC_SRC $SW_DESC;
+	cp -f $PREFER_RESET_SRC $PREFER_RESET_DESC;
+	
+	sed -i "s/SYSUPD_VERSION/$SYSUPD_VERSION/g" $SW_DESC
+	sed -i "s/KERNEL_BIN/$KERNEL_BIN/g" $SW_DESC
+	sed -i "s/ROOTFS_BIN/$ROOTFS_BIN/g" $SW_DESC
+	sed -i "s/RTOS_BIN/$RTOS_BIN/g" $SW_DESC
+	sed -i "s/DTB_BIN/$DTB_BIN/g" $SW_DESC
+
+	if [ $reset_factory == 1 ]; then
+		post_install_script=$fctry_rst_script
+	elif [ $reset_user == 1 ]; then
+		post_install_script=$usr_rst_script
+	elif [ $reset_prefer == 1 ]; then
+		post_install_script=$pre_rst_script
+		sed -i "s/$BLOCK_VER/ /g" $post_install_script
+	elif [ $reset_prefer_auto == 1 ]; then
+		post_install_script=$pre_rst_script
+		sed -i "s/$BLOCK_VER/$SYSUPD_BLOCK_VERSION/g" $post_install_script
+	fi
+	sed -i "s/post-install.sh/$post_install_script/g" $SW_DESC
+
+	# generate SHA256 of bin and script
+	if [ -f "$BINDIR/$KERNEL_BIN" ]; then
+                KERNEL_SHA=$(openssl sha256 "$BINDIR/$KERNEL_BIN" | awk '{print $NF}')
+                sed -i "s/KERNEL_SHA/$KERNEL_SHA/g" $SW_DESC
+	fi
+
+	if [ -f "$BINDIR/$ROOTFS_BIN" ]; then
+		ROOTFS_SHA=$(openssl sha256 "$BINDIR/$ROOTFS_BIN" | awk '{print $NF}')
+        	sed -i "s/ROOTFS_SHA/$ROOTFS_SHA/g" $SW_DESC
+	fi
+
+	if [ -f "$BINDIR/$RTOS_BIN" ]; then
+		RTOS_SHA=$(openssl sha256 "$BINDIR/$RTOS_BIN" | awk '{print $NF}')
+        	sed -i "s/RTOS_SHA/$RTOS_SHA/g" $SW_DESC
+	fi
+
+	if [ -f "$BINDIR/$DTB_BIN" ]; then
+		DTB_SHA=$(openssl sha256 "$BINDIR/$DTB_BIN" | awk '{print $NF}')
+        	sed -i "s/DTB_SHA/$DTB_SHA/g" $SW_DESC
+	fi
+
+	PRE_INSTALL_SHA=$(openssl sha256 pre-install.sh | awk '{print $NF}')
+	sed -i "s/PRE_INSTALL_SHA/$PRE_INSTALL_SHA/g" $SW_DESC
+	POST_INSTALL_SHA=$(openssl sha256 "$post_install_script" | awk '{print $NF}')
+	sed -i "s/POST_INSTALL_SHA/$POST_INSTALL_SHA/g" $SW_DESC
+}
+
+gen_sysupd_pkg(){
+	rm -f *.bin *.swu
+	gen_swdesc
+
+	BINSRCS="$KERNEL_BIN $ROOTFS_BIN $RTOS_BIN $DTB_BIN"
+	SCRIPTSRCS="pre-install.sh $post_install_script"
+	SW_DESC_SIG="sw-description.sig"
+
+	echo " - Link binaries:"
+	for i in $BINSRCS; do
+		echo -e "\t$BINDIR/$i => $i"
+		ln -s $BINDIR/$i $i;
+	done
+		
+	echo -e " - Generating software description signature...\n"
+	make -C $BUILDDIR secure-ota SYSUPD_SW_DESC=$PWD/sw-description SYSUPD_SW_DESC_SIG=$PWD/$SW_DESC_SIG
+
+	echo -e " - Generating sysupd package...\n" \
+	        "\tPackage name: $SYSUPD_OUTPUT_PKG\n" \
+	        "\tVersion: $SYSUPD_VERSION"
+	for i in $SW_DESC $SW_DESC_SIG $BINSRCS $SCRIPTSRCS; do echo $i; done |
+		cpio -o -L -H crc > $SYSUPD_OUTPUT_PKG
+
+	rm *.bin
+}
+
+print_pkg_version(){
+	curdir=$PWD
+	mkdir -p $TMPDIR;
+	pushd $TMPDIR 1>/dev/null;
+	version=$(cpio --quiet -i -H crc < $curdir/$SYSUPD_INPUT_PKG && cat sw-description | awk -F "[\" =;]" '/version =/ {print $5}')
+	echo "Image version: $version"
+	popd 1>/dev/null
+	rm -rf $TMPDIR
+}
+
+
+if [ $# != 6 ] && [ $# != 5 ] && [ $# != 4 ] && [ $# != 2 ]; then usage_exit; fi
+
+ROOTFS_BIN=$(ls $BINDIR/*.uboot.bin)
+if [ -f $ROOTFS_BIN ]; then
+	ROOTFS_BIN=$(basename $ROOTFS_BIN)
+fi
+
+if [ -f $BINDIR/freertos.bin ]; then
+	RTOS_BIN=freertos.bin
+fi
+
+if [ -f $BINDIR/*.dtb.bin ]; then
+        DTB_BIN=$(basename $BINDIR/*.dtb.bin)
+fi
+
+while [ $# -gt 0 ]; do
+key="$1"
+case $key in
+	-v|--version)
+	SYSUPD_VERSION="$2"
+	shift
+	shift
+	;;
+	-o)
+	SYSUPD_OUTPUT_PKG="$2"
+	shift
+	shift
+	;;
+	-i)
+	SYSUPD_INPUT_PKG="$2"
+	shift
+	shift
+	;;
+	-u)
+	reset_user=1
+	shift
+	;;
+	-f)
+	reset_factory=1
+	shift
+	;;
+	-p)
+	reset_prefer=1
+	shift
+	;;
+	-ap)
+	SYSUPD_BLOCK_VERSION="$2"
+	reset_prefer_auto=1
+	shift
+	shift
+	;;
+	*)
+	usage_exit
+	shift
+	;;
+esac
+done
+
+if [ ! -z $SYSUPD_INPUT_PKG ]; then
+	print_pkg_version
+elif [ ! -z $SYSUPD_OUTPUT_PKG ]; then
+	if [ -z $SYSUPD_VERSION ]; then
+		usage_exit
+	fi
+	gen_sysupd_pkg
+else
+	usage_exit
+fi
+#if [ $result 0 ]; then echo "ERROR: !"; fi

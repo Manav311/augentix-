@@ -1,0 +1,167 @@
+{
+  "cmd_id": "AGTX_CMD_OSD_PM_CONF",
+  "json_content": {
+    "conf": [
+      {
+        "param": [
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          }
+        ]
+      },
+      {
+        "param": [
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          }
+        ]
+      },
+      {
+        "param": [
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          }
+        ]
+      },
+      {
+        "param": [
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          },
+          {
+            "enabled": false,
+            "alpha": 0,
+            "color": 0,
+            "start_x": 0,
+            "start_y": 0,
+            "end_x": 0,
+            "end_y": 0
+          }
+        ]
+      }
+    ]
+  }
+}

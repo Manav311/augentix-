@@ -1,0 +1,75 @@
+rewrite ^/html_en/(.*)$ /html/$1;
+rewrite ^/html_tw/(.*)$ /html/$1;
+rewrite ^/html_cn/(.*)$ /html/$1;
+
+location / {
+    root /system/www/;
+    index index.html index.htm;
+    expires -1;
+}
+
+location /demo/ {
+    root /system/www/;
+    index index.html index.htm;
+    expires -1;
+}
+
+location /live/ {
+    proxy_pass https://localhost:8443/live/;
+    auth_request /auth;
+    auth_request_set $auth_status $upstream_status;
+    error_page 401 = @error401;
+    expires -1;
+}
+
+location /liveaudio/ {
+    proxy_pass https://localhost:8443/liveaudio/;
+    auth_request /auth;
+    auth_request_set $auth_status $upstream_status;
+    error_page 401 = @error401;
+    expires -1;
+}
+
+location ~ ^/html(_tw|_en|_cn)?/passwd.html$ {
+    root /system/www/;
+    auth_request /auth;
+    auth_request_set $auth_status $upstream_status;
+    error_page 401 = @error401;
+    expires -1;
+}
+
+location ~ ^/(cgi-bin|html)/ {
+    root /system/www/;
+
+    if (-f /system/www/.default-passwd) {
+        return 302 /html_en/passwd.html;
+    }
+    
+    auth_request /auth;
+    auth_request_set $auth_status $upstream_status;
+    error_page 401 = @error401;
+    expires -1;
+}
+
+# Custom Authentication Handling
+location = /auth {
+    # must use se_auth application to verify
+    proxy_pass http://unix:/tmp/auth_socket:;
+    proxy_set_header Content-Length "";
+    proxy_pass_request_body off;
+}
+
+# Handling the page for authentication failure
+location @error401 {
+    add_header WWW-Authenticate 'Basic realm="Please input password"';
+    return 401;
+}
+
+location /faces {
+    alias  /usrdata/eaif/facereco/faces/;
+}
+
+error_page   500 502 503 504  /50x.html;
+location = /50x.html {
+    root   html;
+}

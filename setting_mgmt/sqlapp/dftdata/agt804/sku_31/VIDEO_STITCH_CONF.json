@@ -1,0 +1,73 @@
+{
+  "version": "HC1703_HC1783S_r3_4_7",
+  "module": "stitch_conf",
+  "cmd_id": "AGTX_CMD_STITCH_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "enable": false,
+    "center_0_x": 0,
+    "center_0_y": 0,
+    "center_1_x": 0,
+    "center_1_y": 0,
+    "dft_dist": 0,
+    "dist_tbl_list": [
+      {
+        "tbl_idx": 0,
+        "dist": 0,
+        "ver_disp": 0,
+        "straighten": 0,
+        "src_zoom": 0,
+        "theta_0": 0,
+        "theta_1": 0,
+        "radius_0": 0,
+        "radius_1": 0,
+        "curvature_0": 0,
+        "curvature_1": 0,
+        "fov_ratio_0": 0,
+        "fov_ratio_1": 0,
+        "ver_scale_0": 0,
+        "ver_scale_1": 0,
+        "ver_shift_0": 0,
+        "ver_shift_1": 0
+      },
+      {
+        "tbl_idx": 0,
+        "dist": 0,
+        "ver_disp": 0,
+        "straighten": 0,
+        "src_zoom": 0,
+        "theta_0": 0,
+        "theta_1": 0,
+        "radius_0": 0,
+        "radius_1": 0,
+        "curvature_0": 0,
+        "curvature_1": 0,
+        "fov_ratio_0": 0,
+        "fov_ratio_1": 0,
+        "ver_scale_0": 0,
+        "ver_scale_1": 0,
+        "ver_shift_0": 0,
+        "ver_shift_1": 0
+      },
+      {
+        "tbl_idx": 0,
+        "dist": 0,
+        "ver_disp": 0,
+        "straighten": 0,
+        "src_zoom": 0,
+        "theta_0": 0,
+        "theta_1": 0,
+        "radius_0": 0,
+        "radius_1": 0,
+        "curvature_0": 0,
+        "curvature_1": 0,
+        "fov_ratio_0": 0,
+        "fov_ratio_1": 0,
+        "ver_scale_0": 0,
+        "ver_scale_1": 0,
+        "ver_shift_0": 0,
+        "ver_shift_1": 0
+      }
+    ]
+  }
+}

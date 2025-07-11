@@ -1,0 +1,13 @@
+{
+  "cmd_id": "AGTX_CMD_PANORAMA_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "center_offset_x": 0,
+    "center_offset_y": 0,
+    "enable": 0,
+    "radius": 4988,
+    "curvature": 2200,
+    "ldc_ratio": 18000,
+    "straighten": 620
+  }
+}

@@ -1,0 +1,312 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_AWB_CONF_S",
+	"comments": [
+		"===================================",
+		"== Auto white balance parameters ==",
+		"===================================",
+		"ALSO SEE: MPI_setAwbAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"speed": {
+			"comments": "--- Convergence speed ---",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"low_k": {
+			"comments": [
+				"",
+				"--- Boundary of color temperature ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 2700,
+			"minimum": 2000,
+			"maximum": 15000
+		},
+		"high_k": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 11000,
+			"minimum": 2000,
+			"maximum": 15000
+		},
+		"r_extra_gain": {
+			"comments": [
+				"",
+				"--- Extra R, G, B channel gain multiplied to result ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"g_extra_gain": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"b_extra_gain": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"max_lum_gain": {
+			"comments": [
+				"",
+				"--- Maximal luma gain multiplied to result ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 96,
+			"minimum": 64,
+			"maximum": 255
+		},
+		"wht_weight": {
+			"comments": [
+				"",
+				"--- Weight for white, gray areas and channel average ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 64,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"gwd_weight": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 64,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"color_tolerance": {
+			"comments": [
+				"",
+				"--- tolerance for correlated color temperature ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 32,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"wht_density": {
+			"comments": [
+				"",
+				"--- white area density and threshold for over exposure ---"
+			],
+			"ui_type": "enum",
+			"type": "integer",
+			"enum": [
+				0,
+				1,
+				2,
+				3,
+				4
+			],
+			"default": 0
+		},
+		"over_exp_th": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 13000,
+			"minimum": 0,
+			"maximum": 32767
+		},
+		"ccm_domain": {
+			"comments": [
+				"",
+				"--- Color matrix information ---"
+			],
+			"ui_type": "enum",
+			"type": "string",
+			"enum": [
+				"GAMMA_ENCODED",
+				"LINEAR"
+			],
+			"default": "GAMMA_ENCODED"
+		},
+		"k_table_valid_size": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 8,
+			"minimum": 4,
+			"maximum": 8
+		},
+		"k_table_list": {
+			"subcomments": {
+				"0": "",
+				"1": "",
+				"2": "",
+				"3": "",
+				"4": "",
+				"5": "",
+				"6": "",
+				"7": ""
+			},
+			"ini_name": "k_table",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 8,
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_AWB_COLOR_TEMP_S",
+				"properties": {
+					"k": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 6500,
+						"minimum": 0,
+						"maximum": 15000
+					},
+					"gain": {
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 256,
+							"minimum": 0,
+							"maximum": 2047
+						},
+						"defaultItems": [256, 256, 256, 256]
+					},
+					"maxtrix": {
+						"ini_name": "T_matrix",
+						"ui_type": "matrix",
+						"type": "array",
+						"minItems": 9,
+						"maxItems": 9,
+						"items": {
+							"type": "integer",
+							"default": 2048,
+							"minimum": -32768,
+							"maximum": 32767
+						},
+						"defaultItems": [2048, 0, 0, 0, 2048, 0, 0, 0, 2048]
+					}
+				}
+			}
+		},
+		"delta_table_list": {
+			"subcomments": {
+				"0": [
+					"",
+					"--- Color delta information ---"
+				]
+			},
+			"ini_name": "delta_table",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 8,
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_AWB_COLOR_DELTA_S",
+				"properties": {
+					"gain": {
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -255,
+							"maximum": 255
+						},
+						"defaultItems": [0, 0, 0, 0]
+					}
+				}
+			}
+		},
+		"k_table_bias_list": {
+			"subcomments": {
+				"0": "----------------------------------------------------",
+				"1": "----------------------------------------------------",
+				"2": "----------------------------------------------------",
+				"3": "----------------------------------------------------",
+				"4": "----------------------------------------------------",
+				"5": "----------------------------------------------------",
+				"6": "----------------------------------------------------",
+				"7": "----------------------------------------------------"
+			},
+			"ini_name": "bias_table",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 8,
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_AWB_COLOR_TEMP_BIAS_S",
+				"properties": {
+					"k": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 6500,
+						"minimum": 0,
+						"maximum": 15000
+					},
+					"color_tolerance_bias": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -127,
+						"maximum": 127
+					},
+					"wht_weight_bias": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -127,
+						"maximum": 127
+					},
+					"gwd_weight_bias": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -127,
+						"maximum": 127
+					},
+					"r_extra_gain_bias": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -127,
+						"maximum": 127
+					},
+					"g_extra_gain_bias": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -127,
+						"maximum": 127
+					},
+					"b_extra_gain_bias": {
+						"ui_type": "number",
+						"type": "integer",
+						"default": 0,
+						"minimum": -127,
+						"maximum": 127
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,65 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"version": 1,
+	"type": "object",
+	"title": "AGTX_DIP_WHITE_BALANCE_INFO_S",
+	"purpose": "query",
+	"ini_unavailable": true,
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_only",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"gain0": {
+			"ui_type": "table",
+			"type": "array",
+			"ui_access_right": "read_only",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 2047
+			}
+		},
+		"gain1": {
+			"ui_type": "table",
+			"ui_access_right": "read_only",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 2047
+			}
+		},
+		"matrix": {
+			"ui_type": "matrix",
+			"ui_access_right": "read_only",
+			"type": "array",
+			"minItems": 9,
+			"maxItems": 9,
+			"items": {
+				"type": "integer",
+				"default": 2048,
+				"minimum": -32768,
+				"maximum": 32767
+			}
+		},
+		"color_temp": {
+			"ui_type": "number",
+			"type": "integer",
+			"ui_access_right": "read_only",
+			"default": 8000,
+			"minimum": 2000,
+			"maximum": 15000
+		}
+	}
+}

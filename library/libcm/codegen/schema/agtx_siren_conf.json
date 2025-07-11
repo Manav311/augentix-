@@ -1,0 +1,46 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_SIREN_CONF_S",
+	"properties": {
+		"enabled": {
+			"ui_type": "enum",
+			"default": 0,
+			"type": "integer",
+			"enum" : [0, 1],
+			"description": "Enable siren for audio output."
+		},	
+		"priority": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 9,
+			"minimum": 0,
+			"type": "integer",
+			"description": "Priority of audio output. The smaller the highest."			
+		},		
+		"hold_time": {
+			"ui_type": "number",
+			"default": 5,
+			"maximum": 600,
+			"minimum": 0,
+			"type": "integer",
+			"description": "Time until another source can use audio output. (unit: second)"
+		},		
+		"volume": {
+			"ui_type": "number",
+			"default": 50,
+			"maximum": 100,
+			"minimum": 0,
+			"type": "integer",
+			"description": "Volume."
+		},
+		"duration": {
+			"ui_type": "number",
+			"default": 5,
+			"maximum": 600,
+			"minimum": 0,
+			"type": "integer",
+			"description": "Duration of siren once starts playing. (unit: second)"
+		}		
+	}
+}

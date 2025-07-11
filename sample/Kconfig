@@ -1,0 +1,516 @@
+menu "sample"
+
+config APP_ACTL
+	bool "actl"
+	default y
+
+config APP_G726
+	bool "g726"
+	default y
+
+config APP_HELLO_APP
+	bool "hello_app"
+	default n
+
+config APP_CMD_SENDER
+	bool "cmd_sender"
+	default y
+
+config APP_VFTR_DUMP
+	bool "vftr_dump"
+	default y
+	select LIBEAIF
+	select LIBINF
+	help
+		A debugging utility for IVA applications.
+
+config APP_VFTR_DUMP_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_VFTR_DUMP
+
+config APP_MPI_SCRIPT
+	bool "mpi_script"
+	default y
+
+config APP_MPI_SNAPSHOT
+	bool "mpi_snapshot"
+	default y
+
+config APP_MPI_STREAM
+	bool "mpi_stream"
+	select LIBSAMPLE
+	select LIBFSINK
+	default y
+	help
+		A lightweight application to construct and run video pipeline.
+
+config APP_MPI_STREAM_ENABLE_ML
+	bool "enable machine learning features"
+	depends on APP_MPI_STREAM
+	default n
+	help
+		Enable machine learning features.
+		When enabled, you can choose to run ML models either
+		on local or remote core, and select specific model type.
+
+choice APP_MPI_STREAM_ML_MODE
+    bool "select ml features executing mode"
+    depends on APP_MPI_STREAM_ENABLE_ML
+
+config APP_MPI_STREAM_ENABLE_ML_LOCAL
+    bool "execute ml features on local core"
+    help
+        Run machine learning on local core
+
+config APP_MPI_STREAM_ENABLE_ML_REMOTE
+    bool "execute ml features on remote core"
+    help
+        Run machine learning on remote core
+endchoice
+
+choice APP_MPI_STREAM_ML_FEATURES
+    bool "select ODv5 model type"
+    depends on APP_MPI_STREAM_ENABLE_ML
+    depends on APP_MPI_STREAM_ENABLE_ML_LOCAL
+
+config APP_MPI_STREAM_ML_OD_PEOPLE_VEHICLE_PET_LOCAL
+    bool "object detection v5 (people vehicle pet)"
+    help
+        Run object detection v5 on local core and detect people, vehicles, and pets.
+
+config APP_MPI_STREAM_ML_OD_LITE_PEOPLE_VEHICLE_PET_LOCAL
+    bool "object detection v5 lite (people vehicle pet)"
+    help
+        Run object detection v5 on local core and detect people, vehicles, and pets.
+
+config APP_MPI_STREAM_ML_OD_LITE_PEOPLE_LOCAL
+    bool "object detection v5 lite (people)"
+    help
+        Run object detection v5 on local core and detect people.
+endchoice
+
+choice APP_MPI_STREAM_ML_FEATURES_REMOTE
+    bool "select ODv5 model type"
+    depends on APP_MPI_STREAM_ENABLE_ML
+    depends on APP_MPI_STREAM_ENABLE_ML_REMOTE
+
+config APP_MPI_STREAM_ML_OD_PEOPLE_VEHICLE_PET_REMOTE
+    bool "object detection v5 (people vehicle pet)"
+    help
+        Run object detection v5 on remote core and detect people, vehicles, and pets.
+
+config APP_MPI_STREAM_ML_OD_LITE_PEOPLE_VEHICLE_PET_REMOTE
+    bool "object detection v5 lite (people vehicle pet)"
+    help
+        Run object detection v5 on remote core and detect people, vehicles, and pets.
+
+config APP_MPI_STREAM_ML_OD_LITE_PEOPLE_REMOTE
+    bool "object detection v5 lite (people)"
+    help
+        Run object detection v5 on remote core and detect people.
+endchoice
+
+config APP_MPI_STREAM_USE_OD_PEOPLE_VEHICLE_PET
+    bool
+    default y if APP_MPI_STREAM_ML_OD_PEOPLE_VEHICLE_PET_LOCAL || APP_MPI_STREAM_ML_OD_PEOPLE_VEHICLE_PET_REMOTE
+    default n
+
+config APP_MPI_STREAM_USE_OD_LITE_PEOPLE_VEHICLE_PET
+    bool
+    default y if APP_MPI_STREAM_ML_OD_LITE_PEOPLE_VEHICLE_PET_LOCAL || APP_MPI_STREAM_ML_OD_LITE_PEOPLE_VEHICLE_PET_REMOTE
+    default n
+
+config APP_MPI_STREAM_USE_OD_LITE_PEOPLE
+    bool
+    default y if APP_MPI_STREAM_ML_OD_LITE_PEOPLE_LOCAL || APP_MPI_STREAM_ML_OD_LITE_PEOPLE_REMOTE
+    default n
+
+config APP_MPI_STREAM_ENABLE_OSD
+	bool "enable_osd"
+	depends on APP_MPI_STREAM
+	default y
+	help
+		When the option is enabled, the process will create OSDs in each video channels.
+		Some bitmap files is necessary for mpi_stream runtime. Please check directory 'assets' for details.
+
+		When it's disabled, the steps for OSD construction will be skipped when running mpi_stream.
+
+config APP_MPI_STREAM_MULTIPLE_IQ_SUPPORT
+	bool "support multiple iq settings"
+	default y
+	depends on APP_MPI_STREAM
+	help
+		mpi_stream install multiple sensor.ini and can be switched by various methods.
+
+choice APP_MPI_STREAM_IQ_SWITCH_METHOD
+	bool "select a switch method"
+	depends on APP_MPI_STREAM_MULTIPLE_IQ_SUPPORT
+
+config APP_MPI_STREAM_SUPPORT_EXTERNAL_IQ_MODE_SWITCH
+	bool "external control by files"
+	help
+		Make mpi_stream be able to switch modes by receiving external commands
+		via '/tmp/augentix/iq/iq_mode_0' and '/tmp/augentix/iq/iq_mode_1' files.
+		The files are created after the program start.
+
+config APP_MPI_STREAM_SUPPORT_SOFTWARE_LIGHT_SENSOR
+	bool "software light sensor"
+	help
+		mpi_stream select day/ir mode by using a software light sensor.
+
+config APP_MPI_STREAM_SUPPORT_GPIO_LIGHT_SENSOR
+	bool "GPIO HW light sensor"
+	help
+		mpi_stream select day/ir mode by real GPIO value
+
+config APP_MPI_STREAM_SUPPORT_ADC_LIGHT_SENSOR
+	bool "ADC HW light sensor"
+	help
+		mpi_stream select day/ir mode by real ADC value
+
+endchoice
+
+config APP_REQUEST_IDR
+	bool "request_idr"
+	default y
+
+config APP_AUTO_TRACKING
+	bool "auto_tracking"
+	select LIBMOTOR
+	select LIBSAMPLE
+	default n
+
+config APP_LVGL_DEMO
+	bool "lvgl_demo"
+	default n
+
+config APP_SDL_DEMO
+	bool "sdl_demo"
+	default n
+
+menuconfig APP_AROI_DEMO
+	bool "aroi_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Automatic Region-of-Interest.
+
+config APP_AROI_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_AROI_DEMO
+
+config APP_PTZ_SUPPORT
+	bool "support ptz"
+	default n
+	depends on APP_AROI_DEMO
+
+menuconfig APP_BM_DEMO
+	bool "bm_demo"
+	default y
+	help
+		Sample program to demonstrate how to implement baby monitor.
+
+config APP_BM_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_BM_DEMO
+
+menuconfig APP_DD_DEMO
+	bool "dd_demo"
+	default n
+	help
+		Sample program to demonstrate demo of decoder and display.
+		
+menuconfig APP_DK_DEMO
+	bool "dk_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Door Keeper.
+
+config APP_DK_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_DK_DEMO
+
+menuconfig APP_EF_DEMO
+	bool "ef_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Electronic Fence.
+
+config APP_EF_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_EF_DEMO
+
+config APP_EF_SHD_SUPPORT
+	bool "Support shaking object detection"
+	default y
+	depends on APP_EF_DEMO
+
+menuconfig APP_FLD_DEMO
+	bool "fld_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Fall Down Detection.
+
+config APP_FLD_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_FLD_DEMO
+
+menuconfig APP_OD_DEMO
+	bool "od_demo"
+	default y
+	help
+		OD demo program.
+
+config APP_OD_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_OD_DEMO
+	help
+		Enable when od_demo needs to generate SEI.
+
+config APP_OD_UTILS
+	bool "Build utils"
+	default n
+	depends on APP_OD_DEMO
+	help
+		A utility to demonstrate object detection.
+
+config APP_OSD_DEMO
+	bool "osd_demo"
+	select LIBOSD
+	depends on !APP_MPI_STREAM_ENABLE_OSD
+	default n
+	help
+		need extra space to store .otf file
+
+config APP_OSD_DEMO_RGBA2AYUV
+	bool "install rgba2ayuv"
+	depends on APP_OSD_DEMO
+	default n
+	help
+		install sample RGBA8888 -> AYUV3544
+
+config APP_OSD_DEMO_LINE_DYNAMIC
+	bool "install drawLine_dynamic"
+	depends on APP_OSD_DEMO
+	default n
+	help
+		install sample draw lines randomly
+
+config APP_OSD_DEMO_INSTALL_SIMPLIFIED_CHINESE
+	bool "install simplified chinese font"
+	depends on APP_OSD_DEMO
+	default y
+	help
+		'y' to install simplified, 'n' to install traditional
+
+config APP_GTK3_DEMO_GUI
+	bool "gtk3 demo gui"
+	default n
+	help
+		Need to install display related libs.
+
+menuconfig APP_EAI_DEMO
+	bool "install eai demo"
+	default n
+	help
+		Sample program to demonstrate how to use multi-sensor iva demo.
+
+if APP_EAI_DEMO
+
+config APP_EAI_HD_DEMO
+	bool "eai_hd_demo"
+	default y
+	help
+		Sample program to demonstrate how to use multi-sensor Human Detection.
+
+config APP_EAI_HD_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_EAI_HD_DEMO
+
+endif
+
+menuconfig APP_HD_DEMO
+	bool "hd_demo"
+	select LIBEAIF
+	default y
+	help
+		Sample program to demonstrate how to use Human Detection.
+
+config APP_HD_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_HD_DEMO
+
+config APP_IR_DEMO
+	bool "ir_demo"
+	default y
+
+menuconfig APP_MD_DEMO
+	bool "md_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Motion Detection.
+
+config APP_MD_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_MD_DEMO
+
+config APP_MD_SHD_SUPPORT
+	bool "Support shaking object detection"
+	default y
+	depends on APP_MD_DEMO
+
+menuconfig APP_PFM_DEMO
+	bool "pfm_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Pet Feeding Monitor.
+
+config APP_PFM_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_PFM_DEMO
+
+menuconfig APP_TD_DEMO
+	bool "td_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Tamper Detection.
+
+config APP_TD_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_TD_DEMO
+
+menuconfig APP_FACEDET_DEMO
+	bool "facedet_demo"
+	select LIBEAIF
+	default y
+	help
+		Sample program to demonstrate how to use Face Detection.
+
+config APP_FACEDET_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_FACEDET_DEMO
+
+menuconfig APP_FACERECO_DEMO
+	bool "facereco_demo"
+	select LIBEAIF
+	default y
+	help
+		Sample program to demonstrate how to use Face Recognition.
+
+config APP_FACERECO_SUPPORT_SEI
+	bool "Send inference result through RTSP"
+	default y
+	depends on APP_FACERECO_DEMO
+
+config APP_DFB_DEMO
+	bool "install directfb-demo for display test"
+	default n
+
+config APP_LSD_DEMO
+	bool "lsd_demo"
+	default y
+	help
+		Sample program to demonstrate how to use Loud Sound Detection.
+
+config APP_SD_DEMO
+	bool "sd_demo"
+	default n
+	help
+		Sample program to demonstrate how to use Sound Detection.
+
+config APP_SD_DEMO_REMOTE_CORE
+	bool "sd_demo use remote core"
+	depends on APP_SD_DEMO
+	default n
+
+config APP_LPW
+	bool "Low power wireless"
+	depends on LIBLPW
+	default n
+
+choice
+	prompt "lpw module"
+	default LPW_HI3861L
+	depends on APP_LPW
+
+	config LPW_HI3861L
+		bool "Hi3681L WiFi module"
+	config LPW_AIW4211L
+		bool "AIW4211L WiFi module"
+
+endchoice
+
+config APP_LPW_SUPP
+	bool "lpw_supplicant"
+	depends on APP_LPW
+	default n
+	help
+		Sample program of lpw_supplicant to handle WiFi connection.
+
+config APP_HIBER_DEMO
+	bool "hiber_demo"
+	depends on APP_LPW
+	default n
+	help
+		Sample program to demonstrate how to use Lib LPW.
+
+config APP_LPW_FW_UPG
+	bool "lpw_fw_upg"
+	depends on APP_LPW
+	default n
+	help
+		Program to upgrade the firmware of Low Power Wireless (LPW) module.
+
+config APP_LPWIO
+	bool "lpwio"
+	depends on APP_LPW
+	default n
+	help
+		Program to measure Low Power Wireless (LPW) module's gpio value.
+
+config APP_SECURE_ELEMENT_DEMO
+	bool "secure_element_demo"
+	default n
+	help
+		Example program demonstrating the use of a Secure Element through the I2C interface.
+
+choice
+	prompt "Select the Secure Element"
+
+config SE_SQ7131
+	depends on APP_SECURE_ELEMENT_DEMO
+	bool "SQ7131"
+	default y
+
+config SE_SQ7131S
+	depends on APP_SECURE_ELEMENT_DEMO
+	bool "SQ7131S"
+
+endchoice
+
+config APP_MP4_RECORDER
+	bool "mp4_recorder"
+	default n
+	help
+		Sample program to demonstrate how to do mp4 recording.
+		The sample code depends on the bento4 module, which must be enabled in buildroot.
+
+config APP_SECURE_OPENSSL_DEMO
+	bool "secure_openssl_demo"
+	default n
+	help
+		Example program demonstrating the use of the secure OpenSSL through a Secure Element.
+
+endmenu

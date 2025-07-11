@@ -1,0 +1,17 @@
+{
+    "obj_life_th": 16,
+    "target_idx": 0,
+    "api": "HUMAN_CLASSIFY",
+    "data_fmt": "MPI_Y",
+    "url": "http://127.0.0.1:8164",
+    "snapshot_width": 640,
+    "snapshot_height": 360,
+    "pos_stop_count_th": 3,
+    "pos_classify_period": 100,
+    "neg_classify_period": 25,
+    "face_reco_model": "whatever",
+    "detect_model": "whatever",
+    "classify_model": "whatever",
+    "classify_cv_model": "whatever",
+    "human_classify_model": "shuffleNetV2"
+}

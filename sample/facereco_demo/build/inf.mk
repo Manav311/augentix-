@@ -1,0 +1,1 @@
+../../../library/libinf/build/config.mk

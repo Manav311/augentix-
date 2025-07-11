@@ -1,0 +1,63 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_SURROUND_CONF_S",
+	"ini_unavailable": true,
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 0,
+			"minimum": 0,
+			"type": "integer"
+		},
+		"center_offset_x": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 8191,
+			"minimum": -8191,
+			"type": "integer"
+		},
+		"center_offset_y": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 8191,
+			"minimum": -8191,
+			"type": "integer"
+		},
+		"rotate": {
+			"ui_type": "enum",
+			"default": "0",
+			"type": "string",
+			"enum": ["0", "90", "180", "270"],
+			"title": "AGTX_SURR_ROTATE_E"
+		},
+		"enable": {
+			"ui_type": "enum",
+			"default": 0,
+			"type": "integer",
+			"enum" : [0, 1]
+		},
+		"min_radius": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 8191,
+			"minimum": 0,
+			"type": "integer"
+		},
+		"max_radius": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 8191,
+			"minimum": 0,
+			"type": "integer"
+		},
+		"ldc_ratio": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 32767,
+			"minimum": 0,
+			"type": "integer"
+		}
+	}
+}

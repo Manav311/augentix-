@@ -1,0 +1,136 @@
+menu "library"
+
+config LIBADO
+	bool "libado"
+	default n
+
+config LIBAGTX
+	bool "libagtx"
+	default n
+
+menuconfig LIBAVFTR
+	bool "libavftr"
+	select LIBEAIF
+	default y
+	help
+	  Say Y here if you are not sure.
+
+config LIBCM
+	bool "libcm"
+	default n
+
+config LIBFOO
+	bool "libfoo"
+	default n
+	help
+	  Reference library.
+
+config LIBFSINK
+	bool "libfsink"
+	default n
+
+config LIBGPIO
+	bool "libgpio"
+	default n
+
+config LIBMOTOR
+	bool "libmotor"
+	select LIBSAMPLE
+	default n
+
+config LIBOSD
+	bool "libosd"
+	default n
+
+config LIBOSD_USE_FREETYPE
+	bool "remove SDL & SDL_ttf dependency, only use libfreetype"
+	depends on LIBOSD
+	default y
+	help
+		remove SDL & SDL_ttf dependency, only use libfreetype
+
+config LIBPWM
+	bool "libpwm"
+	default n
+
+config LIBSAMPLE
+	bool "libsample"
+	default y
+
+config LIBSAMPLE_USE_LIBOSD
+	bool "libsample use libosd"
+	select LIBOSD
+	depends on LIBSAMPLE
+	default n
+
+config LIBSAMPLE_INSTALL_SIMPLIFIED_CHINESE
+	bool "install simplified chinese font"
+	depends on LIBSAMPLE_USE_LIBOSD
+	default y
+	help
+		'y' to install simplified, 'n' to install traditional
+
+config LIBSAMPLE_ENABLE_MP4_RECORDING
+	bool "enable mp4 recording"
+	depends on LIBSAMPLE
+	default n
+
+
+config LIBSAMPLE_TEST_PROGRAM
+	bool "install test program"
+	depends on LIBSAMPLE
+	depends on LIBCM
+	depends on LIBFSINK
+	default n
+	help 
+		'y' to install libsample_test
+
+config LIBSQL
+	bool "libsql"
+	default n
+
+config LIBTZ
+	bool "libtz"
+	default n
+
+config LIBUTILS
+	bool "libutils"
+	default y
+
+config LIBEAIF
+	bool "libeaif"
+	select LIBINF
+	default y
+
+if LIBEAIF
+source "library/libeaif/Kconfig"
+endif
+
+config LIBLPW
+	bool "liblpw"
+	default n
+
+config LIBAMPC
+	bool "libampc"
+	select LIBMETAL
+	select LIBOPEN_AMP
+	default n
+
+config LIBOPEN_AMP
+	bool "libopen_amp"
+	select LIBMETAL
+	default n
+
+config LIBMETAL
+	bool "libmetal"
+	default n
+
+config LIBINF
+	bool "libinf"
+	default y
+
+if LIBINF
+source "library/libinf/Kconfig"
+endif
+
+endmenu

@@ -1,0 +1,117 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_MD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"en_rgn": {
+			"type": "boolean",
+			"description": "Enable region selection"
+		},
+		"det": {
+			"type": "string",
+			"title": "AGTX_IVA_MD_DET_E",
+			"enum": ["NORMAL", "SUBTRACT"]
+		},
+		"en_skip_shake": {
+			"type": "boolean"
+		},
+		"obj_life_th": {
+			"type": "integer"
+		},
+		"en_skip_pd": {
+			"type": "boolean"
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"active_cell": {
+			"type": "string",
+			"maxLength": 512
+		},
+		"mode": {
+			"type": "string",
+			"title": "AGTX_IVA_MD_MODE_E",
+			"enum": ["AREA", "ENERGY"]
+		},
+		"min_spd": {
+			"type": "integer"
+		},
+		"max_spd": {
+			"type": "integer"
+		},
+		"sens": {
+			"type": "integer"
+		},
+		"rgn_cnt": {
+			"type": "integer"
+		},
+		"alarm_buffer": {
+			"type": "number"
+		},
+		"alarm_switch_on_time": {
+			"type": "boolean"
+		},
+		"rgn_list": {
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 64,
+			"items": {
+				"type": "object",
+				"title": "AGTX_IVA_MD_REGION_S",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"obj_life_th": {
+						"type": "integer"
+					},
+					"det": {
+						"type": "string",
+						"title": "AGTX_IVA_MD_DET_E",
+						"enum": ["NORMAL", "SUBTRACT"]
+					},
+					"mode": {
+						"type": "string",
+						"title": "AGTX_IVA_MD_MODE_E",
+						"enum": ["AREA", "ENERGY"]
+					},
+					"min_spd": {
+						"type": "integer"
+					},
+					"max_spd": {
+						"type": "integer"
+					},
+					"sens": {
+						"type": "integer"
+					},
+					"sx": {
+						"type": "integer",
+						"description": "Start coordinates of detection region. (inclusive)"
+					},
+					"sy": {
+						"type": "integer",
+						"description": "Start coordinates of detection region. (inclusive)"
+					},
+					"ex": {
+						"type": "integer",
+						"description": "End coordinates of detection region. (inclusive)"
+					},
+					"ey": {
+						"type": "integer",
+						"description": "End coordinates of detection region. (inclusive)"
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+

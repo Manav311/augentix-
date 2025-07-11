@@ -1,0 +1,71 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_PD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"ui_type": "boolean",
+			"ui_access_right": "read_write"
+		},
+		"obj_life_th": {
+			"type": "integer"
+		},
+		"video_chn_idx": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": 0,
+			"maxValue": 3
+		},		
+		"min_aspect_ratio_w": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1,
+			"minValue": 0,
+			"maxValue": 4294967295
+		},
+		"min_aspect_ratio_h": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 5,
+			"minValue": 1,
+			"maxValue": 4294967295
+		},
+		"max_aspect_ratio_w": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1,
+			"minValue": 0,
+			"maxValue": 4294967295
+		},
+		"max_aspect_ratio_h": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1,
+			"minValue": 1,
+			"maxValue": 4294967295
+		},
+		"min_size": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": 0,
+			"maxValue": 100
+		},
+		"max_size": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 100,
+			"minValue": 0,
+			"maxValue": 100
+		}
+	}
+}

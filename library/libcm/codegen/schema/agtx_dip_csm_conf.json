@@ -1,0 +1,547 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_CSM_CONF_S",
+	"comments": [
+		"============================================",
+		"== Color saturation management parameters ==",
+		"============================================",
+		"NOTE: Saturation level, only valid at manual mode",
+		"ALSO SEE: MPI_setCsmAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: auto, 2: manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"hue": {
+			"comments": "Hue rotation angle",
+			"ini_name": "hue_angle",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"minimum": -240,
+			"maximum": 240,
+			"default": 0
+		},
+		"bw_en": {
+			"comments": "Black and white enable",
+			"ui_type": "boolean",
+			"ui_access_right": "read_write",
+			"type": "boolean",
+			"default": false
+		},
+		"manual_sat": {
+			"comments": "Saturation level",
+			"ini_name": "csm_manual.saturation",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 255,
+			"default": 128
+		},
+		"auto_sat_table": {
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ini_name": "csm_auto.saturation",
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"minItems": 11,
+			"maxItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 128,
+				"minimum": 0,
+				"maximum": 255
+			},
+			"defaultItems": [128, 128, 120, 115, 100, 95, 90, 75, 32, 16, 0]
+		},
+		"cst_color": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_color",
+			"comments": "CST color matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_bw": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_bw",
+			"comments": "CST bw matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 0, 2048, 0, 0, 0, 0, 0, 0, 0 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_en": {
+			"comments": "CST adaptive enable",
+			"ui_type": "boolean",
+			"ui_access_right": "read_write",
+			"type": "boolean",
+			"default": false
+		},
+		"cst_auto_0": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[0]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_1": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[1]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_2": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[2]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_3": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[3]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_4": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[4]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_5": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[5]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_6": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[6]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_7": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[7]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_8": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[8]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_9": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[9]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		},
+		"cst_auto_10": {
+			"type": "object",
+			"title": "AGTX_DIP_CST_MATRIX_S",
+			"ini_name": "cst_auto[10]",
+			"comments": "CST auto matrix",
+			"properties": {
+				"coeff": {
+					"ui_type": "matrix",
+					"ini_name": "T_coeff",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -8192,
+						"maximum": 8191
+					},
+					"defaultItems": [ 436, 1464, 148, -240, -807, 1047, 1047, -951, -96 ]
+				},
+				"offset": {
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": -1024,
+						"maximum": 1023
+					},
+					"defaultItems": [ 0, 512, 512 ]
+				}
+			}
+		}
+	}
+}

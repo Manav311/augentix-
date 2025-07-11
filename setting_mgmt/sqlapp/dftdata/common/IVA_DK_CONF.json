@@ -1,0 +1,16 @@
+{
+  "cmd_id": "AGTX_CMD_DK_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "obj_life_th": 30,
+    "loiter_period_th": 300,
+    "overlap_ratio_th": 25,
+    "roi": {
+      "start_x": 35,
+      "start_y": 0,
+      "end_x": 65,
+      "end_y": 100
+    }
+  }
+}

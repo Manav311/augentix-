@@ -1,0 +1,26 @@
+{
+  "cmd_id": "AGTX_CMD_EF_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "active_cell": "/gA=",
+    "line_cnt": 1,
+    "line_list": [
+      {
+        "id": 0,
+        "start_x": 50,
+        "start_y": 0,
+        "end_x": 50,
+        "end_y": 100,
+        "obj_min_w": 0,
+        "obj_min_h": 0,
+        "obj_max_w": 50,
+        "obj_max_h": 50,
+        "obj_area":0,
+        "obj_v_th":0,
+        "mode": "DIR_BOTH",
+        "obj_life_th": 32
+      }
+    ]
+  }
+}

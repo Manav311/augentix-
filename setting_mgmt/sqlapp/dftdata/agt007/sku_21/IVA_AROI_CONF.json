@@ -1,0 +1,17 @@
+{
+  "cmd_id": "AGTX_CMD_AROI_CONF",
+  "json_content": {
+    "enabled": 1,
+    "en_skip_shake": 1,
+    "video_chn_idx": 0,
+    "aspect_ratio_width": 1280,
+    "aspect_ratio_height": 960,
+    "min_roi_width": 50,
+    "min_roi_height": 75,
+    "max_roi_width": 66,
+    "max_roi_height": 85,
+    "obj_life_th": 0,
+    "track_speed": 16,
+    "return_speed": 50
+  }
+}

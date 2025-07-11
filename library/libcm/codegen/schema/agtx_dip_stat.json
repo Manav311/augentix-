@@ -1,0 +1,67 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"version": 1,
+	"type": "object",
+	"title": "AGTX_DIP_SHP_CONF_S",
+	"comments": [
+		"===========================\n==============================",
+		"== Sharpening parameters ==\n== Sharpening V2 parameters ==",
+		"===========================\n==============================",
+		"ALSO SEE: MPI_setShpAttr\nALSO SEE: MPI_setShpAttrV2"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: auto, 2: manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"manual_shp": {
+			"ini_name": "shp_manual.sharpness\nshp_manual_v2.sharpness",
+			"comments": "Sharpness strength (0~255)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 511
+		},
+		"auto_shp_table": {
+			"ini_name": "shp_auto.sharpness\nshp_auto_v2.sharpness",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"minItems": 11,
+			"maxItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 0,
+				"minimum": 0,
+				"maximum": 511
+			}
+		}
+	}
+}

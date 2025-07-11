@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <title>AUGENTIX</title>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+        .lang_1{
+                background: #f1f1f1;
+                position:absolute;
+                right:0px;
+                top:0px;
+                }
+        .lang_2{
+            background: #f1f1f1;
+            position:absolute;
+            right:90px;
+            top:0px; 
+        }       
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    tr{
+        height: 50px;
+    }       
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p><a href="dateTime.html">General</a></p>
+        <p><a href="networkInterface.html">Network Setting</a></p>
+        <p><a href="video.html">Video Channel</a></p>
+        <p><a href="imagePreference.html">Camera Setting</a></p>
+        <p><a href="osd.html">OSD Setting</a></p>
+        <p><a href="iva_td.html">IVA Setting</a></p>
+        <p><a href="system.html">System Information</a></p>
+        <p><a href="passwd.html">Password</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="osd.html">OSD Setting</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="osdBlock.html">Privacy Mask</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <form>
+              <div><img src="..img/u400.png" style="width:60%"></div>
+              <hr>
+              <table>
+                <tr>
+                  <td><input type="checkbox">Region 1</td>
+                  <td><input type="checkbox">Region 2</td>
+                  <td><input type="checkbox">Region 3</td>
+                </tr>
+                <tr>
+                  <td>X Coordinate <input type="number"></td>
+                  <td>X Coordinate <input type="number"></td>
+                  <td>X Coordinate <input type="number"></td>
+                </tr>
+                <tr>
+                  <td>Y Coordinate <input type="number"></td>
+                  <td>Y Coordinate <input type="number"></td>
+                  <td>Y Coordinate <input type="number"></td>
+                </tr>
+                <tr>
+                  <td>W Coordinate <input type="number"></td>
+                  <td>W Coordinate <input type="number"></td>
+                  <td>W Coordinate <input type="number"></td>
+                </tr>
+                <tr>
+                  <td>H Coordinate <input type="number"></td>
+                  <td>H Coordinate <input type="number"></td>
+                  <td>H Coordinate <input type="number"></td>
+                </tr>
+                <tr>
+                  <td>Privacy Mask Color <select class="changes" id="current" name="current">
+                    <option value="default">
+                      Black
+                    </option>
+                    <option value="color">
+                      White
+                    </option>
+                    <option value="color">
+                      Red
+                    </option>
+                    <option value="color">
+                      Green
+                    </option>
+                    <option value="color">
+                      Blue
+                    </option>
+                    <option value="color">
+                      Magenta
+                    </option>
+                    <option value="default">
+                      Black
+                    </option>
+                    <option value="color">
+                      White
+                    </option>
+                    <option value="color">
+                      Red
+                    </option>
+                    <option value="color">
+                      Green
+                    </option>
+                    <option value="color">
+                      Blue
+                    </option>
+                    <option value="color">
+                      Magenta
+                    </option>
+                    <option value="default">
+                      Black
+                    </option>
+                    <option value="color">
+                      White
+                    </option>
+                    <option value="color">
+                      Red
+                    </option>
+                    <option value="color">
+                      Green
+                    </option>
+                    <option value="color">
+                      Blue
+                    </option>
+                    <option value="color">
+                      Magenta
+                    </option>
+                  </select></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

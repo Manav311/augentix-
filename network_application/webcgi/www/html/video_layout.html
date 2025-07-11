@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/video_layout.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <div class="col-sm-8 text-left">
+          <nav class="navbar navbar-borderless">
+            <div class="container-fluid">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="{{x.page_item}}" ng-repeat="x in VideoMenu">
+                    <a class="page-link" href="{{x.href}}" target="_self">{{x.txt[lang]}}</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </nav>
+          <div>
+            <div>
+              <div class="panel panel-borderless">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                  <p><input ng-model="videoLayoutPref.layout_en" type="checkbox"> {{msg_t.Enable_Layout[lang]}}</p>
+                  <p>{{msg_t.Layout_Count[lang]}} : <select id="current" name="current" ng-change="change_layout_cnt()"
+                  ng-model="videoLayoutPref.layout_num">
+                    <option ng-repeat="x in getNumber(4)" ng-value="{{x}}">
+                      {{x}}
+                    </option>
+                  </select></p>
+                </div>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{msg_t.Window_Count[lang]}}</th>
+                      <td ng-repeat="x in getNumber(videoLayoutPref.layout_num)">{{msg_t.Stream_Index[lang]}}
+                      {{videoLayoutPref.video_layout[x].video_strm_idx}} - {{msg_t.Layout[lang]}} {{x}} <input max="5"
+                      min="1" ng-change="change_max_win_cnt()" ng-model="videoLayoutPref.video_layout[x].window_num"
+                      type="number" value="1"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-striped" ng-repeat="y in getNumber(videoLayoutCtx.max_window_cnt)">
+                  <tr>
+                    <td ng-repeat="x in getNumber(videoLayoutPref.layout_num)">{{msg_t.Window[lang]}} {{y}}</td>
+                  </tr>
+                  <tr>
+                    <td ng-repeat="x in getNumber(videoLayoutPref.layout_num)">FPS: <input max="30" min="3" ng-model=
+                    "videoLayoutPref.video_layout[x].window_array[y].update_fps" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"></td>
+                  </tr>
+                  <tr>
+                    <td ng-repeat="x in getNumber(videoLayoutPref.layout_num)">{{msg_t.POS[lang]}} X-Y : <input max=
+                    "1022" min="0" ng-model="videoLayoutPref.video_layout[x].window_array[y].pos_x" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"> <input max="1022" min="0"
+                    ng-model="videoLayoutPref.video_layout[x].window_array[y].pos_y" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"> W-H : <input max="1024" min=
+                    "1" ng-model="videoLayoutPref.video_layout[x].window_array[y].pos_width" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"> <input max="1024" min="1"
+                    ng-model="videoLayoutPref.video_layout[x].window_array[y].pos_height" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"></td>
+                  </tr>
+                  <tr>
+                    <td ng-repeat="x in getNumber(videoLayoutPref.layout_num)">{{msg_t.ROI[lang]}} X-Y : <input max=
+                    "1022" min="0" ng-model="videoLayoutPref.video_layout[x].window_array[y].roi_x" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"> <input max="1022" min="0"
+                    ng-model="videoLayoutPref.video_layout[x].window_array[y].roi_y" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"> W-H : <input max="1024" min=
+                    "1" ng-model="videoLayoutPref.video_layout[x].window_array[y].roi_width" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"> <input max="1024" min="1"
+                    ng-model="videoLayoutPref.video_layout[x].window_array[y].roi_height" ng-readonly=
+                    "y &gt; (videoLayoutPref.video_layout[x].window_num-1)" type="number"></td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                    <td><button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button></td>
+                    <td><button class="btn btn-info" ng-click="sendData()">{{msg_t.Apply[lang]}}</button></td>
+                    <td></td>
+                  </tr>
+                </table>
+                <p>{{cmdStatus}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

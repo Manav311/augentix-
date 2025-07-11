@@ -1,0 +1,26 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_EXTEND_CONF_S",
+	"ini_name": "DIP_EXTEND",
+	"comments": [
+		"===================================",
+		"== DIP EXTEND DATA ===",
+		"===================================",
+		"ALSO SEE: MPI_getDipExtend / MPI_setDipExtend"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"Content": {
+			"ui_type": "text_file",
+			"type": "string",
+			"defaultItems": ""
+		}
+	}
+}

@@ -1,0 +1,45 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_ADV_IMG_PREF_S",
+	"properties": {
+		"backlight_compensation": {
+			"type": "boolean"
+		},
+		"night_mode": {
+			"type": "string",
+			"title": "AGTX_NIGHT_MODE_E",
+			"enum": ["OFF", "ON", "AUTO", "AUTOSWITCH"]
+		},
+		"icr_mode": {
+			"type": "string",
+			"title": "AGTX_ICR_MODE_E",
+			"enum": ["OFF", "ON", "AUTO"]
+		},
+		"ir_led_mode": {
+			"type": "string",
+			"title": "AGTX_IR_LED_MODE_E",
+			"enum": ["OFF", "ON", "AUTO"]
+		},
+		"ir_light_suppression": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 100,
+			"default": 0
+		},
+		"image_mode": {
+			"type": "string",
+			"title": "AGTX_IMAGE_MODE_E",
+			"enum": ["COLOR", "GRAYSCALE", "AUTO"]
+		},
+		"wdr_en": {
+			"type": "boolean"
+		},
+		"wdr_strength": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 100,
+			"default": 0
+		}
+	}
+}

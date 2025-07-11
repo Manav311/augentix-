@@ -1,0 +1,618 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_TE_CONF_S",
+	"comments": [
+		"=================================",
+		"== Tone enhancement parameters ==",
+		"=================================",
+		"NOTE: WDR mode only valid at single sensor",
+		"ALSO SEE: MPI_setTeAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: normal, 1: wdr, 2: wdr_auto, 3:adaptive",
+			"ui_type": "enum",
+			"type": "string",
+			"title": "AGTX_TE_MODE_E",
+			"enum": ["NORMAL","WDR","WDR_AUTO", "ADAPTIVE"],
+			"default": "NORMAL"
+		},
+		"normal_ctl": {
+			"ini_name": "te_normal.curve",
+			"comments": "Normal mode",
+			"ui_type": "curve",
+			"type": "array",
+			"minItems": 60,
+			"maxItems": 60,
+			"itemKeys": [
+				0, 64, 128, 192, 256, 320, 384, 448, 512, 640, 768, 896, 1024, 1152, 1280,
+				1408, 1536, 1664, 1792, 1920, 2048, 2176, 2304, 2432, 2560, 2816, 3072, 3328,
+				3584, 3840, 4096, 4352, 4608, 4864, 5120, 5376, 5632, 5888, 6144, 6400, 6656,
+				7168, 7680, 8192, 8704, 9216, 9728, 10240, 10752, 11264, 11776, 12288, 12800,
+				13312, 13824, 14336, 14848, 15360, 15872, 16384
+			],
+			"items": {
+				"type": "integer",
+				"default": 256,
+				"minimum": 0,
+				"maximum": 16384
+			},
+			"defaultItems": [
+				0, 64, 128, 192, 256, 320, 384, 448, 512, 640, 768, 896, 1024, 1152, 1280,
+				1408, 1536, 1664, 1792, 1920, 2048, 2176, 2304, 2432, 2560, 2816, 3072, 3328,
+				3584, 3840, 4096, 4352, 4608, 4864, 5120, 5376, 5632, 5888, 6144, 6400, 6656,
+				7168, 7680, 8192, 8704, 9216, 9728, 10240, 10752, 11264, 11776, 12288, 12800,
+				13312, 13824, 14336, 14848, 15360, 15872, 16384
+			]
+		},
+		"wdr_ctl": {
+			"type": "object",
+			"title": "AGTX_DIP_TE_WDR_S",
+			"ini_name": "te_wdr",
+			"comments": "WDR mode",
+			"properties": {
+				"brightness": {
+					"comments": "Brightness strength",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 3000,
+					"minimum": 0,
+					"maximum": 16384
+				},
+				"strength": {
+					"comments": "Content adaptive enhancement strength",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 512,
+					"minimum": 0,
+					"maximum": 1024
+				},
+				"saliency": {
+					"comments": "Non-linear enhancement for dynamic range reallocation",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 512,
+					"minimum": 0,
+					"maximum": 1024
+				},
+				"iso_weight": {
+					"comments": "Weighting adjustment of ISO calculation",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 128,
+					"minimum": 0,
+					"maximum": 255
+				},
+				"dark_enhance": {
+					"comments": "Dark region enhancing strength",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 255
+				},
+				"iso_max": {
+					"comments": "Constraint maximal ISO (1x: 100)",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 3200,
+					"minimum": 100,
+					"maximum": 102400
+				},
+				"noise_cstr": {
+					"subcomments": {
+						"0": "Noise constraint, iso = 100",
+						"1": "Noise constraint, iso = 200",
+						"2": "Noise constraint, iso = 400",
+						"3": "Noise constraint, iso = 800",
+						"4": "Noise constraint, iso = 1600",
+						"5": "Noise constraint, iso = 3200",
+						"6": "Noise constraint, iso = 6400",
+						"7": "Noise constraint, iso = 12800",
+						"8": "Noise constraint, iso = 25600",
+						"9": "Noise constraint, iso = 51200",
+						"10": "Noise constraint, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 32,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"defaultItems": [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]
+				},
+				"interval": {
+					"comments": "Interval between two executions",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 255
+				},
+				"precision": {
+					"comments": "Operation on 0: 15bins, 1: 30bins, 2: 60bins",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 2,
+					"minimum": 0,
+					"maximum": 2
+				}
+			}
+		},
+		"wdr_auto_ctl": {
+			"type": "object",
+			"title": "AGTX_DIP_TE_WDR_AUTO_S",
+			"ini_name": "te_wdr_auto",
+			"comments": "WDR auto mode",
+			"properties": {
+				"dri_type": {
+					"comments": "Dynamic range index type",
+					"ui_type": "enum",
+					"type": "string",
+					"title": "AGTX_TE_DRI_TYPE_E",
+					"enum": ["GAMMA_DOMAIN_HIST_CV", "LINEAR_DOMAIN_HIST_CV"],
+					"default": "GAMMA_DOMAIN_HIST_CV"
+				},
+				"dri_gain": {
+					"subcomments": {
+						"0": "DRI gain, iso = 100",
+						"1": "DRI gain, iso = 200",
+						"2": "DRI gain, iso = 400",
+						"3": "DRI gain, iso = 800",
+						"4": "DRI gain, iso = 1600",
+						"5": "DRI gain, iso = 3200",
+						"6": "DRI gain, iso = 6400",
+						"7": "DRI gain, iso = 12800",
+						"8": "DRI gain, iso = 25600",
+						"9": "DRI gain, iso = 51200",
+						"10": "DRI gain, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 64,
+						"minimum": 0,
+						"maximum": 65536
+					}
+				},
+				"dri_offset": {
+					"subcomments": {
+						"0": "DRI offset, iso = 100",
+						"1": "DRI offset, iso = 200",
+						"2": "DRI offset, iso = 400",
+						"3": "DRI offset, iso = 800",
+						"4": "DRI offset, iso = 1600",
+						"5": "DRI offset, iso = 3200",
+						"6": "DRI offset, iso = 6400",
+						"7": "DRI offset, iso = 12800",
+						"8": "DRI offset, iso = 25600",
+						"9": "DRI offset, iso = 51200",
+						"10": "DRI offset, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 65536
+					}
+				},
+				"strength": {
+					"subcomments": {
+						"0": "Enhancement strength, dri = 0",
+						"1": "Enhancement strength, dri = 128",
+						"2": "Enhancement strength, dri = 256",
+						"3": "Enhancement strength, dri = 384",
+						"4": "Enhancement strength, dri = 512",
+						"5": "Enhancement strength, dri = 640",
+						"6": "Enhancement strength, dri = 768",
+						"7": "Enhancement strength, dri = 896",
+						"8": "Enhancement strength, dri = 1024"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 512,
+						"minimum": 0,
+						"maximum": 1024
+					}
+				},
+				"brightness": {
+					"subcomments": {
+						"0": "Brightness strength, dri = 0",
+						"1": "Brightness strength, dri = 128",
+						"2": "Brightness strength, dri = 256",
+						"3": "Brightness strength, dri = 384",
+						"4": "Brightness strength, dri = 512",
+						"5": "Brightness strength, dri = 640",
+						"6": "Brightness strength, dri = 768",
+						"7": "Brightness strength, dri = 896",
+						"8": "Brightness strength, dri = 1024"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 3000,
+						"minimum": 0,
+						"maximum": 16384
+					}
+				},
+				"iso_max": {
+					"comments": "Constraint maximal ISO (1x: 100)",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 3200,
+					"minimum": 100,
+					"maximum": 102400
+				},
+				"saliency": {
+					"subcomments": {
+						"0": "Non-linear enhancment, dri = 0",
+						"1": "Non-linear enhancment, dri = 128",
+						"2": "Non-linear enhancment, dri = 256",
+						"3": "Non-linear enhancment, dri = 384",
+						"4": "Non-linear enhancment, dri = 512",
+						"5": "Non-linear enhancment, dri = 640",
+						"6": "Non-linear enhancment, dri = 768",
+						"7": "Non-linear enhancment, dri = 896",
+						"8": "Non-linear enhancment, dri = 1024"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 512,
+						"minimum": 0,
+						"maximum": 1024
+					}
+				},
+				"noise_cstr": {
+					"subcomments": {
+						"0": "Noise constraint, iso = 100",
+						"1": "Noise constraint, iso = 200",
+						"2": "Noise constraint, iso = 400",
+						"3": "Noise constraint, iso = 800",
+						"4": "Noise constraint, iso = 1600",
+						"5": "Noise constraint, iso = 3200",
+						"6": "Noise constraint, iso = 6400",
+						"7": "Noise constraint, iso = 12800",
+						"8": "Noise constraint, iso = 25600",
+						"9": "Noise constraint, iso = 51200",
+						"10": "Noise constraint, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					}
+				},
+				"dark_enhance": {
+					"subcomments": {
+						"0": "Dark region enhancing strength, dri = 0",
+						"1": "Dark region enhancing strength, dri = 128",
+						"2": "Dark region enhancing strength, dri = 256",
+						"3": "Dark region enhancing strength, dri = 384",
+						"4": "Dark region enhancing strength, dri = 512",
+						"5": "Dark region enhancing strength, dri = 640",
+						"6": "Dark region enhancing strength, dri = 768",
+						"7": "Dark region enhancing strength, dri = 896",
+						"8": "Dark region enhancing strength, dri = 1024"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 9,
+					"maxItems": 9,
+					"items": {
+						"type": "integer",
+						"default": 32,
+						"minimum": 0,
+						"maximum": 255
+					}
+				},
+				"iso_weight": {
+					"comments": "Weighting adjustment of ISO calculation",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 128,
+					"minimum": 0,
+					"maximum": 255
+				},
+				"interval": {
+					"comments": "Interval between two executions",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 255
+				},
+				"precision": {
+					"comments": "Operation on 0: 15bins, 1: 30bins, 2: 60bins",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 2,
+					"minimum": 0,
+					"maximum": 2
+				}
+			}
+		},
+		"adapt_ctl": {
+			"type": "object",
+			"title": "AGTX_DIP_TE_ADAPT_S",
+			"ini_name": "te_adapt",
+			"comments": "Adaptive mode",
+			"properties": {
+				"strength": {
+					"comments": "strength of te_adapt mode",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 16,
+					"minimum": 0,
+					"maximum": 1024
+				},
+				"dark_enhance": {
+					"subcomments": {
+						"0": "dark_enhance, iso = 100",
+						"1": "dark_enhance, iso = 200",
+						"2": "dark_enhance, iso = 400",
+						"3": "dark_enhance, iso = 800",
+						"4": "dark_enhance, iso = 1600",
+						"5": "dark_enhance, iso = 3200",
+						"6": "dark_enhance, iso = 6400",
+						"7": "dark_enhance, iso = 12800",
+						"8": "dark_enhance, iso = 25600",
+						"9": "dark_enhance, iso = 51200",
+						"10": "dark_enhance, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 8,
+						"minimum": 0,
+						"maximum": 31
+					}
+				},
+				"te_adapt_based_type": {
+					"comments": "adapt based type, 0: TE_ADAPT_NL_BASED , 1: TE_ADAPT_INTTIME_BASED, 2: TE_ADAPT_EV_BASED, 3: TE_ADAPT_BASED_TYPE_RSV",
+					"ui_type": "enum",
+					"type": "string",
+					"title": "AGTX_TE_BASED_TYPE_E",
+					"enum": ["TE_ADAPT_NL_BASED","TE_ADAPT_INTTIME_BASED","TE_ADAPT_EV_BASED","TE_ADAPT_BASED_TYPE_RSV"],
+					"default": "TE_ADAPT_NL_BASED"
+				},
+				"str_auto_en": {
+					"comments": "Enable str_auto control",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 1
+				},
+				"str_auto": {
+					"subcomments": {
+						"0": "str_auto, iso = 100",
+						"1": "str_auto, iso = 200",
+						"2": "str_auto, iso = 400",
+						"3": "str_auto, iso = 800",
+						"4": "str_auto, iso = 1600",
+						"5": "str_auto, iso = 3200",
+						"6": "str_auto, iso = 6400",
+						"7": "str_auto, iso = 12800",
+						"8": "str_auto, iso = 25600",
+						"9": "str_auto, iso = 51200",
+						"10": "str_auto, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 16,
+						"minimum": 0,
+						"maximum": 1024
+					}
+				},
+				"speed": {
+					"comments": "Speed of change of curve",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 102,
+					"minimum": 0,
+					"maximum": 255
+				},
+				"white_th": {
+					"subcomments": {
+						"0": "white_th, iso = 100",
+						"1": "white_th, iso = 200",
+						"2": "white_th, iso = 400",
+						"3": "white_th, iso = 800",
+						"4": "white_th, iso = 1600",
+						"5": "white_th, iso = 3200",
+						"6": "white_th, iso = 6400",
+						"7": "white_th, iso = 12800",
+						"8": "white_th, iso = 25600",
+						"9": "white_th, iso = 51200",
+						"10": "white_th, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 15040,
+						"minimum": 0,
+						"maximum": 16384
+					}
+				},
+				"black_th": {
+					"subcomments": {
+						"0": "black_th, iso = 100",
+						"1": "black_th, iso = 200",
+						"2": "black_th, iso = 400",
+						"3": "black_th, iso = 800",
+						"4": "black_th, iso = 1600",
+						"5": "black_th, iso = 3200",
+						"6": "black_th, iso = 6400",
+						"7": "black_th, iso = 12800",
+						"8": "black_th, iso = 25600",
+						"9": "black_th, iso = 51200",
+						"10": "black_th, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 512,
+						"minimum": 0,
+						"maximum": 16384
+					}
+				},
+				"max_str_prec_sel": {
+					"comments": "max str's precision control",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 1
+				},
+				"max_str": {
+					"subcomments": {
+						"0": "max_str, iso = 100",
+						"1": "max_str, iso = 200",
+						"2": "max_str, iso = 400",
+						"3": "max_str, iso = 800",
+						"4": "max_str, iso = 1600",
+						"5": "max_str, iso = 3200",
+						"6": "max_str, iso = 6400",
+						"7": "max_str, iso = 12800",
+						"8": "max_str, iso = 25600",
+						"9": "max_str, iso = 51200",
+						"10": "max_str, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 7,
+						"minimum": 0,
+						"maximum": 1024
+					}
+				},
+				"dark_protect_smooth": {
+					"subcomments": {
+						"0": "dark_protect_smooth, iso = 100",
+						"1": "dark_protect_smooth, iso = 200",
+						"2": "dark_protect_smooth, iso = 400",
+						"3": "dark_protect_smooth, iso = 800",
+						"4": "dark_protect_smooth, iso = 1600",
+						"5": "dark_protect_smooth, iso = 3200",
+						"6": "dark_protect_smooth, iso = 6400",
+						"7": "dark_protect_smooth, iso = 12800",
+						"8": "dark_protect_smooth, iso = 25600",
+						"9": "dark_protect_smooth, iso = 51200",
+						"10": "dark_protect_smooth, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8
+					}
+				},
+				"dark_protect_str": {
+					"subcomments": {
+						"0": "dark_protect_str, iso = 100",
+						"1": "dark_protect_str, iso = 200",
+						"2": "dark_protect_str, iso = 400",
+						"3": "dark_protect_str, iso = 800",
+						"4": "dark_protect_str, iso = 1600",
+						"5": "dark_protect_str, iso = 3200",
+						"6": "dark_protect_str, iso = 6400",
+						"7": "dark_protect_str, iso = 12800",
+						"8": "dark_protect_str, iso = 25600",
+						"9": "dark_protect_str, iso = 51200",
+						"10": "dark_protect_str, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 64
+					}
+				},
+				"dark_enhance_th": {
+					"subcomments": {
+						"0": "dark_enhance_th, iso = 100",
+						"1": "dark_enhance_th, iso = 200",
+						"2": "dark_enhance_th, iso = 400",
+						"3": "dark_enhance_th, iso = 800",
+						"4": "dark_enhance_th, iso = 1600",
+						"5": "dark_enhance_th, iso = 3200",
+						"6": "dark_enhance_th, iso = 6400",
+						"7": "dark_enhance_th, iso = 12800",
+						"8": "dark_enhance_th, iso = 25600",
+						"9": "dark_enhance_th, iso = 51200",
+						"10": "dark_enhance_th, iso = 102400"
+					},
+					"ui_type": "table",
+					"type": "array",
+					"minItems": 11,
+					"maxItems": 11,
+					"items": {
+						"type": "integer",
+						"default": 2048,
+						"minimum": 0,
+						"maximum": 16384
+					}
+				}
+			}
+		}
+	}
+}

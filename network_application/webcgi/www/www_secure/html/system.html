@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/systemInfo.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item active">
+                  <a class="page-link" href="system.html">System Information</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <form>
+              <table class="table">
+                <tr>
+                  <td>{{msg_t.Device[lang]}}</td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>{{msg_t.Model_Name[lang]}}</td>
+                        <td>{{productname.dev_name}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.System_Up_Time[lang]}}</td>
+                        <td>{{UpTime}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Hardware_Ver[lang]}}</td>
+                        <td>1.0.0</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Firmware_Ver[lang]}}</td>
+                        <td>{{frimwareVersion}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Network[lang]}}</td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>{{msg_t.Activated_Interface[lang]}}</td>
+                        <td>eth0</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Host_Name[lang]}}</td>
+                        <td>{{HostName}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.MAC_Address[lang]}}</td>
+                        <td>{{MacAddress}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.IP_Address[lang]}}</td>
+                        <td>{{IPAddress}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Subnet_Mask[lang]}}</td>
+                        <td>{{NetMask}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Defualt_Gateway[lang]}}</td>
+                        <td>{{Gateway}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Primary_DNS[lang]}}</td>
+                        <td>{{Dns.dns1}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{msg_t.Secondary_DNS[lang]}}</td>
+                        <td>{{Dns.dns2}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </form>
+            <div>
+              <button class="btn btn-primary" ng-click="downloadSecurityLog()">{{msg_t.Download_Security_Log[lang]}}</button>
+            </div>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+	"line_list":[
+		{
+			"id": 1,
+			"start":[50, 0],
+			"end":[50, 100],
+			"obj_min_w": 0,
+			"obj_min_h": 0,
+			"obj_max_w": 50,
+			"obj_max_h": 50,
+			"obj_area":0,
+			"obj_v_th":0,
+			"mode": 3,
+			"obj_life_th": 30
+		}
+	],
+	"shd": {
+		"en": 0,
+		"sensitivity": 75,
+		"quality": 75,
+		"obj_life_th": 32,
+		"longterm_life_th": 10,
+		"instance_duration": 35,
+		"shaking_update_duration": 30,
+		"longterm_dec_period": 1800,
+		"longterm_num": 0,
+		"longterm_list": [
+			{
+				"start":[0, 0],
+				"end":[100, 100]
+			}
+		]
+	}
+}

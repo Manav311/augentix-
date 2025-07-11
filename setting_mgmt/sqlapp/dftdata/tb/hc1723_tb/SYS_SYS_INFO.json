@@ -1,0 +1,6 @@
+{
+  "cmd_id": "AGTX_CMD_SYS_INFO",
+  "json_content": {
+    "dev_name": "HC1723-TB"
+  }
+}

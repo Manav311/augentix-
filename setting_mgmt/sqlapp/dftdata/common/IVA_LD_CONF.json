@@ -1,0 +1,15 @@
+{
+  "cmd_id": "AGTX_CMD_LD_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "sensitivity": 80,
+    "trigger_cond": "BOTH",
+    "det_region": {
+        "start_x": 0,
+        "start_y": 0,
+        "end_x": 100,
+        "end_y": 100
+    }
+  }
+}

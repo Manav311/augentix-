@@ -1,0 +1,26 @@
+{
+    "cmd_id": "AGTX_CMD_EAIF_CONF",
+    "json_content": {
+      "enabled": 0,
+      "video_chn_idx": 0,
+      "obj_life_th": 26,
+      "target_idx": 0,
+      "snapshot_width": 1920,
+      "snapshot_height": 1080,
+      "api": "FACERECO",
+      "face_reco_model": "/system/eaif/models/facereco/inapp_facereco.ini",
+      "face_detect_model": "/system/eaif/models/facereco/inapp_scrfd.ini",
+      "detect_model": "yolov5",
+      "classify_model": "shuffleNetV2",
+      "classify_cv_model": "C4",
+      "human_classify_model": "/system/eaif/models/classifiers/shuffleNetV2/inapp.ini",
+      "data_fmt": "MPI_RGB",
+      "url": "inapp",
+      "pos_stop_count_th": 99,
+      "pos_classify_period": 300,
+      "neg_classify_period": 16,
+      "detection_period": 16,
+      "identification_period": 12,
+      "min_size":40
+    }
+}

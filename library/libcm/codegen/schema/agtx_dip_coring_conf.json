@@ -1,0 +1,75 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_CORING_CONF_S",
+	"comments": [
+		"=======================",
+		"== Coring parameters ==",
+		"=======================",
+		"ALSO SEE: MPI_setCoringAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: auto, 2: manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"coring_slope": {
+			"comments": "Slope (0~4095)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1024,
+			"minimum": 0,
+			"maximum": 4095
+		},
+		"auto_abs_th_list": {
+			"ini_name": "coring_auto.abs_th",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 20,
+				"minimum": 0,
+				"maximum": 1023
+			}
+		},
+		"manual_abs_th": {
+			"ini_name": "coring_manual.abs_th",
+			"comments": "Chroma to grey threshold (0~1023)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 1023
+		}
+	}
+}

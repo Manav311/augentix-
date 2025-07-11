@@ -1,0 +1,10 @@
+mainmenu "Augentix SDK Application Configuration"
+
+source "library/Kconfig"
+source "3rd_party/Kconfig"
+source "av_daemon/Kconfig"
+source "network_application/Kconfig"
+source "sample/Kconfig"
+source "setting_mgmt/Kconfig"
+source "streaming_server/Kconfig"
+source "system_utility/Kconfig"

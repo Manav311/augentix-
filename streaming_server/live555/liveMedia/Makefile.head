@@ -1,0 +1,8 @@
+SDKSRC_DIR = $(realpath $(CURDIR)/../../../..)
+include $(SDKSRC_DIR)/application/internal.mk
+
+INCLUDES := -Iinclude -I../UsageEnvironment/include -I../groupsock/include
+INCLUDES += -I$(MPP_INC) -I$(SENSOR_PATH) -I$(SDK_INC)
+PREFIX = /usr/local
+LIBDIR = $(PREFIX)/lib
+##### Change the following for your environment:

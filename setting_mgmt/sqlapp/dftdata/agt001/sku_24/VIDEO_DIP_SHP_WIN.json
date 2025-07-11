@@ -1,0 +1,94 @@
+{
+  "cmd_id": "AGTX_CMD_DIP_SHP_WIN",
+  "json_content": {
+    "strm_num": 2,
+    "video_dev_idx": 0,
+    "video_strm": [
+      {
+        "video_strm_idx": 0,
+        "window_array": [
+          {
+            "auto_shp_table": [
+              191,
+              191,
+              191,
+              191,
+              24,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "manual_shp": 128,
+            "mode": 0,
+            "window_idx": 0
+          },
+          {
+            "auto_shp_table": [
+              191,
+              191,
+              191,
+              191,
+              24,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "manual_shp": 128,
+            "mode": 0,
+            "window_idx": 1
+          }
+        ],
+        "window_num": 2
+      },
+      {
+        "video_strm_idx": 1,
+        "window_array": [
+          {
+            "auto_shp_table": [
+              191,
+              191,
+              191,
+              191,
+              24,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "manual_shp": 128,
+            "mode": 0,
+            "window_idx": 0
+          },
+          {
+            "auto_shp_table": [
+              191,
+              191,
+              191,
+              191,
+              24,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "manual_shp": 128,
+            "mode": 0,
+            "window_idx": 1
+          }
+        ],
+        "window_num": 2
+      }
+    ],
+    "win_shp_en": 0
+  }
+}

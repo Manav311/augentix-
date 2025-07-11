@@ -1,0 +1,28 @@
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.display-none {
+  display: none;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.margin-right-2 {
+  margin-right: 2rem;
+}

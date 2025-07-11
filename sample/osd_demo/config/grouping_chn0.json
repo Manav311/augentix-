@@ -1,0 +1,77 @@
+{
+	"color_mode":"AYUV_3544",
+	"channel":[0],
+	"rect":[[1920, 1080]],
+	"regions":
+	[
+		{
+			"region_num":8,
+			"region":[[0, 0, 120, 80], [1440, 0, 120, 80], [1440, 810, 120, 80], [0, 500, 120, 280], [480, 270, 120, 80], [960, 450, 120, 80], [960, 810, 120, 80], [0, 810, 120, 80]],
+			"src":
+			[
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/rect.bmp"
+				},
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/red.bmp"
+				},
+				{
+					"type":"utf8",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"Block 03",
+					"size":20,
+					"backcol":"TRANSPARENT",
+					"forecol":[255, 255, 255],
+					"outline_width":2,
+					"outcol":[0, 0, 255]
+				},
+				{
+					"type":"privacy_mask",
+					"color":[255, 128, 128, 128]
+				},
+				{
+					"type":"utf8",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"Block 04",
+					"size":16,
+					"backcol":"WHITE",
+					"forecol":[0, 0, 0],
+					"outline_width":0,
+					"outcol":[0, 0, 0]
+				},
+				{
+					"type":"utf8",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"Block 03",
+					"size":20,
+					"backcol":"TRANSPARENT",
+					"forecol":[255, 255, 255],
+					"outline_width":2,
+					"outcol":[0, 0, 255]
+				},
+				{
+					"type":"unicode",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"timestamp",
+					"size":18,
+					"backcol":"TRANSPARENT",
+					"forecol":[255, 255, 255],
+					"outline_width":1,
+					"outcol":[0, 0, 255]
+				},
+				{
+					"type":"unicode",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"timestamp",
+					"size":18,
+					"backcol":"WHITE",
+					"forecol":[255, 255, 255],
+					"outline_width":1,
+					"outcol":[0, 0, 255]
+				}
+			]
+		}
+	]
+}

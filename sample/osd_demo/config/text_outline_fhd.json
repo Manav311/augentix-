@@ -1,0 +1,64 @@
+{
+    "color_mode":"AYUV_3544",
+	"channel":[0, 1],
+	"rect":[[1280, 720], [1280, 720]],
+	"regions":
+	[
+		{
+			"region_num":2,
+			"region":[
+				[16,16,503,118],[16, 540, 503, 118]
+			],
+			"src":
+			[
+				{
+					"type":"utf8",
+					"ttf_path":"/mnt/nfs/ethnfs/SourceHanSansTC-Normal.otf",
+					"txt":"中文１２３456kpjｋｐｊ&＆;；Today",
+					"size":20,
+					"backcol":"TRANSPARENT",
+					"forecol":[255,255,255],
+					"outline_width":2,
+					"outcol":[255, 5, 0]
+				},
+				{
+					"type":"utf8",
+					"ttf_path":"/mnt/nfs/ethnfs/simhei.ttf",
+					"txt":"中文１２３456kpjｋｐｊ&＆;；Today",
+					"size":20,
+					"backcol":"TRANSPARENT",
+					"forecol":[255,255,255],
+					"outline_width":2,
+					"outcol":[255, 5, 0]
+				},
+			]
+		},
+		{
+			"region_num":2,
+			"region":[
+				[16,16,200,118],[16, 540, 400, 118]  
+			],
+			"src":[
+				{
+				"type":"utf8",
+				"ttf_path":"/mnt/nfs/ethnfs/SourceHanSansTC-Normal.otf",
+				"txt":"Camera 01",
+				"size":35,
+				"backcol":"WHITE",
+				"forecol":[25,33,255],
+				"outline_width":1,
+				"outcol":[0, 0, 0]
+				},{
+				"type":"unicode",
+				"ttf_path":"/mnt/nfs/ethnfs/SourceHanSansTC-Normal.otf",
+				"txt":"timestamp",
+				"size":25,
+				"backcol":"BLACK",
+				"forecol":[128,255,25],
+				"outline_width":1,
+				"outcol":[255, 255, 255]
+				}
+			]
+		}
+	]
+}

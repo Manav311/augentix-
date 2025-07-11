@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/iva_od.js"></script>
+  <title>Augentix</title>
+  <script language="Javascript">
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="dropdown">
+              <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle=
+              "dropdown" id="dropdownMenuButton" type="button">{{CurPage[lang]}}</button>
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                <a class="{{x.dropdown}}" href="{{x.href}}" ng-repeat="x in IvaDropDown" target=
+                "_self">{{x.txt[lang]}}</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <table>
+              <tr>
+                <td><input ng-model="odPref.enabled" type="checkbox">{{msg_t.Enable_object_detection[lang]}}</td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Quality[lang]}}</td>
+                <td><input max="100" min="1" ng-model="odPref.od_qual" type="range"></td>
+                <td><input max="100" min="1" ng-model="odPref.od_qual" type="number"></td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Obj_size_th[lang]}}</td>
+                <td><input max="100" min="1" ng-model="odPref.od_size_th" type="range"></td>
+                <td><input max="100" min="1" ng-model="odPref.od_size_th" type="number"></td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Sensitivity[lang]}}</td>
+                <td><input max="100" min="1" ng-model="odPref.od_sen" type="range"></td>
+                <td><input max="100" min="1" ng-model="odPref.od_sen" type="number"></td>
+              </tr>
+              <tr>
+                <td><input ng-change="sendData()" ng-model="odPref.en_motor" type="checkbox" ng-true-value="1" ng-false-value="0">{{msg_t.Enable_GMV_motor[lang]}}</td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Enable_ODv5[lang]}} :</td>
+                <td><select ng-model="odPref.version">
+                  <option value="OD_V4">
+                    {{msg_t.OD_4[lang]}}
+                  </option>
+                  <option value="OD_V5">
+                    {{msg_t.OD_5[lang]}}
+                  </option>
+                </select></td>
+              </tr>
+            </table><button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+            <button class="btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+            <p>{{cmdStatus}}</p>
+            <table>
+              <tr>
+                <td><input ng-model="shdPref.enabled" type="checkbox">{{msg_t.Enable_shake_det[lang]}}</td>
+                <td></td>
+                <td>
+                  <div class="btn-group">
+                     <button class="btn dropdown-toggle dropdown-toggle-split" id="shd_div_toggle" ng-click=
+                    "shdOnchange()" type="button"></button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div id="shd_div">
+              <table>
+                <tr>
+                  <td>{{msg_t.Sensitivity[lang]}}</td>
+                  <td><input max="100" min="1" ng-model="shdPref.sensitivity" type="range"></td>
+                  <td><input max="100" min="1" ng-model="shdPref.sensitivity" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Quality[lang]}}</td>
+                  <td><input max="100" min="1" ng-model="shdPref.quality" type="range"></td>
+                  <td><input max="100" min="1" ng-model="shdPref.quality" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Obj_life_th[lang]}}</td>
+                  <td><input max="120" min="0" ng-model="shdPref.obj_life_th" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Longterm_life_th[lang]}}</td>
+                  <td><input max="999" min="1" ng-model="shdPref.longterm_life_th" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Instance_duration[lang]}}</td>
+                  <td><input max="65535" min="1" ng-model="shdPref.instance_duration" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Shaking_update_duration[lang]}}</td>
+                  <td><input max="99999" min="1" ng-model="shdPref.shaking_update_duration" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Longterm_dec_period[lang]}}</td>
+                  <td><input max="9999999" min="1" ng-model="shdPref.longterm_dec_period" type="number"></td>
+                </tr>
+                <tr>
+                  <td>{{msg_t.Longterm_num[lang]}}</td>
+                  <td><input max="10" min="0" ng-model="shdPref.longterm_num" type="number"></td>
+                </tr>
+              </table>
+              <table ng-repeat="x in range(0,shdPref.longterm_num)">
+                <tr>
+                  <td>{{msg_t.Longterm_item[lang]}} {{x+1}} :</td>
+                  <td></td>
+                  <td>{{msg_t.Start[lang]}} X:</td>
+                  <td></td>
+                  <td><input max="99" min="0" ng-blur="check_coordinate()" ng-model="shdPref.longterm_list[x].start_x"
+                  type="number"></td>
+                  <td>{{msg_t.Start[lang]}} Y:</td>
+                  <td></td>
+                  <td><input max="99" min="0" ng-blur="check_coordinate()" ng-model="shdPref.longterm_list[x].start_y"
+                  type="number"></td>
+                  <td>{{msg_t.End[lang]}} X:</td>
+                  <td></td>
+                  <td><input max="100" min="1" ng-blur="check_coordinate()" ng-model="shdPref.longterm_list[x].end_x"
+                  type="number"></td>
+                  <td>{{msg_t.End[lang]}} Y:</td>
+                  <td></td>
+                  <td><input max="100" min="1" ng-blur="check_coordinate()" ng-model="shdPref.longterm_list[x].end_y"
+                  type="number"></td>
+                </tr>
+              </table>
+            </div><br>
+            <button class="btn btn-info" ng-click="getShdData()">{{msg_t.Read_setting[lang]}}</button> <button class=
+            "btn btn-info" ng-disabled="!canApply" ng-click="sendShdData()">{{msg_t.Apply[lang]}}</button>
+            <p>{{cmdShdStatus}}</p><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

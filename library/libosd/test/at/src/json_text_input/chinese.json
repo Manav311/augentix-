@@ -1,0 +1,20 @@
+{
+    "input_text": {
+      "txt": "今天天氣真好",
+      "color_mode": "AYUV_3544",
+      "ttf_path": "/mnt/nfs/ethnfs/simhei.ttf",
+      "size": 40,
+      "backcol": "TRANSPARENT",
+      "forecol": [
+        0,
+        14,
+        0
+      ],
+      "outline_width": 2,
+      "outcol": [
+        255,
+        255,
+        0
+      ]
+    }
+}

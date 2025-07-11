@@ -1,0 +1,9 @@
+{
+    "en_block_det": 1,
+    "en_redirect_det": 1,
+    "sensitivity": 60,
+    "endurance": 60,
+    "redirect_sensitivity": 128,
+    "redirect_global_change": 50,
+    "redirect_trigger_delay": 5
+}

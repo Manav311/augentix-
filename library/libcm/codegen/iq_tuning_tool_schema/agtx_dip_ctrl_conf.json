@@ -1,0 +1,158 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_CTRL_CONF_S",
+	"ini_name": "dip",
+	"comments": [
+		"===============================================",
+		"== Digital Image Processing algorithm enable ==",
+		"===============================================",
+		"ALSO SEE: MPI_setDipAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"is_dip_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_ae_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_iso_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_awb_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_csm_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_te_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_pta_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_nr_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_shp_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_gamma_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_dpc_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_dms_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_me_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_enh_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_coring_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_fcs_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		},
+		"is_dhz_en": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 8
+		}
+	}
+}

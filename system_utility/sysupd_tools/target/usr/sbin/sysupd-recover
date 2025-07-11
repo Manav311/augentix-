@@ -1,0 +1,51 @@
+#!/bin/sh
+
+#
+# AUGENTIX INC. - PROPRIETARY
+#
+# sysupd-recover - system update fallback
+# Copyright (C) 2018 Augentix Inc. - All Rights Reserved
+#
+# NOTICE: The information contained herein is the property of Augentix Inc.
+# Copying and distributing of this file, via any medium,
+# must be licensed by Augentix Inc.
+#
+# * Author: ShihChieh Lin <shihchieh.lin@augentix.com>
+fw_setenv_list=/tmp/fw_env_list
+
+run_swupdate_recover(){
+	# Step 1 read the bootpart to decide which OS to be updated
+	if [ $(fw_printenv slot_b_active -n) == 1 ]; then
+		if [ $(fw_printenv slot_a_bootable -n) == 1 ]; then
+			bootpart_to_recover=1
+			echo "Recover to Slot A"
+			echo "slot_a_active 1" >  $fw_setenv_list
+			echo "slot_b_active 0" >> $fw_setenv_list
+		else
+			return 1;
+		fi
+	else
+		if [ $(fw_printenv slot_b_bootable -n) == 1 ]; then
+			bootpart_to_recover=2
+			echo "Recover to Slot B"
+			echo "slot_a_active 0" >  $fw_setenv_list
+			echo "slot_b_active 1" >> $fw_setenv_list
+		else
+			return 1;
+		fi
+	fi
+
+	echo "bootcounter 0" >> $fw_setenv_list
+	fw_setenv -s $fw_setenv_list
+
+	return 0
+}
+
+run_swupdate_recover
+
+if [ $? == 0 ]; then
+	echo "System ready to be recovered; Reboot the system";
+	reboot;
+else
+	echo "Failed to recover system - Backup slot is not bootable!";
+fi

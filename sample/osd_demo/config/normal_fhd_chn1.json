@@ -1,0 +1,39 @@
+{
+	"color_mode":"AYUV_3544",
+	"channel":[1],
+	"rect":[[1280, 720]],
+	"regions":
+	[
+		{
+			"region_num":3,
+			"region":[[16,16,503, 118], [1120, 16, 160, 48], [900, 640, 348, 48]],
+			"src":
+			[
+				{
+					"type":"ayuv",
+					"src_path":"/system/mpp/font/LOGO_Augentix_v2.imgayuv"
+				},
+				{
+					"type":"utf8",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"Camera 01",
+					"size":30,
+					"backcol":"WHITE",
+					"forecol":[0, 0, 0],
+					"outline_width":0,
+					"outcol":[0, 0, 0]
+				},
+				{
+					"type":"unicode",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"timestamp",
+					"size":25,
+					"backcol":"WHITE",
+					"forecol":[0, 0, 0],
+					"outline_width":0,
+					"outcol":[0, 0, 0]
+				}
+			]
+		}
+	]
+}

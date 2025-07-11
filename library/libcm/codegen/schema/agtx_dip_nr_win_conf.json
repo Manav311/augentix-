@@ -1,0 +1,287 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_NR_WIN_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"win_nr_en" : {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1
+		},
+		"strm_num" : {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1
+		},
+		"video_strm": {
+			"type": "array",
+			"maxItems": 4,
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"title": "AGTX_NR_STRM_PARAM_S",
+				"properties": {
+					"video_strm_idx": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1
+					},
+					"window_num": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 9
+					},
+					"window_array": {
+						"type": "array",
+						"maxItems": 9,
+						"minItems": 1,
+						"items": {
+							"type": "object",
+							"title": "AGTX_NR_WINDOW_PARAM_S",
+							"properties": {
+								"window_idx": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 0,
+									"minimum": 0,
+									"maximum": 8
+								},
+								"mode": {
+									"ui_type": "enum",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"enum": [0, 2],
+									"default": 0
+								},
+								"motion_comp": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 2,
+									"minimum": 0,
+									"maximum": 31
+								},
+								"trail_suppress": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 0,
+									"minimum": 0,
+									"maximum": 16
+								},
+								"ghost_remove": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 0,
+									"minimum": 0,
+									"maximum": 255
+								},
+								"ma_y_strength": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 26,
+									"minimum": 0,
+									"maximum": 31
+								},
+								"mc_y_strength": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 30,
+									"minimum": 0,
+									"maximum": 31
+								},
+								"ma_c_strength": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 24,
+									"minimum": 0,
+									"maximum": 31
+								},
+								"ratio_3d": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 4,
+									"minimum": 0,
+									"maximum": 4
+								},
+								"mc_y_level_offset": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 0,
+									"minimum": -255,
+									"maximum": 255
+								},
+								"me_frame_fallback_en": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 0,
+									"minimum": 0,
+									"maximum": 1
+								},
+								"fss_ratio_min": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 993,
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"fss_ratio_max": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 1014,
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"lut_type": {
+									"comments": "look-up table type, 0: LUT_TYPE_0, 1: LUT_TYPE_1",
+									"ui_type": "enum",
+									"ui_access_right": "read_write",
+									"type": "string",
+									"title": "AGTX_NR_LUT_TYPE_E",
+									"enum": ["LUT_TYPE_0", "LUT_TYPE_1"],
+									"default": "LUT_TYPE_0"
+								},
+								"auto_y_level_3d_list": {
+									"ui_type": "table",
+									"ui_access_right": "read_write",
+									"type": "array",
+									"maxItems": 11,
+									"minItems": 11,
+									"items": {
+										"type": "integer",
+										"default": 128,
+										"minimum": 0,
+										"maximum": 255
+									}
+								},
+								"auto_c_level_3d_list": {
+									"ui_type": "table",
+									"ui_access_right": "read_write",
+									"type": "array",
+									"maxItems": 11,
+									"minItems": 11,
+									"items": {
+										"type": "integer",
+										"default": 128,
+										"minimum": 0,
+										"maximum": 255
+									}
+								},
+								"auto_y_level_2d_list": {
+									"ui_type": "table",
+									"ui_access_right": "read_write",
+									"type": "array",
+									"maxItems": 11,
+									"minItems": 11,
+									"items": {
+										"type": "integer",
+										"default": 100,
+										"minimum": 0,
+										"maximum": 255
+									}
+								},
+								"auto_c_level_2d_list": {
+									"ui_type": "table",
+									"ui_access_right": "read_write",
+									"type": "array",
+									"maxItems": 11,
+									"minItems": 11,
+									"items": {
+										"type": "integer",
+										"default": 150,
+										"minimum": 0,
+										"maximum": 255
+									}
+								},
+								"auto_fss_y_level_3d_list": {
+									"ui_type": "table",
+									"ui_access_right": "read_write",
+									"type": "array",
+									"maxItems": 11,
+									"minItems": 11,
+									"items": {
+										"type": "integer",
+										"default": 128,
+										"minimum": 0,
+										"maximum": 255
+									}
+								},
+								"manual_y_level_3d": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 128,
+									"minimum": 0,
+									"maximum": 255
+								},
+								"manual_c_level_3d": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 128,
+									"minimum": 0,
+									"maximum": 255
+								},
+								"manual_y_level_2d": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 128,
+									"minimum": 0,
+									"maximum": 255
+								},
+								"manual_c_level_2d": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 128,
+									"minimum": 0,
+									"maximum": 255,
+									"description": "This is a description."
+								},
+								"manual_fss_y_level_3d": {
+									"ui_type": "number",
+									"ui_access_right": "read_write",
+									"type": "integer",
+									"default": 128,
+									"minimum": 0,
+									"maximum": 255
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

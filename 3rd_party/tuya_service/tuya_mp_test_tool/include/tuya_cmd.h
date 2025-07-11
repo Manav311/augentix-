@@ -1,0 +1,48 @@
+#ifndef TUYA_CMD_H
+#define TUYA_CMD_H
+
+/*
+ * AUGENTIX INC. - PROPRIETARY
+ *
+ * tuya_cmd.h - Tuya factory test command list
+ * Copyright (C) 2019-2020 Shihchieh Lin, Augentix Inc. <shihchieh.lin@augentix.com>
+ *
+ * NOTICE: The information contained herein is the property of Augentix Inc.
+ * Copying and distributing of this file, via any medium,
+ * must be licensed by Augentix Inc.
+ *
+ */
+
+typedef enum {
+	TUYATEST_MODE = 0x00,
+	TUYATEST_R_MASTER_FIRMWARE = 0x01,
+	TUYATEST_R_SLAVE_FIRMWARE = 0x02,
+	TUYATEST_W_CFGINFO = 0x03,
+	TUYATEST_R_CFGINFO = 0x04,
+	TUYATEST_W_MASTER_MAC = 0x05,
+	TUYATEST_R_MASTER_MAC = 0x06,
+	TUYATEST_W_SLAVE_MAC = 0x07,
+	TUYATEST_R_SLAVE_MAC = 0x08,
+	TUYATEST_SELF_TEST = 0x09,
+	TUYATEST_BUTTON_TEST = 0x0a,
+	TUYATEST_LED_TEST = 0x0b,
+	TUYATEST_W_BSN = 0x0c,
+	TUYATEST_R_BSN = 0x0d,
+	TUYATEST_W_SN = 0x0e,
+	TUYATEST_R_SN = 0x0f,
+	TUYATEST_MASTER_CAP = 0x10,
+	TUYATEST_SLAVE_CAP = 0x11,
+	TUYATEST_IPERF_TEST = 0x12,
+	TUYATEST_VIDEO_TEST = 0x13,
+	TUYATEST_IRCUT_TEST = 0x14,
+	TUYATEST_SPEAKER_TEST = 0x15,
+	TUYATEST_MIC_TEST = 0x16,
+	TUYATEST_IRLED_TEST = 0x17,
+	TUYATEST_BLACK_TEST = 0X18,
+	TUYATEST_W_COUNTRY_CODE = 0X1C,
+	TUYATEST_R_COUNTRY_CODE = 0X1D,
+	TUYATEST_MOTOR_TEST = 0X1B,
+	TUYATEST_PIR_TEST = 0X25,
+} TuyaTestCmd;
+
+#endif /* TUYA_CMD_H */

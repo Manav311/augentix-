@@ -1,0 +1,331 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_NR_CONF_S",
+	"comments": [
+		"================================",
+		"== Noise reduction parameters ==",
+		"================================",
+		"ALSO SEE: MPI_setNrAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: auto, 2: manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"motion_comp": {
+			"comments": "mc ratio (BASE_DYN) (0~31)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 2,
+			"minimum": 0,
+			"maximum": 31
+		},
+		"trail_suppress": {
+			"comments": "trail suppress strength level (0~16)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 16
+		},
+		"ghost_remove": {
+			"comments": "ghost removes trength level",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"ma_y_strength": {
+			"comments": "max 3d ma luma strength (0~31)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 26,
+			"minimum": 0,
+			"maximum": 31
+		},
+		"mc_y_strength": {
+			"comments": "max 3d mc luma strength (0~31)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 30,
+			"minimum": 0,
+			"maximum": 31
+		},
+		"ma_c_strength": {
+			"comments": "max 3d ma chroma strength (0~31)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 24,
+			"minimum": 0,
+			"maximum": 31
+		},
+		"ratio_3d": {
+			"comments": "strength level (0~4) (0:all 2d, 4:Mostly 3d)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 4,
+			"minimum": 0,
+			"maximum": 4
+		},
+		"mc_y_level_offset": {
+			"comments": "mc luma level offset (-255~255)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": -255,
+			"maximum": 255
+		},
+		"me_frame_fallback_en": {
+			"comments": "enable me frame fallback",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 1
+		},
+		"fss_ratio_min": {
+			"comments": "min threshold of full screen static ratio (0~1024)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 993,
+			"minimum": 0,
+			"maximum": 1024
+		},
+		"fss_ratio_max": {
+			"comments": "max threshold of full screen static ratio (0~1024)",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 1014,
+			"minimum": 0,
+			"maximum": 1024
+		},
+		"lut_type": {
+			"comments": "look-up table type, 0: LUT_TYPE_0, 1: LUT_TYPE_1, 2: LUT_TYPE_2, 3: LUT_TYPE_3",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "string",
+			"title": "AGTX_NR_LUT_TYPE_E",
+			"enum": ["LUT_TYPE_0", "LUT_TYPE_1", "LUT_TYPE_2", "LUT_TYPE_3"],
+			"default": "LUT_TYPE_0"
+		},
+		"auto_y_level_3d_list": {
+			"ini_name": "nr_auto.y_level_3d",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 128,
+				"minimum": 0,
+				"maximum": 255
+			},
+			"defaultItems": [0, 3, 8, 19, 40, 83, 169, 255, 255, 255, 255]
+		},
+		"auto_c_level_3d_list": {
+			"ini_name": "nr_auto.c_level_3d",
+			"comments": "",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 128,
+				"minimum": 0,
+				"maximum": 255
+			},
+			"defaultItems": [0, 3, 8, 19, 40, 83, 169, 255, 255, 255, 255]
+		},
+		"auto_y_level_2d_list": {
+			"ini_name": "nr_auto.y_level_2d",
+			"comments": "",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 100,
+				"minimum": 0,
+				"maximum": 255
+			},
+			"defaultItems": [0, 3, 8, 19, 40, 83, 169, 255, 255, 255, 255]
+		},
+		"auto_c_level_2d_list": {
+			"ini_name": "nr_auto.c_level_2d",
+			"comments": "",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 150,
+				"minimum": 0,
+				"maximum": 255
+			},
+			"defaultItems": [0, 3, 8, 19, 40, 83, 169, 255, 255, 255, 255]
+		},
+		"auto_fss_y_level_3d_list": {
+			"ini_name": "nr_auto.fss_y_level_3d",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"maxItems": 11,
+			"minItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 128,
+				"minimum": 0,
+				"maximum": 255
+			},
+			"defaultItems": [0, 3, 8, 19, 40, 83, 169, 255, 255, 255, 255]
+		},
+		"manual_y_level_3d": {
+			"comments": ["", "Noise reduction 3d luma strength"],
+			"ini_name": "nr_manual.y_level_3d",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"manual_c_level_3d": {
+			"comments": "Noise reduction 3d chroma strength",
+			"ini_name": "nr_manual.c_level_3d",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"manual_y_level_2d": {
+			"comments": "Noise reduction 2d luma strength",
+			"ini_name": "nr_manual.y_level_2d",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"manual_c_level_2d": {
+			"comments": "Noise reduction 2d chroma strength",
+			"ini_name": "nr_manual.c_level_2d",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255,
+			"description": "This is a description."
+		},
+		"manual_fss_y_level_3d": {
+			"comments": "manual 3d noise reduction luma level when max threshold of full screen static ratio",
+			"ini_name": "nr_manual.fss_y_level_3d",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		}
+	}
+}

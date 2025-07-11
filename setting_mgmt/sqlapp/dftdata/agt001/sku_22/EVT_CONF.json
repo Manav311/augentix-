@@ -1,0 +1,483 @@
+{
+  "cmd_id": "AGTX_CMD_EVT_CONF",
+  "json_content": {
+    "event": [
+      {
+        "in_use": true,
+        "always_enabled": false,
+        "name": "LIGHT_SENSOR_IN",
+        "source": "GPIO",
+        "gpio": {
+          "polling_period_usec": 3000000,
+          "init_level": [
+            {
+              "action_args": ""
+            },
+            {
+              "action_args": ""
+            }
+          ],
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": -1,
+                "level_time_sec": 0,
+                "edge": -1,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": -1,
+                "level_time_sec": 0,
+                "edge": 1,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": 0,
+                "level_time_sec": 0,
+                "edge": -2,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            }
+          ]
+        }
+      },
+      {
+        "in_use": false,
+        "always_enabled": false,
+        "name": "PIR_IN",
+        "source": "GPIO",
+        "gpio": {
+          "polling_period_usec": 1000000,
+          "init_level": [
+            {
+              "action_args": ""
+            },
+            {
+              "action_args": ""
+            }
+          ],
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": -1,
+                "level_time_sec": 0,
+                "edge": -1,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": "/system/bin/alarmoutc 11 1 5"
+            },
+            {
+              "rule": {
+                "trigger_type": "LEVEL",
+                "level_value": 0,
+                "level_time_sec": 4,
+                "edge": 0,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": "/system/bin/alarmoutc 11 1 5"
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": 0,
+                "level_time_sec": 0,
+                "edge": -2,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            }
+          ]
+        }
+      },
+      {
+        "in_use": true,
+        "always_enabled": false,
+        "name": "IVA_MD",
+        "source": "SW",
+        "sw": {
+          "socket_path": "IVA_MD",
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "IVA_MD_NEGATIVE"
+              },
+              "action": "PRINT",
+              "action_args": "IVA_MD_NEGATIVE"
+            },
+            {
+              "rule": {
+                "trigger_type": "IVA_MD_POSITIVE"
+              },
+              "action": "EXEC_CMD",
+              "action_args": "/system/bin/alarmoutc 11 1 10"
+            }
+          ]
+        }
+      },
+      {
+        "in_use": true,
+        "always_enabled": false,
+        "name": "IVA_TD",
+        "source": "SW",
+        "sw": {
+          "socket_path": "IVA_TD",
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "IVA_TD_NEGATIVE"
+              },
+              "action": "PRINT",
+              "action_args": "IVA_TD_NEGATIVE"
+            },
+            {
+              "rule": {
+                "trigger_type": "IVA_TD_POSITIVE"
+              },
+              "action": "EXEC_CMD",
+              "action_args": "/system/bin/alarmoutc 11 1 15"
+            }
+          ]
+        }
+      },
+      {
+        "in_use": true,
+        "always_enabled": true,
+        "name": "PUSH_BUTTON_IN",
+        "source": "GPIO",
+        "gpio": {
+          "polling_period_usec": 500000,
+          "init_level": [
+            {
+              "action_args": ""
+            },
+            {
+              "action_args": ""
+            }
+          ],
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "LEVEL",
+                "level_value": 0,
+                "level_time_sec": 5,
+                "edge": 0,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": "touch /usrdata/reset_file;reboot"
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": -1,
+                "level_time_sec": 0,
+                "edge": 1,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 2
+              },
+              "action": "EXEC_CMD",
+              "action_args": "sysupd"
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": 0,
+                "level_time_sec": 0,
+                "edge": -2,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            }
+          ]
+        }
+      },
+      {
+        "in_use": false,
+        "always_enabled": false,
+        "name": "SD_CARD_IN",
+        "source": "GPIO",
+        "gpio": {
+          "polling_period_usec": 2000000,
+          "init_level": [
+            {
+              "action_args": "devmem 0x800000E6 8 0x09"
+            },
+            {
+              "action_args": ""
+            }
+          ],
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": -1,
+                "level_time_sec": 0,
+                "edge": -1,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": "devmem 0x800000E6 8 0x09"
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": -1,
+                "level_time_sec": 0,
+                "edge": 1,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": "devmem 0x800000E6 8 0x05"
+            },
+            {
+              "rule": {
+                "trigger_type": "EDGE",
+                "level_value": 0,
+                "level_time_sec": 0,
+                "edge": -2,
+                "edge_time_sec_start": 0,
+                "edge_time_sec_end": 0
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            }
+          ]
+        }
+      },
+      {
+        "in_use": false,
+        "always_enabled": false,
+        "name": "LIGHT_SENSOR_ADC",
+        "source": "ADC",
+        "adc": {
+          "polling_period_usec": 3000000,
+          "chn": 1,
+          "init_hys": [
+            {
+              "action_args": ""
+            },
+            {
+              "action_args": ""
+            }
+          ],
+          "event": [
+            {
+              "rule": {
+                "trigger_type": "HYS",
+                "hys_th": 400
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            },
+            {
+              "rule": {
+                "trigger_type": "HYS",
+                "hys_th": 750
+              },
+              "action": "EXEC_CMD",
+              "action_args": ""
+            }
+          ]
+        }
+      },
+      {
+        "in_use": false,
+        "always_enabled": false,
+        "name": "LED_INFORM",
+        "source": "LED",
+        "led": {
+          "polling_period_usec": 1000000,
+          "slow_flash_period_usec": 1000000,
+          "fast_flash_period_usec": 250000,
+          "init_light_on_pin_num": -1,
+          "init_light_on_value": 1,
+          "trigger_type_level": 1,
+          "event": [
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Wifi_Pairing"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED1_OUT PTRN_FLASH 1000000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Wifi_Connecting"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED1_OUT PTRN_FLASH 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Cloud_Connecting"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED0_OUT PTRN_FLASH 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Connecting_Fail"
+              },
+              "action": "PAR_STRING",
+              "action_args": "2 LED0_OUT LED1_OUT PTRN_FLASH_ALT 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Wifi_Connected"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED1_OUT PTRN_OFF 0"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Motion_Detected"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED0_OUT PTRN_ON 0"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Live_view"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED0_OUT PTRN_ON 0"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Low_Signal"
+              },
+              "action": "PAR_STRING",
+              "action_args": "2 LED0_OUT LED1_OUT PTRN_FLASH 1000000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Disconnected"
+              },
+              "action": "PAR_STRING",
+              "action_args": "2 LED0_OUT LED1_OUT PTRN_FLASH 1000000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "OTA"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED0_OUT PTRN_FLASH 1000000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Critical_Error"
+              },
+              "action": "PAR_STRING",
+              "action_args": "2 LED0_OUT LED1_OUT PTRN_FLASH 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Card_Upgrade"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED0_OUT PTRN_FLASH 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "DEBUG_MODE"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED1_OUT PTRN_ON 0"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "DEBUG_INFO_DUMP"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED0_OUT PTRN_FLASH 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Reset_INFO_Slow"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED1_OUT PTRN_ON 0"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "Reset_INFO_Fast"
+              },
+              "action": "PAR_STRING",
+              "action_args": "1 LED1_OUT PTRN_FLASH 250000"
+            },
+            {
+              "in_use": true,
+              "rule": {
+                "trigger_type": "LED_OFF"
+              },
+              "action": "PAR_STRING",
+              "action_args": "2 LED0_OUT LED1_OUT PTRN_OFF 0"
+            }
+          ]
+        }
+      },
+      {
+        "in_use": false,
+        "always_enabled": false,
+        "name": "LIGHT_SENSOR_MPI",
+        "source": "MPI",
+        "mpi": {
+          "event": [
+            {
+              "action": "EXEC_CMD",
+              "action_args": ""
+            },
+            {
+              "action": "EXEC_CMD",
+              "action_args": ""
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

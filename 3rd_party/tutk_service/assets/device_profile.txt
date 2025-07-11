@@ -1,0 +1,62 @@
+{
+  "nebulaVersion": "1.0",
+  "type": "camera",  
+  "name": "Augentix Security Camera",
+  "model": "camera",
+  "fwVer": "V1.0.0.1",
+  "manufacturer": "Suvilo",
+  "functionSets": [
+    "IOTCAV:audioStreaming",
+    "IOTCAV:videoStreaming",
+    "IOTCAV:speaker",
+    "IOTCAV:playback"
+  ],
+  "functions": [
+    {
+      "func": "IOTCAV:startVideo",
+      "args": {
+        "value": "Boolean"
+      }
+    },
+    {
+      "func": "IOTCAV:getVideoQuality",
+      "return": {
+      "value": "Int"
+      }
+    },
+    {
+      "func": "IOTCAV:setVideoQuality",
+      "return": {
+      "value": "Int"
+      }
+    },
+    {
+      "func": "IOTCAV:startAudio",
+      "args": {
+        "value": "Boolean"
+      }
+    },
+    {
+      "func": "IOTCAV:playbackControl",
+      "args": {
+        "ctrl": "Int",
+        "fileName": "String"
+      }
+    },
+    {
+      "func": "IOTCAV:startSpeaker",
+      "args": {
+        "value": "Boolean"
+      }
+    },
+    {
+      "func": "IOTCAV:getSpeakerFormat",
+      "return": {
+        "samplerate": "Int",
+        "channels": "Int",
+        "bitrate": "Int",
+        "codec": "String"
+      }
+    }
+  ]
+}

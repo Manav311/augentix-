@@ -1,0 +1,144 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",	
+	"type": "object",
+	"title": "AGTX_PRODUCT_OPTION_S",
+	"properties": {
+		"product_video_type": {		
+        	"type": "string",
+        	"title": "AGTX_PRODUCT_VIDEO_TYPE_E",
+        	"enum": ["NORMAL", "STITCH", "BCD"]        		
+	    },
+		"video_option": {
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "object",
+				"title": "AGTX_VIDEO_OPTION_S",
+				"properties": {
+					"res": {
+						"type": "array",
+						"minItems": 8,
+						"maxItems": 8,
+						"items": {
+							"type": "object",
+							"title": "AGTX_RES_OPTION_S",
+							"properties": {
+								"width": {
+									"type": "integer"
+								},
+								"height": {
+									"type": "integer"
+								},
+								"max_frame_rate": {
+									"type": "array",
+									"minItems": 8,
+									"maxItems": 8,
+									"items": {
+										"type": "number"
+									}
+								},
+								"frame_rate_list": {
+									"type": "array",
+									"minItems": 60,
+									"maxItems": 60,
+									"items": {
+										"type": "number"
+									}
+								}
+							}
+						}
+					},
+					"venc": {
+						"type": "array",
+						"minItems": 3,
+						"maxItems": 3,
+						"items": {
+							"type": "object",
+							"title": "AGTX_VENC_OPTION_S",
+							"properties": {
+								"codec": {
+									"type": "string",
+									"title": "AGTX_VENC_TYPE_E",
+									"enum": ["H264", "H265", "MJPEG"]
+								},
+								"profile": {
+									"type": "array",
+									"minItems": 1,
+									"maxItems": 3,
+									"items": {
+										"type": "string",
+										"title": "AGTX_PRFL_E",
+										"enum": ["BASELINE", "MAIN", "HIGH"]
+									}
+								},
+								"rc_mode": {
+									"type": "array",
+									"minItems": 1,
+									"maxItems": 4,
+									"items": {
+										"type": "string",
+										"title": "AGTX_RC_MODE_E",
+										"enum": ["VBR", "CBR", "SBR", "CQP"]
+									}
+								},
+								"min_bit_rate": {
+									"type": "integer"
+								},
+								"max_bit_rate": {
+									"type": "integer"
+								},
+								"cbr_param": {
+									"type": "object",
+									"title": "AGTX_RC_CBR_PARAM_S",
+									"properties": {
+										"min_q_factor": {
+											"type": "number"
+										},
+										"max_q_factor": {
+											"type": "number"
+										}
+									}
+								},
+								"vbr_param": {
+									"type": "object",
+									"title": "AGTX_RC_VBR_PARAM_S",
+									"properties": {
+										"min_quality_range": {
+											"type": "number"
+										},
+										"max_quality_range": {
+											"type": "number"
+										}
+									}
+								},
+								"cqp_param": {
+									"type": "object",
+									"title": "AGTX_RC_CQP_PARAM_S",
+									"properties": {
+										"min_qp": {
+											"type": "integer"
+										},
+										"max_qp": {
+											"type": "integer"
+										},
+										"q_factor": {
+											"type": "integer"
+										}
+									}
+								},
+								"min_gop_size": {
+									"type": "integer"
+								},
+								"max_gop_size": {
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

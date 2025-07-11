@@ -1,0 +1,9 @@
+{
+  "cmd_id": "AGTX_CMD_AWB_PREF",
+  "json_content": {
+    "mode": 1,
+    "color_temp": 5000,
+    "r_gain": 50,
+    "b_gain": 50
+  }
+}

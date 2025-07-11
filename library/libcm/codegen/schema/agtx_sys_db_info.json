@@ -1,0 +1,58 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_SYS_DB_INFO_S",
+	"properties": {
+		"db_ver": {
+			"type": "string",
+			"maxLength": 128
+		},
+		"led_info": {
+			"type": "object",
+			"title": "AGTX_LED_INFO_S",
+			"properties": {
+				"gpio_pin0": {
+					"type": "integer"
+				},
+				"gpio_pin1": {
+					"type": "integer"
+				},
+				"inverse_pin0": {
+					"type": "integer"
+				},
+				"inverse_pin1": {
+					"type": "integer"
+				},
+				"period_msec": {
+					"type": "integer"
+				},
+				"duty_cycle": {
+					"type": "integer"
+				},
+				"interleave": {
+					"type": "integer"
+				}
+			}
+		},
+		"fw_setting_list": {
+			"type": "array",
+			"maxItems": 128,
+			"minItems": 128,
+			"items": {
+				"type": "object",
+                                "title": "AGTX_FW_SETTING_PARAM_S",
+				"properties": {
+					"name": {
+						"type": "string",
+						"maxLength": 64
+					},
+					"update_rule": {
+						"type": "string",
+						"title": "AGTX_UPDATE_RULE_E",
+						"enum": ["NONE", "OVERWRITE"]
+					}
+				}
+			}
+		}
+	}
+}

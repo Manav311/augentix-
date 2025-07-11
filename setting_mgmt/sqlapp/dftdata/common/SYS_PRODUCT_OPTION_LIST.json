@@ -1,0 +1,10 @@
+{
+	"cmd_id": "AGTX_CMD_PRODUCT_OPTION_LIST",
+	"json_content": {
+		"option": [
+			"AGTX_CMD_RES_OPTION",
+			"AGTX_CMD_VENC_OPTION",
+			"AGTX_CMD_SYS_FEATURE_OPTION"
+		]
+	}
+}

@@ -1,0 +1,377 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_AE_CONF_S",
+	"comments": [
+		"==============================",
+		"== Auto exposure parameters ==",
+		"==============================",
+		"ALSO SEE: MPI_setAeAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"brightness": {
+			"comments": "--- Target image brightness ---",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 7000,
+			"minimum": 0,
+			"maximum": 16383
+		},
+		"exp_strategy": {
+			"comments": [
+				"",
+				"--- AE strategy parameter---"
+			],
+			"ini_name": "strategy.mode",
+			"ui_type": "enum",
+			"type": "string",
+			"title": "AGTX_EXP_STRATEGY",
+			"enum": ["NORMAL", "HI_LIGHT_SUPPRES"],
+			"default": "NORMAL"
+		},
+		"exp_strength": {
+			"ini_name": "strategy.strength",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"roi_luma_weight": {
+			"comments": [
+				"",
+				"--- Weight of ROI ---"
+			],
+			"ini_name": "roi.luma_weight",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"roi_awb_weight": {
+			"ini_name": "roi.awb_weight",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 1,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"roi_zone_lum_avg_weight": {
+			"ini_name": "roi.zone_lum_avg_weight",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"max_sys_gain": {
+			"comments": [
+				"",
+				"--- Sensor gain range, isp gain range ---",
+				"sensor_gain_range : [32~15376], isp_gain_range : [32~3200]"
+			],
+			"ini_name": "sys_gain_range.max",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 320,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"min_sys_gain": {
+			"ini_name": "sys_gain_range.min",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 32,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"max_sensor_gain": {
+			"ini_name": "sensor_gain_range.max",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 320,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"min_sensor_gain": {
+			"ini_name": "sensor_gain_range.min",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 32,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"max_isp_gain": {
+			"ini_name": "isp_gain_range.max",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 32,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"min_isp_gain": {
+			"ini_name": "isp_gain_range.min",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 32,
+			"minimum": 32,
+			"maximum": 4294967295
+		},
+		"fps_mode": {
+			"comments": [
+				"",
+				"--- Operation mode, target frame rate, system gain threshold ---"
+			],
+			"ui_type": "enum",
+			"type": "string",
+			"title": "AGTX_FPS_MODE",
+			"enum": ["VARIABLE", "FIXED"],
+			"default": "FIXED"
+		},
+		"frame_rate": {
+			"ui_type": "number",
+			"type": "number",
+			"default": 15,
+			"minimum": 0.1,
+			"maximum": 255
+		},
+		"slow_frame_rate": {
+			"ui_type": "number",
+			"type": "number",
+			"default": 15,
+			"minimum": 0.1,
+			"maximum": 255
+		},
+		"gain_thr_up": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 96,
+			"minimum": 0,
+			"maximum": 4294967295
+		},
+		"gain_thr_down": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 288,
+			"minimum": 0,
+			"maximum": 4294967295
+		},
+		"speed": {
+			"comments": [
+				"",
+				"--- Speed, tolerance, black delay frame, white delay frame ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"black_speed_bias": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 128,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"tolerance": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 1280,
+			"minimum": 0,
+			"maximum": 16383
+		},
+		"white_delay_frame": {
+			"ini_name": "delay.white_delay_frame",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"black_delay_frame": {
+			"ini_name": "delay.black_delay_frame",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 2,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"interval": {
+			"comments": [
+				"",
+				"--- Frame interval between two executions ---"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 255
+		},
+		"anti_flicker": {
+			"comments": [
+				"",
+				"--- Anti-flicker, enable, frequency, mode ---"
+			],
+			"type": "object",
+			"title": "AGTX_DIP_AE_ANTI_FLICKER_CONF_S",
+			"properties": {
+				"enable": {
+					"ui_type": "boolean",
+					"type": "boolean",
+					"default": false
+				},
+				"frequency": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 60,
+					"minimum": 1,
+					"maximum": 255
+				},
+				"luma_delta": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 2000,
+					"minimum": 0,
+					"maximum": 16383
+				}
+			}
+		},
+		"manual": {
+			"comments": [
+				"",
+				"--- Manual mode attribute ---"
+			],
+			"type": "object",
+			"title": "AGTX_DIP_AE_MANUAL_CONF_S",
+			"properties": {
+				"enabled": {
+					"ini_name": "is_valid",
+					"ui_type": "boolean",
+					"type": "boolean",
+					"default": false
+				},
+				"flag": {
+					"comments": "b0: exp_value, b1: inttime, b2: sensor_gain, b3:isp_gain, b4: sys_gain",
+					"ini_name": "enable.val",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 31
+				},
+				"exp_value": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 32000,
+					"minimum": 32,
+					"maximum": 2147483647
+				},
+				"inttime": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 1000,
+					"minimum": 0,
+					"maximum": 10000000
+				},
+				"sensor_gain": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 32,
+					"minimum": 32,
+					"maximum": 4294967295
+				},
+				"isp_gain": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 32,
+					"minimum": 32,
+					"maximum": 4294967295
+				},
+				"sys_gain": {
+					"ui_type": "number",
+					"type": "integer",
+					"default": 32,
+					"minimum": 32,
+					"maximum": 4294967295
+				}
+			}
+		},
+		"zone_weight": {
+			"comments": [
+				"",
+				"--- Weight of zone luma average ---"
+			],
+			"type": "object",
+			"title": "AGTX_DIP_AE_ZONE_WEIGHT_TABLE_CONF_S",
+			"properties": {
+				"mode": {
+					"ui_type": "enum",
+					"type": "string",
+					"title": "AGTX_AE_ZONE_WEIGHT_TABLE_MODE",
+					"enum": ["AVG","CENTRAL","SPOT","MANUAL"],
+					"default": "AVG"
+				},
+				"manual_table": {
+					"subcomments": {
+						"8": "     ",
+						"16": "\t  ",
+						"24": "\n  ",
+						"32": "",
+						"40": "",
+						"48": "",
+						"56": ""
+					},
+					"ui_type": "matrix",
+					"type": "array",
+					"minItems": 64,
+					"maxItems": 64,
+					"items": {
+						"type": "integer",
+						"default": 1,
+						"minimum": 0,
+						"maximum": 255
+					},
+					"defaultItems": [
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1,
+						1, 1, 1, 1, 1, 1, 1, 1
+					]
+				}
+			}
+		},
+		"max_inttime": {
+			"comments": [
+				"",
+				"--- Sensor integration time range ---"
+			],
+			"ini_name": "inttime_range.max",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 10000000,
+			"minimum": 0,
+			"maximum": 10000000
+		},
+		"min_inttime": {
+			"ini_name": "inttime_range.min",
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 10000000
+		}
+	}
+}

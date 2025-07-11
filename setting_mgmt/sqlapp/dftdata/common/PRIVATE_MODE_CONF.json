@@ -1,0 +1,6 @@
+{
+  "cmd_id": "AGTX_CMD_PRIVATE_MODE_CONF",
+  "json_content": {
+    "enabled": 0,           
+  }
+}

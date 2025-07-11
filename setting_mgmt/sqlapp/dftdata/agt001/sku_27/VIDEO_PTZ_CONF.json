@@ -1,0 +1,28 @@
+{
+  "cmd_id": "AGTX_CMD_VIDEO_PTZ_CONF",
+  "json_content": {
+    "enabled": 0,
+    "mode": "MANUAL",
+    "win_size_limit_min": 1,
+    "win_size_limit_max": 1023,
+    "roi_width": 256,
+    "roi_height": 256,
+    "win_speed_x": 32767,
+    "win_speed_y": 32767,
+    "zoom_speed_height": 0,
+    "zoom_speed_width": 0,
+    "speed_x": 4,
+    "speed_y": 4,
+    "win_pos_x": 32767,
+    "win_pos_y": 32767,
+    "zoom_level": 1024,
+    "zoom_change": 1024,
+    "subwindow_disp": {
+    "win_num": 1,
+    "win": [{
+      "chn_idx": 1,
+      "win_idx": 0
+    }]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cmd_id": "AGTX_CMD_SIREN_CONF",
+  "json_content": {
+    "enabled": 0,    
+    "priority": 0,
+    "hold_time": 5,
+    "volume": 90,
+    "duration": 60,
+  }
+}

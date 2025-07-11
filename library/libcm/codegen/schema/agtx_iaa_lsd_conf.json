@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IAA_LSD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"audio_dev_idx": {
+			"type": "integer"
+		},
+		"volume": {
+			"type": "integer"
+		},
+		"duration": {
+			"type": "number"
+		},
+		"suppression": {
+			"type": "number"
+		}
+	}
+}

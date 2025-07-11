@@ -1,0 +1,30 @@
+{
+  "cmd_id": "AGTX_CMD_PFM_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "sensitivity": 50,
+    "endurance": 50,
+    "register_scene": 0,
+    "roi": {
+      "start_x": 40,
+      "start_y": 60,
+      "end_x": 60,
+      "end_y": 100
+    },
+    "regis_to_feeding_interval": 300,
+    "time_num": 0,
+    "schedule": [
+      25200,
+      68400,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

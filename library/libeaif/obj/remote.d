@@ -1,0 +1,23 @@
+/home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/obj/remote.o: \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/src/remote.c \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/src/app.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_iva.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_index.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_base_types.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_limits.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_enc.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/include/eaif.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_base_types.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_index.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/src/eaif_algo.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/src/cm_iva_eaif_resp.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/src/eaif_utils.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_dev.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/mpp/include/mpi_errno.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libinf/include/inf_classifier.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libinf/include/inf_types.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libinf/include/inf_model.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libinf/include/inf_face.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libinf/include/inf_detect.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libinf/include/inf_image.h \
+ /home/manav/project/r3.20.0-rc10/SDK_release_3200rc10/application/library/libeaif/src/eaif_log.h

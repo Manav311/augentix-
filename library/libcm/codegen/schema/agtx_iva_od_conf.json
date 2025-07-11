@@ -1,0 +1,67 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_OD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"version": {
+			"type": "string",
+			"title": "AGTX_IVA_OD_VERSION_E",
+			"enum": ["OD_V4", "OD_V5"]
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"od_qual": {
+			"type": "integer"
+		},
+		"od_track_refine": {
+			"type": "integer"
+		},
+		"od_size_th": {
+			"type": "integer"
+		},
+		"od_sen": {
+			"type": "integer"
+		},
+		"od_conf_th": {
+			"type": "integer"
+		},
+		"od_iou_th": {
+			"type": "integer"
+		},
+		"od_snapshot_w": {
+			"type": "integer"
+		},
+		"od_snapshot_h": {
+			"type": "integer"
+		},
+		"od_snapshot_type": {
+			"type": "integer"
+		},
+		"en_shake_det": {
+			"type": "boolean"
+		},
+		"en_crop_outside_obj": {
+			"type": "boolean"
+		},
+		"en_stop_det": {
+			"type": "boolean"
+		},
+		"en_gmv_det": {
+			"type": "boolean"
+		},
+		"en_motor": {
+			"type": "boolean"
+		}
+	}
+}
+
+
+
+
+
+
+
