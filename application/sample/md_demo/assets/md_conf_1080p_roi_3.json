@@ -1,0 +1,41 @@
+{
+	"roi":[
+		{
+			"start":[0, 0],
+			"end":[960, 540],
+			"ratio":30
+		},
+		{
+			"start":[960, 0],
+			"end":[1919, 540],
+			"ratio":30
+		},
+		{
+			"start":[0, 540],
+			"end":[960, 1079],
+			"ratio":30
+		},
+		{
+			"start":[960, 540],
+			"end":[1919, 1079],
+			"ratio":30
+		}
+	],
+	"shd": {
+		"en": 0,
+		"sensitivity": 75,
+		"quality": 75,
+		"obj_life_th": 32,
+		"longterm_life_th": 10,
+		"instance_duration": 35,
+		"shaking_update_duration": 30,
+		"longterm_dec_period": 1800,
+		"longterm_num": 0,
+		"longterm_list": [
+			{
+				"start":[0, 0],
+				"end":[100, 100]
+			}
+		]
+	}
+}

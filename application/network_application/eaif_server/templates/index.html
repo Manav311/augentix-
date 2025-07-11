@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport" >
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" >
+	<meta http-equiv="Pragma" content="no-cache" >
+	<meta http-equiv="Expires" content="0" >
+	<!-- <link rel="stylesheet" href="/static/bootstrap.min.css"> -->
+	<!-- https://getbootstrap.com/docs/3.4/getting-started/ -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+	<title>Augentix</title>
+	<style>
+	.center {
+ 	 	margin-left: auto; 
+  		margin-right: auto;
+  		text-align: center;
+	}
+	.right {
+ 	 	margin-left: auto; 
+  		margin-right: auto;
+  		text-align: right;
+	}
+	.border {
+		border:1px solid black;
+	}
+	.lead {
+		font-family:Georgia;
+		font-size:1.3rem;
+	}
+	.btn {
+		border-radius: 5px;
+		padding: 1px;
+		font-family:Georgia;
+		font-size:1.5rem;
+		height: 40px;
+		border-color: #ffffff rgba(255, 255, 255, 0.8);
+	}
+	.btn:hover {
+		background:#1890dd;
+	}
+	.btn-primary {
+		color:#ffffff;
+		background:#24a0ed;
+	}
+	.btn-option {
+		background:#7f7f7f;
+	}
+	.btn-block {
+ 	 	margin-left: auto; 
+  		margin-right: auto;
+		max-width: 500px;
+		width: 100%;
+	}
+	.color-primary {
+		color: #24a0ed;
+	}
+	.bg-secondary {
+		background: #efefef;
+	}
+	.dropdown:hover .dropbtn {
+	  background-color: red;
+	}
+	.dropdown-content {
+	  position: relative;
+	}
+	.dropdown-content button {
+	  float: none;
+	  display: block;
+	}
+	.dropdown-content a:hover {
+	  background-color: #ddd;
+	}
+	.form.error {
+		background-color: #7f0000;
+	}
+	.table:hover {
+	}
+	.table-font {
+		font-size: 1.0rem;
+	}
+	.input {
+		background-color: #efefef;
+	}
+	.input-digit {
+		width: 40px;
+	}
+	.img-blk {
+		max-width: 500px;
+		max-height: 500px;
+	}
+	</style>
+</head>
+<body>
+		<div>
+			<div style="text-align:center; color:gray; font-size:2rem">
+					INFERENCE SERVER
+			</div>
+			<div class="center">
+				<button class="btn btn-primary btn-block" type="button" onclick="get_requests('/update'); return false;">MODEL-UPDATE</button>
+			</div>
+			<div class="center">
+				<button class="btn btn-primary btn-block" type="button" onclick="get_requests('/avail'); return false;">AVAIL-MODELS</button>
+			</div>
+			<div class="center">
+				<button class="btn btn-primary btn-block" type="button" onclick="get_requests('/model_states'); return false;">MODEL-INFO</button>
+			</div>
+			<div class="center">
+				<button class="btn btn-primary btn-block" type="button" onclick="get_requests('/clear_model_states'); return false;">CLEAN-INFO</button>
+			</div>
+			<div class="center dropdown">
+				<button  id="inferenceDropDownBtn" class="btn btn-primary btn-block" onclick="toggleInferenceUtils(); return false;">INFERNCE-UTILS &#8711;</button>
+				<div id="inferenceDropDownList" class="dropdown-content" style="display:none">
+					<form id="inferenceRequestForm" enctype="multipart/form-data" target="frame">
+						<button class="btn btn-primary btn-block btn-option" onclick="submitInferRequest(); return false;">SUBMIT</button>
+						<table class="center btn btn-primary btn-block btn-option table-font">
+							<tr><th>Api :<th colspan="4"><input type="text" id="reqform-api" name="api" placeholder="yolov5" value="yolov5">
+							<tr><th>Time :<th colspan="4"><input type="text" id="reqform-time" name="time" placeholder="Time value" value="0000">
+							<tr><th>Format :<th colspan="4"><input type="text" id="reqform-format" name="format" placeholder="Data format" value="jpg">
+							<tr><th>Meta :<th colspan="3"><input type="text" id="reqform-meta" name="meta" placeholder="Meta Data json string" value='{"od":[]}'><th><button class="btn btn-primary btn-block btn-option table-font" onclick="setBox(); return false;">FullBox</button>
+							<tr><th>Shape :<td><input name="reqform-shape" class="input-digit" placeholder="H" value="1">
+										   <td><input name="reqform-shape" class="input-digit" placeholder="W" value="1">
+											<td><input name="reqform-shape" class="input-digit" placeholder="C" value"1">
+	 						<tr><th>Image :<td colspan="2"><input type="file" id="reqform-image" placeholder="Image file" onchange="readURL(this, 'img-req', 'reqform-shape', 'canvas-req'); return false;">
+	 							<td><button class="btn btn-primary btn-block btn-option table-font" onclick="updateSize('reqform-shape','img-req'); return false;">Update</button>
+						</table>
+					</form>
+					<img class="center img-blk" id="img-req" src="#" alt="your image" style="display:none">
+					<canvas class="center img-blk" id="canvas-req" src="#" alt="browser does not support canvas" style="display:none">
+				</div>
+			</div>
+			<div class="center dropdown">
+				<button  id="faceDropDownBtn" class="btn btn-primary btn-block" onclick="toggleFaceUtils()">FACERECO-UTILS &#8711;</button>
+				<div id="faceDropDownList" class="dropdown-content" style="display:none">
+					<button class="btn btn-primary btn-block btn-option" type="button" onclick="get_requests('/facereco/save'); return false;">SAVE</button>
+					<button class="btn btn-primary btn-block btn-option" type="button" onclick="get_requests('/facereco/load'); return false;">LOAD</button>
+					<button class="btn btn-primary btn-block btn-option" type="button" onclick="get_requests('/facereco/query'); return false;">QUERY</button>
+					<form id="faceRegisterForm" enctype="multipart/form-data" target="frame">
+						<button class="btn btn-primary btn-block btn-option" onclick="submitRegisterFace()">REGISTER</button>
+						<table class="center btn btn-primary btn-block btn-option table-font">
+							<tr><th>Name :<th colspan="3"><input type="text" id="form-name" name="name" placeholder="Name value">
+							<tr><th>Time :<th colspan="3"><input type="text" id="form-time" name="time" placeholder="Time value" value="0000">
+							<tr><th>Format :<th colspan="3"><input type="text" id="form-format" name="format" placeholder="Data format" value="jpg">
+							<tr><th>Meta :<th colspan="3"><input type="text" id="form-meta" name="meta" placeholder='Meta Value' value='{"od":[]}'><th>
+							<tr><th>Shape :<td><input name="form-shape" class="input-digit" placeholder="H" value="1">
+										   <td><input name="form-shape" class="input-digit" placeholder="W" value="1">
+											<td><input name="form-shape" class="input-digit" placeholder="C" value="1">
+	 						<tr><th>Image :<td colspan="2"><input type="file" id="form-image" placeholder="Image file" onchange="readURL(this, 'img-face', 'form-shape', ''); return false;">
+	 							<td><button class="btn btn-primary btn-block btn-option table-font" onclick="updateSize('form-shape','img-face'); return false;">Update</button>
+						</table>
+					</form>
+					<img class="center img-blk" id="img-face" src="#" alt="your image" style="display:none">
+				</div>
+			</div>
+			<div class="center" style="height:0.5rem"></div>
+			<div class="center" style="text-align:center">
+				<div class="bg-secondary text-white center" style="max-width: 18rem;">
+				  <div class="lead" style="color:gray">MESSAGE</div>
+				  <div id="message-title" class="color-primary"></div>
+				  <div id="message-content" class="color-primary" style="font-size: 1.3rem"></div>
+				</div>
+			</div>
+	</div>
+	<iframe name="frame" style="display:none"></iframe>
+</body>
+
+<script>
+
+function docGetId(name) {
+	return document.getElementById(name);
+}
+
+function docGetName(name) {
+	return document.getElementsByName(name);
+}
+
+var form_face = {
+	"name": docGetId("form-name"),
+	"time": docGetId("form-time"),
+	"format": docGetId("form-format"),
+	"meta": docGetId("form-meta"),
+	"shape" : docGetName("form-shape"),
+	"image" : docGetId("form-image"),
+	"form" : docGetId("faceRegisterForm"),
+	"req_img" : undefined,
+	"req_canvas" : undefined
+};
+
+var form_req = {
+	"api": docGetId("reqform-api"),
+	"time": docGetId("reqform-time"),
+	"format": docGetId("reqform-format"),
+	"meta": docGetId("reqform-meta"),
+	"shape" : docGetName("reqform-shape"),
+	"image" : docGetId("reqform-image"),
+	"form" : docGetId("inferenceRequestForm"),
+	"req_img" : docGetId("img-req"),
+	"req_canvas" : docGetId("canvas-req")
+};
+
+var content = document.getElementById("message-content");
+var title = document.getElementById("message-title");
+var facelist = document.getElementById("faceDropDownList");
+var faceBtn = document.getElementById("faceDropDownBtn");
+var inferReqlist = document.getElementById("inferenceDropDownList");
+var inferReqBtn = document.getElementById("inferenceDropDownBtn");
+
+// var img_req = document.getElementById("img-req");
+// Testing function
+function drawRect() {
+
+	var img_blk = docGetId("img-req");
+	var canvas_blk = docGetId("canvas-req");
+	img_blk.style.display = "none";
+	var ctx = canvas_blk.getContext('2d');
+	canvas_blk.width = img_blk.width;
+	canvas_blk.height = img_blk.height;
+	ctx.width = img_blk.width;
+	ctx.height = img_blk.height;
+	ctx.drawImage(img_blk, 0, 0);
+	canvas_blk.style.display = "block";
+
+	var img_w = img_blk.width;
+	var img_h = img_blk.height;
+	var can_w = canvas_blk.width;
+	var can_h = canvas_blk.height;
+
+	var rect = [100,100,800,800];
+	ctx.beginPath();
+	ctx.lineWidth="10";
+	ctx.strokeStyle = "rgb(0,255,0)";
+	ctx.rect(
+		rect[0],
+		rect[1],
+		rect[2],
+		rect[3],
+		);
+	ctx.stroke();
+
+	ctx.font = "bold 50px Comic Sans MS";
+	ctx.fillStyle = "rgb(0,255,0)";
+	var str = "Human " + "0.9232"
+	ctx.fillStyle = "rgb(0,0,0)";
+	ctx.fillText(str, rect[0]-5, rect[1]-5);
+	ctx.fillStyle = "rgb(0,255,0)";
+	ctx.fillText(str, rect[0], rect[1]-10);
+
+}
+
+function setBox() {
+	var img_blk = form_req.req_img;
+	var json_obj = {
+		"od":[
+			{"obj":{
+				"idx":0,
+				"rect":[0,0,img_blk.naturalWidth-1,img_blk.naturalHeight-1]
+			}}
+		]
+	};
+	form_req.meta.value = JSON.stringify(json_obj);
+}
+
+var POS_TOP = 1
+var POS_DOWN = 2
+
+function drawRectByObj(form, obj_list) {
+	var img_blk = form.req_img;
+	var canvas_blk = form.req_canvas;
+	if (img_blk == undefined || canvas_blk == undefined)
+		return;
+	img_blk.style.display = "none";
+	var ctx = canvas_blk.getContext('2d');
+	canvas_blk.width = img_blk.width;
+	canvas_blk.height = img_blk.height;
+	ctx.width = img_blk.width;
+	ctx.height = img_blk.height;
+	ctx.drawImage(img_blk, 0, 0);
+	canvas_blk.style.display = "block";
+
+	var obj_list_req = JSON.parse(form.meta.value);
+
+	for (var i = 0; i < obj_list.pred_num; i++) {
+		var pred = obj_list.predictions[i];
+		var rect = pred.rect;
+		var pos = POS_TOP;
+		var pos_y = 0;
+		if (rect == undefined) {
+			pos = POS_DOWN;
+			if (obj_list_req) {
+				var od = obj_list_req.od[i];
+				if (od) rect = od.obj.rect;
+				else return;
+ 			} else {
+				return;
+			}
+		}
+		var offset = ctx.height / 1080 * 10;
+	    ctx.beginPath();
+		ctx.lineWidth=offset.toString();
+		ctx.strokeStyle = "rgb(0,255,0)";
+		ctx.rect(
+			rect[0],
+			rect[1],
+			rect[2]-rect[0]+1,
+			rect[3]-rect[1]+1,
+			);
+		ctx.stroke();
+		ctx.font = "bold " + (ctx.height / 25).toString() + "px Comic Sans MS";
+		var str = pred.label[0] + " " + pred.prob[0];
+		pos_y = (pos == POS_TOP) ? rect[1] : rect[3];
+		ctx.fillStyle = "rgb(0,0,0)";
+		ctx.fillText(str, rect[0]-offset/2, pos_y-offset/2);
+		ctx.fillStyle = "rgb(0,255,0)";
+		ctx.fillText(str, rect[0], pos_y-offset);
+	}
+}
+
+function updateSize(shape_name, imgid) {
+	var img_blk = docGetId(imgid);
+	var shape = docGetName(shape_name);
+	shape[0].value = img_blk.naturalHeight;
+	shape[1].value = img_blk.naturalWidth;
+	shape[2].value = "3";
+	//drawRect();
+}
+
+function readURL(input, ele, shape_name, canvasid) {
+	var img_blk = document.getElementById(ele);
+	var canvas_blk = docGetId(canvasid);
+	var shape = docGetName(shape_name);
+	if (canvas_blk) {
+		canvas_blk.style.display = "none";
+	}
+	if (input.files && input.files[0]) {
+		img_blk.style.display = "block";
+		var reader = new FileReader();
+		reader.onloadend = function (e) {
+			img_blk.src = reader.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		img_blk.style.display = "none";
+	}
+}
+
+function toggleInferenceUtils() {
+  if (inferReqlist.style.display === "none") {
+    inferReqlist.style.display = "block";
+    inferReqBtn.innerHTML = "INFERENCE-UTILS V";
+  } else {
+    inferReqlist.style.display = "none";
+    inferReqBtn.innerHTML = "INFERENCE-UTILS &#8711";
+  }
+}
+
+function toggleFaceUtils() {
+  if (facelist.style.display === "none") {
+    facelist.style.display = "block";
+    faceBtn.innerHTML = "FACERECO-UTILS V";
+  } else {
+    facelist.style.display = "none";
+    faceBtn.innerHTML = "FACERECO-UTILS &#8711";
+  }
+}
+
+function submitInferRequest() {
+	var api = "/predict/";
+	api += form_req.api.value;
+	var query_str = "";
+	submitFormData(form_req, api, query_str);
+}
+
+function submitRegisterFace() {
+	var api = "/facereco/register";
+	var query_str = "?face=" + form_face.name.value;
+	submitFormData(form_face, api, query_str);
+}
+
+function submitFormData(form, api, query_str) {
+	var ti;
+	var toc;
+	var formData = new FormData();
+	formData.append("time", new Blob([form.time.value],{type:"text/plain"}), "time");
+	formData.append("meta", new Blob([form.meta.value],{type:"text/plain"}), "meta");
+	formData.append("format", new Blob([form.format.value],{type:"text/plain"}), "format");
+
+	var int32_viewer = new Int32Array(3);
+	for (var i = 0; i < form.shape.length; i++)
+		int32_viewer[i] = parseInt(form.shape[i].value);
+	var shape_file = new Blob([int32_viewer], { type: "text/xml"});
+	formData.append("shape", shape_file, "shape");
+	formData.append("image", form.image.files[0], "image");
+	title.innerHTML = "";
+	content.innerHTML = "Sending Register Request ...";
+
+	var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() { 
+    	var diff = (Date.now() - ti) / 1000
+    	var resp_text = "Response time: " + diff.toString() + "(s)\n";
+    	console.log(resp_text);
+    	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    		console.log(xmlHttp.responseText);
+    		var myObj = JSON.parse(xmlHttp.responseText);
+    		if ('success' in myObj) {
+    			title.innerHTML = "Success";
+    			title.style = "color:#24a0ed; font-size:1.3rem";
+    			drawRectByObj(form, myObj);
+    		} else {
+    			title.innerHTML = "Fails";
+    			title.style = "color:#ff0000; font-size:1.3rem";
+    		};
+        	content.innerHTML = resp_text + xmlHttp.responseText;
+        }
+    };
+    var action_str = api + query_str;
+    ti = Date.now();
+    xmlHttp.open("POST", action_str, true); // true for asynchronous 
+    xmlHttp.send( formData );
+}
+
+function get_requests(args) {
+	content.innerHTML = "Sending Request ...";
+	title.innerHTML = "";
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+    	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    		var myObj = JSON.parse(xmlHttp.responseText);
+    		if ('success' in myObj) {
+    			title.innerHTML = "Success";
+    			title.style = "color:#24a0ed; font-size:1.3rem";
+    		} else {
+    			title.innerHTML = "Fails";
+    			title.style = "color:#ff0000; font-size:1.3rem";
+    		};
+        	content.innerHTML = xmlHttp.responseText;
+        }
+    };
+    xmlHttp.open("GET", args, true); // true for asynchronous 
+    xmlHttp.send( null );
+};
+
+</script>
+</html>
+
+

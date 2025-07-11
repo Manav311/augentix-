@@ -1,0 +1,14 @@
+{
+	"od_qual": 46,
+	"od_track_refine": 42,
+	"od_size_th": 40,
+	"od_sen": 254,
+	"od_conf_th": 50,
+	"od_iou_th": 100,
+	"od_snapshot_w": 1280,
+	"od_snapshot_h": 720,
+	"od_snapshot_type": 1,
+	"en_stop_det": false,
+	"en_gmv_det": true,
+	"en_motor": false
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/relay_server_settings.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+
+      <div class="col-sm-8 text-left">
+        <p ng-show="status === undefined">{{msg_t.Get_Status[lang]}}</p>
+        <div class="panel panel-default m-2" ng-show="status === null">
+          <!-- Install guide panel contents -->
+          <div class="panel-heading"></div>
+          <div class="panel-body">
+            <div class="alert alert-danger">
+              <h1 class="alert-heading">{{msg_t.Alert_Cannot_Detect_Relay_Server_Title[lang]}}</h1>
+              <div ng-bind-html="msg_t.Alert_Cannot_Detect_Relay_Server_Content[lang]"></div>
+              <!--
+              <hr>
+              <a href="http://example.com/relay-server.html">{{msg_t.Alert_Cannot_Detect_Relay_Server_Download[lang]}}</a>
+              -->
+            </div>
+            <button class="btn btn-danger" ng-click="getStatus()">{{msg_t.Get_Status_Again[lang]}}</button>
+          </div>
+        </div>
+
+        <div class="panel panel-default m-2" ng-show="status != null">
+          <!-- Default panel contents -->
+          <div class="panel-heading"></div>
+          <div class="panel-body">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-md-3 col-xl-2 my-auto">{{msg_t.Status_Version[lang]}}</div>
+                <div class="col-md-3 col-xl-2 my-auto">{{status.version}}</div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-3 col-xl-2 my-auto">{{msg_t.Status_Remote_Host[lang]}}</div>
+                <div class="col-md-3 col-xl-2 my-auto">
+                  <p class="my-1">
+                    <span class="" ng-show="status.remoteHost">{{status.remoteHost}}</span>
+                    <span class="badge-secondary px-2 py-1" ng-show="!status.remoteHost">{{msg_t.Status_Remote_Host_Not_Yet_Registered[lang]}}</span>
+                  </p>
+                </div>
+                <div class="col-md my-auto">
+                  <button class="btn btn-info" ng-click="register()">{{msg_t.Register[lang]}}</button>
+                  <button class="btn btn-danger" ng-click="unregister()">{{msg_t.Unregister[lang]}}</button>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-3 col-xl-2 my-auto">{{msg_t.Status_Is_Running[lang]}}</div>
+                <div class="col-md-3 col-xl-2 my-auto">
+                  <p class="my-1">
+                    <span class="badge-success px-2 py-1" ng-show="status.isRunning">{{msg_t.Status_Is_Running_True[lang]}}</span>
+                    <span class="badge-danger px-2 py-1" ng-show="!status.isRunning">{{msg_t.Status_Is_Running_False[lang]}}</span>
+                  </p>
+                </div>
+                <div class="col-md my-auto">
+                  <button class="btn btn-primary" ng-click="start()" ng-disabled="status.isRunning">{{msg_t.Start[lang]}}</button>
+                  <button class="btn btn-danger" ng-click="stop()" ng-disabled="!status.isRunning">{{msg_t.Stop[lang]}}</button>
+                  <button class="btn btn-warning" ng-click="restart()" ng-disabled="!status.isRunning">{{msg_t.Restart[lang]}}</button>
+                  <button class="btn btn-info" ng-click="getStatus()">{{msg_t.Get_Status[lang]}}</button>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6 col-xl-4 mb-1">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="selectLogLevel" style="margin-right: 0;">{{msg_t.Log_Level_Label[lang]}}</label>
+                    </div>
+                    <select class="custom-select" id="selectLogLevel" ng-model="selectedLogLevel" ng-change="isLogLevelSelected = true">
+                      <option ng-repeat="lv in logLevels" ng-value="lv">{{msg_t.Log_Levels[lv][lang]}}</option>
+                    </select>
+                    <div class="input-group-append"><button class="btn btn-info" ng-click="setLogLevel()">{{msg_t.Apply[lang]}}</button></div>
+                  </div>
+                </div>
+                <div class="col-md mb-1">
+                  <a class="btn btn-success" href="{{logUrl}}" target="_blank">{{msg_t.Get_Logs[lang]}}</a>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-3 col-xl-2 my-auto">{{msg_t.Idle_Time_Label[lang]}}</div>
+                <div class="col-md-3 col-xl-2 mb-1">
+                  <div class="input-group">
+                    <input
+                      class="form-control" type="number" placeholder="{{msg_t.Idle_Time_Label[lang]}}" step="1" min="-1"
+                      ng-model="editingIdleTime" ng-change="isIdleTimeEdited = true"
+                      style="margin-right: 0;" aria-label="{{msg_t.Idle_Time_Label[lang]}}" required>
+                    <div class="input-group-append">
+                      <button class="btn btn-info" ng-click="setIdleTime()" ng-disabled="editingIdleTime == null">{{msg_t.Apply[lang]}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <button class="btn btn-warning" ng-click="preResetConfig()">{{msg_t.Reset_Relay_Server[lang]}}</button>
+                  <button class="btn btn-danger" ng-click="resetConfig()" ng-show="confirmResetConfig">{{msg_t.Confirm[lang]}}</button>
+                </div>
+              </div>
+              <div class="row"><div class="col">{{cmdStatus}}</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

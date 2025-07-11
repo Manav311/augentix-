@@ -1,0 +1,37 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_GPIO_CONF_S",
+	"properties": {
+		"gpio_alias": {
+			"type": "array",
+			"minItems": 12,
+			"maxItems": 12,
+			"items": {
+				"type": "object",
+				"title": "AGTX_GPIO_ALIAS_S",
+				"properties": {
+					"name": {
+						"type": "string",
+						"maxLength": 128,
+						"description": "GPIO event name."
+					},
+					"dir": {
+						"type": "string",
+                        "title": "AGTX_GPIO_DIR_E",
+						"enum": ["IN", "OUT"],
+						"description": "Name of GPIO direction."
+					},
+					"pin_num": {
+						"type": "integer",
+						"description": "Pin number."
+					},
+					"value": {
+						"type": "integer",
+						"description": "GPIO output value; don't care for GPIO input."
+					}
+				}
+			}
+		}
+	}
+}

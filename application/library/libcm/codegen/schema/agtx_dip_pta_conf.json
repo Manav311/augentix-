@@ -1,0 +1,95 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_PTA_CONF_S",
+	"comments": [
+		"=====================================",
+		"== Post tone adjustment parameters ==",
+		"=====================================",
+		"ALSO SEE: MPI_setPtaAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: normal, 1: manual",
+			"ui_type": "enum",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"enum": [0, 1],
+			"default": 0
+		},
+		"brightness": {
+			"comments": "The strength to brighten image.",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 255,
+			"default": 128
+		},
+		"contrast": {
+			"comments": "The curvature of curve",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 255,
+			"default": 128
+		},
+		"break_point": {
+			"comments": "The breakpoint of contrast curve",
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 255,
+			"default": 64
+		},
+		"auto_tone_table": {
+			"ini_name": "pta_auto.tone",
+			"ui_type": "table",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"minItems": 11,
+			"maxItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 1024,
+				"minimum": 0,
+				"maximum": 1024
+			}
+		},
+		"curve": {
+			"comments": "PTA manual curve",
+			"ini_name": "pta_manual.curve",
+			"ui_type": "curve",
+			"ui_access_right": "read_write",
+			"type": "array",
+			"minItems": 33,
+			"maxItems": 33,
+			"itemKeys": [
+				0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320,
+				352, 384, 416, 448, 480, 512, 544, 576, 608, 640, 672,
+				704, 736, 768, 800, 832, 864, 896, 928, 960, 992, 1024
+			],
+			"items": {
+				"type": "integer",
+				"default": 128,
+				"minimum": 0,
+				"maximum": 1024
+			},
+			"defaultItems": [
+				0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320,
+				352, 384, 416, 448, 480, 512, 544, 576, 608, 640, 672,
+				704, 736, 768, 800, 832, 864, 896, 928, 960, 992, 1024
+			]
+		}
+	}
+}

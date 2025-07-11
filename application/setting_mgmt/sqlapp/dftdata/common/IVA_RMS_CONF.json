@@ -1,0 +1,10 @@
+{
+  "cmd_id": "AGTX_CMD_RMS_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "sensitivity": 100,
+    "split_x": 1,
+    "split_y": 1
+  }
+}

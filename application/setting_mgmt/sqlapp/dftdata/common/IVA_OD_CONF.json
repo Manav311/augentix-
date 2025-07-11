@@ -1,0 +1,22 @@
+{
+  "cmd_id": "AGTX_CMD_OD_CONF",
+  "json_content": {
+    "enabled": 0,
+    "version": "OD_V4",
+    "video_chn_idx": 0,
+    "od_qual": 90,
+    "od_track_refine": 86,
+    "od_size_th": 4,
+    "od_sen": 99,
+    "od_conf_th": 50,
+    "od_iou_th": 100,
+    "od_snapshot_w": 1280,
+    "od_snapshot_h": 720,
+    "od_snapshot_type": 2,
+    "en_shake_det": 1,
+    "en_crop_outside_obj": 1,
+    "en_stop_det": 1,
+    "en_gmv_det": 0,
+    "en_motor": 0
+  }
+}

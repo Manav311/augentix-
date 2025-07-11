@@ -1,0 +1,206 @@
+{
+    "cmd_id": "AGTX_CMD_VIDEO_LAYOUT_CONF",
+    "json_content": {
+      "video_dev_idx": 0,
+      "layout_num": 1,
+      "layout_en": 1,
+      "video_layout": [
+        {
+            "video_strm_idx": 0,
+            "window_num": 1,
+            "window_array":[
+                {
+                    "window_idx": 0,
+                    "parent": -1,
+                    "update_fps": 30,
+                    "priority": 0,
+                    "const_qual": 0,
+                    "dyn_adj": 0,
+                    "path_bmp": 1,
+                    "eis_en": 0,
+                    "pos_x": 0,
+                    "pos_y": 0,
+                    "pos_width":1024,
+                    "pos_height": 1024,
+                    "roi_x": 0,
+                    "roi_y": 0,
+                    "roi_width": 1024,
+                    "roi_height": 1024,
+                    "view_type": "NORMAL"
+                },
+                {
+                    "window_idx": 1,
+                    "parent": -1,
+                    "update_fps": 20,
+                    "priority": 0,
+                    "const_qual": 0,
+                    "dyn_adj": 0,
+                    "path_bmp": 1,
+                    "eis_en": 0,
+                    "pos_x": 0,
+                    "pos_y": 0,
+                    "pos_width":1024,
+                    "pos_height": 1024,
+                    "roi_x": 0,
+                    "roi_y": 0,
+                    "roi_width": 1024,
+                    "roi_height": 1024,
+                    "view_type": "NORMAL"
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                }
+            ]
+        },
+        {
+            "video_strm_idx": 1,
+            "window_num": 1,
+            "window_array":[
+                {
+                    "window_idx": 0,
+                    "parent": -1,
+                    "update_fps": 30,
+                    "priority": 0,
+                    "const_qual": 0,
+                    "dyn_adj": 0,
+                    "path_bmp": 1,
+                    "eis_en": 0,
+                    "pos_x": 0,
+                    "pos_y": 0,
+                    "pos_width": 1024,
+                    "pos_height": 1024,
+                    "roi_x": 0,
+                    "roi_y": 0,
+                    "roi_width": 1024,
+                    "roi_height": 1024,
+                    "view_type": "NORMAL"
+                },
+                {
+                    "window_idx": 1,
+                    "parent": -1,
+                    "update_fps": 20,
+                    "priority": 0,
+                    "const_qual": 0,
+                    "dyn_adj": 0,
+                    "path_bmp": 1,
+                    "eis_en": 0,
+                    "pos_x": 0,
+                    "pos_y": 0,
+                    "pos_width": 1024,
+                    "pos_height": 1024,
+                    "roi_x": 0,
+                    "roi_y": 0,
+                    "roi_width": 1024,
+                    "roi_height": 1024,
+                    "view_type": "NORMAL"
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                }
+            ]
+        },
+        {
+            "video_strm_idx": 0,
+            "window_num": 0,
+            "window_array":[
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                }
+            ]
+        },
+        {
+            "video_strm_idx": 0,
+            "window_num": 0,
+            "window_array":[
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                },
+                {
+                    "parent": -1
+                }
+            ]
+        }
+      ]
+    }
+  }

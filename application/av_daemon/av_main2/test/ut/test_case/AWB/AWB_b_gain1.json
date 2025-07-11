@@ -1,0 +1,7 @@
+{
+  "b_gain":255550,
+  "color_temp":5000,
+  "mode":1,
+  "r_gain":50,
+  "cmd_id":"AGTX_CMD_AWB_PREF"
+}

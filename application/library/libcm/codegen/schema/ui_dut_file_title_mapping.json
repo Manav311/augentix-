@@ -1,0 +1,130 @@
+{
+    "AGTX_DIP_CAL_CONF_S":{
+    "dut_title": "dip_cal",
+    "ui_title": "cal"
+    },
+    "AGTX_DIP_DBC_CONF_S":{
+    "dut_title": "dip_dbc",
+    "ui_title": "dbc"
+    },
+    "AGTX_DIP_DCC_CONF_S":{
+    "dut_title": "dip_dcc",
+    "ui_title": "dcc"
+    },
+    "AGTX_DIP_DHZ_CONF_S":{
+    "dut_title": "dip_dhz",
+    "ui_title": "dhz"
+    },
+    "AGTX_DIP_LSC_CONF_S":{
+    "dut_title": "dip_lsc",
+    "ui_title": "lsc"
+    },
+    "AGTX_DIP_ROI_CONF_S":{
+    "dut_title": "dip_roi",
+    "ui_title": "roi"
+    },
+    "AGTX_DIP_CTRL_CONF_S":{
+    "dut_title": "dip_ctrl",
+    "ui_title": "ctrl"
+    },
+    "AGTX_DIP_AE_CONF_S":{
+    "dut_title": "dip_ae",
+    "ui_title": "ae"
+    },
+    "AGTX_DIP_AWB_CONF_S":{
+    "dut_title": "dip_awb",
+    "ui_title": "awb"
+    },
+    "AGTX_DIP_PTA_CONF_S":{
+    "dut_title": "dip_pta",
+    "ui_title": "pta"
+    },
+    "AGTX_DIP_PCA_CONF_S":{
+        "dut_title": "dip_pca",
+        "ui_title": "pca"
+    },
+    "AGTX_DIP_CSM_CONF_S":{
+    "dut_title": "dip_csm",
+    "ui_title": "csm"
+    },
+    "AGTX_DIP_SHP_CONF_S":{
+    "dut_title": "dip_shp",
+    "ui_title": "shp"
+    },
+    "AGTX_DIP_NR_CONF_S":{
+    "dut_title": "dip_nr",
+    "ui_title": "nr"
+    },
+    "AGTX_DIP_GAMMA_CONF_S":{
+    "dut_title": "dip_gamma",
+    "ui_title": "gamma"
+    },
+    "AGTX_DIP_TE_CONF_S":{
+    "dut_title": "dip_te",
+    "ui_title": "te"
+    },
+    "AGTX_DIP_ISO_CONF_S":{
+    "dut_title": "dip_iso",
+    "ui_title": "iso"
+    },
+    "AGTX_LDC_CONF_S":{
+    "dut_title": "ldc_conf",
+    "ui_title": "ldc"
+    },
+    "AGTX_STITCH_CONF_S":{
+    "dut_title": "stitch_conf",
+    "ui_title": "stitch"
+    },
+    "AGTX_PANORAMA_CONF_S":{
+    "dut_title": "panorama_conf",
+    "ui_title": "panorama"
+    },
+    "AGTX_PANNING_CONF_S":{
+    "dut_title": "panning_conf",
+    "ui_title": "panning"
+    },
+    "AGTX_SURROUND_CONF_S":{
+    "dut_title": "surround_conf",
+    "ui_title": "surround"
+    },
+    "AGTX_DIP_ENH_CONF_S":{
+    "dut_title": "dip_enh",
+    "ui_title": "enh"
+    },
+    "AGTX_DIP_CORING_CONF_S":{
+    "dut_title": "dip_coring",
+    "ui_title": "coring"
+    },
+    "AGTX_DIP_STAT_CONF_S":{
+    "dut_title": "dip_stat",
+    "ui_title": "stat"
+    },
+    "AGTX_DIP_DMS_CONF_S":{
+    "dut_title": "dip_dms",
+    "ui_title": "dms"
+    },
+    "AGTX_DIP_EXPOSURE_INFO_S":{
+    "dut_title": "exp_info",
+    "ui_title": "exposure"
+    },
+    "AGTX_DIP_WHITE_BALANCE_INFO_S":{
+    "dut_title": "wb_info",
+    "ui_title": "white_balance"
+    },
+    "AGTX_DIP_FCS_CONF_S":{
+    "dut_title": "dip_fcs",
+    "ui_title": "fcs"
+    },
+    "AGTX_DIP_HDR_SYNTH_CONF_S":{
+    "dut_title": "dip_hdr_synth",
+    "ui_title": "hdr_synth"
+    },
+    "AGTX_DIP_TE_INFO_S":{
+    "dut_title": "te_info",
+    "ui_title": "tone_enhancement"
+    },
+    "AGTX_DIP_EXTEND_CONF_S":{
+    "dut_title":"dip_extend",
+    "ui_title": "dip_extend"
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "brightness":50,
+  "saturation":2555550,
+  "hue":50,
+  "contrast":50,
+  "sharpness":50,
+  "anti_flicker":2,
+  "cmd_id":"AGTX_CMD_IMG_PREF"
+}

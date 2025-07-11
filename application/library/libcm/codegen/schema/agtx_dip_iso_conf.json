@@ -1,0 +1,132 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_ISO_CONF_S",
+	"ini_name": "DIP_ISO",
+	"comments": [
+		"===================================",
+		"== DIP EFFECTIVE ISO parameters ===",
+		"===================================",
+		"ALSO SEE: MPI_setDipIsoAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"mode": {
+			"comments": "Operation mode, 0: auto, 2: manual",
+			"ui_type": "enum",
+			"type": "integer",
+			"enum": [0, 2],
+			"default": 0
+		},
+		"manual_iso": {
+			"ini_name": "iso_manual.effective_iso",
+			"comments": [
+				"--- Manual mode attribute ---",
+				"manual effective iso"
+			],
+			"ui_type": "number",
+			"type": "integer",
+			"default": 100,
+			"minimum": 0,
+			"maximum": 2147483647
+		},
+		"auto_iso_table": {
+			"ini_name": "iso_auto.effective_iso",
+			"comments": "--- auto mode attribute ---",
+			"subcomments": {
+				"0": "iso = 100",
+				"1": "iso = 200",
+				"2": "iso = 400",
+				"3": "iso = 800",
+				"4": "iso = 1600",
+				"5": "iso = 3200",
+				"6": "iso = 6400",
+				"7": "iso = 12800",
+				"8": "iso = 25600",
+				"9": "iso = 51200",
+				"10": "iso = 102400"
+			},
+			"ui_type": "table",
+			"type": "array",
+			"minItems": 11,
+			"maxItems": 11,
+			"items": {
+				"type": "integer",
+				"default": 100,
+				"minimum": 0,
+				"maximum": 2147483647
+			},
+			"defaultItems": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200, 102400]
+		},
+		"iso_type": {
+			"ui_type": "enum",
+			"ini_name": "iso_type",
+			"comments": "Type/Version of ISO values",
+			"type": "integer",
+			"enum": [0, 1],
+			"default": 0
+		},
+		"daa": {
+			"type": "object",
+			"title": "AGTX_DIP_ISO_DAA_S",
+			"ini_name": "daa",
+			"comments": "--- Distortion-aware Adaptation(DAA) settings ---",
+			"properties": {
+				"di_max": {
+					"comments": "Maximum distortion-index number. In range [0, 3000].",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 900,
+					"minimum": 0,
+					"maximum": 3000
+				},
+				"di_rising_speed": {
+					"comments": "Adjusting speed while increasing distortion index. In range [0, 256].",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 32,
+					"minimum": 0,
+					"maximum": 256
+				},
+				"di_fallen_speed": {
+					"comments": "Adjusting speed while decreasing distortion index. In range [0, 256].",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 32,
+					"minimum": 0,
+					"maximum": 256
+				},
+				"qp_upper_th": {
+					"comments": "QP value which scene is considered as a distorted image. In range [0, 51].",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 35,
+					"minimum": 0,
+					"maximum": 51
+				},
+				"qp_lower_th": {
+					"comments": "QP value which scene is considered as a normal image. In range [0, 51].",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 28,
+					"minimum": 0,
+					"maximum": 51
+				},
+				"enable": {
+					"comments": "Enable DAA feature or not.",
+					"ui_type": "number",
+					"type": "integer",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 1
+				}
+			}
+		}
+	}
+}

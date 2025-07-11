@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <link href="../css/agtx_player.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/iva_md.js"></script>
+  <script src="../js/lib/flv.min.js"></script>
+  <script src="../js/agtx_player_check.js"></script>
+  <script src="../js/lib/signalr.min.js"></script>
+  <script type="module" src="../js/agtx_player_srv.js"></script>
+  <script type="module" src="../js/agtx_player_vm.js"></script>
+  <script type="module">
+  $(async function() {
+    const mainUrl = window.flvLiveAudio0;
+    const subUrl = window.flvLiveAudio1;
+    const mainRelayUrl = window.flvRelayLiveAudio0;
+    const subRelayUrl = window.flvRelayLiveAudio1;
+    const { core } = window.augentixPlayerViewModel || {};
+    await core?.init({ langId, mainUrl, subUrl, mainRelayUrl, subRelayUrl });
+  });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="dropdown">
+              <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle=
+              "dropdown" id="dropdownMenuButton" type="button">{{CurPage[lang]}}</button>
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                <a class="{{x.dropdown}}" href="{{x.href}}" ng-repeat="x in IvaDropDown" target=
+                "_self">{{x.txt[lang]}}</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <div id="agtx-player-preview"></div>
+            <table>
+              <tr>
+                <td><input ng-model="mdPref.enabled" type="checkbox">{{msg_t.Enable_motion_detection[lang]}}</td>
+              </tr>
+              <tr>
+                <td><input ng-model="mdPref.en_skip_shake" type="checkbox">{{msg_t.Enable_skip_shake[lang]}}</td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Active_regions[lang]}}</td>
+                <td><input max="63" min="1" ng-change="region_cnt_change()" ng-model="mdPref.rgn_cnt" type=
+                "number"></td>
+              </tr>
+            </table>
+            <table ng-repeat="x in mdPref.rgn_list">
+              <tr>
+                <td>{{msg_t.Region[lang]}} {{x.id}} :</td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Start[lang]}} X:</td>
+                <td></td>
+                <td><input max="99" min="0" ng-blur="check_coordinate()" ng-model="x.sx" type="number"></td>
+                <td>{{msg_t.Start[lang]}} Y:</td>
+                <td></td>
+                <td><input max="99" min="0" ng-blur="check_coordinate()" ng-model="x.sy" type="number"></td>
+                <td>{{msg_t.End[lang]}} X:</td>
+                <td></td>
+                <td><input max="100" min="1" ng-blur="check_coordinate()" ng-model="x.ex" type="number"></td>
+                <td>{{msg_t.End[lang]}} Y:</td>
+                <td></td>
+                <td><input max="100" min="1" ng-blur="check_coordinate()" ng-model="x.ey" type="number"></td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Sensitivity[lang]}}</td>
+                <td colspan="3"><input max="100" min="1" ng-model="x.sens" type="range"></td>
+                <td colspan="3"><input max="100" min="1" ng-model="x.sens" type="number"></td>
+              </tr>
+            </table><br>
+            <button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button> <button class=
+            "btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+            <p>{{cmdStatus}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

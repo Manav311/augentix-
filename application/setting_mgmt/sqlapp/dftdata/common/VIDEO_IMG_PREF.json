@@ -1,0 +1,11 @@
+{
+  "cmd_id": "AGTX_CMD_IMG_PREF",
+  "json_content": {
+    "brightness": 50,
+	"saturation": 50,
+	"hue": 50,
+    "contrast": 50,
+    "sharpness": 50,
+    "anti_flicker": 2
+  }
+}

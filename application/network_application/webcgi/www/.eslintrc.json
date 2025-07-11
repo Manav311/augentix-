@@ -1,0 +1,33 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 5
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "indent": "off",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "prettier/prettier": "error"
+  }
+}

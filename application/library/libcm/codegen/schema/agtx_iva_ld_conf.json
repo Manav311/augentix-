@@ -1,0 +1,58 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_LD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"ui_type":"boolean",
+			"ui_access_right": "read_write"
+		},
+		"video_chn_idx": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": 0,
+			"maxValue": 3
+		},
+		"sensitivity": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": 0,
+			"maxValue": 100
+		},
+		"trigger_cond": {
+			"type": "string",
+			"ui_type":"string",
+			"ui_access_right": "read_write",
+			"title": "AGTX_LD_TRIG_COND_E",
+			"enum": ["LIGHT_NONE", "LIGHT_ON", "LIGHT_OFF", "BOTH"]
+		},
+		"det_region": {
+			"type": "object",
+			"title": "AGTX_IVA_LD_REGION_S",
+			"properties": {
+				"start_x": {
+					"type": "integer",
+					"description": "Start coordinates of detection region. (inclusive)"
+				},
+				"start_y": {
+					"type": "integer",
+					"description": "Start coordinates of detection region. (inclusive)"
+				},
+				"end_x": {
+					"type": "integer",
+					"description": "End coordinates of detection region. (inclusive)"
+				},
+				"end_y": {
+					"type": "integer",
+					"description": "End coordinates of detection region. (inclusive)"
+				}
+			}
+		}
+	}
+
+}

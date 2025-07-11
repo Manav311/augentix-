@@ -1,0 +1,20 @@
+{
+  "cmd_id": "AGTX_CMD_BM_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "quality": 50,
+    "sensitivity": 50,
+    "boundary_thickness": 15,
+    "suppression": 3,
+    "time_buffer": 12000,
+    "reset": 0,
+    "data_ctrl": "NONE",
+    "roi": {
+      "start_x": 0,
+      "start_y": 0,
+      "end_x": 100,
+      "end_y": 100
+    }
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "cmd_id": "AGTX_CMD_VENC_OPTION",
+  "json_content": {
+    "strm_idx": -1,
+    "strm": [
+      {
+        "venc_idx": -1,
+        "venc": [
+          {
+            "codec": "H264",
+            "profile": [
+              "HIGH",
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 2048,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "H265",
+            "profile": [
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 2048,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "MJPEG",
+            "profile": [
+              "NONE"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 2048,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          }
+        ]
+      },
+      {
+        "venc_idx": -1,
+        "venc": [
+          {
+            "codec": "H264",
+            "profile": [
+              "HIGH",
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 512,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "H265",
+            "profile": [
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 512,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "MJPEG",
+            "profile": [
+              "NONE"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 512,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          }
+        ]
+      },
+       {
+        "venc_idx": -1,
+        "venc": [
+          {
+            "codec": "H264",
+            "profile": [
+              "HIGH",
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 2048,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "H265",
+            "profile": [
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 2048,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "MJPEG",
+            "profile": [
+              "NONE"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 2048,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          }
+        ]
+      },
+      {
+        "venc_idx": -1,
+        "venc": [
+          {
+            "codec": "H264",
+            "profile": [
+              "HIGH",
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 512,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "H265",
+            "profile": [
+              "MAIN"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 512,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          },
+          {
+            "codec": "MJPEG",
+            "profile": [
+              "NONE"
+            ],
+            "rc_mode": [
+              "CBR",
+              "VBR",
+              "SBR",
+              "CQP"
+            ],
+            "min_bit_rate": 64,
+            "max_bit_rate": 512,
+            "cbr_param": {
+              "min_q_factor": 1,
+              "max_q_factor": 100
+            },
+            "vbr_param": {
+              "min_quality_range": 0,
+              "max_quality_range": 0
+            },
+            "min_gop_size": 1,
+            "max_gop_size": 120
+          }
+        ]
+      }
+    ]
+  }
+}

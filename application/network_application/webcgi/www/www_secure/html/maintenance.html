@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="no-store, max-age=0" http-equiv="Cache-Control">
+  <meta content="no-cache" http-equiv="Pragma">
+  <meta content="0" http-equiv="Expires">
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src='../js/lib/angular-upload.min.js'></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/maintainance.js"></script>
+  <title>Augentix</title>
+  <style>
+  .modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <iframe id="my_iframe" name="my_iframe" style="display:none;"></iframe>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:30%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href+'?lang='+lang}}" target=
+        "_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="dateTime.html?lang={{lang}}" target="_self">{{msg_t.date_time[lang]}}</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="maintenance.html?lang={{lang}}" target=
+                  "_self">{{msg_t.Maintenance[lang]}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <table class="table" >
+              <td>{{msg_t.Firmware_Upgrade[lang]}}</td>
+              <td><button class="btn btn-warning" ng-click="preFirmwareUpload()">{{msg_t.Confirm[lang]}}</button>
+              <td>{{msg_t.ConfirmToUpgrade[lang]}}</td>
+              <tr ng-show="confirmedUpgrade">
+                <form name="upload" method="POST" enctype="multipart/form-data" action="/upload" >
+                  <td><input type="file" name="file1" ></td>
+                  <td><input id=nginxUpload type="submit" name="submit" value="Upload" class="btn btn-info" ng-hide="alwaysHide" ng-click="importSetting()" ></td>
+                </form>
+                <td><button class="btn btn-info" ng-hide="!canUpload" ng-click="applyUpload()">{{msg_t.Upload[lang]}}</button></td>
+              </tr>
+              <tr>
+                <td>{{msg_t.Factory_Default[lang]}}</td>
+                <td><button class="btn btn-warning" ng-click="preFactoryDefault()">{{msg_t.Restore[lang]}}</button>
+                <button class="btn btn-danger" ng-click="factoryDefault()" ng-show=
+                "confirmRestore">{{msg_t.Confirm[lang]}}</button></td>
+              </tr>
+              <tr>
+                <td><button class="btn btn-info" ng-click="reboot()">{{msg_t.Reboot[lang]}}</button></td>
+              </tr>
+            </table>
+            <p>{{cmdStatus}}</p>
+            <p>{{percentComplete}}</p>
+          </div>
+          <div id="authModal" class="modal" ng-show="authModalVisible">
+           <div class="modal-content">
+             <span class="close" ng-click="closeAuthModal()">&times;</span>
+             <h2>{{msg_t.Auth_Title[lang]}}</h2>
+             <label>{{msg_t.Auth_Prompt_Username[lang]}}</label>
+             <input type="text" ng-model="username" placeholder="{{msg_t.Auth_Prompt_Username[lang]}}">
+             <label>{{msg_t.Auth_Prompt_Password[lang]}}</label>
+             <input type="password" ng-model="password" placeholder="{{msg_t.Auth_Prompt_Password[lang]}}">
+             <button ng-click="submitAuth()">{{msg_t.Confirm[lang]}}</button>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

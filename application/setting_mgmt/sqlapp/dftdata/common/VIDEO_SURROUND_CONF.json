@@ -1,0 +1,13 @@
+{
+    "cmd_id": "AGTX_CMD_SURROUND_CONF",
+    "json_content": {
+      "video_dev_idx": 0,
+      "center_offset_x": 0,
+      "center_offset_y": 0,
+      "enable": 0,
+      "min_radius": 0,
+      "max_radius": 0,
+      "rotate": "0",
+      "ldc_ratio": 0
+    }
+}

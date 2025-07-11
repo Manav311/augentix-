@@ -1,0 +1,158 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_VIDEO_PTZ_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"ui_type":"boolean",
+			"ui_access_right": "read_write"
+		},
+		"mode": {
+			"type": "string",
+			"title":"AGTX_VIDEO_PTZ_MODE_E",
+			"enum": ["AUTO", "MANUAL", "SCAN"]
+		},
+		"win_size_limit_min": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"description": "Window size minimum limit [1-1024]",
+			"default": 100
+		},
+		"win_size_limit_max": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"description": "Window size maximum limit [1-1024]",
+			"default": 512
+		},
+		"roi_width": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 1024,
+			"minValue": 0,
+			"maxValue": 1024
+		},
+		"roi_height": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"defaults": 1024,
+			"minValue": 0,
+			"maxValue": 1024
+		},
+		"zoom_speed_width": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": -32768,
+			"maxValue": 32767
+		},
+		"zoom_speed_height": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": -32768,
+			"maxValue": 32767
+		},
+		"win_speed_x": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": -100,
+			"maxValue": 100
+		},
+		"win_speed_y": {
+			"type": "integer",
+			"ui_type":"number",
+			"ui_access_right": "read_write",
+			"default": 0,
+			"minValue": -100,
+			"maxValue": 100
+		},
+		"speed_x": {
+			"type": "integer",
+			"ui_type":"number",
+			"description": "Moving position speed x.",
+			"ui_access_right": "read_write",
+			"default": 0
+		},
+		"speed_y": {
+			"type": "integer",
+			"ui_type":"number",
+			"description": "Moving position speed y.",
+			"ui_access_right": "read_write",
+			"default": 0
+		},
+		"win_pos_x": {
+			"type": "integer",
+			"ui_type":"number",
+			"description": "Target window position x.",
+			"ui_access_right": "read_write",
+			"default": 0
+		},
+		"win_pos_y": {
+			"type": "integer",
+			"ui_type":"number",
+			"description": "Target window position y.",
+			"ui_access_right": "read_write",
+			"default": 0
+		},
+		"zoom_level": {
+			"type": "integer",
+			"ui_type":"number",
+			"description": "Zoom level",
+			"ui_access_right": "read_write",
+			"default": 0
+		},
+		"zoom_change": {
+			"type": "integer",
+			"ui_type":"number",
+			"description": "Zoom Change [-1 0 1]",
+			"ui_access_right": "read_write",
+			"default": 0
+		},
+		"subwindow_disp": {
+			"title": "AGTX_SUBWIN_DISP_S",
+			"type": "object",
+			"properties": {
+				"win_num" : {
+					"type": "integer",
+					"default": 1,
+					"minValue": 1,
+					"maxValue": 4
+				},
+				"win": {
+					"type": "array",
+					"maxItems": 4,
+					"minItems": 1,
+					"items": {
+						"type": "object",
+						"title": "AGTX_SUBWIN_PARAM_S",
+						"properties": {
+							"chn_idx": {
+								"type": "integer",
+								"default": 0,
+								"ui_type": "number",
+								"minimum": 0,
+								"maximum": 3
+							},
+							"win_idx": {
+								"type": "integer",
+								"default": 0,
+								"ui_type": "number",
+								"minimum": 0,
+								"maximum": 8
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

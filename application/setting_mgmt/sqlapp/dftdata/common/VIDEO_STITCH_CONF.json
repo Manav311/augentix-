@@ -1,0 +1,72 @@
+{
+  "cmd_id": "AGTX_CMD_STITCH_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "enable": 0,
+    "center_0_x": 3838,
+    "center_0_y": 2158,
+    "center_1_x": 3838,
+    "center_1_y": 2158,
+    "dft_dist": 0,
+    "dist_tbl_cnt": 3,
+    "dist_tbl_list": [
+      {
+        "tbl_idx": 0,
+        "dist": 100,
+        "ver_disp": 1450,
+        "straighten": 12728,
+        "src_zoom": 1640,
+        "theta_0": 0,
+        "theta_1": 0,
+        "radius_0": 3010,
+        "radius_1": 3010,
+        "curvature_0": 4630,
+        "curvature_1": 4630,
+        "fov_ratio_0": 4096,
+        "fov_ratio_1": 4096,
+        "ver_scale_0": 4506,
+        "ver_scale_1": 4506,
+        "ver_shift_0": 0,
+        "ver_shift_1": 0
+      },
+      {
+        "tbl_idx": 1,
+        "dist": 300,
+        "ver_disp": 1450,
+        "straighten": 12728,
+        "src_zoom": 1640,
+        "theta_0": 0,
+        "theta_1": 0,
+        "radius_0": 2930,
+        "radius_1": 2930,
+        "curvature_0": 4630,
+        "curvature_1": 4630,
+        "fov_ratio_0": 4096,
+        "fov_ratio_1": 4096,
+        "ver_scale_0": 4506,
+        "ver_scale_1": 4506,
+        "ver_shift_0": 0,
+        "ver_shift_1": 0
+      },
+      {
+        "tbl_idx": 2,
+        "dist": 500,
+        "ver_disp": 1450,
+        "straighten": 12728,
+        "src_zoom": 1638,
+        "theta_0": 0,
+        "theta_1": 0,
+        "radius_0": 2924,
+        "radius_1": 2924,
+        "curvature_0": 4630,
+        "curvature_1": 4630,
+        "fov_ratio_0": 4096,
+        "fov_ratio_1": 4096,
+        "ver_scale_0": 4506,
+        "ver_scale_1": 4506,
+        "ver_shift_0": 0,
+        "ver_shift_1": 0
+      }
+    ]
+  }
+}

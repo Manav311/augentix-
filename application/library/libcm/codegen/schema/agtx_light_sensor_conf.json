@@ -1,0 +1,95 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_LIGHT_SENSOR_CONF_S",
+	"properties": {
+		"mode": {
+			"type": "string",
+			"title": "AGTX_LIGHT_SENSOR_MODE_E",
+			"enum": ["NONE", "ADC", "MPI"]
+		},
+		"adc": {
+			"type": "object",
+			"title": "AGTX_LIGHT_SENSOR_ADC_S",
+			"properties": {
+				"day_th": {
+					"type": "integer"
+				},
+				"night_th": {
+					"type": "integer"
+				}
+			}
+		},
+		"mpi": {
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"type": "object",
+				"title": "AGTX_LIGHT_SENSOR_MPI_S",
+				"properties": {
+					"dev": {
+						"type": "integer"
+					},
+					"path": {
+						"type": "integer"
+					},
+					"polling_period_usec": {
+						"type": "integer"
+					},
+					"force_day_th": {
+						"type": "integer"
+					},
+					"day_th": {
+						"type": "integer"
+					},
+					"night_th": {
+						"type": "integer"
+					},
+					"day_delay": {
+						"type": "integer",
+						"minimum": 0,
+						"maximum": 255
+					},
+					"night_delay": {
+						"type": "integer",
+						"minimum": 0,
+						"maximum": 255
+					},
+					"iir_current_weight": {
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 255
+					},
+					"ir_amplitude_ratio": {
+						"type": "integer",
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"ev_response_usec": {
+						"type": "integer"
+					},
+					"ir_led_ctrl": {
+						"type": "array",
+						"minItems": 5,
+						"maxItems": 5,
+						"items": {
+							"type": "object",
+							"title": "AGTX_IR_LED_CTRL_S",
+							"properties": {
+								"duty_cycle": {
+									"type": "integer"
+								},
+								"light_strength": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

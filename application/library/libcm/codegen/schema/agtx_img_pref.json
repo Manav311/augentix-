@@ -1,0 +1,27 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IMG_PREF_S",
+	"properties": {
+		"brightness": {
+			"type": "integer"
+		},
+		"saturation": {
+			"type": "integer"
+		},
+		"hue": {
+			"type": "integer"
+		},
+		"contrast": {
+			"type": "integer"
+		},
+		"sharpness": {
+			"type": "integer"
+		},
+		"anti_flicker": {
+			"type": "string",
+			"title": "AGTX_ANTI_FLICKER_E",
+			"enum": ["50HZ", "60HZ", "AUTO", "OFF"]
+		}
+	}
+}

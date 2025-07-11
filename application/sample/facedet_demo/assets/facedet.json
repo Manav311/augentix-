@@ -1,0 +1,11 @@
+{
+    "obj_life_th": 16,
+    "target_idx": 0,
+    "data_fmt": "MPI_RGB",
+    "url": "inapp",
+    "snapshot_width": 1280,
+    "snapshot_height": 720,
+    "inf_with_obj_list": 1,
+    "model_path": "/system/eaif/models/facereco/inapp_scrfd.ini",
+    "detect_period": 13
+}

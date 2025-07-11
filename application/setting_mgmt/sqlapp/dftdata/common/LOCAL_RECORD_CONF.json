@@ -1,0 +1,11 @@
+{
+  "cmd_id": "AGTX_CMD_LOCAL_RECORD_CONF",
+  "json_content": {
+    "enabled": 0,    
+    "mode": "event",
+    "pre_record_time": 5,
+    "post_record_time": 0,
+	"min_event_time": 10,
+	"max_event_time": 55,
+  }
+}

@@ -1,0 +1,239 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_DBC_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"dbc": {
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 2,
+			"subcomments": {
+				"0": [
+					"==============================================",
+					"== Device black-level correction parameters ==",
+					"==============================================",
+					"NOTE: if single sensor, only DBC0 valid",
+					"ALSO SEE: MPI_setDbcAttr"
+				]
+			},
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_DBC_ATTR_S",
+				"properties": {
+					"mode": {
+						"ui_type": "enum",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"enum": [0,2],
+						"default": 0
+					},
+					"dbc_level": {
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"maximum": 65535,
+						"minimum": 0,
+						"default": 0
+					},
+					"type": {
+						"ui_type": "enum",
+						"ui_access_right": "read_write",
+						"type": "string",
+						"title": "AGTX_DBC_TYPE_E",
+						"enum": ["SAME_BLACK_LEVEL", "IND_BLACK_LEVEL"],
+						"default": "SAME_BLACK_LEVEL"
+					},
+					
+					"manual_black_level": {
+						"ini_name": "dbc_manual.manual.black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_0": {
+						"ini_name": "dbc_auto.auto_table[0].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_1": {
+						"ini_name": "dbc_auto.auto_table[1].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_2": {
+						"ini_name": "dbc_auto.auto_table[2].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_3": {
+						"ini_name": "dbc_auto.auto_table[3].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_4": {
+						"ini_name": "dbc_auto.auto_table[4].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_5": {
+						"ini_name": "dbc_auto.auto_table[5].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_6": {
+						"ini_name": "dbc_auto.auto_table[6].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_7": {
+						"ini_name": "dbc_auto.auto_table[7].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_8": {
+						"ini_name": "dbc_auto.auto_table[8].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_9": {
+						"ini_name": "dbc_auto.auto_table[9].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_black_level_10": {
+						"ini_name": "dbc_auto.auto_table[10].black_level",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": 0,
+							"maximum": 65535
+						},
+						"defaultItems": [0, 0, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

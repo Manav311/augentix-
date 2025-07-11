@@ -1,0 +1,40 @@
+{
+	"color_mode":"PALETTE_8",
+	"channel":[0],
+	"rect":[[1920, 1080]],
+	"regions":
+	[
+		{
+			"region_num":4,
+			"region":[[160, 90, 600, 180], [160, 290, 320, 180], [160, 700, 200, 120], [160, 840, 200, 120]],
+			"src":
+			[
+				{
+					"type":"utf8",
+					"ttf_path":"/system/mpp/font/SourceHanSansCN-Regular_1.otf",
+					"txt":"Today is 2021-08-02",
+					"size":40,
+					"backcol":"WHITE",
+					"forecol":[255,14,255],
+					"outline_width":2,
+					"outcol":[255, 2, 0]
+				},
+				{
+					"type":"line",
+					"line_num":5,
+					"lines":[[[240, 290], [160, 335]], [[160, 335], [480, 335]], [[480, 335], [480, 470]], [[480, 470], [240, 470]], [[240, 470], [240, 290]]],
+					"thickness":10,
+					"color":[255,0,0,255]
+				},
+				{
+					"type":"privacy_mask",
+					"color":[255, 4, 128, 128]
+				},
+				{
+					"type":"privacy_mask",
+					"color":[100, 6, 128, 128]
+				}
+			]
+		}
+	]
+}

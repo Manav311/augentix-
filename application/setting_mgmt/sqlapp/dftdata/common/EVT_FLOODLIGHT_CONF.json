@@ -1,0 +1,10 @@
+{
+  "cmd_id": "AGTX_CMD_FLOODLIGHT_CONF",
+  "json_content": {
+    "enabled": 0,
+    "warn_switch": 1,
+    "warn_time": 60,
+    "lightness": 60,
+    "bright_mode": 1
+  }
+}

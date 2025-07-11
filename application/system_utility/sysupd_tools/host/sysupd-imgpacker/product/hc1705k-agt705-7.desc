@@ -1,0 +1,66 @@
+software =
+{
+	version = "SYSUPD_VERSION";
+	description = "Augentix system update";
+
+	/* hardware-compatibility is not set */
+	/* partitions are not set */
+	release: {
+		copy_1: {
+			images: (
+				{
+					filename = "KERNEL_BIN";
+					device = "mtd2";
+					type = "flash";
+					sha256 = "KERNEL_SHA";
+				},
+				{
+					filename = "ROOTFS_BIN";
+					device = "mtd3";
+					type = "flash";
+					sha256 = "ROOTFS_SHA";
+				}
+			);
+			scripts: (
+				{
+					filename = "pre-install.sh";
+					type = "preinstall";
+					sha256 = "PRE_INSTALL_SHA";
+				},
+				{
+					filename = "post-install.sh";
+					type = "postinstall";
+					sha256 = "POST_INSTALL_SHA";
+				}
+			);
+		};
+		copy_2: {
+			images: (
+				{
+					filename = "KERNEL_BIN";
+					device = "mtd4";
+					type = "flash";
+					sha256 = "KERNEL_SHA";
+				},
+				{
+					filename = "ROOTFS_BIN";
+					device = "mtd5";
+					type = "flash";
+					sha256 = "ROOTFS_SHA";
+				}
+			);
+			scripts: (
+				{
+					filename = "pre-install.sh";
+					type = "preinstall";
+					sha256 = "PRE_INSTALL_SHA";
+				},
+				{
+					filename = "post-install.sh";
+					type = "postinstall";
+					sha256 = "POST_INSTALL_SHA";
+				}
+			);
+		};
+	};
+}

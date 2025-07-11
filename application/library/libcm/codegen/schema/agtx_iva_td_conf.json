@@ -1,0 +1,34 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_TD_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"en_block_det": {
+			"type": "boolean"
+		},
+		"en_redirect_det": {
+			"type": "boolean"
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"sensitivity": {
+			"type": "integer"
+		},
+		"endurance": {
+			"type": "integer"
+		},
+		"redirect_sensitivity": {
+			"type": "integer"
+		},
+		"redirect_global_change": {
+			"type": "integer"
+		},
+		"redirect_trigger_delay": {
+			"type": "integer"
+		}
+	}
+}

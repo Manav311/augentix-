@@ -1,0 +1,126 @@
+.red {
+  background-color: red;
+}
+
+input {
+  margin-right: 15px;
+  border-color: #ccc;
+}
+input:invalid {
+  border-color: red;
+}
+input:valid {
+  border-color: #ccc;
+}
+
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+  height: 450px;
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+.thumbnail {
+  padding: 0;
+  border: 0;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+.lang_1 {
+  background: #f1f1f1;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.lang_2 {
+  background: #f1f1f1;
+  position: absolute;
+  right: 90px;
+  top: 0;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {
+    height: auto;
+  }
+}
+tr {
+  height: 50px;
+}
+td {
+  white-space: nowrap;
+}
+a {
+  white-space: nowrap;
+}
+label {
+  margin-right: 15px;
+}
+
+select option.color {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.BLACK {
+  background: rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.RED {
+  background: rgba(200, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.GREEN {
+  background: rgba(0, 200, 0, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.BLUE {
+  background: rgba(0, 0, 255, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.YELLOW {
+  background: rgba(255, 255, 0, 1);
+  color: rgba(0, 0, 0, 1);
+}
+
+.PURPLE {
+  background: rgba(200, 0, 200, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.ORANGE {
+  background: rgba(255, 150, 0, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.WHITE {
+  background: rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 1);
+}

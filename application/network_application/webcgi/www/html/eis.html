@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/lib/jquery-3.3.1.min.js"></script>
+    <script src="../js/lib/popper.min.js"></script>
+    <script src="../js/lib/bootstrap.min.js"></script>
+    <script src="../js/lib/angular.min.js"></script>
+    <script src="../js/message.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/eis.js"></script>
+    <title>Augentix</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .dev-path {
+        border-bottom: 2px solid #333;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .channel-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-top: 10px;
+      }
+      .channel {
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .eis-strength-container {
+        display: block;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      .eis-strength-container label,
+      .eis-strength-container input {
+        margin-right: 5px;
+      }
+      h2 {
+        margin-top: 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-light">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <div class="row">
+            <div class="thumbnail">
+              <img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"/>
+            </div>
+            <div class="col-sm-8"></div>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar"></div>
+      </div>
+    </nav>
+    <div class="container-fluid text-center" ng-cloak>
+      <div class="row content">
+        <div class="col-sm-2 sidenav">
+          <p ng-repeat="x in LMenu" ng-hide="x.hide">
+            <a target="_self" href="{{x.href}}">{{x.txt[lang]}}</a>
+          </p>
+        </div>
+        <div class="col-sm-8 text-left">
+          <nav class="navbar navbar-borderless">
+            <div class="container-fluid">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li ng-repeat="x in VideoMenu" class="{{x.page_item}}">
+                    <a class="page-link" target="_self" href="{{x.href}}">{{x.txt[lang]}}</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </nav>
+            <div id="EIS config">
+              <div class="panel panel-borderless">
+                <div class="panel-body"></div>
+                <div ng-repeat="path in videoDevPref.input_path_list" class="dev-path">
+                  <h2>Path {{$index}}</h2>
+                  <div class="eis-strength-container">
+                    <label>{{msg_t.EIS_Strength[lang]}}: </label>
+                    <input type="range" ng-model="path.eis_strength" min="0" max="64" ng-change="updateStrength($index, path.eis_strength)">
+                    <input type="number" ng-model="path.eis_strength" min="0" max="64" ng-change="updateStrength($index, path.eis_strength)">
+                    <label>(0~64)</label>
+                  </div>
+                  <div class="channel-container">
+                    <div>
+                      {{msg_t.Enable_EIS[lang]}} :  &nbsp
+                    </div>
+                    <div class="channel" ng-repeat="n in [].constructor(getTotalChannels()) track by $index" ng-if="getChannelDevPath($index) == $parent.$index">
+                      <input type="checkbox" ng-model="getChannel($index).eis_en" ng-true-value="1" ng-false-value="0">
+                      {{msg_t.Channel[lang]}} {{$index + 1}}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label>{{msg_t.EIS_Note[lang]}}</label>
+                </div>
+                <br>
+                <button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+                <button class="btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+                <p> {{cmdStatus}}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

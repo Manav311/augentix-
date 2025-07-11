@@ -1,0 +1,58 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_RES_OPTION_S",
+	"properties": {
+		"strm_idx": {
+			"type": "integer"
+		},
+		"strm": {
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "object",
+				"title": "AGTX_STRM_RES_OPTION_S",
+				"properties": {
+					"res_idx": {
+						"type": "integer"
+					},
+					"res": {
+						"type": "array",
+						"minItems": 8,
+						"maxItems": 8,
+						"items": {
+							"type": "object",
+							"title": "AGTX_RES_ENTITY_S",
+							"properties": {
+								"width": {
+									"type": "integer"
+								},
+								"height": {
+									"type": "integer"
+								},
+								"max_frame_rate": {
+									"type": "array",
+									"minItems": 8,
+									"maxItems": 8,
+									"items": {
+										"type": "number"
+									}
+								},
+								"frame_rate_list": {
+									"type": "array",
+									"minItems": 60,
+									"maxItems": 60,
+									"items": {
+										"type": "number"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

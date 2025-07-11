@@ -1,0 +1,54 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_LOCAL_RECORD_CONF_S",
+	"properties": {
+		"enabled": {
+			"ui_type": "enum",
+			"default": 0,
+			"type": "integer",
+			"enum" : [0, 1],
+			"description": "Enable recording to local storage."
+		},	
+		"mode": {
+			"ui_type": "enum",
+			"default": "event",
+			"type": "string",
+			"enum": ["event", "continuous"],
+			"title": "AGTX_RECORD_MODE_E",
+			"description": "Modes of recording."
+		},
+		"pre_record_time": {
+			"ui_type": "number",
+			"default": 5,
+			"maximum": 10,
+			"minimum": 0,
+			"type": "integer",
+			"description": "Pre-recording time before event trigger. (unit: second)"
+		},
+		"post_record_time": {
+			"ui_type": "number",
+			"default": 0,
+			"maximum": 10,
+			"minimum": 0,
+			"type": "integer",
+			"description": "Post-recording time before event trigger. (unit: second)"
+		},
+		"min_event_time": {
+			"ui_type": "number",
+			"default": 10,
+			"maximum": 60,
+			"minimum": 5,
+			"type": "integer",
+			"description": "Min duration of a event. (unit: second)"
+		},
+		"max_event_time": {
+			"ui_type": "number",
+			"default": 55,
+			"maximum": 60,
+			"minimum": 5,
+			"type": "integer",
+			"description": "Max duration of a event. (unit: second)"
+		}
+	}
+}

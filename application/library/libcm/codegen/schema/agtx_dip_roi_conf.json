@@ -1,0 +1,140 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_ROI_CONF_S",
+	"comments": [
+		"===================================",
+		"== Region Of Interest parameters ==",
+		"===================================",
+		"ALSO SEE: MPI_setRoiAttr"
+	],
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"roi": {
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 2,
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_ROI_ATTR_S",
+				"properties": {
+					"luma_roi_sx": {
+						"ini_name": "luma_roi.sx",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"luma_roi_sy": {
+						"ini_name": "luma_roi.sy",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"luma_roi_ex": {
+						"ini_name": "luma_roi.ex",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1024,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"luma_roi_ey": {
+						"ini_name": "luma_roi.ey",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1024,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"awb_roi_sx": {
+						"ini_name": "awb_roi.sx",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"awb_roi_sy": {
+						"ini_name": "awb_roi.sy",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"awb_roi_ex": {
+						"ini_name": "awb_roi.ex",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1024,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"awb_roi_ey": {
+						"ini_name": "awb_roi.ey",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1024,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"zone_lum_avg_roi_sx": {
+						"ini_name": "zone_lum_avg_roi.sx",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"zone_lum_avg_roi_sy": {
+						"ini_name": "zone_lum_avg_roi.sy",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"zone_lum_avg_roi_ex": {
+						"ini_name": "zone_lum_avg_roi.ex",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1024,
+						"minimum": 0,
+						"maximum": 1024
+					},
+					"zone_lum_avg_roi_ey": {
+						"ini_name": "zone_lum_avg_roi.ey",
+						"ui_type": "number",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"default": 1024,
+						"minimum": 0,
+						"maximum": 1024
+					}
+				}
+			}
+		}
+	}
+}

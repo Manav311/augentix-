@@ -1,0 +1,14 @@
+# For now, EAIF supports in-app inferencing only.
+# Macro 'EAIF_INFERENCE_INAPP' should be always defined.
+CONFIG_CFLAGS +=
+CONFIG_CPPFLAGS += -DEAIF_INFERENCE_INAPP
+CONFIG_INCS :=
+CONFIG_LIBS :=
+
+ifeq (x$(CONFIG_LIBEAIF_REMOTE_DISABLE),x)
+	CONFIG_CPPFLAGS += -DEAIF_SUPPORT_JSON -DEAIF_SUPPORT_CURL
+	CONFIG_INCS += $(LIBCURL_INC) $(JSON_INC)
+	CONFIG_LIBS += -L$(JSON_LIB) -ljson-c
+	CONFIG_LIBS += -L$(LIBCURL_LIB) -lcurl
+	CONFIG_LIBS += -L$(ZLIB_LIB) -L$(OPENSSL_ROOT) -lz -lssl -lcrypto
+endif

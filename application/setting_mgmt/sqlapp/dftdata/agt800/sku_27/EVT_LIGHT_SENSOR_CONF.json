@@ -1,0 +1,49 @@
+{
+	"cmd_id": "AGTX_CMD_LIGHT_SENSOR_CONF",
+	"json_content": {
+	  "mode": "ADC",
+	  "adc": {
+			"night_th": 2500,
+			"day_th": 3000
+	  },
+	  "mpi": [
+		{
+		  "dev":0,
+		  "path":0,
+		  "polling_period_usec":3000000,
+		  "force_day_th": 10000,
+		  "day_th":850,
+		  "night_th":170,
+		  "day_delay":2,
+		  "night_delay":1,
+		  "iir_current_weight":128,
+		  "ir_amplitude_ratio":50,
+		  "ev_response_usec":500000,
+		  "ir_led_ctrl": [
+			  {
+				"duty_cycle": 0,
+				"light_strength":1024
+			  },
+			  {
+				"duty_cycle": 256,
+				"light_strength":989
+			  },
+			  {
+				"duty_cycle": 512,
+				"light_strength":954
+			  },
+			  {
+				"duty_cycle": 768,
+				"light_strength":919
+			  },
+			  {
+				"duty_cycle": 1024,
+				"light_strength":884
+			  }
+		  ]
+		}
+	  ]
+	}
+}
+
+

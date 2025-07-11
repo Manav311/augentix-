@@ -1,0 +1,102 @@
+menu "av_daemon"
+
+config APP_AV_MAIN2
+	bool "av_main2"
+	depends on APP_CENTCTRL
+	select LIBAGTX
+	select LIBAVFTR
+	select LIBTZ
+	default y
+	help
+	It designed to replace 'av_main' to have better performance and less dependency.
+
+config APP_AV_MAIN2_USE_CCSERVER
+	bool "av_main2 use ccserver"
+	depends on APP_AV_MAIN2
+	depends on APP_CENTCTRL
+	default y
+	help
+		use ccserver
+
+config APP_AV_MAIN2_ENABLE_ML
+	bool "enable machine learning features"
+	depends on APP_AV_MAIN2
+	default n
+	help
+		Enable machine learning features.
+		When enabled, you can choose to run ML models either
+		on local or remote core, and select specific model type.
+
+choice APP_AV_MAIN2_ML_MODE
+    bool "select ml features executing mode"
+    depends on APP_AV_MAIN2_ENABLE_ML
+
+config APP_AV_MAIN2_ENABLE_ML_LOCAL
+    bool "execute ml features on local core"
+    help
+        Run machine learning on local core
+
+config APP_AV_MAIN2_ENABLE_ML_REMOTE
+    bool "execute ml features on remote core"
+    help
+        Run machine learning on remote core
+endchoice
+
+choice APP_AV_MAIN2_ML_FEATURES
+    bool "select ODv5 model type"
+    depends on APP_AV_MAIN2_ENABLE_ML
+    depends on APP_AV_MAIN2_ENABLE_ML_LOCAL
+
+config APP_AV_MAIN2_ML_OD_PEOPLE_VEHICLE_PET_LOCAL
+    bool "object detection v5 (people vehicle pet)"
+    help
+        Run object detection v5 on local core and detect people, vehicles, and pets.
+
+config APP_AV_MAIN2_ML_OD_LITE_PEOPLE_VEHICLE_PET_LOCAL
+    bool "object detection v5 lite (people vehicle pet)"
+    help
+        Run object detection v5 on local core and detect people, vehicles, and pets.
+
+config APP_AV_MAIN2_ML_OD_LITE_PEOPLE_LOCAL
+    bool "object detection v5 lite (people)"
+    help
+        Run object detection v5 on local core and detect people.
+endchoice
+
+choice APP_AV_MAIN2_ML_FEATURES_REMOTE
+    bool "select ODv5 model type"
+    depends on APP_AV_MAIN2_ENABLE_ML
+    depends on APP_AV_MAIN2_ENABLE_ML_REMOTE
+
+config APP_AV_MAIN2_ML_OD_PEOPLE_VEHICLE_PET_REMOTE
+    bool "object detection v5 (people vehicle pet)"
+    help
+        Run object detection v5 on remote core and detect people, vehicles, and pets.
+
+config APP_AV_MAIN2_ML_OD_LITE_PEOPLE_VEHICLE_PET_REMOTE
+    bool "object detection v5 lite (people vehicle pet)"
+    help
+        Run object detection v5 on remote core and detect people, vehicles, and pets.
+
+config APP_AV_MAIN2_ML_OD_LITE_PEOPLE_REMOTE
+    bool "object detection v5 lite (people)"
+    help
+        Run object detection v5 on remote core and detect people.
+endchoice
+
+config APP_AV_MAIN2_USE_OD_PEOPLE_VEHICLE_PET
+    bool
+    default y if APP_AV_MAIN2_ML_OD_PEOPLE_VEHICLE_PET_LOCAL || APP_AV_MAIN2_ML_OD_PEOPLE_VEHICLE_PET_REMOTE
+    default n
+
+config APP_AV_MAIN2_USE_OD_LITE_PEOPLE_VEHICLE_PET
+    bool
+    default y if APP_AV_MAIN2_ML_OD_LITE_PEOPLE_VEHICLE_PET_LOCAL || APP_AV_MAIN2_ML_OD_LITE_PEOPLE_VEHICLE_PET_REMOTE
+    default n
+
+config APP_AV_MAIN2_USE_OD_LITE_PEOPLE
+    bool
+    default y if APP_AV_MAIN2_ML_OD_LITE_PEOPLE_LOCAL || APP_AV_MAIN2_ML_OD_LITE_PEOPLE_REMOTE
+    default n
+
+endmenu

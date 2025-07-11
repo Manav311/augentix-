@@ -1,0 +1,27 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_EVENT_PARAM_S",
+	"properties": {
+        "event_attr": {
+			"type": "array",
+			"minItems": 10,
+			"maxItems": 10,
+			"items": {
+				"type": "object",
+				"title": "AGTX_EVENT_ATTR_S",
+				"properties": {
+                    "name": {
+						"type": "string",
+						"maxLength": 128,
+						"description": "Event name."
+					},
+					"enabled": {
+						"type": "boolean",
+						"description": "Process GPIO/SW event list only when enabled."
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+"{"\
+"  "video_dev_idx": 0,"\
+"  "roi": ["\
+"    {"\
+"      "luma_roi_sx": 512,"\
+"      "luma_roi_sy": 341,"\
+"      "luma_roi_ex": 1024,"\
+"      "luma_roi_ey": 853,"\
+"      "awb_roi_sx": 0,"\
+"      "awb_roi_sy": 0,"\
+"      "awb_roi_ex": 1024,"\
+"      "awb_roi_ey": 1024"\
+"    },"\
+"    {"\
+"      "luma_roi_sx": 0,"\
+"      "luma_roi_sy": 341,"\
+"      "luma_roi_ex": 512,"\
+"      "luma_roi_ey": 853,"\
+"      "awb_roi_sx": 0,"\
+"      "awb_roi_sy": 0,"\
+"      "awb_roi_ex": 1024,"\
+"      "awb_roi_ey": 1024"\
+"    }"\
+"  ]"\
+"}

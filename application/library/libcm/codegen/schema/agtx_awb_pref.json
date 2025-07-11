@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_AWB_PREF_S",
+	"properties": {
+		"awb_mode": {
+			"type": "string",
+            "title": "AGTX_AWB_MODE_E",
+			"enum": ["MANUAL", "AUTO"]
+		},
+		"color_temp": {
+			"type": "integer",
+		},
+		"r_gain": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 100
+		},
+		"b_gain": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 100
+		}
+	}
+}

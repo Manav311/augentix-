@@ -1,0 +1,50 @@
+{
+	"color_mode":"AYUV_3544",
+	"channel":[0],
+	"rect":[[1280, 720]],
+	"regions":[
+		{
+			"region_num": 8,
+			"region":[[10, 10, 10, 10], [0, 0, 304, 164],[152, 164, 304, 164], [608, 0, 208, 164], [928, 320, 304, 164], [912, 412, 304, 164], [32, 600, 160, 80], [112, 640, 160, 80]],
+			"src":[
+				{
+					"type":"none"
+				},
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/grass-l.bmp"
+				},
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/pink-l.bmp"
+				},
+						{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/purple-l.bmp"
+				},
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/orange-l.bmp"
+				},
+				{
+					"type":"utf8",
+					"ttf_path":"/system/mpp/font/SourceHanSansTC-Normal.otf",
+					"txt":"Camera 01",
+					"size":30,
+					"backcol":"WHITE",
+					"forecol":[0, 0, 0],
+					"outline_width":0,
+					"outcol":[0, 0, 0]
+				},
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/red.bmp"
+				},
+				{
+					"type":"bmp",
+					"src_path":"/mnt/nfs/ethnfs/green.bmp"
+				}
+			]
+		}
+	]
+}

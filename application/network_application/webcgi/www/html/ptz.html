@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/lib/jquery-3.3.1.min.js"></script>
+    <script src="../js/lib/popper.min.js"></script>
+    <script src="../js/lib/bootstrap.min.js"></script>
+    <script src="../js/lib/angular.min.js"></script>
+    <script src="../js/message.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/ptz.js"></script>
+    <title>Augentix</title>
+    <style>
+    .btn.btn-light.focus,
+    .btn.btn-light:focus {
+      color: #000;
+      background-color: #787878;
+      border-color: #f8f8f8; /*set focus color*/
+    }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-light">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <div class="row">
+              <div class="thumbnail">
+                 <img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"/>
+              </div>
+              <div class="col-sm-8"></div>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid text-center" ng-cloak>
+      <div class="row content">
+        <div class="col-sm-2 sidenav">
+          <p ng-repeat="x in LMenu" ng-hide="x.hide"><a target="_self" href="{{x.href}}">{{x.txt[lang]}}</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+          <nav class="navbar navbar-borderless">
+            <div class="container-fluid">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li ng-repeat="x in VideoMenu" class="{{x.page_item}}" >
+                  <a class="page-link" target="_self" href="{{x.href}}">{{x.txt[lang]}}</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </nav>
+          <div id="div_ptz_config">
+            <div class="panel panel-borderless">
+              <!-- Default panel contents -->
+              <div class="panel-body"></div>
+              <table>
+                <tr>
+                  <td> <input type="checkbox" ng-model="ptzPref.enabled" ng-change="checkAroiStatus()"/> {{msg_t.Enable_Pan_Tilt_Zoom[lang]}}</td>
+                </tr>
+                <tr hidden>
+                  <td> {{msg_t.Control_mode[lang]}} :
+                    <select ng-model="ptzCtx.mode" ng-click="ptzCtxModeChange()">
+                      <option value="0"> {{msg_t.Simple[lang]}}</option>
+                      <option value="1"> {{msg_t.Full[lang]}}</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+              <div id="easy_control">
+                <table>
+                  <tr>
+                    <td> {{msg_t.PTZ_ctrl_win[lang]}} :</td>
+                    <td>
+                      Chn : <select ng-model="ptzPref.subwindow_disp.win[0].chn_idx">
+                          <option val="0">0</option>
+                          <option val="1">1</option>
+                      </select>
+                      Win : <select ng-model="ptzPref.subwindow_disp.win[0].win_idx">
+                        <option val="0">0</option>
+                        <option val="1">1</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{{msg_t.PTZ_Roi_Ratio[lang]}} :</td>
+                    <td> {{msg_t.Width[lang]}} : <input type="number" ng-model="ptzPref.roi_height" min="1" max="1023"/></td>
+                    <td> {{msg_t.Height[lang]}} : <input type="number" ng-model="ptzPref.roi_width" min="1" max="1023"/></td>
+                  </tr>
+                  <tr>
+                    <td>{{msg_t.PTZ_Mode[lang]}} :</td>
+                    <td>
+                      <select ng-model="ptzPref.mode">
+                        <option value="MANUAL">{{msg_t.Manual[lang]}}</option>
+                        <option value="AUTO">{{msg_t.Auto[lang]}}</option>
+                        <option value="SCAN">{{msg_t.Scan[lang]}}</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{{msg_t.Ctrl_Speed[lang]}} :</td>
+                    <td><input type="range" ng-model="ptzCtx.ctrl_speed" min="1" max="8" ng-change="updateSpeed()"/></td>
+                    <td><input type="number" ng-model="ptzCtx.ctrl_speed" min="1" max="8" ng-change="updateSpeed()"/></td>
+                  </tr>
+                  <tr id="ctrl_panel" class="panel panel-borderless">
+                    <table tabindex="1" ng-keyUp="keyPress(0, $event)", ng-keyDown="keyPress(1, $event)" style="outline:none">
+                      <tr class="panel-body"><td>{{msg_t.Control_Panel[lang]}}</td></tr>
+                      <tr class="panel-body">
+                        <td>
+                          <p id="btn_zoom_in" type="button" class="btn btn-light btn-lg" ng-mouseup=
+                          "mouse_update(-1)" ng-mousedown="mouse_update(0)">+
+                          </p>
+                          <p id="btn_mv_top" type="button" class="btn btn-light btn-lg" ng-mouseup=
+                          "mouse_update(-1)" ng-mousedown="mouse_update(2)">^
+                          </p>
+                          <p id="btn_zoom_out" type="button" class="btn btn-light btn-lg" ng-mouseup=
+                          "mouse_update(-1)" ng-mousedown="mouse_update(1)">-
+                          </p>
+                        </td>
+                      </tr>
+                      <tr class="panel-body">
+                        <td>
+                          <p id="btn_mv_left" type="button" class="btn btn-light btn-lg" ng-mouseup=
+                          "mouse_update(-1)" ng-mousedown="mouse_update(4)">{{msg_t.Left[lang]}}
+                          </p>
+                          <p id="btn_mv_bottom" type="button" class="btn btn-light btn-lg" ng-mouseup=
+                          "mouse_update(-1)" ng-mousedown="mouse_update(3)">v
+                          </p>
+                          <p id="btn_mv_right" type="button" class="btn btn-light btn-lg" ng-mouseup=
+                          "mouse_update(-1)" ng-mousedown="mouse_update(5)">>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </tr>
+                </table>
+              </div>
+              <div id="full_control" style="display:none">
+                <table>
+                  <tr>
+                    <td> {{msg_t.PTZ_ctrl_win[lang]}} :</td>
+                    <td>
+                      <select ng-model="ptzPref.subwindow_disp.win[0].chn_idx">
+                        <option val="0">0</option>
+                        <option val="1">1</option>
+                      </select>
+                      <select ng-model="ptzPref.subwindow_disp.win[0].win_idx">
+                        <option val="0">0</option>
+                        <option val="1">1</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{{msg_t.PTZ_Roi_Ratio[lang]}} : </td>
+                    <td> {{msg_t.Width[lang]}} : <input type="number" ng-model="ptzPref.roi_height" min="1" max="1023" /></td>
+                    <td> {{msg_t.Height[lang]}} : <input type="number" ng-model="ptzPref.roi_width" min="1" max="1023" /></td>
+                  </tr>
+                  <tr>
+                    <td>{{msg_t.PTZ_Mode[lang]}} :</td>
+                    <td>
+                      <select ng-model="ptzPref.mode">
+                        <option value="MANUAL">{{msg_t.Manual[lang]}}</option>
+                        <option value="AUTO">{{msg_t.Auto[lang]}}</option>
+                        <option value="SCAN">{{msg_t.Scan[lang]}}</option>
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                    <td>{{msg_t.Win_Speed[lang]}} X :</td>
+                    <td><input type="number" ng-model="ptzPref.win_speed_x" min="-128" max="128" /></td>
+                    <td>Y :</td>
+                    <td><input type="number" ng-model="ptzPref.win_speed_y" min="-128" max="128" /></td>
+                  </tr>
+                  <tr>
+                    <td>{{msg_t.Zoom_Speed[lang]}} W :</td>
+                    <td><input type="number" ng-model="ptzPref.zoom_speed_width" min="-28985" max="28985" /></td>
+                    <td>H :</td>
+                    <td> <input type="number" ng-model="ptzPref.zoom_speed_height" min="-28985" max="28985" /></td>
+                  </tr>
+                </table>
+              </div>
+              <br>
+              <button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+              <button class="btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+              <p> {{cmdStatus}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

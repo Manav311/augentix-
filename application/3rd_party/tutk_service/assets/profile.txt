@@ -1,0 +1,128 @@
+{
+    "functionSets": [
+      "IOTCAV:audioStreaming",
+      "IOTCAV:videoStreaming",
+      "IOTCAV:speaker",
+      "IOTCAV:playback",
+      "cloudRecording",
+      "storageInfo",
+      "pushNotification",
+      "deviceInfo",
+      "webrtcEx",
+	  "getStorageInfo",
+	  "queryEventList"
+    ],
+    "functions": [
+      {
+        "args": {
+          "value": "Boolean"
+        },
+        "func": "IOTCAV:startAudio"
+      },
+      {
+        "args": {
+          "value": "Boolean"
+        },
+        "func": "IOTCAV:startVideo"
+      },
+      {
+        "args": {
+          "value": "Boolean"
+        },
+        "func": "IOTCAV:startSpeaker"
+      },
+      {
+        "args": {
+          "ctrl": "Int",
+          "fileName": "String",
+          "iotcChannel": "Int"
+        },
+        "func": "IOTCAV:playbackControl"
+      },
+      {
+        "args": {
+          "header": "Dictionary",
+          "url": "String"
+        },
+        "func": "setCloudRecordingEndpoint"
+      },
+      {
+         "func":"IOTCAV:playbackSeek",
+         "args":{
+            "time":"Int"
+         }
+      },
+      {
+        "func": "queryStorageList",
+        "return": {
+          "list": [
+            "String"
+          ]
+        }
+      },
+      {
+        "args": {
+          "header": "Dictionary",
+          "service": "String",
+          "url": "String"
+        },
+        "func": "addPushNotificationService"
+      },
+      {
+        "func": "getDeviceInfo",
+        "return": {
+          "ip": "String",
+          "mac": "String",
+          "model": "String",
+          "name": "String",
+          "serialNumber": "String",
+          "skuNumber": "String",
+          "type": "String"
+        }
+      },
+      {
+        "func": "queryEventList",
+        "args": {
+          "startTime": "Int",
+          "order": "String",
+          "listNumber": "Int",
+          "eventTypes": [
+            "String"
+          ],
+          "channels": [
+            "Int"
+          ]
+        },
+        "return": {
+          "results": [
+            {
+              "eventTypes": [
+                "String"
+              ],
+              "timestamp": "Int",
+              "fileName": "String",
+              "thumbnailUrl": "String",
+              "channel": "Int",
+              "duration": "Int"
+            }
+          ]
+        }
+      },
+      { 
+      "func":"getStorageInfo", 
+      "args":{ 
+        "value":"String" 
+      }, 
+      "return":{ 
+        "totalSize":"Int", 
+        "freeSize":"Int" 
+      } 
+    }
+    ],
+    "fwVer": "V1.0.0",
+    "manufacturer": "Augentix",
+    "model": "ModelName",
+    "name": "Augentix Security Camera",
+    "type": "camera",
+    "version": "1.0"
+}

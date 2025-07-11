@@ -1,0 +1,13 @@
+Pre-requisites:
+
+1. Get Tuya IPC SDK tarball. You may need to contact Tuya to get the file.
+2. Untar Tuya IPC SDK to a directory of your choice.
+3. Define a environment variable "TUYA_IPC_SDK_DIR" pointing to the directory containing the SDK.
+   During build flow, two directories will be used.
+   - $TUYA_IPC_SDK_DIR/include
+   - $TUYA_IPC_SDK_DIR/libs
+
+Building the application:
+
+1. Simply type "make clean && make"
+

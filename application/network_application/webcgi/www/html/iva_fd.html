@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/iva_eaif.js"></script>
+  <title>Augentix</title>
+  <script language="Javascript">
+  </script>
+  <style type="text/css">
+  .hide {
+  display: none;
+  }
+  .classify_tag {}
+  .detection_tag {}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="dropdown">
+              <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle=
+              "dropdown" id="dropdownMenuButton" type="button">{{CurPage[lang]}}</button>
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                <a class="{{x.dropdown}}" href="{{x.href}}" ng-repeat="x in IvaDropDown" target=
+                "_self">{{x.txt[lang]}}</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body"></div>
+            <table id="optiontable">
+              <tr>
+                <td><input ng-change="checkPdStatus()" ng-model="fdStatus.enabled" type="checkbox">{{msg_t.Enable_Face_Detect[lang]}}</td>
+              </tr>
+              <tr class="hide">
+                <td>{{msg_t.Api[lang]}}</td>
+                <td></td>
+                <td><select ng-model="eaifPref.api" ng-change="update_api_tag()">
+                  <option value="FACEDET">
+                   {{msg_t.Face_Detect[lang]}}
+                  </option>
+                  <option value="HUMAN_CLASSIFY">
+                    {{msg_t.Human_classify[lang]}}
+                  </option>
+                </select></td>
+              </tr>
+              <tr ng-show="canShow">
+                <td>{{msg_t.Obj_Life_Thr[lang]}}</td>
+                <td><input max="160" min="0" ng-model="eaifPref.obj_life_th" type="range"></td>
+                <td><input max="160" min="0" ng-model="eaifPref.obj_life_th" type="number"></td>
+              </tr>
+              <tr class="hide">
+                <td>{{msg_t.Target_idx[lang]}}
+                DEV<input max="8" min="0" ng-model="target_idx.dev" type="number" ng-change="update_target_idx()">
+                <td>CHN<input max="8" min="0" ng-model="target_idx.chn" type="number" ng-change="update_target_idx()">
+                <td>WIN<input max="8" min="0" ng-model="target_idx.win" type="number" ng-change="update_target_idx()">
+              </tr>
+              <tr class="hide">
+                <td>{{msg_t.Snapshot_Size[lang]}}</td>
+                <td>{{msg_t.Width[lang]}}<input max="3000" min="0" ng-model="eaifPref.snapshot_width" type="number"></td>
+                <td>{{msg_t.Height[lang]}}<input max="3000" min="0" ng-model="eaifPref.snapshot_height" type="number"></td>
+              </tr>
+
+              <tr class="hide">
+                <td>{{msg_t.Data_format[lang]}}</td>
+                <td></td>
+                <td><select ng-model="eaifPref.data_fmt">
+                  <option value="JPEG">
+                    {{msg_t.Jpeg[lang]}}
+                  </option>
+                  <option value="Y">
+                    {{msg_t.Raw_Y[lang]}}
+                  </option>
+                  <option value="YUV">
+                    {{msg_t.Raw_YUV[lang]}}
+                  </option>
+                  <option value="RGB">
+                    {{msg_t.Raw_RGB[lang]}}
+                  </option>
+                  <option value="MPI_JPEG">
+                    {{msg_t.Mpi_Jpeg[lang]}}
+                  </option>
+                  <option value="MPI_Y">
+                    {{msg_t.Mpi_RawY[lang]}}
+                  </option>
+                  <option value="MPI_YUV">
+                    {{msg_t.Mpi_RawYUV[lang]}}
+                  </option>
+                  <option value="MPI_RGB">
+                    {{msg_t.Mpi_RawRGB[lang]}}
+                  </option>
+                </select></td>
+              </tr>
+              <tr class="classify_tag" ng-show="canShow">
+                <td>{{msg_t.Pos_Classify_Period[lang]}}</td>
+                <td></td>
+                <td><input min="1" max="999" ng-model="eaifPref.pos_classify_period" type="number"></td>
+              </tr>
+              <tr class="classify_tag" ng-show="canShow">
+                <td>{{msg_t.Pos_Stop_Count_Thr[lang]}}</td>
+                <td></td>
+                <td><input min="1" max="99" ng-model="eaifPref.pos_stop_count_th" type="number"></td>
+              </tr>
+              <tr class="classify_tag" ng-show="canShow">
+                <td>{{msg_t.Neg_Classify_Period[lang]}}</td>
+                <td></td>
+                <td><input min="0" max="999" ng-model="eaifPref.neg_classify_period" type="number"></td>
+              </tr>
+              <tr class="classify_tag" ng-show="canShow">
+                <td>{{msg_t.Obj_Exist_Classify_Period[lang]}}</td>
+                <td></td>
+                <td><input min="0" max="999" ng-model="eaifPref.obj_exist_classify_period" type="number"></td>
+              </tr>
+              <tr class="detection_tag">
+                <td>{{msg_t.Detection_Period[lang]}}</td>
+                <td></td>
+                <td><input min="0" max="999" ng-model="eaifPref.detection_period" type="number"></td>
+              </tr>
+              <tr ng-show="!canShow">
+                <td>{{msg_t.Inf_With_ObjList[lang]}}</td>
+                <td></td>
+                <td><input ng-model="eaifPref.inf_with_obj_list" type="checkbox" ng-true-value="1" ng-false-value="0"></td>
+              </tr>
+              <tr class="hide">
+                <td>{{msg_t.Url[lang]}}</td>
+                <td><button ng-click="toggle_inference_mode()">{{toggle_button_text}}</button></td>
+                <td><input maxlength="128" ng-model="eaifPref.url" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,128}"
+                size="40" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+              <tr class="hide">
+                <td>face_detect</td>
+                <td></td>
+                <td><input maxlength="128" ng-model="eaifPref.face_detect_model" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,32}"
+                size="48" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+              <tr class="hide">
+                <td>face_reco</td>
+                <td></td>
+                <td><input maxlength="128" ng-model="eaifPref.face_reco_model" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,32}"
+                size="48" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+              <tr class="hide">
+                <td>detect</td>
+                <td></td>
+                <td><input maxlength="128" ng-model="eaifPref.detect_model" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,128}"
+                size="48" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+              <tr class="hide">
+                <td>classify</td>
+                <td></td>
+                <td><input maxlength="128" ng-model="eaifPref.classify_model" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,128}"
+                size="48" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+              <tr class="hide">
+                <td>classify_cv</td>
+                <td></td>
+                <td><input maxlength="128" ng-model="eaifPref.classify_cv_model" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,128}"
+                size="48" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+              <tr class="hide">
+                <td>human_classify</td>
+                <td></td>
+                <td><input maxlength="128" ng-model="eaifPref.human_classify_model" pattern=
+                "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,128}"
+                size="48" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+              </tr>
+            </table><button class="btn btn-info" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+            <button class="btn btn-info" ng-disabled="!canApply" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+            <p>{{cmdStatus}}</p><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

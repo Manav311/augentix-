@@ -1,0 +1,60 @@
+choice
+	prompt "neural network inference backend"
+
+	default LIBINF_TFLITE
+
+	config LIBINF_NCNN
+		bool "use ncnn"
+
+	config LIBINF_NCNN_COMPACT
+		bool "use ncnn compact (only support HD/ ODv5)"
+
+	config LIBINF_NCNN_MINIMAL
+		bool "use ncnn minimal (only support HD)"
+
+	config LIBINF_TFLITE
+		bool "use tflite"
+
+	config LIBINF_TFLITE_OPTIM
+		bool "use tflite slim"
+
+	config LIBINF_MICROLITE
+		bool "use microlite"
+
+
+endchoice
+
+config LIBINF_TFLITE_TOOL
+	bool "enable tflite tool"
+	depends on LIBINF_TFLITE || LIBINF_TFLITE_OPTIM
+	default n
+
+config LIBINF_REMOTE_CORE
+	bool "execute inf at remote core"
+	depends on LIBINF_MICROLITE
+	select LIBAMPC
+	default n
+
+config LIBINF_INSTALL_HUMAN_DETECT_MODELS
+	bool "install human detection model"
+	default y
+
+config LIBINF_INSTALL_FACE_MODELS
+	bool "install face model"
+	depends on LIBINF_TFLITE || LIBINF_TFLITE_OPTIM || LIBINF_MICROLITE
+	default n
+
+config LIBINF_INSTALL_OBJECT_CLASSIFIER_MODELS
+	bool "install object classifier model"
+	depends on LIBINF_TFLITE || LIBINF_TFLITE_OPTIM || LIBINF_MICROLITE
+	default n
+
+config LIBINF_INSTALL_OBJECT_CLASSIFIER_HUMAN_ONLY_MODELS
+	bool "install object classifier model (human only)"
+	depends on LIBINF_TFLITE || LIBINF_TFLITE_OPTIM || LIBINF_MICROLITE
+	default n
+
+config LIBINF_INSTALL_OBJECT_DETECTION_YOLO_MODELS
+	bool "install and enable callback based object detecton"
+	depends on LIBINF_NCNN
+	default n

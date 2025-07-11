@@ -1,0 +1,30 @@
+menu "streaming_server"
+
+config APP_LIVE555
+	bool "live555"
+	select LIBADO
+	default y
+
+config APP_RTSP_SERVER_ENABLE_IVA
+	bool "RTSP Server enable IVA"
+	select LIBAVFTR
+	depends on APP_LIVE555
+	default y
+	help
+		When the option is enabled, rtsp server use libavftr API to get vaftr shm to generate SEI.
+
+config APP_FLV_SERVER
+	bool "flv_server"
+	default y
+
+config APP_SUPPORT_HTTPS
+	bool "support https"
+	default y
+	depends on APP_FLV_SERVER
+
+config APP_WEBSOCKET_AUDIO_PLAYBACK
+	bool "support audio playback based on websocket"
+	default y
+	depends on APP_SUPPORT_HTTPS
+
+endmenu

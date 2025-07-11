@@ -1,0 +1,10 @@
+{
+  "cmd_id": "AGTX_CMD_LSD_CONF",
+  "json_content": {
+    "enabled": 0,
+    "audio_dev_idx": 0,
+    "volume": 95,
+    "duration": 1.0,
+    "suppression": 2.0
+  }
+}

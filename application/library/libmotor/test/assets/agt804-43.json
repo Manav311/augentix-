@@ -1,0 +1,35 @@
+{
+	"type": "gpio_motor",
+	"limit":[
+		{
+			"min_theta":-130,
+			"max_theta":180,
+			"min_velocity":5317,
+			"max_velocity":5317,
+			"default_velocity":5317,
+			"center_position": 0
+		},
+		{
+			"min_theta":-70,
+			"max_theta": 70,
+			"min_velocity":5317,
+			"max_velocity":5317,
+			"default_velocity":5317,
+			"center_position": 0
+		},
+		{
+			"min_theta":0,
+			"max_theta":0,
+			"min_velocity":0,
+			"max_velocity":0,
+			"default_velocity":0,
+			"center_position": 0
+		}
+	],
+	"step_angle": 5.625,
+	"motor_direction_factor":["left", "up", "none"],
+	"ptz_speed_factor": [0.219, 0.219, 0],
+	"x_gpio": [23, 22, 66, 67],
+	"y_gpio": [14, 15, 26, 27],
+	"z_gpio":-1
+}

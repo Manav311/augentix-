@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <link href="../css/agtx_player.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/iva_fr.js"></script>
+  <script src="../js/lib/flv.min.js"></script>
+  <script src="../js/lib/idb.min.js"></script>
+  <script src="../js/agtx_player_check.js"></script>
+  <script src="../js/lib/signalr.min.js"></script>
+  <script type="module" src="../js/agtx_player_srv.js"></script>
+  <script type="module" src="../js/agtx_player_vm.js"></script>
+  <style>
+    select {
+        width: 150px;
+        margin: 10px;
+    }
+    select:focus {
+        min-width: 150px;
+        width: auto;
+    }
+    .scrolling-wrapper {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      display: flex;
+      white-space: nowrap;
+    }
+    table, th , td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+    table tr:nth-child(odd) {
+      background-color: #f1f1f1;
+    }
+    table tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+  </style>
+  <script type="module">
+  $(async function() {
+    // web player
+    const mainUrl = window.flvLiveAudio0;
+    const subUrl = window.flvLiveAudio1;
+    const mainRelayUrl = window.flvRelayLiveAudio0;
+    const subRelayUrl = window.flvRelayLiveAudio1;
+    const { core, snapshot } = window.augentixPlayerViewModel || {};
+    await core?.init({ langId, mainUrl, subUrl, mainRelayUrl, subRelayUrl, mode: 1, clientWidth: 1280, clientHeight: 720 }); // mode: 1 face recognition
+    snapshot?.init({ core, mode: 1 }); // mode: 1 face recognition
+  });
+  </script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="scrolling-wrapper">
+      <div class="sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="dropdown">
+              <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle=
+              "dropdown" id="dropdownMenuButton" type="button">{{CurPage[lang]}}</button>
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                <a class="{{x.dropdown}}" href="{{x.href}}" ng-repeat="x in IvaDropDown" target=
+                "_self">{{x.txt[lang]}}</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <td><input ng-change="checkPdStatus(); sendData()" ng-model="faceStatus.enabled" type="checkbox">{{msg_t.Enable_Face_Reco[lang]}}</td>
+        </div>
+        <div ng-show="faceStatus.enabled">
+          <div>
+            <td><input type="radio" name="method" ng-model="showHideTrigger" ng-value="false">{{msg_t.RegisterBySnapshot[lang]}}</td>
+          </div>
+          <div ng-show="!showHideTrigger" style="margin-left:40px;">
+            <div class="panel panel-default">
+              <div class="panel-heading"></div>
+              <div class="panel-body" style="position:relative;">
+                <div id="agtx-player-preview"></div>
+                <div>{{msg_t.EnterFacePhotoName[lang]}} : <input ng-model="captureName" type="text"></div>
+                <div><button class="btn btn-info" ng-click="precheckCapture()" ng-disabled="!canUpload">{{msg_t.Upload[lang]}}</button></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <input type="radio" name="method" ng-model="showHideTrigger" ng-value="true">{{msg_t.RegisterByUpload[lang]}}
+          </div>
+          <div ng-show="showHideTrigger" style="margin-left:40px;">
+              <div>
+                <button class="btn btn-info" onclick="file_id.click()">{{msg_t.SelectFile[lang]}}</button>
+                <td><input file-model="faceFile" type="file" onchange="upload_check()" id="file_id" accept=".jpg" style="display: none"><p id="selected_file_name"></p></td>
+              </div>
+              <div>{{msg_t.EnterFacePhotoName[lang]}} : <input ng-model="photoName" type="text"></div>
+              <div><button class="btn btn-info" ng-disabled="!canUpload" ng-click="precheckUpload()">{{msg_t.Upload[lang]}}</button></div>
+          </div>
+        </div>
+        <div>{{cmdStatus}}</div>
+        <div ng-show="faceStatus.enabled">
+          <div><button class="btn btn-info" ng-click="showFaceExample = !showFaceExample" ng-hide="showFaceExample">{{msg_t.ShowExample[lang]}}</button></div>
+          <div><button class="btn btn-info" ng-click="showFaceExample = !showFaceExample" ng-show="showFaceExample">{{msg_t.HideExample[lang]}}</button></div>
+          <div ng-show="showFaceExample">
+            <div>Registering multiple angles of face photos helps to identify</div>
+            <table>
+              <tr>
+                <td>Angles</td>
+                <td>Front</td>
+                <td>Left 30°</td>
+                <td>Right 30°</td>
+                <td>Head down 30°</td>
+                <td>Head up 30°</td>
+              </tr>
+              <tr>
+                <td>Example photos</td>
+                <td><img src="../img/Example_F.jpg"></td>
+                <td><img src="../img/Example_L.jpg"></td>
+                <td><img src="../img/Example_R.jpg"></td>
+                <td><img src="../img/Example_D.jpg"></td>
+                <td><img src="../img/Example_U.jpg"></td>
+              </tr>
+              <tr>
+                <td>Example names</td>
+                <td>Example_F.jpg</td>
+                <td>Example_L.jpg</td>
+                <td>Example_R.jpg</td>
+                <td>Example_D.jpg</td>
+                <td>Example_U.jpg</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="text-left" ng-show="faceStatus.enabled">
+        <div>Registered Faces</div>
+        <select size="10" multiple ng-model="selectedPhoto" ng-change="setSelectedName()" ng-options="x for x in faceModuleData.FaceModelList">
+           <option value='' style="display: none"></option>
+        </select>
+        <div><button class="btn btn-info" ng-click="unregisterFaceModel()">Remove</button><button class="btn btn-info" ng-click="getFaceModelList()">Reload</button></div>
+        <div ng-repeat="photo in selectedPhoto">
+          <img ng-src="/faces/{{photo}}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

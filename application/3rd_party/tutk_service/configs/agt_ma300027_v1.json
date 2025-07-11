@@ -1,0 +1,25 @@
+{
+    "pwr_mgmt":{
+    "gpio":10,
+    "active":0,
+    "battery_adc_ch":3,
+    "off_thre":640,
+    "on_thre":747
+    },
+    "no_session_timeout": 30,
+    "sleep_timeout":180,
+    "sleep_response":50,
+    "video":{
+        "chn":0
+    },
+    "battery_level":{
+        "adc_val":[875, 845, 828, 815, 804, 794, 783, 772, 762, 747, 693],
+        "level":[100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0],
+        "low_battery_warning":20
+    },
+    "detect_event":{
+        "adc":2,
+        "threshold": 285,
+        "detect_event_gpio":5
+    }
+}

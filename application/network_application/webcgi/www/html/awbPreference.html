@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <link href="../css/agtx_player.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/awbPref.js"></script>
+  <script src="../js/lib/flv.min.js"></script>
+  <script src="../js/agtx_player_check.js"></script>
+  <script src="../js/lib/signalr.min.js"></script>
+  <script type="module" src="../js/agtx_player_srv.js"></script>
+  <script type="module" src="../js/agtx_player_vm.js"></script>
+  <script type="module">
+  $(async function() {
+    const mainUrl = window.flvLiveAudio0;
+    const subUrl = window.flvLiveAudio1;
+    const mainRelayUrl = window.flvRelayLiveAudio0;
+    const subRelayUrl = window.flvRelayLiveAudio1;
+    const { core } = window.augentixPlayerViewModel || {};
+    await core?.init({ langId, mainUrl, subUrl, mainRelayUrl, subRelayUrl });
+  });
+  </script>  
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left" ng-cloak="">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="imagePreference.html" target="_self">{{msg_t.Image_Preference[lang]}}</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="awbPreference.html" target="_self">{{msg_t.AWB_Preference[lang]}}</a>
+                </li>
+                <li class="page-item" ng-hide="Disrval()">
+                  <a class="page-link" href="stitching.html" target="_self">{{msg_t.Stitching[lang]}}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="cameraAdv.html" target="_self">{{msg_t.Advanced_Setting[lang]}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+              <div id="agtx-player-preview"></div>
+              <p>{{msg_t.White_Balance[lang]}}</p>
+              <hr>
+              <p></p>
+              <table>
+                <tr>
+                  <td><label><input ng-model="awbPref.mode" ng-value="1" type=
+                  "radio">{{msg_t.Auto_Tracking_White_Balance[lang]}}</label></td>
+                </tr>
+                <tr>
+                  <td><label><input ng-model="awbPref.mode" ng-value="0" type=
+                  "radio">{{msg_t.Manual_White_Balance[lang]}}</label> <label><select class="changes" name="current"
+                  ng-disabled="AutoMode()" ng-model="awbPref.color_temp">
+                    <option ng-value="2700">
+                      2700K
+                    </option>
+                    <option ng-value="4150">
+                      4150K
+                    </option>
+                    <option ng-value="6500">
+                      6500K
+                    </option>
+                    <option ng-value="8000">
+                      8000K
+                    </option>
+                  </select></label></td>
+                </tr>
+              </table>
+              <table>
+                <tr>
+                  <td><label>{{msg_t.Red_Gain[lang]}}</label></td>
+                  <td><input max="100" min="0" ng-model="awbPref.r_gain" type="range"></td>
+                  <td><input ng-model="awbPref.r_gain" required="" type="number">(0~100)</td>
+                </tr>
+                <tr>
+                  <td><label>{{msg_t.Blue_Gain[lang]}}</label></td>
+                  <td><input max="100" min="0" ng-model="awbPref.b_gain" type="range"></td>
+                  <td><input ng-model="awbPref.b_gain" required="" type="number">(0~100)</td>
+                </tr>
+              </table><button class="btn btn-info" ng-disabled="!canApply" ng-click="getData()">{{msg_t.Read_setting[lang]}}</button>
+              <button class="btn btn-info" ng-click="sendData()">{{msg_t.Apply[lang]}}</button>
+              <p>{{cmdStatus}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+	"obj_life_th": 30,
+	"loiter_period_th": 300,
+	"overlap_ratio_th": 25,
+	"roi": {
+		"start_x": 670,
+		"start_y": 0,
+		"end_x": 1250,
+		"end_y": 1080
+	}
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/wireless.js"></script>
+  <title>Augentix</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                <!-- <li class="page-item active"><a class="page-link" href="#">General</a></li> -->
+                  <li class="page-item"><a class="page-link" target="_self" href="networkInterface.html">{{msg_t.Wired_Network_Interface[lang]}}</a></li>
+                  <li class="page-item active"><a class="page-link" target="_self" href="wireless.html">{{msg_t.Wireless_Network_Interface[lang]}}</a></li>
+                </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <p>{{msg_t.Wireless_Network_Interface[lang]}}
+              <hr/>
+            </p>            
+            <table>
+              <tr>
+                <td width="110"></td>
+                <td>SSID:</td>
+                <td>
+                  <select name="ssid_name" ng-model="linkwifi.ssid">
+                    <option ng-repeat="x in wireless_ssid.SSID track by $index">{{x}}</option>
+                  </select>
+                </td>
+                <td>
+                  <button class="btn btn-info" ng-click="getSSID()">{{msg_t.Scan_WIFI[lang]}}</button>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                  <td>PSK:</td>
+                  <td><input id="pwd" ng-model="linkwifi.psk" type="password"></td>
+                  <td><button class="btn btn-info" ng-click="showHidePwd()">{{msg_t.Hide_Or_Show_Password[lang]}}</button> </td>
+                </tr>
+                <tr>
+                 <td></td>
+                 <td>{{msg_t.connected_SSID[lang]}}</td>
+                 <td ><lable style="background-color:lightgrey;color:green">{{wlanInfo.ssid}}</lable></td>
+                </tr>
+              <tr>
+                <td></td>
+                  <td>{{msg_t.wireless_IP[lang]}}</td>
+                <td ><lable style="background-color:lightgrey;color:green">{{wlanInfo.wifiIP}}</lable></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><button class="btn btn-info" ng-click="setupwifi()" ng-disabled="!canApply">{{msg_t.connect_wifi[lang]}}</button></td>
+                <td><button class="btn btn-info" ng-click="disconnect_wifi()" ng-disabled="!canApply">{{msg_t.disconnect_wifi[lang]}}</button> </td>
+              </tr>
+            </table>
+            <p> {{cmdStatus}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

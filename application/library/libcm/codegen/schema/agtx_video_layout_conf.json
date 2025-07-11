@@ -1,0 +1,117 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_LAYOUT_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"type": "integer"
+		},
+		"layout_num" : {
+			"type": "integer"
+		},
+		"layout_en" : {
+			"type": "boolean"
+		},
+		"video_layout": {
+			"type": "array",
+			"maxItems": 4,
+			"minItems": 4,
+			"items": {
+				"type": "object",
+				"title": "AGTX_LAYOUT_PARAM_S",
+				"properties": {
+					"video_strm_idx": {
+						"type": "integer"
+					},
+					"window_num": {
+						"type": "integer"
+					},
+					"window_array": {
+						"type": "array",
+						"maxItems": 9,
+						"minItems": 1,
+						"items": {
+							"type": "object",
+							"title": "AGTX_WINDOW_PARAM_S",
+							"properties": {
+								"window_idx": {
+									"type": "integer"
+								},
+								"update_fps": {
+									"type": "integer"
+								},
+								"priority": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 255
+								},
+								"const_qual": {
+									"type": "integer"
+								},
+								"dyn_adj": {
+									"type": "integer"
+								},
+								"eis_en": {
+									"type": "integer"
+								},
+								"parent": {
+									"type": "integer"
+								},
+								"path_bmp": {
+									"type": "integer",
+									"minimum": 1,
+									"maximum": 3
+								},
+								"pos_x": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"pos_y": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"pos_width": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"pos_height": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"roi_x": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"roi_y": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"roi_width": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"roi_height": {
+									"type": "integer",
+									"minimum": 0,
+									"maximum": 1024
+								},
+								"view_type": {
+									"type": "string",
+									"title": "AGTX_WINDOW_VIEW_TYPE_E",
+									"enum": ["NORMAL", "LDC", "STITCH", "PANORAMA", "PANNING", "SURROUND"]
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

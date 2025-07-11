@@ -1,0 +1,62 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_COLOR_CONF_S",
+	"properties": {
+		"color_mode": {
+			"type": "string",
+			"title": "AGTX_COLOR_MODE_E",
+			"enum": ["DAY", "NIGHT"]
+		},
+		"params":{
+			"type": "array",
+			"minItems": 3,
+			"maxItems": 3,
+			"items":{
+				"type": "object",
+				"title": "AGTX_SW_LIGHT_SENSING_PARAM",
+				"properties":{
+					"detect_name":{
+						"type": "string",
+						"maxLength": 254
+					},
+					"day2ir_th": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 4294967295
+					},
+					"ir2day_th": {
+						"type": "integer",
+						"minimum": 0,
+						"maximum": 4294967295
+					},
+					"rg_ratio_min": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"rg_ratio_max": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"bg_ratio_min": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					},
+					"bg_ratio_max": {
+						"type": "integer",
+						"default": 0,
+						"minimum": 0,
+						"maximum": 8192
+					}
+				}
+			}
+		}
+	}
+}

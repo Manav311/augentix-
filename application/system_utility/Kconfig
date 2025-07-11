@@ -1,0 +1,67 @@
+menu "system_utility"
+
+config APP_ACCESS_MODE
+	bool "access_mode"
+	default y
+
+config APP_ALARM_OUT
+	bool "alarm_out"
+	default y
+
+config APP_APPVERIFY
+	bool "appverify"
+	default n
+
+config APP_DAY_NIGHT_MODE
+	bool "day_night_mode"
+	default n
+
+config APP_EVENT_DAEMON
+	bool "event_daemon"
+	select LIBPWM
+	select LIBTZ
+	default y
+
+config APP_GPIO_DAEMONS
+	bool "gpio_daemons"
+	default y
+
+config APP_NRS
+	bool "nrs"
+
+config APP_OTP
+	bool "otp"
+
+config APP_SNTP
+	bool "sntp"
+	default y
+
+config APP_SYSUPD_TOOLS
+	bool "sysupd_tools"
+	default y
+
+if APP_SYSUPD_TOOLS
+source "system_utility/sysupd_tools/Kconfig"
+endif
+
+config APP_THERMAL_PROTECTION
+	bool "thermal_protection"
+	default y
+
+config APP_UVC
+	bool "uvc"
+	default y
+
+config APP_WATCHDOG
+	bool "watchdog"
+	default y
+
+config APP_SYSTEM_LEVEL_TEST
+	bool "system_level_test"
+	default n
+
+config APP_REALTIME_DBG
+	bool "realtime_dbg"
+	default n
+
+endmenu

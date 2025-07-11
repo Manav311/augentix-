@@ -1,0 +1,347 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_EVENT_CONF_S",
+	"properties": {
+		"event": {
+			"type": "array",
+			"minItems": 9,
+			"maxItems": 9,
+			"items": {
+				"type": "object",
+				"title": "AGTX_EVENT_GROUP_S",
+				"properties": {
+					"in_use": {
+						"type": "boolean",
+						"description": "Create a thread when set to true."
+					},
+					"always_enabled": {
+						"type": "boolean",
+						"description": "Process GPIO/SW/ADC event list only when enabled."
+					},
+					"name": {
+						"type": "string",
+						"title": "AGTX_EVENT_NAME_E",
+						"enum": ["NONE", "PUSH_BUTTON_IN", "LIGHT_SENSOR_IN", "PIR_IN", "SD_CARD_IN", "EINTC_PIR", "IVA_MD", "IVA_TD", "LIGHT_SENSOR_ADC", "LED_INFORM", "LIGHT_SENSOR_MPI", "NUM"],
+						"description": "Name of the event group."
+					},
+					"source": {
+						"type": "string",
+						"title": "AGTX_EVENT_SOURCE_E",
+						"enum": ["GPIO", "SW", "EINTC", "ADC", "LED", "MPI", "NUM"]
+					},
+					"gpio": {
+						"type": "object",
+						"title": "AGTX_GPIO_EVENT_LIST_S",
+						"properties": {
+							"polling_period_usec": {
+								"type": "integer"
+							},
+							"init_level": {
+								"type": "array",
+								"minItems": 2,
+								"maxItems": 2,
+								"items": {
+									"type": "object",
+									"title": "AGTX_GPIO_INIT_RULE_S",
+									"properties": {
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							},
+							"event": {
+								"type": "array",
+								"minItems": 3,
+								"maxItems": 3,
+								"items": {
+									"type": "object",
+									"title": "AGTX_GPIO_EVENT_S",
+									"properties": {
+										"rule": {
+											"type": "object",
+											"title": "AGTX_GPIO_EVENT_RULE_S",
+											"properties": {
+												"trigger_type": {
+													"type": "string",
+													"title": "AGTX_GPIO_EVENT_TRIG_TYPE_E",
+													"enum": ["NONE", "LEVEL", "EDGE", "NUM"]
+												},
+												"level_value": {
+													"type": "integer"
+												},
+												"level_time_sec": {
+													"type": "integer"
+												},
+												"edge": {
+													"type": "integer",
+													"description": "-1: Trigger on falling edge, +1: Trigger on rising edge."
+												},
+												"edge_time_sec_start": {
+													"type": "integer"
+												},
+												"edge_time_sec_end": {
+													"type": "integer"
+												}
+											}
+										},
+										"action": {
+											"type": "string",
+											"title": "AGTX_EVENT_ACTION_CB_E",
+											"enum": ["NONE", "PRINT", "EXEC_CMD", "PAR_STRING", "NUM"]
+										},
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							}
+						}
+					},
+					"eintc": {
+						"type": "object",
+						"title": "AGTX_EINTC_EVENT_LIST_S",
+						"properties": {
+							"device_path": {
+									"type": "string",
+									"title": "AGTX_EINTC_EVENT_DEVICE_PATH_E",
+									"enum": ["NONE", "EINTC_PIR", "NUM"],
+									"description": "Name of the external interrupt device path."
+							},
+							"jiffies_timeout": {
+								"type": "integer"
+							},
+							"sensitivity": {
+								"type": "integer"
+							},
+							"event": {
+								"type": "array",
+								"minItems": 2,
+								"maxItems": 2,
+								"items": {
+									"type": "object",
+									"title": "AGTX_EINTC_EVENT_S",
+									"properties": {
+										"rule": {
+											"type": "object",
+											"title": "AGTX_EINTC_EVENT_RULE_S",
+											"properties": {
+												"trigger_type": {
+													"type": "string",
+													"title": "AGTX_EINTC_EVENT_TRIG_TYPE_E",
+													"enum": ["NONE", "EINTC_PIR_NEGATIVE", "EINTC_PIR_POSITIVE", "NUM"]
+												}
+											}
+										},
+										"action": {
+											"type": "string",
+											"title": "AGTX_EVENT_ACTION_CB_E",
+											"enum": ["NONE", "PRINT", "EXEC_CMD", "PAR_STRING", "NUM"]
+										},
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							}
+						}
+					},
+					"sw": {
+						"type": "object",
+						"title": "AGTX_SW_EVENT_LIST_S",
+						"properties": {
+							"socket_path": {
+									"type": "string",
+									"title": "AGTX_SW_EVENT_SOCKET_PATH_E",
+									"enum": ["NONE", "IVA_MD", "IVA_TD", "NUM"],
+									"description": "Name of the software socket path."
+							},
+							"event": {
+								"type": "array",
+								"minItems": 2,
+								"maxItems": 2,
+								"items": {
+									"type": "object",
+									"title": "AGTX_SW_EVENT_S",
+									"properties": {
+										"rule": {
+											"type": "object",
+											"title": "AGTX_SW_EVENT_RULE_S",
+											"properties": {
+												"trigger_type": {
+													"type": "string",
+													"title": "AGTX_SW_EVENT_TRIG_TYPE_E",
+													"enum": ["NONE", "IVA_MD_NEGATIVE", "IVA_MD_POSITIVE", "IVA_TD_NEGATIVE", "IVA_TD_POSITIVE", "NUM"]
+												}
+											}
+										},
+										"action": {
+											"type": "string",
+											"title": "AGTX_EVENT_ACTION_CB_E",
+											"enum": ["NONE", "PRINT", "EXEC_CMD", "PAR_STRING", "NUM"]
+										},
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							}
+						}
+					},
+					"adc": {
+						"type": "object",
+						"title": "AGTX_ADC_EVENT_LIST_S",
+						"properties": {
+							"polling_period_usec": {
+								"type": "integer"
+							},
+							"chn": {
+								"type": "integer"
+							},
+							"init_hys": {
+								"type": "array",
+								"minItems": 2,
+								"maxItems": 2,
+								"items": {
+									"type": "object",
+									"title": "AGTX_ADC_INIT_RULE_S",
+									"properties": {
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								},
+								"description": "init_hys[0]: action that hys_th is between hys_th0 and hys_th1, init_hys[1]: action that hys_th is not between hys_th0 and hys_th1."
+							},
+							"event": {
+								"type": "array",
+								"minItems": 2,
+								"maxItems": 2,
+								"items": {
+									"type": "object",
+									"title": "AGTX_ADC_EVENT_S",
+									"properties": {
+										"rule": {
+											"type": "object",
+											"title": "AGTX_ADC_EVENT_RULE_S",
+											"properties": {
+												"trigger_type": {
+													"type": "string",
+													"title": "AGTX_ADC_EVENT_TRIG_TYPE_E",
+													"enum": ["NONE", "HYS", "NUM"]
+												},
+												"hys_th": {
+													"type": "integer"
+												}
+											}
+										},
+										"action": {
+											"type": "string",
+											"title": "AGTX_EVENT_ACTION_CB_E",
+											"enum": ["NONE", "PRINT", "EXEC_CMD", "PAR_STRING", "NUM"]
+										},
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							}
+						}
+					},
+					"led": {
+						"type": "object",
+						"title": "AGTX_LED_EVENT_LIST_S",
+						"properties": {
+							"polling_period_usec": {
+								"type": "integer"
+							},
+							"slow_flash_period_usec": {
+								"type": "integer"
+							},
+							"fast_flash_period_usec": {
+								"type": "integer"
+							},
+							"init_light_on_pin_num": {
+								"type": "integer"
+							},
+							"init_light_on_value": {
+								"type": "integer"
+							},
+							"trigger_type_level": {
+								"type": "integer"
+							},
+							"event": {
+								"type": "array",
+								"minItems": 17,
+								"maxItems": 17,
+								"items": {
+									"type": "object",
+									"title": "AGTX_LED_EVENT_S",
+									"properties": {
+										"in_use": {
+											"type": "boolean",
+											"description": "Enable the led client when set to true."
+										},
+										"rule": {
+											"type": "object",
+											"title": "AGTX_LED_EVENT_RULE_S",
+											"properties": {
+												"trigger_type": {
+													"type": "string",
+													"title": "AGTX_LED_EVENT_TRIG_TYPE_E",
+													"enum": ["NONE", "Wifi_Pairing", "Wifi_Connecting", "Cloud_Connecting", "Connecting_Fail", "Wifi_Connected", "Motion_Detected", "Live_view", "Low_Signal", "Disconnected", "OTA", "Critical_Error", "Card_Upgrade", "DEBUG_MODE", "DEBUG_INFO_DUMP", "Reset_INFO_Slow", "Reset_INFO_Fast", "LED_OFF", "NUM"]
+												}
+											}
+										},
+										"action": {
+											"type": "string",
+											"title": "AGTX_EVENT_ACTION_CB_E",
+											"enum": ["NONE", "PRINT", "EXEC_CMD", "PAR_STRING", "NUM"]
+										},
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							}
+						}
+					},
+					"mpi": {
+						"type": "object",
+						"title": "AGTX_MPI_EVENT_LIST_S",
+						"properties": {
+							"event": {
+								"type": "array",
+								"minItems": 2,
+								"maxItems": 2,
+								"items": {
+									"type": "object",
+									"title": "AGTX_MPI_EVENT_S",
+									"properties": {
+										"action": {
+											"type": "string",
+											"title": "AGTX_EVENT_ACTION_CB_E",
+											"enum": ["NONE", "PRINT", "EXEC_CMD", "PAR_STRING", "NUM"]
+										},
+										"action_args": {
+											"type": "string",
+											"maxLength": 128
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

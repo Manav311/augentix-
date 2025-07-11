@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html ng-app="HC_App" ng-controller="HC_Ctrl">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <link href="../css/agtx_player.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/osd.js"></script>
+  <script src="../js/lib/flv.min.js"></script>
+  <script src="../js/agtx_player_check.js"></script>
+  <script src="../js/lib/signalr.min.js"></script>
+  <script type="module" src="../js/agtx_player_srv.js"></script>
+  <script type="module" src="../js/agtx_player_vm.js"></script>
+  <script type="module">
+  $(async function() {
+    const mainUrl = window.flvLiveAudio0;
+    const subUrl = window.flvLiveAudio1;
+    const mainRelayUrl = window.flvRelayLiveAudio0;
+    const subRelayUrl = window.flvRelayLiveAudio1;
+    const { core } = window.augentixPlayerViewModel || {};
+    await core?.init({ langId, mainUrl, subUrl, mainRelayUrl, subRelayUrl });
+  });
+</script>
+  <title>Augentix</title>  
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item active">
+                  <a class="page-link" href="osd.html" target="_self">{{msg_t.OSD_Setting[lang]}}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="osd_pm.html" target="_self">{{msg_t.Privacy_Mask[lang]}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </nav>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div id="agtx-player-preview"></div>
+            <form ng-submit="sendData()">
+              <table class="table">
+                <tr>
+                  <td><input ng-change="isValidRegionCnt()" ng-model="osdPref.strm[0].region[0].enabled" type=
+                  "checkbox">{{msg_t.Device_name[lang]}}</td>
+                  <td><input maxlength="32" ng-model="osdPref.strm[0].region[0].type_spec" pattern=
+                  "[A-Za-z0-9\x20\x21\x22\x23\x24\x26\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F\x3A\x3B\x3C\x3D\x3E\x3F\x40\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E]{1,32}"
+                  size="40" title="{{msg_t.Visable_ASCII_characters[lang]}}" type="text"></td>
+                  <td>{{msg_t.Position[lang]}}</td>
+                  <td>x: <input max="100" min="0" ng-change="update()" ng-model="osdPref.strm[0].region[0].start_x"
+                  type="number">y: <input max="100" min="0" ng-change="update()" ng-model=
+                  "osdPref.strm[0].region[0].start_y" type="number"></td>
+                </tr>
+                <tr>
+                  <td><input ng-change="isValidRegionCnt()" ng-model="osdPref.strm[0].region[1].enabled" type=
+                  "checkbox">{{msg_t.Date_format[lang]}}</td>
+                  <td><select ng-change="updateDateTimeFormat()" ng-model="type_spec.date">
+                    <option ng-value="0">
+                      YYYY-MM-DD
+                    </option>
+                    <option ng-value="1">
+                      MM-DD-YYYY
+                    </option>
+                    <option ng-value="2">
+                      DD-MM-YYYY
+                    </option>
+                  </select> <select ng-change="updateDateTimeFormat()" ng-model="type_spec.time">
+                    <option ng-value="0">
+                      h:mm:ss tt
+                    </option>
+                    <option ng-value="1">
+                      hh:mm:ss tt
+                    </option>
+                    <option ng-value="2">
+                      H:mm:ss
+                    </option>
+                    <option ng-value="3">
+                      HH:mm:ss
+                    </option>
+                  </select></td>
+                  <td>{{msg_t.Position[lang]}}</td>
+                  <td>x: <input max="100" min="0" ng-change="update()" ng-model="osdPref.strm[0].region[1].start_x"
+                  type="number">y: <input max="100" min="0" ng-change="update()" ng-model=
+                  "osdPref.strm[0].region[1].start_y" type="number"></td>
+                </tr>
+                <tr>
+                  <td><input ng-change="isValidRegionCnt()" ng-model="osdPref.strm[0].region[2].enabled" type=
+                  "checkbox">{{msg_t.Logo[lang]}}</td>
+                  <td><label ng-model="osdPref.strm[0].region[2].type_spec" size="60" type="text"></label></td>
+                  <td>{{msg_t.Position[lang]}}</td>
+                  <td>x: <input max="100" min="0" ng-change="update()" ng-model="osdPref.strm[0].region[2].start_x"
+                  type="number">y: <input max="100" min="0" ng-change="update()" ng-model=
+                  "osdPref.strm[0].region[2].start_y" type="number"></td>
+                </tr>
+                <tr>
+                  <td><input ng-change="isValidRegionCnt()" ng-model="osdPref.strm[0].region[3].enabled" type=
+                  "checkbox">{{msg_t.Iva_alarm[lang]}}</td>
+                  <td><label ng-model="osdPref.strm[0].region[3].type_spec" size="60" type="text"></label></td>
+                  <td>{{msg_t.Position[lang]}}</td>
+                  <td>x: <input max="100" min="0" ng-change="update()" ng-model="osdPref.strm[0].region[3].start_x"
+                  type="number">y: <input max="100" min="0" ng-change="update()" ng-model=
+                  "osdPref.strm[0].region[3].start_y" type="number"></td>
+                </tr>
+              </table><br>
+              <br>
+              <button class="btn btn-info" formnovalidate="" ng-click="getData()" type=
+              "button">{{msg_t.Read_setting[lang]}}</button> <input class="btn btn-info" ng-disabled="!canApply" type=
+              "submit" value="{{msg_t.Apply[lang]}}">
+            </form>
+            <p>{{cmdStatus}}</p><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

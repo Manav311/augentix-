@@ -1,0 +1,64 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_PFM_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"sensitivity": {
+			"type": "integer"
+		},
+		"endurance": {
+			"type": "integer",
+			"description": "Time needed to determine the finish signal."
+		},
+		"register_scene": {
+			"type": "boolean",
+			"description": "0-Do nothing, 1-Register scene, 2-Feeding notification."
+		},
+		"roi": {
+			"type": "object",
+			"title": "AGTX_IVA_PFM_REGION_S",
+			"properties": {
+				"start_x": {
+					"type": "integer",
+					"description": "Start coordinates of monitor region. (inclusive)"
+				},
+				"start_y": {
+					"type": "integer",
+					"description": "Start coordinates of monitor region. (inclusive)"
+				},
+				"end_x": {
+					"type": "integer",
+					"description": "End coordinates of monitor region. (inclusive)"
+				},
+				"end_y": {
+					"type": "integer",
+					"description": "End coordinates of monitor region. (inclusive)"
+				}
+			}
+		},
+		"regis_to_feeding_interval": {
+			"type": "integer",
+			"description": "The interval between background registration and feeding notification."
+		},
+		"time_number": {
+			"type": "integer",
+			"description": "Number of feeding time in the schedule."
+		},
+		"schedule": {
+			"type": "array",
+			"title": "AGTX_IVA_PFM_SCHEDULE_S",
+			"minItems": 0,
+			"maxItems": 10,
+			"items": {
+				"type": "integer",
+				"description": "Time(s) in 24 hours per day"
+			}
+		}
+	}
+}

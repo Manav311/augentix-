@@ -1,0 +1,102 @@
+#!/bin/sh
+
+###############################################################################
+#
+# AUGENTIX INC. - PROPRIETARY
+#
+# mode - Augentix user mode switch
+# Copyright (C) 2019 Augentix Inc. - All Rights Reserved
+#
+# NOTICE: The information contained herein is the property of Augentix Inc.
+# Copying and distributing of this file, via any medium,
+# must be licensed by Augentix Inc.
+#
+# * Author: ShihChieh Lin <shihchieh.lin@augentix.com>
+#
+###############################################################################
+
+mode_file=/usrdata/mode
+new_mode_file=/usrdata/new_mode
+
+set_mode() {
+	echo "Set system mode after reboot: $1"
+	mkdir -p /usrdata
+	echo $1 > $new_mode_file
+	sync
+}
+
+get_mode() {
+	curr_mode=$(cat $mode_file)
+	case $curr_mode in
+	factory|develop|user)
+		;;
+	*)
+		curr_mode=factory
+		set_mode $curr_mode
+		;;
+	esac
+
+	echo $curr_mode
+}
+
+update_mode() {
+	if [ -f $new_mode_file ]; then
+		mv $new_mode_file $mode_file
+	fi
+}
+
+usage() {
+	echo "Usage: mode [MODE]"
+	echo "Get/set system mode"
+	echo ""
+	echo " Get current system mode:"
+	echo "    $0"
+	echo ""
+	echo " Set system mode to MODE:"
+	echo "    $0 MODE"
+	echo ""
+	echo " Available modes in [MODE]:"
+	echo ""
+	echo "  fctry, factory        Factory mode"
+	echo "  usr, user             User mode"
+	echo "  dev, develop          Developer mode"
+}
+
+usage_exit(){
+	usage
+	exit 0
+}
+
+if [ $# -gt 1 ]; then
+	usage_exit
+fi
+
+if [ $# -eq 0 ]; then
+	get_mode
+	exit 0
+fi
+
+while [ $# -gt 0 ]; do
+	key="$1"
+	case $key in
+	fctry|factory)
+		set_mode factory
+		shift
+		;;
+	usr|user)
+		set_mode user
+		shift
+		;;
+	dev|develop)
+		set_mode develop
+		shift
+		;;
+	-u)
+		update_mode
+		shift
+		;;
+	-h|--help|*)
+		usage_exit
+		;;
+	esac
+done

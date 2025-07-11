@@ -1,0 +1,7 @@
+SDKSRC_DIR = $(realpath $(CURDIR)/../../../..)
+include $(SDKSRC_DIR)/application/internal.mk
+
+INCLUDES = -Iinclude -I../UsageEnvironment/include
+PREFIX = /usr/local
+LIBDIR = $(PREFIX)/lib
+##### Change the following for your environment:

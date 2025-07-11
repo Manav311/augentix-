@@ -1,0 +1,14 @@
+{
+  "cmd_id": "AGTX_CMD_TD_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "en_block_det": 1,
+    "en_redirect_det": 0,
+    "sensitivity": 50,
+    "endurance": 48,
+    "redirect_sensitivity": 50,
+    "redirect_global_change": 20,
+    "redirect_trigger_delay": 5
+  }
+}

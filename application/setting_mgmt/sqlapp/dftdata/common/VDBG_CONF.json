@@ -1,0 +1,7 @@
+{
+  "cmd_id": "AGTX_CMD_VDBG_CONF",
+  "json_content": {
+    "enabled": 0,
+    "ctx": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_PRODUCT_OPTION_LIST_S",
+	"properties": {
+		"option": {
+			"type": "array",
+			"minItems": 16,
+			"maxItems": 16,
+			"items": {
+				"type": "string",
+				"maxLength": 64
+			}
+		}
+	}
+}
+

@@ -1,0 +1,21 @@
+{
+  "cmd_id": "AGTX_CMD_PIR_CONF",
+  "json_content": {
+    "pir_alias": [
+      {
+        "name": "PIR_SWITCH_LEFT",
+        "enabled": "0"
+      },
+      {
+        "name": "PIR_SWITCH_MID",
+        "enabled": "0"
+      },
+      {
+        "name": "PIR_SWITCH_RIGHT",
+        "enabled": "0"
+      }
+    ],
+    "period": 12800,
+    "duty_cycle": 700
+  }
+}

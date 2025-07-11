@@ -1,0 +1,50 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_ANTI_FLICKER_CONF_S",
+	"properties": {
+	  "enable": {
+		"ui_type": "number",
+		"ui_access_right": "read_write",
+		"type": "integer",
+		"default": 1,
+		"minimum": 0,
+		"maximum": 1
+	  },
+	  "frequency_idx": {
+		"ui_type": "number",
+		"ui_access_right": "read_write",
+		"type": "integer",
+		"default": 0,
+		"minimum": 0,
+		"maximum": 8
+	  },
+	  "frequency_list": {
+		"type": "array",
+		"minItems": 2,
+		"maxItems": 2,
+		"items": {
+		  "type": "object",
+		  "title": "AGTX_ANTI_FLICKER_LIST_S",
+		  "properties": {
+			"frequency": {
+			  "ui_type": "number",
+			  "ui_access_right": "read_write",
+			  "type": "integer",
+			  "default": 50,
+			  "minimum": 1,
+			  "maximum": 255
+			},
+			"fps": {
+			  "ui_type": "number",
+			  "ui_access_right": "read_write",
+			  "type": "number",
+			  "default": 25,
+			  "minimum": 1,
+			  "maximum": 60
+			}
+		  }
+		}
+	  }
+	}
+  }

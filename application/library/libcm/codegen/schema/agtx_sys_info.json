@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_SYS_INFO_S",
+	"properties": {
+		"dev_name": {
+			"type": "string",
+			"maxLength": 32
+		}
+	}
+}
+

@@ -1,0 +1,13 @@
+{
+  "version": "HC1703_HC1783S_r3_4_7",
+  "module": "ldc_conf",
+  "cmd_id": "AGTX_CMD_LDC_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "enable": 0,
+    "view_type": "CROP",
+    "center_x_offset": 0,
+    "center_y_offset": 0,
+    "ratio": 0
+  }
+}

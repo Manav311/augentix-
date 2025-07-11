@@ -1,0 +1,6 @@
+{
+	"cmd_id": "AGTX_CMD_SYS_FEATURE_OPTION",
+	"json_content": {
+		"stitch_support": false
+	}
+}

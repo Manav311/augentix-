@@ -1,0 +1,23 @@
+{
+  "cmd_id": "AGTX_CMD_SHD_CONF",
+  "json_content": {
+    "enabled": 0,
+    "video_chn_idx": 0,
+    "obj_life_th": 32,
+    "sensitivity": 75,
+    "quality": 75,
+    "longterm_life_th": 10,
+    "instance_duration": 35,
+    "shaking_update_duration": 30,
+    "longterm_dec_period": 1800,
+    "longterm_num": 0,
+    "longterm_list": [
+      {
+        "sx": 0,
+        "sy": 0,
+        "ex": 100,
+        "ey": 100
+      }
+    ]
+  }
+}

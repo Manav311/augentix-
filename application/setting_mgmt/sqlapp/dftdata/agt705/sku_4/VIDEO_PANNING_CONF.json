@@ -1,0 +1,15 @@
+{
+  "version": "HC1703_HC1783S_r3_4_7",
+  "module": "panning_conf",
+  "cmd_id": "AGTX_CMD_PANNING_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "center_offset_x": 0,
+    "center_offset_y": 0,
+    "enable": 0,
+    "hor_strength": 0,
+    "ver_strength": 0,
+    "radius": 3838,
+    "ldc_ratio": 0
+  }
+}

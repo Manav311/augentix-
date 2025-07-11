@@ -1,0 +1,30 @@
+{
+  "cmd_id": "AGTX_CMD_VIDEO_DEV_CONF",
+  "json_content": {
+    "video_dev_idx": 0,
+    "hdr_mode": 0,
+    "stitch_en": 0,
+    "eis_en": 0,
+    "bayer": 2,
+    "input_fps": 15,
+    "input_path_cnt": 1,
+    "input_path_list": [
+      {
+        "path_idx": 0,
+        "path_en": 1,
+        "sensor_idx": 0,
+        "width": 1280,
+        "height": 720,
+        "eis_strength": 60
+      },
+      {
+        "path_idx": 1,
+        "path_en": 1,
+        "sensor_idx": 1,
+        "width": 1280,
+        "height": 720,
+        "eis_strength": 60
+      }
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "cmd_id": "AGTX_CMD_OSD_CONF",
+  "json_content": {
+    "showWeekDay": 1,
+    "strm": [
+      {
+        "region": [
+          {
+            "enabled": true,
+            "type": "TEXT",
+            "type_spec": "Augentix",
+            "start_x": 100,
+            "start_y": 0
+          },
+          {
+            "enabled": true,
+            "type": "INFO",
+            "type_spec": "YYYY-MM-DD HH:mm:ss",
+            "start_x": 100,
+            "start_y": 100
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "/system/mpp/font/logo_augentix_size0.ayuv",
+            "start_x": 0,
+            "start_y": 0
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "icon:bell",
+            "start_x": 50,
+            "start_y": 0
+          }
+        ]
+      },
+      {
+        "region": [
+          {
+            "enabled": true,
+            "type": "TEXT",
+            "type_spec": "Augentix",
+            "start_x": 100,
+            "start_y": 0
+          },
+          {
+            "enabled": true,
+            "type": "INFO",
+            "type_spec": "YYYY-MM-DD HH:mm:ss",
+            "start_x": 100,
+            "start_y": 100
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "/system/mpp/font/logo_augentix_size1.ayuv",
+            "start_x": 0,
+            "start_y": 0
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "icon:bell",
+            "start_x": 50,
+            "start_y": 0
+          }
+        ]
+      },
+      {
+        "region": [
+          {
+            "enabled": true,
+            "type": "TEXT",
+            "type_spec": "Augentix",
+            "start_x": 100,
+            "start_y": 0
+          },
+          {
+            "enabled": true,
+            "type": "INFO",
+            "type_spec": "YYYY-MM-DD HH:mm:ss",
+            "start_x": 100,
+            "start_y": 100
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "/system/mpp/font/logo_augentix_size1.ayuv",
+            "start_x": 0,
+            "start_y": 0
+          },
+          {
+            "enabled": true,
+            "type": "IMAGE",
+            "type_spec": "icon:bell",
+            "start_x": 50,
+            "start_y": 0
+          }
+        ]
+      },
+      {
+        "region": [
+          {
+            "enabled": 0
+          },
+          {
+            "enabled": 0
+          },
+          {
+            "enabled": 0
+          },
+          {
+            "enabled": 0
+          }
+        ]
+      }
+    ]
+  }
+}

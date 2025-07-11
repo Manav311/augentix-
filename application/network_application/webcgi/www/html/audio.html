@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Augentix</title>
+</head>
+<body>
+  -
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/common.css" rel="stylesheet">
+  <script src="../js/lib/jquery-3.3.1.min.js"></script>
+  <script src="../js/lib/popper.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/angular.min.js"></script>
+  <script src="../js/message.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/audio.js"></script>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <div class="row">
+          <div class="thumbnail"><img src="../img/Augentix_Logo_270x42-04.png" style="width:60%"></div>
+          <div class="col-sm-8"></div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid text-center" ng-cloak="">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p ng-hide="x.hide" ng-repeat="x in LMenu"><a href="{{x.href}}" target="_self">{{x.txt[lang]}}</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <nav class="navbar navbar-borderless"></nav>
+        <div class="container-fluid">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="{{x.page_item}}" ng-repeat="x in AudioMenu">
+                <a class="page-link" href="{{x.href}}" target="_self">{{x.txt[lang]}}</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+              <input ng-model="AudioSet.enabled" ng-value="0" type="checkbox">{{msg_t.EnableAudio[lang]}}
+              <table class="table">
+                <tr>
+                  <td>{{msg_t.ExternalMICGain[lang]}}</td>
+                  <td><select class="changes" ng-disabled="enableAudio()" ng-model="AudioSet.gain" ng-name="current">
+                    <option ng-value="0">
+                      +0dB
+                    </option>
+                    <option ng-value="3">
+                      +3dB
+                    </option>
+                    <option ng-value="6">
+                      +6dB
+                    </option>
+                    <option ng-value="9">
+                      +9dB
+                    </option>
+                    <option ng-value="12">
+                      +12dB
+                    </option>
+                    <option value="ALAW">
+                      G711(ALAW)
+                    </option>
+                    <option value="ULAW">
+                      G711(ULAW)
+                    </option>
+                    <option value="G726">
+                      G726
+                    </option>
+                    <option ng-value="2">
+                      2 bit
+                    </option>
+                    <option ng-value="4">
+                      4 bit
+                    </option>
+                  </select></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

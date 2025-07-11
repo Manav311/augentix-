@@ -1,0 +1,6 @@
+# Ignore artifacts:
+cgi-bin
+css/lib
+js/lib
+.eslintrc.*
+.stylelintrc.*

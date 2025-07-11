@@ -1,0 +1,9 @@
+{
+    "window_function": "HANNING",
+    "window_size": 256,
+    "stride": 64,
+    "time": 5120,
+    "volume": 60,    
+    "sensitivity": 127,
+    "notification_interval": 0
+}

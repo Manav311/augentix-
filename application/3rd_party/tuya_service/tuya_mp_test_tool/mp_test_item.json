@@ -1,0 +1,84 @@
+﻿{
+  "SequenceName": "VideoTest",
+  "ProtocolType": "Linux",
+  "PlatformName": "IPC",
+  "TestItems": [
+
+    {
+      "Name": "CONNECT",
+      "Text": "建立连接",
+      "Paras": {
+        "ConnectType": "TCPClient"
+      }
+    },
+    {
+      "Name": "Enter_TESTMODE",
+      "Text": "进入测试模式",
+      "Paras": null
+    },
+    {
+      "Name": "TEST_LED",
+      "Text": "指示灯测试",
+      "Paras": {
+        "LEDType": "Normal"
+      }
+    },
+    {
+      "Name": "TEST_LED",
+      "Text": "红外灯测试",
+      "Paras": {
+        "LEDType": "InfraRed"
+      }
+    },
+    {
+      "Name": "TEST_IRCUT",
+      "Text": "IRCut测试",
+      "Paras": null
+    },
+    {
+      "Name": "TEST_KEY",
+      "Text": "按键测试",
+      "Paras": {
+        "Keys": [
+          {
+            "Name": "Reset",
+            "KeyEvent": "key12"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "TEST_MIC",
+      "Text": "麦克风测试",
+      "Paras": null
+    },
+    {
+      "Name": "TEST_SPEAKER",
+      "Text": "喇叭测试",
+      "Paras": null
+    },
+    {
+      "Name": "TEST_VIDEO",
+      "Text": "图像预览",
+      "Paras": {
+        "TestType": "Preview"
+      }
+    },
+    {
+      "Name": "TEST_VIDEO",
+      "Text": "图像测试",
+      "Paras": {
+        "TestType": "PictureTest"
+      }
+    },
+    {
+      "Name": "TEST_QUALITY_SIGNAL",
+      "Text": "wifi带宽测试",
+      "Paras": {
+        "TestType": "Bandwidth",
+        "LowLimit": 1,
+        "HighLimit": 80
+      }
+    },
+  ]
+}

@@ -1,0 +1,135 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_STRM_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"type": "integer"
+		},
+		"video_strm": {
+			"type": "array",
+			"maxItems": 4,
+			"minItems": 4,
+			"items": {
+				"type": "object",
+				"title": "AGTX_STRM_PARAM_S",
+				"properties": {
+					"video_strm_idx": {
+						"type": "integer"
+					},
+					"strm_en": {
+						"type": "boolean"
+					},
+					"rotate": {
+						"type": "integer"
+					},
+					"mirr_en": {
+						"type": "boolean"
+					},
+					"flip_en": {
+						"type": "boolean"
+					},
+					"output_fps": {
+						"type": "integer"
+					},
+					"binding_capability": {
+						"type": "integer"
+					},
+					"width": {
+						"type": "integer"
+					},
+					"height": {
+						"type": "integer"
+					},
+					"venc_type": {
+						"type": "string",
+						"title": "AGTX_VENC_TYPE_E",
+						"enum": ["H264", "H265", "MJPEG"]
+					},
+					"venc_profile": {
+						"type": "string",
+						"title": "AGTX_PRFL_E",
+						"enum": ["BASELINE", "MAIN", "HIGH"]
+					},
+					"rc_mode": {
+						"type": "string",
+						"title": "AGTX_RC_MODE_E",
+						"enum": ["VBR", "CBR", "SBR", "CQP"]
+					},
+					"gop_size": {
+						"type": "integer"
+					},
+					"max_frame_size": {
+						"type": "integer"
+					},
+					"bit_rate": {
+						"type": "integer"
+					},
+					"min_qp": {
+						"type": "integer"
+					},
+					"max_qp": {
+						"type": "integer"
+					},
+					"min_q_factor": {
+						"type": "integer"
+					},
+					"max_q_factor": {
+						"type": "integer"
+					},
+					"fluc_level": {
+						"type": "integer"
+					},
+					"scene_smooth": {
+						"type": "integer"
+					},
+					"regression_speed": {
+						"type": "integer"
+					},
+					"i_continue_weight": {
+						"type": "integer"
+					},
+					"i_qp_offset": {
+						"type": "integer"
+					},
+					"motion_tolerance_level": {
+						"type": "integer"
+					},
+					"motion_tolerance_qp": {
+						"type": "integer"
+					},
+					"motion_tolerance_qfactor": {
+						"type": "integer"
+					},
+					"vbr_max_bit_rate": {
+						"type": "integer"
+					},
+					"sbr_adjust_br_thres_pc": {
+						"type": "integer"
+					},
+					"sbr_adjust_step_times": {
+						"type": "integer"
+					},
+					"sbr_converge_frame": {
+						"type": "integer"
+					},
+					"cqp_i_frame_qp": {
+						"type": "integer"
+					},
+					"cqp_p_frame_qp": {
+						"type": "integer"
+					},
+					"cqp_q_factor": {
+						"type": "integer"
+					},
+					"obs": {
+						"type": "boolean"
+					},
+					"obs_off_period": {
+						"type": "integer"
+					}
+				}
+			}
+		}
+	}
+}

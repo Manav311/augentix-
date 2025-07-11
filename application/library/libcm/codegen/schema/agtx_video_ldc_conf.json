@@ -1,0 +1,49 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_LDC_CONF_S",
+	"ini_unavailable": true,
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"enable": {
+			"ui_type": "enum",
+			"type": "integer",
+			"enum": [0, 1],
+			"default": 0
+		},
+		"view_type": {
+			"ui_type": "enum",
+			"type": "string",
+			"title": "AGTX_LDC_VIEW_TYPE_E",
+			"enum": ["CROP", "ALL"],
+			"default": "CROP"
+		},
+		"center_x_offset": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": -8191,
+			"maximum": 8192
+		},
+		"center_y_offset": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": -8191,
+			"maximum": 8192
+		},
+		"ratio": {
+			"ui_type": "number",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 32767
+		}
+	}
+}

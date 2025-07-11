@@ -1,0 +1,10 @@
+{
+    "obj_life_th": 0,
+    "obj_falling_mv_th": 10,
+    "obj_stop_mv_th": 4,
+    "obj_high_ratio_th": 99,
+    "falling_period_th": 200,
+    "down_period_th": 200,
+    "fallen_period_th": 300,
+    "demo_level": 0
+}

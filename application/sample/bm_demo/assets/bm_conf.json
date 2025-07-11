@@ -1,0 +1,14 @@
+{
+	"sensitivity": 100,
+	"boundary_thickness": 4,
+	"quality": 255,
+	"obj_life_th": 16,
+	"time_buffer": 8192,
+	"suppression": 100,
+	"roi": [0, 0, 1919, 1071],
+	"od_qual": 46,
+	"od_track_refine": 42,
+	"od_size_th": 40,
+	"od_sen": 254,
+	"en_stop_det": false
+}

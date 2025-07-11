@@ -1,0 +1,7 @@
+config LIBEAIF_REMOTE_DISABLE
+	bool "Disable cloud computing mode"
+	depends on LIBEAIF
+	default y
+	help
+		Cloud computing mode is not supported by default. Say Y to disable it,
+		and save some memory / storage usage.

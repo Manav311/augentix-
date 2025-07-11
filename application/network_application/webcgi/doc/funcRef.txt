@@ -1,0 +1,50 @@
+Fast CGI Function reference
+/firmwareUpload.cgi	Upload file to /tmp/update.swu
+/getHostname.cgi	Return hostname
+/setToDefault.cgi	Execute /system/www/cgi-bin/setToDefault.sh
+/changePass.cgi		Change password using /system/www/cgi-bin/passwd.sh
+/assignIP.cgi		1.Assign Network parameter(IP,Netmask,gateay,DNS_) using /system/bin/ip_assign 2.Execute /etc/init.d/S40network restart
+/netInfo.cgi		Return IP,Netmask,Gateway,DNS,dhcp status
+/upTime.cgi			Return uptime
+/getMAC.cgi			Return MAC address
+/getFirmwareVersion.cgi	Return firmware version
+/getIPAddress.cgi	Return IP address
+/getNetmask.cgi		Return Netmask
+/getGateway.cgi		Return Gateway
+/getDNS.cgi			Return DNS
+/msg.cgi			Transfer JSON to ccserver and return the value from ccserver
+/getTime.cgi		Return system time
+/getSntpConf.cgi	Return SNTP config
+/getEnabledConf.cgi	Return enabled time mode config
+/getDSTConf.cgi		Return DST config
+/getTZ.cgi			Return TZ config
+/getTimeSwitch.cgi	Return TimeSwitch config
+/reboot.cgi			Reboot system
+/stopStream.cgi		Stop S95rtmp & S26av_main
+/SysupdOS.cgi		Execute sysupd
+/switch2SysupdOS.cgi	Execute sysupd-recover
+/setIP.cgi			Set IP address
+/setMask.cgi		Set Netmask
+/setGateway.cgi		Set Gateway
+/setDNS.cgi			Set DNS
+/setTime.cgi		Set system time
+/setSntpConf.cgi	Set SNTP config
+/DSTSet.cgi			Set DST
+/TZSet.cgi			Set TZ
+/EnabledSet.cgi		Eable time config
+/TimeSwitchSet.cgi	Eable TimeSwitch config
+/uploadCert.cgi		Upload cert file
+/uploadKey.cgi		Upload cert key
+/updateCA.cgi		Update Certificate authority
+/resetCA.cgi		Reset Certificate authority to default
+/getFaceModelList.cgi	Get face mode list
+/uploadFacePhoto.cgi	Upload face photo
+/removeFacePhoto.cgi	Remove face photo
+/validateFaceModel.cgi	Validate face photo as a qualified face model or not
+/registerFaceModel.cgi	Register face model
+/unregisterFaceModel.cgi	Unregister face model
+/setWifi.cgi		Set WiFi config
+/disconnectWifi.cgi	Disconnect WiFi
+/getSSID.cgi		Return SSID list
+/getWPASSID.cgi		Return WPA SSID config
+/getWlanInfo.cgi	Retrun Wlan info

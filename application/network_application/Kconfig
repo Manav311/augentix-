@@ -1,0 +1,65 @@
+menu "network_application"
+
+config APP_CONNSEL
+	bool "connsel"
+	default y
+
+config APP_EAIF_SERVER
+	bool "eaif_server"
+	depends on APP_AV_MAIN2
+	default n
+
+config APP_IP_ASSIGN
+	bool "ip_assign"
+	default y
+
+config APP_ONVIF_SERVER
+	bool "onvif_server"
+	depends on APP_AV_MAIN2 && APP_CENTCTRL
+	default y
+
+config APP_STAMEN
+	bool "stamen"
+	default y
+
+source "network_application/unicorn/Kconfig"
+
+config APP_WEBCGI
+	bool "webcgi"
+	depends on APP_AV_MAIN2 && APP_CENTCTRL
+	default y
+
+config APP_SE_AUTH
+	depends on APP_WEBCGI
+	bool "se_auth"
+	help
+		use ssecure element to encrypt and store username and password
+	default n
+
+config SECURE_WEB_PAGE
+	bool "secure web page"
+	depends on APP_WEBCGI
+	help
+		install secure web page assets and configs.
+	default n
+
+if APP_WEBCGI
+
+config APP_WEBCGI_DEMO
+	bool "Demo apps"
+	default n
+	help
+	  Install demo web apps to the target.
+
+endif
+
+config APP_WIFI
+	bool "wifi"
+	default y
+
+config APP_WS_DISCOVERY
+	bool "ws_discovery"
+	default y
+
+
+endmenu

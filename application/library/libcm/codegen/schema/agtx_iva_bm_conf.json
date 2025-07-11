@@ -1,0 +1,65 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_IVA_BM_CONF_S",
+	"properties": {
+		"enabled": {
+			"type": "boolean"
+		},
+		"video_chn_idx": {
+			"type": "integer"
+		},
+		"quality": {
+			"type": "integer",
+			"description": "quality range [0,255]."
+		},
+		"sensitivity": {
+			"type": "integer",
+			"description": "sensitivity range [0,255]."
+		},
+		"boundary_thickness": {
+			"type": "integer",
+			"description": "Border thickness of monitor region."
+		},
+		"suppression": {
+			"type": "integer",
+			"description": "suppression time(seconds)."
+		},
+		"time_buffer": {
+			"type": "integer",
+			"description": "Request time buffer size(seconds)."
+		},
+		"reset": {
+			"type": "boolean",
+			"description": "Reset baby monitor status."
+		},
+		"data_ctrl": {
+			"type": "string",
+			"title": "AGTX_IVA_FD_CTRL_E",
+			"enum": ["NONE", "SAVE", "LOAD"],
+			"description": "Save or Load foreground detection data."
+		},
+		"roi": {
+			"type": "object",
+			"title": "AGTX_IVA_BM_REGION_S",
+			"properties": {
+				"start_x": {
+					"type": "integer",
+					"description": "Start coordinates of monitor region. (inclusive)"
+				},
+				"start_y": {
+					"type": "integer",
+					"description": "Start coordinates of monitor region. (inclusive)"
+				},
+				"end_x": {
+					"type": "integer",
+					"description": "End coordinates of monitor region. (inclusive)"
+				},
+				"end_y": {
+					"type": "integer",
+					"description": "End coordinates of monitor region. (inclusive)"
+				}
+			}
+        }
+    }
+}

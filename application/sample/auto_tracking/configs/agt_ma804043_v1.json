@@ -1,0 +1,55 @@
+{
+	"chn": 0,
+	"win": 0,
+	"type": "od",
+	"od_qual": 63,
+	"od_track_refine": 63,
+	"od_size_th": 20,
+	"od_sen": 253,
+	"en_stop_det": false,
+	"en_gmv_det": false,
+	"obj_life_th": 8,
+	"track_delay_time": 200,
+	"max_move_time": 1000,
+	"reset_time": 12,
+	"detect_boundary": [0.55, 1.0, -1],
+	"mirr_en": false,
+	"flip_en": false,
+	"enable_debug_osd": false,
+	"motor":
+	{
+		"type": "gpio_motor",
+		"limit":[
+			{
+				"min_theta":-180,
+				"max_theta":180,
+				"min_velocity":5317,
+				"max_velocity":5317,
+				"default_velocity":5317,
+				"center_position": 0
+			},
+			{
+				"min_theta":-70,
+				"max_theta": 70,
+				"min_velocity":5317,
+				"max_velocity":5317,
+				"default_velocity":5317,
+				"center_position": 0
+			},
+			{
+				"min_theta":0,
+				"max_theta":0,
+				"min_velocity":0,
+				"max_velocity":0,
+				"default_velocity":0,
+				"center_position": 0
+			}
+		],
+		"step_angle": 5.625,
+		"motor_direction_factor":["left", "up", "none"],
+		"ptz_speed_factor": [2.33, 2.33, 0],
+		"x_gpio": [23, 22, 66, 67],
+		"y_gpio": [14, 15, 26, 27],
+		"z_gpio":-1
+	}
+}

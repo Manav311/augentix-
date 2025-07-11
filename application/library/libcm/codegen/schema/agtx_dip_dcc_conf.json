@@ -1,0 +1,553 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"title": "AGTX_DIP_DCC_CONF_S",
+	"properties": {
+		"video_dev_idx": {
+			"ui_type": "number",
+			"ui_access_right": "read_write",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0,
+			"maximum": 0
+		},
+		"dcc": {
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 2,
+			"comments": [
+				"========================================",
+				"== Device color correction parameters ==",
+				"========================================",
+				"NOTE: if single sensor, only DCC0 valid",
+				"ALSO SEE: MPI_setDccAttr"
+			],
+			"items": {
+				"type": "object",
+				"title": "AGTX_DIP_DCC_ATTR_S",
+				"properties": {
+					"mode": {
+						"ui_type": "enum",
+						"ui_access_right": "read_write",
+						"type": "integer",
+						"enum": [0,2],
+						"default": 0
+					},
+					"type": {
+						"ui_type": "enum",
+						"ui_access_right": "read_write",
+						"type": "string",
+						"title": "AGTX_DCC_TYPE_E",
+						"enum": ["DCC_TYPE", "DCC_TYPE_EX"],
+						"default": "DCC_TYPE"
+					},
+					"gain": {
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"maximum": 4095,
+							"minimum": 0,
+							"default": 1024
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"offset": {
+						"ini_name": "offset_2s",
+						"ui_type": "table",
+						"ui_access_right": "read_write",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"maximum": 65535,
+							"minimum": -65536,
+							"default": 0
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"manual_gain": {
+						"ini_name": "dcc_manual.manual.gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"manual_offset": {
+						"ini_name": "dcc_manual.manual.offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_0": {
+						"ini_name": "dcc_auto.auto_table[0].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_0": {
+						"ini_name": "dcc_auto.auto_table[0].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_1": {
+						"ini_name": "dcc_auto.auto_table[1].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_1": {
+						"ini_name": "dcc_auto.auto_table[1].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_2": {
+						"ini_name": "dcc_auto.auto_table[2].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_2": {
+						"ini_name": "dcc_auto.auto_table[2].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_3": {
+						"ini_name": "dcc_auto.auto_table[3].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_3": {
+						"ini_name": "dcc_auto.auto_table[3].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_4": {
+						"ini_name": "dcc_auto.auto_table[4].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_4": {
+						"ini_name": "dcc_auto.auto_table[4].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_5": {
+						"ini_name": "dcc_auto.auto_table[5].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_5": {
+						"ini_name": "dcc_auto.auto_table[5].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_6": {
+						"ini_name": "dcc_auto.auto_table[6].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_6": {
+						"ini_name": "dcc_auto.auto_table[6].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_7": {
+						"ini_name": "dcc_auto.auto_table[7].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_7": {
+						"ini_name": "dcc_auto.auto_table[7].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_8": {
+						"ini_name": "dcc_auto.auto_table[8].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_8": {
+						"ini_name": "dcc_auto.auto_table[8].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_9": {
+						"ini_name": "dcc_auto.auto_table[9].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_9": {
+						"ini_name": "dcc_auto.auto_table[9].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_10": {
+						"ini_name": "dcc_auto.auto_table[10].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_10": {
+						"ini_name": "dcc_auto.auto_table[10].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_11": {
+						"ini_name": "dcc_auto.auto_table[11].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_11": {
+						"ini_name": "dcc_auto.auto_table[11].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_12": {
+						"ini_name": "dcc_auto.auto_table[12].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_12": {
+						"ini_name": "dcc_auto.auto_table[12].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_13": {
+						"ini_name": "dcc_auto.auto_table[13].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_13": {
+						"ini_name": "dcc_auto.auto_table[13].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_14": {
+						"ini_name": "dcc_auto.auto_table[14].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_14": {
+						"ini_name": "dcc_auto.auto_table[14].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					},
+					"auto_gain_15": {
+						"ini_name": "dcc_auto.auto_table[15].gain",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 1024,
+							"minimum": 0,
+							"maximum": 4095
+						},
+						"defaultItems": [0, 0, 0, 0]
+					},
+					"auto_offset_15": {
+						"ini_name": "dcc_auto.auto_table[15].offset_2s",
+						"ui_type": "table",
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "integer",
+							"default": 0,
+							"minimum": -65536,
+							"maximum": 65535
+						},
+						"defaultItmes": [0, 0, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

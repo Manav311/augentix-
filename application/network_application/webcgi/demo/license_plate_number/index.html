@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=320, height=240, initial-scale=1">
+  <meta http-equiv="cache-control" content="no-store, max-age=0">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="./app.css">
+  <!-- Prefetch images -->
+  <link rel="prefetch" as="image" href="./assets/agtx_logo.gif">
+  <link rel="prefetch" as="image" href="./assets/0.gif">
+  <link rel="prefetch" as="image" href="./assets/1.gif">
+  <link rel="prefetch" as="image" href="./assets/2.gif">
+  <link rel="prefetch" as="image" href="./assets/3.gif">
+  <link rel="prefetch" as="image" href="./assets/4.gif">
+  <link rel="prefetch" as="image" href="./assets/5.gif">
+  <link rel="prefetch" as="image" href="./assets/6.gif">
+  <link rel="prefetch" as="image" href="./assets/7.gif">
+  <link rel="prefetch" as="image" href="./assets/8.gif">
+  <link rel="prefetch" as="image" href="./assets/9.gif">
+  <title>Plate Number Demo</title>
+</head>
+<body>
+  <div class="app">
+    <!-- Welcome screen -->
+    <div id="p01" class="welcome page">
+      <a href="#p02">
+        <div class="container">
+          <img src="./assets/agtx_logo.gif" class="logo">
+          <div class="hint">
+            <p>Welcome!</p>
+            <p>Please click the screen.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- Enter your license plate number -->
+    <div id="p02" class="prompt page">
+      <form onsubmit="event.preventDefault();" autocomplete="off" class="lpn-form">
+        <label>
+          Enter your license plate number:
+          <input type="text" minlength="4" maxlength="4" class="number">
+        </label>
+        <div class="numpad">
+          <input type="button" readonly value="1" class="numkey numkey-1">
+          <input type="button" readonly value="2" class="numkey numkey-2">
+          <input type="button" readonly value="3" class="numkey numkey-3">
+          <input type="button" readonly value="4" class="numkey numkey-4">
+          <input type="button" readonly value="5" class="numkey numkey-5">
+          <input type="button" readonly value="6" class="numkey numkey-6">
+          <input type="button" readonly value="7" class="numkey numkey-7">
+          <input type="button" readonly value="8" class="numkey numkey-8">
+          <input type="button" readonly value="9" class="numkey numkey-9">
+          <input type="button" readonly value="0" class="numkey numkey-0">
+        </div>
+        <div class="actions">
+          <input type="reset" value="Clear" class="clear">
+          <input type="submit" disabled value="Submit" class="submit">
+        </div>
+      </form>
+    </div>
+    <!-- Show result -->
+    <div id="p03" class="result page">
+        <div class="container">
+          <a href="#p04">
+            <div class="plate"></div>
+          </a>
+        </div>
+      <p>Click the image!</p>
+    </div>
+    <!-- Done -->
+    <div id="p04" class="page">
+      <a href="#p01">
+        <div class="container">
+          <p>Thank you.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

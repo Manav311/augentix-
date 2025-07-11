@@ -1,0 +1,296 @@
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <signal.h>
+#include <string.h>
+#include <unistd.h>
+#include <time.h>
+#include <getopt.h>
+
+#include "mpi_base_types.h"
+#include "mpi_sys.h"
+#include "mpi_dev.h"
+#include "mpi_errno.h"
+#include "mpi_index.h"
+#include "mpi_iva.h"
+#include "vftr.h"
+
+#include "json.h"
+#include "log.h"
+
+#ifdef CONFIG_APP_FACEDET_SUPPORT_SEI
+#include "avftr_conn.h"
+extern AVFTR_CTX_S *avftr_res_shm;
+#endif
+
+#ifndef MIN
+#define MIN(a, b) ((a) < (b)) ? (a) : (b)
+#endif
+
+#include "eaif.h"
+#include "facedet_demo.h"
+
+struct timespec g_start_time;
+FACEDET_PARAM_S g_facedet_param;
+MPI_WIN g_win_idx;
+MPI_IVA_OD_PARAM_S g_od_param;
+MPI_RECT_POINT_S g_chn_bdry;
+int g_facedet_running;
+
+#ifdef DEBUG
+#define DBG(...) printf(__VA_ARGS__)
+#else
+#define DBG(...)
+#endif
+
+int g_restart = 0;
+static void handleSigInt(int signo)
+{
+	DBG("[%s]leave %s\n", __func__, __FILE__);
+
+	g_facedet_running = 0;
+	char *restartc = getenv("FACEDET_RESTART");
+	if (restartc)
+		g_restart += atoi(restartc);
+
+	if (g_restart >= 10)
+		g_restart = 0;
+
+	FACEDET_TIC(g_start_time);
+
+	if (signo == SIGINT) {
+		printf("Caught SIGINT!\n");
+	} else if (signo == SIGTERM) {
+		printf("Caught SIGTERM!\n");
+	} else if (signo == SIGKILL) {
+		printf("Caught SIGKILL\n");
+	} else if (signo == SIGQUIT) {
+		printf("Caught SIGQUIT!\n");
+	} else {
+		perror("Unexpected signal!\n");
+	}
+}
+
+int parse_config(char *file_name, FACEDET_PARAM_S *param)
+{
+	static const char *agtx_iva_eaif_data_fmt_e_map[] = { "JPEG",     "Y",     "YUV",     "RGB",
+		                                              "MPI_JPEG", "MPI_Y", "MPI_YUV", "MPI_RGB" };
+
+	struct json_object *tmp_obj, *cmd_obj;
+	int i;
+	const char *str;
+
+	cmd_obj = json_object_from_file(file_name);
+	if (!cmd_obj) {
+		log_err("Cannot open %s", file_name);
+		return -EBADF;
+	}
+
+	if (json_object_object_get_ex(cmd_obj, "data_fmt", &tmp_obj)) {
+		str = json_object_get_string(tmp_obj);
+		for (i = 0; (UINT32)i < sizeof(agtx_iva_eaif_data_fmt_e_map) / sizeof(char *); i++) {
+			if (strcmp(agtx_iva_eaif_data_fmt_e_map[i], str) == 0) {
+				param->data_fmt = (EAIF_DATA_FMT_E)i;
+				break;
+			}
+		}
+	}
+	if (json_object_object_get_ex(cmd_obj, "model_path", &tmp_obj)) {
+		i = MIN(EAIF_MODEL_LEN, json_object_get_string_len(tmp_obj));
+		strncpy((char *)param->face_detect_model, json_object_get_string(tmp_obj), i);
+		param->face_detect_model[i] = '\0';
+	}
+	if (json_object_object_get_ex(cmd_obj, "detect_period", &tmp_obj)) {
+		param->detection_period = json_object_get_int(tmp_obj);
+	}
+	if (json_object_object_get_ex(cmd_obj, "inf_with_obj_list", &tmp_obj)) {
+		param->inf_with_obj_list = json_object_get_int(tmp_obj);
+	}
+	if (json_object_object_get_ex(cmd_obj, "obj_life_th", &tmp_obj)) {
+		param->obj_life_th = json_object_get_int(tmp_obj);
+	}
+	if (json_object_object_get_ex(cmd_obj, "snapshot_height", &tmp_obj)) {
+		param->snapshot_height = json_object_get_int(tmp_obj);
+	}
+	if (json_object_object_get_ex(cmd_obj, "snapshot_width", &tmp_obj)) {
+		param->snapshot_width = json_object_get_int(tmp_obj);
+	}
+	if (json_object_object_get_ex(cmd_obj, "target_idx", &tmp_obj)) {
+		param->target_idx.value = 0;
+		param->target_idx.chn = json_object_get_int(tmp_obj);
+	}
+
+#define printInt(x) printf("[INFO] %s=%d\n", #x, (int)x)
+#define printStr(x) printf("[INFO] %s=\"%s\"\n", #x, x)
+	printInt(param->obj_life_th);
+	printInt(param->target_idx.chn);
+	printInt(param->data_fmt);
+	printInt(param->snapshot_width);
+	printInt(param->snapshot_height);
+	printInt(param->detection_period);
+	printStr(param->face_detect_model);
+	return 0;
+}
+
+void help(void)
+{
+	printf("USAGE:\tfacedet_demo -i <CONFIG>\t\n");
+	printf("\t-i <file>\t\tface detection config in .json file\n");
+	printf("\t@detect period\tDetection period between each detection. Range[1-999].\n");
+	printf("OPTIONS:\n");
+	printf("\t-c <channel>\t\tSpecify which video channel to use. (Default 0).\n");
+	/* UINT8 od_qual; < Quality index of OD performance. */
+	printf("\t-q <value>\t\tSpecify OD quality index.[0-63] (Default 58).\n");
+	/* UINT8 od_sen; < sensitivity index of OD performance. */
+	printf("\t-s <sensitivity>\t\tSpecify OD sensitivity.[0-255] (Default 254).\n");
+	printf("\n");
+	printf("For example:\n");
+	printf("\tmpi_stream -d /system/mpp/case_config/case_config_1001 -precord_enable=1 -poutput_file=/dev/null -pframe_num=-1 &\n");
+	printf("\tfacedet_demo -i /system/mpp/facedet_config/facedet_conf.json &\n");
+#ifdef CONFIG_APP_FACEDET_SUPPORT_SEI
+	printf("\ttestOnDemandRTSPServer 0 -S\n");
+#else
+	printf("\ttestOnDemandRTSPServer 0 -n\n");
+#endif
+	printf("\n");
+}
+
+int main(int argc, char **argv)
+{
+	int ret;
+	int c;
+	int chn_idx = 0;
+	int win_idx = 0;
+	char cfg_file_name[256] = { 0 };
+
+	MPI_IVA_OD_PARAM_S *od_param = &g_od_param;
+	*od_param = (MPI_IVA_OD_PARAM_S){
+		.od_qual = 58, .od_track_refine = 42, .od_size_th = 25, .od_sen = 254, .en_stop_det = 1, .en_gmv_det = 0
+	};
+
+	FACEDET_PARAM_S *facedet_param = &g_facedet_param;
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+	*facedet_param =
+	        (FACEDET_PARAM_S){ .obj_life_th = 16,
+		                   .target_idx = MPI_VIDEO_WIN(0, 0, 0),
+		                   .api = EAIF_API_FACEDET,
+		                   .data_fmt = EAIF_DATA_MPI_Y,
+		                   .url = "inapp",
+		                   .snapshot_width = 1280,
+		                   .snapshot_height = 720,
+		                   .face_detect_model = "/system/eaif/models/facereco/inapp_mtcnn.ini",
+		                   .face_reco_model = "whatever",
+		                   .detect_model = "whatever",
+		                   .classify_model = "whatever",
+		                   .classify_cv_model = "whatever",
+		                   .human_classify_model = "whatever" };
+#pragma GCC diagnostic pop
+
+	while ((c = getopt(argc, argv, "i:c:w:q:s:h")) != -1) {
+		switch (c) {
+		case 'i':
+			sprintf(cfg_file_name, optarg);
+			DBG("input .json file:%s\n", cfg_file_name);
+			break;
+		case 'c':
+			chn_idx = atoi(optarg);
+			DBG("set device channel:%d\n", chn_idx);
+			break;
+		case 'w':
+			win_idx = atoi(optarg);
+			DBG("set device window:%d\n", win_idx);
+			break;
+		case 'q':
+			od_param->od_qual = atoi(optarg);
+			DBG("set detect quality index:%s\n", optarg);
+			break;
+		case 's':
+			od_param->od_sen = atoi(optarg);
+			DBG("set detect sensitivity:%s\n", optarg);
+			break;
+		case 'h':
+			help();
+			exit(0);
+		default:
+			abort();
+		}
+	}
+
+	if (signal(SIGINT, handleSigInt) == SIG_ERR) {
+		perror("Cannot handle SIGINT!\n");
+		exit(1);
+	}
+
+	if (strlen(cfg_file_name) == 0) {
+		log_err("Config file path is not specified !");
+		exit(1);
+	}
+
+	//readJsonFromFile(cfg_file_name);
+	DBG("Read Json form file:%s\n", cfg_file_name);
+
+	MPI_CHN_ATTR_S chn_attr;
+	MPI_CHN_LAYOUT_S layout_attr;
+	MPI_CHN chn = MPI_VIDEO_CHN(0, chn_idx);
+	MPI_WIN win = MPI_VIDEO_WIN(0, chn_idx, win_idx);
+
+	/* Initialize MPI system */
+	MPI_SYS_init();
+	VFTR_init(NULL);
+
+	ret = MPI_DEV_getChnAttr(chn, &chn_attr);
+	if (ret != MPI_SUCCESS) {
+		log_err("Failed to get video channel attribute. err: %d", ret);
+		return -EINVAL;
+	}
+
+	/* TODO: please check the following code */
+	ret = MPI_DEV_getChnLayout(chn, &layout_attr);
+	if (ret != MPI_SUCCESS) {
+		log_err("Failed to get video layout attribute. err: %d", ret);
+		return -EINVAL;
+	}
+
+	/* NOTICE: we only support the case that only one window in a channel */
+	assert(layout_attr.window_num == 1);
+	assert(layout_attr.window[0].x == 0);
+	assert(layout_attr.window[0].y == 0);
+	assert(layout_attr.window[0].width == chn_attr.res.width);
+	assert(layout_attr.window[0].height == chn_attr.res.height);
+
+	g_chn_bdry =
+	        (MPI_RECT_POINT_S){ .sx = 0, .sy = 0, .ex = chn_attr.res.width - 1, .ey = chn_attr.res.height - 1 };
+
+	ret = parse_config(cfg_file_name, facedet_param);
+	if (ret) {
+		log_err("[ERROR] fail to parse config file");
+		return -EINVAL;
+	}
+
+#ifdef CONFIG_APP_FACEDET_SUPPORT_SEI
+	// init avftr serv
+	ret = AVFTR_initServer();
+	if (ret) {
+		log_err("[ERROR] init avftr server fail");
+		return -EINVAL;
+	}
+#endif
+
+	do {
+		printf("[INFO] starting FaceDetect\n");
+		ret = runFaceDetection(win, &chn_attr.res, facedet_param);
+		FACEDET_TOC("[FaceDet EXIT]", g_start_time);
+	} while (g_restart);
+
+#ifdef CONFIG_APP_FACEDET_SUPPORT_SEI
+	// exit avftr serv
+	AVFTR_exitServer();
+#endif
+
+	VFTR_exit();
+	MPI_SYS_exit();
+	return 0;
+}

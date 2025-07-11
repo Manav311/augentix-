@@ -1,0 +1,11 @@
+{
+  "backlight_compensation":0,
+  "icr_mode":"ON",
+  "image_mode":"AUTO",
+  "ir_led_mode":"OFF",
+  "ir_light_suppression":101,
+  "night_mode":"OFF",
+  "wdr_en":0,
+  "wdr_strength":0,
+  "cmd_id":"AGTX_CMD_ADV_IMG_PREF"
+}
