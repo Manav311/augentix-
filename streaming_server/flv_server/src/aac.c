@@ -22,6 +22,10 @@ int is_little_endian()
 	return 0;
 }
 
+//asdadad
+
+
+
 int AAC_encoderInit(TyMediaAACHandle *phdl, int channels, int sample_rate, int bitrate)
 {
 	AACENC_ERROR err = AACENC_OK;
